@@ -1,21 +1,25 @@
 import express, { json } from 'express';
-import cookieParser from 'cookie-parser';
-import bodyParser from 'body-parser'
+import { dirname, join } from 'path';
+import { fileURLToPath } from 'url';
 import cors from 'cors';
+import indexRoute from './routes/index.js';
 import morgan from 'morgan';
 
-
-
+// import('./config/db');
 
 const server = express();
 
-// server.name = 'SERVER';
+// server.use( morgan( 'dev' ) );
+// server.use( json() );
+// server.use( cors() );
 
-server.use( bodyParser.json( { limit: '50mb' } ) );
-server.use( cookieParser() );
-server.use( morgan( 'dev' ) );
-server.use( json() );
-server.use( cors() );
+const __dirname = dirname(fileURLToPath(import.meta.url));
+
+server.set('views', join(__dirname, 'views'));
+server.set('view engine', 'ejs');
+
+server.use('/', indexRoute);
+server.use(express.static(join(__dirname, 'public')));
 
 
 export default server;
