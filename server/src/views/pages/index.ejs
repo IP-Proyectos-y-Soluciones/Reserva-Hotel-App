@@ -1,3 +1,12 @@
+<!-- const verifyProfile = (admin) => {
+  if (admin.profile !== "Administrator") {
+    res.redirect("banner");
+    return;
+  }
+};
+
+export default verifyProfile; -->
+
 <div class="content-wrapper" style="min-height: 717px">
   <section class="content-header">
     <div class="container-fluid">
@@ -8,7 +17,7 @@
 
         <div class="col-sm-6">
           <ol class="breadcrumb float-sm-right">
-            <li class="breadcrumb-item"><a href="inicio">Inicio</a></li>
+            <li class="breadcrumb-item"><a href="index">Inicio</a></li>
             <li class="breadcrumb-item active">Analíticas</li>
           </ol>
         </div>
@@ -21,31 +30,31 @@
   <section class="content">
     <div class="container-fluid">
       <div class="row">
-        import include from '../modules/top.ejs';
+        <%- include('modules/top.ejs') %>
 
         <div class="col-3">
-          import include from './modules/bestRoom.ejs';
+          <%- include('modules/bestRoom.ejs') %>
         </div>
 
         <div class="col-3">
-          import include from './modules/worstRoom.ejs';
+          <%- include('modules/worstRoom.ejs') %>
         </div>
 
         <div class="col-6">
-          import incude from './modules/sales.ejs';
+          <%- include('modules/sales.ejs') %>
         </div>
 
         <div class="col-6">
-          import include from './modules/calendar.ejs';
+          <%- include('modules/calendar.ejs') %>
         </div>
 
         <div class="col-6">
           <div class="col-12">
-            import include from './modules/lastUsers.ejs';
+            <%- include('modules/lastUsers.ejs') %>
           </div>
 
           <div class="col-12">
-            import include from './modules/lastReservations.ejs';
+            <%- include('modules/lastReservations.ejs') %>
           </div>
         </div>
       </div>
