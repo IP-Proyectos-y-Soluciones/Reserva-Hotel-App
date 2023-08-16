@@ -1,4 +1,5 @@
 import Administratoras from "../config/db"
+import bcrypt from 'bcrypt';
 
 // crear nuveo admin
 export const createAdmin = async (profile, name, user, password, status) => {
@@ -8,11 +9,14 @@ export const createAdmin = async (profile, name, user, password, status) => {
         throw("missing data to create the admin")
     }
     else {
+        const saltRounds = 10;
+        const hashedPassword = await bcrypt.hash(password, saltRounds);
+
         const newAdmin = await Administratoras.create({
             profile,
             name,
-            user, 
-            password,
+            user,
+            password: hashedPassword,
             status
         });
         return newAdmin;
@@ -27,7 +31,7 @@ export const createAdmin = async (profile, name, user, password, status) => {
 }
 
 // ver todos los administratoras en una lista
-export const listAdmins = async () => {
+export const getAdmins = async () => {
     try{
         const admins = await Administratoras.findAll();
         return admins
@@ -71,7 +75,7 @@ export const updateAdmin = async (id ,profile, name, user, password, status) => 
 export const DeleteAdmin = async (id) => {
     try {
         const admin = await Administratoras.findByPk(id);
-        if(id){
+        if(admin){
             await admin.destroy();
         }
         else {
@@ -85,5 +89,33 @@ export const DeleteAdmin = async (id) => {
         return { error: error.message };
     }
 }
+export const login = async (user, password) => {
+    try {
+        const admin = await Administratoras.findOne({ where: { user } });
+        if (admin) {
+            const isValidPassword = await bcrypt.compare(password, admin.password);
+            if (isValidPassword) {
+                return { success: true };
+            } else {
+                throw new Error("Invalid password");
+            }
+        } else {
+
+            throw new Error("Admin not found");
+        }
+    } catch (error) {
+        fs.appendFile('error.log', error.message + '\n', (err) => {
+            if (err) throw err;
+        });
+        return { error: error.message };
+    }
+} 
 
 
+module.exports = {
+    DeleteAdmin,
+    updateAdmin,
+    getAdmins,
+    createAdmin,
+    login
+}
