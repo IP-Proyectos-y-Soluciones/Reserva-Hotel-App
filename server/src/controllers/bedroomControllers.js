@@ -55,16 +55,16 @@ export const createBedroom = async (kind_h, style, gallery, video, virtual_tour,
         if(!isAdmin){
             throw new Error("You are not authorized")
         }
-        const newBedroom = await Bedrooms.findByPk(id);
-        if(newBedroom){
-            newBedroom.kind_h = kind_h;
-            newBedroom.style = style;
-            newBedroom.gallery = gallery
-            newBedroom.video = video;
-            newBedroom.virtual_tour = virtual_tour;
-            newBedroom.description_h = description_h;
-            await newBedroom.save();
-            return newBedroom;
+        const bedroomUp = await Bedrooms.findByPk(id);
+        if(bedroomUp){
+            bedroomUp.kind_h = kind_h;
+            bedroomUp.style = style;
+            bedroomUp.gallery = gallery
+            bedroomUp.video = video;
+            bedroomUp.virtual_tour = virtual_tour;
+            bedroomUp.description_h = description_h;
+            await bedroomUp.save();
+            return bedroomUp;
         }
     }
     catch(error){
