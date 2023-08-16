@@ -1,24 +1,49 @@
 import { DataTypes } from 'sequelize';
-import sequelize from '../config/db'; // Asegúrate de ajustar la ruta
+import sequelize from '../config/db';
 
 const Bookings = sequelize.define('bookings', {
-  // Define los atributos del modelo
-  // ...
   id_reservation: {
     type: DataTypes.UUID,
     defaultValue: DataTypes.UUIDV4,
     primaryKey: true,
-    autoIncrement: true,
+    allowNull: false,
   },
-  id_room: DataTypes.TEXT,
-  id_user: DataTypes.TEXT,
-  payment_reservation: DataTypes.TEXT,
-  transaction_number: DataTypes.TEXT,
-  reservation_code: DataTypes.TEXT,
-  reservation_description: DataTypes.TEXT,
-  admission_date: DataTypes.TEXT,
-  departure_date: DataTypes.TEXT,
-  reservation_date: DataTypes.TEXT,
+  id_room: {
+    type: DataTypes.TEXT,
+    allowNull: false,
+  },
+  id_user: {
+    type: DataTypes.TEXT,
+    allowNull: false,
+  },
+  payment_reservation: {
+    type: DataTypes.TEXT,
+    allowNull: false,
+  },
+  transaction_number: {
+    type: DataTypes.TEXT,
+    allowNull: false,
+  },
+  reservation_code: {
+    type: DataTypes.TEXT,
+    allowNull: false,
+  },
+  reservation_description: {
+    type: DataTypes.TEXT,
+    allowNull: false,
+  },
+  admission_date: {
+    type: DataTypes.TEXT,
+    allowNull: false,
+  },
+  departure_date: {
+    type: DataTypes.TEXT,
+    allowNull: false,
+  },
+  reservation_date: {
+    type: DataTypes.TEXT,
+    allowNull: false,
+  },
 });
 
 export default Bookings;

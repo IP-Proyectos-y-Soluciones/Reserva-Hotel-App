@@ -1,20 +1,25 @@
 import { DataTypes } from 'sequelize';
-import sequelize from '../config/db'; // Asegúrate de ajustar la ruta
+import sequelize from '../config/db';
 
 const Notifications = sequelize.define('notifications', {
-  // Define los atributos del modelo
-  // ...
   id: {
     type: DataTypes.UUID,
     defaultValue: DataTypes.UUIDV4,
     primaryKey: true,
-    autoIncrement: true,
+    allowNull: false,
   },
-  kind: DataTypes.TEXT,
-  amount: DataTypes.TEXT,
+  kind: {
+    type: DataTypes.TEXT,
+    allowNull: false,
+  },
+  amount: {
+    type: DataTypes.TEXT,
+    allowNull: false,
+  },
   date: {
     type: DataTypes.TIMESTAMP,
     defaultValue: DataTypes.NOW,
+    allowNull: false,
   },
 });
 

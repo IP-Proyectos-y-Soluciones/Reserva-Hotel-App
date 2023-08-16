@@ -1,22 +1,33 @@
 import { DataTypes } from 'sequelize';
-import sequelize from '../config/db'; // Asegúrate de ajustar la ruta
+import sequelize from '../config/db'; 
 
 const Travel = sequelize.define('travel', {
-  // Define los atributos del modelo
-  // ...
   id: {
     type: DataTypes.UUID,
     defaultValue: DataTypes.UUIDV4,
     primaryKey: true,
-    autoIncrement: true,
+    allowNull: false,
   },
-  photo_small: DataTypes.TEXT,
-  big_photo: DataTypes.TEXT,
-  title: DataTypes.TEXT,
-  description: DataTypes.TEXT,
+  photo_small: {
+    type: DataTypes.TEXT,
+    allowNull: false,
+  },
+  big_photo: {
+    type: DataTypes.TEXT,
+    allowNull: false,
+  },
+  title: {
+    type: DataTypes.TEXT,
+    allowNull: false,
+  },
+  description: {
+    type: DataTypes.TEXT,
+    allowNull: false,
+  },
   date: {
     type: DataTypes.TIMESTAMP,
     defaultValue: DataTypes.NOW,
+    allowNull: false,
   },
 });
 

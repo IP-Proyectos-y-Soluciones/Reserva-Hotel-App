@@ -1,18 +1,25 @@
 import { DataTypes } from 'sequelize';
-import sequelize from '../config/db'; // Asegúrate de ajustar la ruta
+import sequelize from '../config/db';
 
 const Bookings2 = sequelize.define('bookings2', {
-  // Define los atributos del modelo
-  // ...
   id: {
     type: DataTypes.UUID,
     defaultValue: DataTypes.UUIDV4,
     primaryKey: true,
-    autoIncrement: true,
+    allowNull: false,
   },
-  id_room: DataTypes.TEXT,
-  admission_date: DataTypes.TEXT,
-  departure_date: DataTypes.TEXT,
+  id_room: {
+    type: DataTypes.TEXT,
+    allowNull: false,
+  },
+  admission_date: {
+    type: DataTypes.TEXT,
+    allowNull: false,
+  },
+  departure_date: {
+    type: DataTypes.TEXT,
+    allowNull: false,
+  },
 });
 
 export default Bookings2;
