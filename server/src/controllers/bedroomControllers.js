@@ -1,7 +1,10 @@
+<<<<<<< HEAD
 import Bedrooms from "../config/db";
 import { isAdmin } from "./bannerControllers"
 
 
+=======
+>>>>>>> bacd220 (fix)
 export const createBedroom = async (kind_h, style, gallery, video, virtual_tour, description_h) => {
   try {
     if (!isAdmin()) {
@@ -92,4 +95,8 @@ export const createBedroom = async (kind_h, style, gallery, video, virtual_tour,
         });
         return { error: error.message };
     }
+<<<<<<< HEAD
    };
+=======
+   } 
+>>>>>>> bacd220 (fix)

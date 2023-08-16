@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 import Administrators from "../config/db.js";
 import bcrypt from 'bcrypt';
 import fs from 'fs';
@@ -104,5 +105,5 @@ export const login = async (user, password) => {
   }
 };
 
-
-  
+=======
+>>>>>>> d1a37fd (fix)

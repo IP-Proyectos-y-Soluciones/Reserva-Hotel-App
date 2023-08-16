@@ -1,7 +1,10 @@
 import fs from "fs/promises";
 import Users from "../config/db";
 import bcrypt from "bcrypt";
+<<<<<<< HEAD
 import nodemailer from "nodemailer"
+=======
+>>>>>>> bacd220 (fix)
 
 const createUser = async (password, email, name) => {
   try {
@@ -104,4 +107,8 @@ export const sendMail = async (email, subject, text) => {
         });
         return { error: error.message };
     }
+<<<<<<< HEAD
 };
+=======
+}
+>>>>>>> bacd220 (fix)
