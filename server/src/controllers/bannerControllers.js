@@ -38,13 +38,13 @@ export const updateBanner = async (id, img, date ) => {
         if(!isAdmin){
             throw new Error("You are not authorized")
         }
-        const bannerUp = await Banner.findByPk(id);
-        if(bannerUp){
-            bannerUp.id = id;
-            bannerUp.img = img;
-            bannerUp.date = date
-            await bannerUp.save();
-            return bannerUp;
+        const bannerUpdate = await Banner.findByPk(id);
+        if(bannerUpdate){
+            bannerUpdate.id = id;
+            bannerUpdate.img = img;
+            bannerUpdate.date = date
+            await bannerUpdate.save();
+            return bannerUpdate;
         }
     }
     catch(error){
