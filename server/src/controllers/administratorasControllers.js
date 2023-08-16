@@ -104,10 +104,11 @@ export const login = async (user, password) => {
   }
 };
 
-export default {
-  deleteAdmin,
-  updateAdmin,
-  getAdmins,
-  createAdmin,
-  login
-};
+
+module.exports = {
+    DeleteAdmin,
+    updateAdmin,
+    getAdmins,
+    createAdmin,
+    login
+}
