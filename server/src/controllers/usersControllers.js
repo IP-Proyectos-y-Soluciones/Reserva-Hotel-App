@@ -1,7 +1,6 @@
 import fs from "fs/promises";
 import Users from "../config/db";
 import bcrypt from "bcrypt";
-import nodemailer from "nodemailer";
 
 const createUser = async (password, email, name) => {
   try {
@@ -80,33 +79,28 @@ export const login = async (email, password) => {
 };
 
 export const sendMail = async (email, subject, text) => {
-  try {
-    const transporter = nodemailer.createTransport({
-      host: "smtp.mailtrap.io",
-      port: 2525,
-      auth: {
-        user: "kubathasanengin@gmail.com",
-        pass: "be1e90b92fa3e518eaafbf7d9d80c1c3"
-      }
-    });
-    const info = await transporter.sendMail({
-      from: '"Hotel" <kubathasanengin@gmail.com>',
-      to: email,
-      subject,
-      text
-    });
-    return info;
-  } catch (error) {
-    fs.appendFile("error.log", error.message + "\n", err => {
-      if (err) throw err;
-    });
-    return { error: error.message };
-  }
-};
-
-export default {
-  createUser,
-  updateUsers,
-  sendMail,
-  login
-};
+    try {
+     const transporter = nodemailer.createTransport({
+        host: 'smtp.mailtrap.io',
+        port: 2525,
+        auth: {
+            user: "kubathasanengin@gmail.com",
+            pass: "be1e90b92fa3e518eaafbf7d9d80c1c3"
+        },
+     });
+     const info = await transporter.sendMail({
+        from: '"Hotel" <kubathasanengin@gmail.com>',
+        to: email,
+        subject,
+        text
+     })
+     return info;
+     
+    }
+    catch (error) {
+        fs.appendFile('error.log', error.message + '\n', (err) => {
+            if (err) throw err;
+        });
+        return { error: error.message };
+    }
+}

@@ -1,4 +1,4 @@
-import Administratoras from "../config/db.js";
+import Administrators from "../config/db.js";
 import bcrypt from 'bcrypt';
 import fs from 'fs';
 
@@ -104,10 +104,3 @@ export const login = async (user, password) => {
   }
 };
 
-export default {
-  deleteAdmin,
-  updateAdmin,
-  getAdmins,
-  createAdmin,
-  login
-};
