@@ -34,7 +34,7 @@ export const createBedroom = async (kind_h, style, gallery, video, virtual_tour,
 
 
 
-   const getBedroom = async () => {
+   const getBedrooms = async () => {
      try {
         const bedrooms = await Bedrooms.findAll();
         return bedrooms;
@@ -102,5 +102,5 @@ export const createBedroom = async (kind_h, style, gallery, video, virtual_tour,
     deleteBedroom,
     updateBedroom,
     getBedroom,
-    createBedroom
+    createBedrooms
   }
