@@ -103,3 +103,4 @@ export const sendMail = async (email, subject, text) => {
         });
         return { error: error.message };
     }
+};

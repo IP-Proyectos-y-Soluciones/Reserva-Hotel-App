@@ -19,7 +19,7 @@ const modelDefiners = [];
 
 fs.readdirSync(path.join(__dirname, 'models'))
   .filter((file) => (file.indexOf('.') !== 0) && (file.slice(-3) === '.js'))
-  .forEach((file) => {
+  .forEach(async (file)  =>  {
     const model = await import(path.join(__dirname, 'models', file));
     modelDefiners.push(model.default);
   });
@@ -39,7 +39,7 @@ Testimonials.belongsTo(Users, { foreignKey: 'id_res' });
 Testimonials.belongsTo(Users, { foreignKey: 'id_us' });
 Testimonials.belongsTo(Bedrooms, { foreignKey: 'id_room' });
 
-export default {
-  ...sequelize.models,
+module.exports = {
+  ...sequelize.models, 
   conn: sequelize,
 };
