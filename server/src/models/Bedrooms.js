@@ -1,24 +1,41 @@
 import { DataTypes } from 'sequelize';
-import sequelize from '../config/db'; // Asegúrate de ajustar la ruta
+import sequelize from '../config/db'; 
 
 const Bedrooms = sequelize.define('bedrooms', {
-  // Define los atributos del modelo
-  // ...
   id_h: {
     type: DataTypes.UUID,
-    defaultValue:DataTypes.UUIDV4,
+    defaultValue: DataTypes.UUIDV4,
     primaryKey: true,
-    autoIncrement: true,
+    allowNull: false,
   },
-  kind_h: DataTypes.TEXT,
-  style: DataTypes.TEXT,
-  gallery: DataTypes.TEXT,
-  video: DataTypes.TEXT,
-  virtual_tour: DataTypes.TEXT,
-  description_h: DataTypes.TEXT,
+  kind_h: {
+    type: DataTypes.TEXT,
+    allowNull: false,
+  },
+  style: {
+    type: DataTypes.TEXT,
+    allowNull: false,
+  },
+  gallery: {
+    type: DataTypes.TEXT,
+    allowNull: false,
+  },
+  video: {
+    type: DataTypes.TEXT,
+    allowNull: false,
+  },
+  virtual_tour: {
+    type: DataTypes.TEXT,
+    allowNull: false,
+  },
+  description_h: {
+    type: DataTypes.TEXT,
+    allowNull: false,
+  },
   date_h: {
     type: DataTypes.TIMESTAMP,
     defaultValue: DataTypes.NOW,
+    allowNull: false,
   },
 });
 

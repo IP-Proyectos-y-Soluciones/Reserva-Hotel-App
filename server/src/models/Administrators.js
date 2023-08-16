@@ -1,23 +1,46 @@
-import { DataTypes } from "sequelize";
+import { DataTypes } from 'sequelize';
 import sequelize from '../config/db';
-import byrcpt from 'bcrypt';
+import bcrypt from 'bcrypt';
 
 const Administrator = sequelize.define('administrator', {
   id: {
     type: DataTypes.UUID,
     defaultValue: DataTypes.UUIDV4,
     primaryKey: true,
-    autoIncrement: true,
+    allowNull: false, // Cambio: Agregar allowNull
   },
-  profile: DataTypes.TEXT,
-  name: DataTypes.TEXT,
-  user: DataTypes.TEXT,
-  password: DataTypes.TEXT,
-  status: DataTypes.INTEGER,
+  profile: {
+    type: DataTypes.TEXT,
+    allowNull: false, // Cambio: Agregar allowNull
+  },
+  name: {
+    type: DataTypes.TEXT,
+    allowNull: false, // Cambio: Agregar allowNull
+  },
+  user: {
+    type: DataTypes.TEXT,
+    allowNull: false, // Cambio: Agregar allowNull
+  },
+  password: {
+    type: DataTypes.TEXT,
+    allowNull: false, // Cambio: Agregar allowNull
+  },
+  status: {
+    type: DataTypes.INTEGER,
+    allowNull: false, // Cambio: Agregar allowNull
+  },
   date: {
     type: DataTypes.TIMESTAMP,
     defaultValue: DataTypes.NOW,
+    allowNull: false, // Cambio: Agregar allowNull
   },
 });
 
-export default  Administrator;
+// Callback para encriptar la contraseña antes de guardar
+Administrator.beforeCreate(async (administrator, options) => {
+  const saltRounds = 10;
+  const hashedPassword = await bcrypt.hash(administrator.password, saltRounds);
+  administrator.password = hashedPassword;
+});
+
+export default Administrator;

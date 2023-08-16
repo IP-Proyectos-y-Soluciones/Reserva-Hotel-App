@@ -1,25 +1,45 @@
-import { DataTypes } from "sequelize";
-import sequelize from "../config/db"; // Asegúrate de ajustar la ruta
+import { DataTypes } from 'sequelize';
+import sequelize from '../config/db'; /
 
-const Users = sequelize.define("users", {
-  // Define los atributos del modelo
-  // ...
+const Users = sequelize.define('users', {
   id_u: {
     type: DataTypes.UUID,
     defaultValue: DataTypes.UUIDV4,
     primaryKey: true,
-    autoIncrement: true,
+    allowNull: false,
   },
-  name: DataTypes.TEXT,
-  password: DataTypes.TEXT,
-  email: DataTypes.TEXT,
-  photo: DataTypes.TEXT,
-  mode: DataTypes.TEXT,
-  check: DataTypes.TEXT,
-  encrypted_email: DataTypes.TEXT,
+  name: {
+    type: DataTypes.TEXT,
+    allowNull: false,
+  },
+  password: {
+    type: DataTypes.TEXT,
+    allowNull: false,
+  },
+  email: {
+    type: DataTypes.TEXT,
+    allowNull: false,
+  },
+  photo: {
+    type: DataTypes.TEXT,
+    allowNull: false,
+  },
+  mode: {
+    type: DataTypes.TEXT,
+    allowNull: false,
+  },
+  check: {
+    type: DataTypes.TEXT,
+    allowNull: false,
+  },
+  encrypted_email: {
+    type: DataTypes.TEXT,
+    allowNull: false,
+  },
   date: {
     type: DataTypes.TIMESTAMP,
     defaultValue: DataTypes.NOW,
+    allowNull: false,
   },
 });
 

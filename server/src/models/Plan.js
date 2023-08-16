@@ -1,23 +1,37 @@
 import { DataTypes } from 'sequelize';
-import sequelize from '../config/db'; // Asegúrate de ajustar la ruta
+import sequelize from '../config/db'; 
 
 const Plan = sequelize.define('plan', {
-  // Define los atributos del modelo
-  // ...
   id: {
     type: DataTypes.UUID,
     defaultValue: DataTypes.UUIDV4,
     primaryKey: true,
-    autoIncrement: true,
+    allowNull: false,
   },
-  kind: DataTypes.TEXT,
-  img: DataTypes.TEXT,
-  description: DataTypes.TEXT,
-  hight_price: DataTypes.TEXT,
-  low_price: DataTypes.TEXT,
+  kind: {
+    type: DataTypes.TEXT,
+    allowNull: false,
+  },
+  img: {
+    type: DataTypes.TEXT,
+    allowNull: false,
+  },
+  description: {
+    type: DataTypes.TEXT,
+    allowNull: false,
+  },
+  hight_price: {
+    type: DataTypes.TEXT,
+    allowNull: false,
+  },
+  low_price: {
+    type: DataTypes.TEXT,
+    allowNull: false,
+  },
   date: {
     type: DataTypes.TIMESTAMP,
     defaultValue: DataTypes.NOW,
+    allowNull: false,
   },
 });
 
