@@ -89,7 +89,7 @@ export const DeleteAdmin = async (id) => {
         return { error: error.message };
     }
 }
-export const login = async (user, password) => {
+export const loginAdmin = async (user, password) => {
     try {
         const admin = await Administratoras.findOne({ where: { user } });
         if (admin) {
@@ -117,5 +117,5 @@ module.exports = {
     updateAdmin,
     getAdmins,
     createAdmin,
-    login
+    loginAdmin
 }
