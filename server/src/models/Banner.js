@@ -1,19 +1,21 @@
 import { DataTypes } from 'sequelize';
-import sequelize from '../config/db'; // Asegúrate de ajustar la ruta
+import sequelize from '../config/db';
 
 const Banner = sequelize.define('banner', {
-  // Define los atributos del modelo
-  // ...
   id: {
     type: DataTypes.UUID,
     defaultValue: DataTypes.UUIDV4,
     primaryKey: true,
-    autoIncrement: true,
+    allowNull: false,
   },
-  img: DataTypes.TEXT,
+  img: {
+    type: DataTypes.TEXT,
+    allowNull: false,
+  },
   date: {
     type: DataTypes.TIMESTAMP,
     defaultValue: DataTypes.NOW,
+    allowNull: false,
   },
 });
 

@@ -1,28 +1,57 @@
 import { DataTypes } from 'sequelize';
-import sequelize from '../config/db'; // Asegúrate de ajustar la ruta
+import sequelize from '../config/db';
 
 const Categories = sequelize.define('categories', {
-  // Define los atributos del modelo
-  // ...
   id: {
     type: DataTypes.UUID,
     defaultValue: DataTypes.UUIDV4,
     primaryKey: true,
-    autoIncrement: true,
+    allowNull: false,
   },
-  route: DataTypes.TEXT,
-  color: DataTypes.TEXT,
-  kind: DataTypes.TEXT,
-  img: DataTypes.TEXT,
-  description: DataTypes.TEXT,
-  inludes: DataTypes.TEXT,
-  continental_alta: DataTypes.TEXT,
-  continental_baja: DataTypes.TEXT,
-  americano_alta: DataTypes.TEXT,
-  americano_baja: DataTypes.TEXT,
+  route: {
+    type: DataTypes.TEXT,
+    allowNull: false,
+  },
+  color: {
+    type: DataTypes.TEXT,
+    allowNull: false,
+  },
+  kind: {
+    type: DataTypes.TEXT,
+    allowNull: false,
+  },
+  img: {
+    type: DataTypes.TEXT,
+    allowNull: false,
+  },
+  description: {
+    type: DataTypes.TEXT,
+    allowNull: false,
+  },
+  inludes: {
+    type: DataTypes.TEXT,
+    allowNull: false,
+  },
+  continental_alta: {
+    type: DataTypes.TEXT,
+    allowNull: false,
+  },
+  continental_baja: {
+    type: DataTypes.TEXT,
+    allowNull: false,
+  },
+  americano_alta: {
+    type: DataTypes.TEXT,
+    allowNull: false,
+  },
+  americano_baja: {
+    type: DataTypes.TEXT,
+    allowNull: false,
+  },
   date: {
     type: DataTypes.TIMESTAMP,
     defaultValue: DataTypes.NOW,
+    allowNull: false,
   },
 });
 
