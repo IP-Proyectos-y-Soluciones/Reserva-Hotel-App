@@ -11,12 +11,12 @@ const createUser = async (password, email, name) => {
         const saltRounds = 10;
         const hashedPassword = await bcrypt.hash(password, saltRounds);
 
-        const newUser = await Users.create({
+        const User = await Users.create({
             password: hashedPassword,
             email,
             name
         })
-        return newUser
+        return User
         }
     }
     catch(error){
