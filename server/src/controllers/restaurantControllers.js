@@ -119,10 +119,3 @@ export const getAllRestaurants = async () => {
 }
 
 
-module.exports = {
-    getAllRestaurants,
-    getRestaurant,
-    deleteRestaurant,
-    updateRestaurant,
-    createRestaurant
-}

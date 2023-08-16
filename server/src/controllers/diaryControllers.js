@@ -158,13 +158,4 @@ export const getAllDiaryEntries = async () => {
     });
     return { error: error.message };
    }
-}
-
-module.exports = {
-    getAllDiaryEntries,
-    deleteDiaryEntry,
-    getDiaryEntry,
-    updateDiaryEntry,
-    createDiaryEntry
-
-}
+};

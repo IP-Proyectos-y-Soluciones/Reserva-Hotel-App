@@ -129,13 +129,4 @@ export const getAllNotifications = async () => {
     });
     return { error: error.message };
 }
-}
-
-
-module.exports = {
-    getAllNotifications,
-    getNotification,
-    deleteNotification,
-    updateNotification,
-    createNotification
-}
+};

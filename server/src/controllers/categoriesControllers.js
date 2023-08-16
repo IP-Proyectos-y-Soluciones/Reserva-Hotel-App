@@ -157,5 +157,5 @@ import Categories from "../config/db";
     });
     return { error: error.message };
 }
-  }
+  };
 

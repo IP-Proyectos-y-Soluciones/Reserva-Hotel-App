@@ -134,10 +134,3 @@ export const getAllPlans = async () => {
 }
 
 
-module.exports = {
-    getAllPlans,
-    getPlan,
-    deletePlan,
-    updatePlan,
-    createPlan
-}
