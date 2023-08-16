@@ -1,6 +1,6 @@
 import { DataTypes } from "sequelize";
 import sequelize from '../config/db';
-
+byrcpt
 
 const Administrator = sequelize.define('administrator', {
   id: {
