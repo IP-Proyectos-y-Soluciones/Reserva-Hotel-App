@@ -5,7 +5,8 @@ const Testimonials = sequelize.define('testimonials', {
   // Define los atributos del modelo
   // ...
   id_testimony: {
-    type: DataTypes.INTEGER,
+    type: DataTypes.UUID,
+    defaultValue: DataTypes.UUIDV4,
     primaryKey: true,
     autoIncrement: true,
   },

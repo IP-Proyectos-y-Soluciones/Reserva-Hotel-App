@@ -5,7 +5,8 @@ const Bedrooms = sequelize.define('bedrooms', {
   // Define los atributos del modelo
   // ...
   id_h: {
-    type: DataTypes.INTEGER,
+    type: DataTypes.UUID,
+    defaultValue:DataTypes.UUIDV4,
     primaryKey: true,
     autoIncrement: true,
   },
