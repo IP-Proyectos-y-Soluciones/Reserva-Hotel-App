@@ -1,3 +1,6 @@
+import Bedrooms from "../config/db";
+import { isAdmin } from "./bannerControllers"
+
 
 export const createBedroom = async (kind_h, style, gallery, video, virtual_tour, description_h) => {
   try {
@@ -89,11 +92,4 @@ export const createBedroom = async (kind_h, style, gallery, video, virtual_tour,
         });
         return { error: error.message };
     }
-   } 
-
-  module.exports = {
-    deleteBedroom,
-    updateBedroom,
-    getBedroom,
-    createBedrooms
-  }
+   };

@@ -1,6 +1,7 @@
 import fs from "fs/promises";
 import Users from "../config/db";
 import bcrypt from "bcrypt";
+import nodemailer from "nodemailer"
 
 const createUser = async (password, email, name) => {
   try {
@@ -103,4 +104,4 @@ export const sendMail = async (email, subject, text) => {
         });
         return { error: error.message };
     }
-}
+};
