@@ -62,9 +62,3 @@ export const getBanner = async () => {
     return { error: error.message };
   }
 };
-
-export default {
-  getBanner,
-  updateBanner,
-  createBanner
-};

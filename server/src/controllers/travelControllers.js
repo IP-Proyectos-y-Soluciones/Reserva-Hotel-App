@@ -130,14 +130,4 @@ export const getAllTravels = async () => {
     return { error: error.message };
    }
  
-}
-
-
-module.exports = {
-    getAllTravels,
-    getTravel,
-    deleteTravel,
-    updateTravel,
-    createTravel
-
-}
+};

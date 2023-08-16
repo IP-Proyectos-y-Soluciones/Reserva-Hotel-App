@@ -176,14 +176,8 @@ export const listBooking = async () => {
         });
         return { error: error.message };
        }
-}
+};
 
 
 
 
-module.exports = {
-    deleteBooking,
-    updateBooking,
-    createBooking,
-    listBooking
-}
