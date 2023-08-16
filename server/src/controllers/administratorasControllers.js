@@ -103,11 +103,3 @@ export const login = async (user, password) => {
     return { error: error.message };
   }
 };
-
-export default {
-  deleteAdmin,
-  updateAdmin,
-  getAdmins,
-  createAdmin,
-  login
-};
