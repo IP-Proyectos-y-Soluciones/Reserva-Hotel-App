@@ -28,7 +28,7 @@ const createUser = async (password, email, name) => {
 }
 
 
-export const updateUser = async (id_u, name, password, email, photo, mode, check) => {
+export const updateUsers = async (id_u, name, password, email, photo, mode, check) => {
    try{
     const saltRounds = 10;
     const hashedPassword = await bcrypt.hash(password, saltRounds);
@@ -103,7 +103,7 @@ export const sendMail = async (email, subject, text) => {
 
 module.exports = {
     createUser,
-    updateUser,
+    updateUsers,
     sendMail,
     login
 }
