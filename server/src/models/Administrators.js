@@ -1,10 +1,11 @@
 import { DataTypes } from "sequelize";
 import sequelize from '../config/db';
-byrcpt
+import byrcpt from 'bcrypt';
 
 const Administrator = sequelize.define('administrator', {
   id: {
-    type: DataTypes.INTEGER,
+    type: DataTypes.UUID,
+    defaultValue: DataTypes.UUIDV4,
     primaryKey: true,
     autoIncrement: true,
   },

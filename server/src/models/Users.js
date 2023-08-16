@@ -5,7 +5,8 @@ const Users = sequelize.define("users", {
   // Define los atributos del modelo
   // ...
   id_u: {
-    type: DataTypes.INTEGER,
+    type: DataTypes.UUID,
+    defaultValue: DataTypes.UUIDV4,
     primaryKey: true,
     autoIncrement: true,
   },

@@ -5,7 +5,8 @@ const Bookings2 = sequelize.define('bookings2', {
   // Define los atributos del modelo
   // ...
   id: {
-    type: DataTypes.INTEGER,
+    type: DataTypes.UUID,
+    defaultValue: DataTypes.UUIDV4,
     primaryKey: true,
     autoIncrement: true,
   },
