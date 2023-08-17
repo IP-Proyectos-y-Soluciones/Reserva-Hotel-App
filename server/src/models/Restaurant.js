@@ -1,7 +1,9 @@
-import { DataTypes } from 'sequelize';
-import sequelize from '../config/db';
+const { DataTypes } = require('sequelize');
 
-const Restaurant = sequelize.define('restaurant', {
+
+module.exports = (sequelize) => { 
+sequelize.define(
+  'restaurant', {
   id: {
     type: DataTypes.UUID,
     defaultValue: DataTypes.UUIDV4,
@@ -22,5 +24,4 @@ const Restaurant = sequelize.define('restaurant', {
     allowNull: false,
   },
 });
-
-export default Restaurant;
+}

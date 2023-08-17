@@ -1,15 +1,14 @@
-import Banner from "../config/db.js"; 
-import { getAdmins } from "./administratorasControllers.js";
-import fs from 'fs';
+const { Banner } = require("../config/db");
+const { getAdmins } = require("./administratorasControllers.js");
 
 // Solo para ver el administrador
-export const isAdmin = async (userId) => {
+const isAdmin = async (userId) => {
   const admin = await getAdmins();
   const adminIds = admin.map(admins => admins.id);
   return adminIds.includes(userId);
 };
 
-export const createBanner = async (img) => {
+ const createBanner = async (img) => {
   try {
     if (!isAdmin) {
       throw new Error("No estás autorizado");
@@ -23,14 +22,12 @@ export const createBanner = async (img) => {
       return newBanner;
     }
   } catch (error) {
-    fs.appendFile('error.log', error.message + '\n', (err) => {
-      if (err) throw err;
-    });
+   
     return { error: error.message };
   }
 };
 
-export const updateBanner = async (id, img, date) => {
+const updateBanner = async (id, img, date) => {
   try {
     if (!isAdmin) {
       throw new Error("No estás autorizado");
@@ -44,14 +41,12 @@ export const updateBanner = async (id, img, date) => {
       return bannerUpdate;
     }
   } catch (error) {
-    fs.appendFile('error.log', error.message + '\n', (err) => {
-      if (err) throw err;
-    });
+  
     return { error: error.message };
   }
 };
 
-export const getBanner = async () => {
+ const getBanner = async () => {
   try {
     const banner = await Banner.findAll();
     return banner;
@@ -62,3 +57,10 @@ export const getBanner = async () => {
     return { error: error.message };
   }
 };
+
+module.exports = {
+  getBanner,
+  updateBanner,
+  createBanner,
+  isAdmin
+}

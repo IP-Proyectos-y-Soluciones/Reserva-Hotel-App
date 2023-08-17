@@ -1,7 +1,9 @@
-import { DataTypes } from 'sequelize';
-import sequelize from '../config/db';
+const { DataTypes } = require('sequelize');
 
-const Notifications = sequelize.define('notifications', {
+
+module.exports = (sequelize) => { 
+sequelize.define(
+  'notifications', {
   id: {
     type: DataTypes.UUID,
     defaultValue: DataTypes.UUIDV4,
@@ -22,5 +24,4 @@ const Notifications = sequelize.define('notifications', {
     allowNull: false,
   },
 });
-
-export default Notifications;
+}

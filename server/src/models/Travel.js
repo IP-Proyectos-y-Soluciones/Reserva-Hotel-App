@@ -1,7 +1,9 @@
-import { DataTypes } from 'sequelize';
-import sequelize from '../config/db'; 
+const { DataTypes } = require('sequelize');
 
-const Travel = sequelize.define('travel', {
+
+module.exports = (sequelize) => {
+ sequelize.define('travel', 
+ {
   id: {
     type: DataTypes.UUID,
     defaultValue: DataTypes.UUIDV4,
@@ -30,5 +32,4 @@ const Travel = sequelize.define('travel', {
     allowNull: false,
   },
 });
-
-export default Travel;
+}

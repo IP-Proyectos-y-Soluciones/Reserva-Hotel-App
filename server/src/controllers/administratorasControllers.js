@@ -1,38 +1,37 @@
-import Administrators from "../config/db.js";
-import bcrypt from 'bcrypt';
-import fs from 'fs';
+const bcrypt = require('bcrypt'); 
+const { Administrators } = require("../config/db")
 
-// Crear un nuevo administrador
-export const createAdmin = async (profile, name, user, password, status) => {
-  try {
-    if (!name || !user || !password) {
-      throw new Error("Faltan datos para crear el administrador");
-    } else {
-      const saltRounds = 10;
-      const hashedPassword = await bcrypt.hash(password, saltRounds);
+const createAdmin = async (profile, name, user, password, status) => {
+    try {
+      if (!name || !user || !password) {
+        throw new Error("Faltan datos para crear el administrador");
+      } else {
 
-      const newAdmin = await Administratoras.create({
-        profile,
-        name,
-        user,
-        password: hashedPassword,
-        status
-      });
-
-      return newAdmin;
+        const saltRounds = 10;
+        const hashedPassword = await bcrypt.hash(password, saltRounds);
+  
+        const newAdmin = await Administrators.create({
+          profile,
+          name,
+          user,
+          password: hashedPassword,
+          status
+        });
+  
+        return newAdmin;
+      }
+    } catch (error) {
+    
+      console.error(error)
     }
-  } catch (error) {
-    fs.appendFile('error.log', error.message + '\n', (err) => {
-      if (err) throw err;
-    });
-    return { error: error.message };
-  }
 };
 
+
 // Obtener todos los administradores en una lista
-export const getAdmins = async () => {
+const getAdmins = async () => {
   try {
-    const admins = await Administratoras.findAll();
+    const admins = await Administrators.findAll();
+    
     return admins;
   } catch (error) {
     fs.appendFile('error.log', error.message + '\n', (err) => {
@@ -43,9 +42,9 @@ export const getAdmins = async () => {
 };
 
 // Actualizar administrador
-export const updateAdmin = async (id, profile, name, user, password, status) => {
+ const updateAdmin = async (id, profile, name, user, password, status) => {
   try {
-    const admin = await Administratoras.findByPk(id);
+    const admin = await Administrators.findByPk(id);
     if (admin) {
       admin.profile = profile;
       admin.name = name;
@@ -58,19 +57,23 @@ export const updateAdmin = async (id, profile, name, user, password, status) => 
       throw new Error("Administrador no encontrado");
     }
   } catch (error) {
-    fs.appendFile('error.log', error.message + '\n', (err) => {
-      if (err) throw err;
-    });
+    console.log(error)
     return { error: error.message };
   }
 };
 
 // Eliminar administrador
-export const deleteAdmin = async (id) => {
+const deleteAdmin = async (id) => {
   try {
-    const admin = await Administratoras.findByPk(id);
+    const admin = await Administrators.findOne({
+      where: {
+        id: id
+      }
+    });
+    
     if (admin) {
       await admin.destroy();
+      return { message: 'Admin silindi' };
     } else {
       throw new Error("Administrador no encontrado");
     }
@@ -83,9 +86,9 @@ export const deleteAdmin = async (id) => {
 };
 
 // Iniciar sesión
-export const login = async (user, password) => {
+ const login = async (user, password) => {
   try {
-    const admin = await Administratoras.findOne({ where: { user } });
+    const admin = await Administrators.findOne({ where: { user } });
     if (admin) {
       const isValidPassword = await bcrypt.compare(password, admin.password);
       if (isValidPassword) {
@@ -97,12 +100,16 @@ export const login = async (user, password) => {
       throw new Error("Administrador no encontrado");
     }
   } catch (error) {
-    fs.appendFile('error.log', error.message + '\n', (err) => {
-      if (err) throw err;
-    });
+   
     return { error: error.message };
   }
 };
 
 
-  
+module.exports = {
+  login,
+  deleteAdmin,
+  updateAdmin,
+  createAdmin,
+  getAdmins
+}

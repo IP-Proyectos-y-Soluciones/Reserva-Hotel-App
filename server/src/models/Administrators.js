@@ -1,8 +1,9 @@
-import { DataTypes } from 'sequelize';
-import sequelize from '../config/db';
+const { DataTypes } = require('sequelize');
 import bcrypt from 'bcrypt';
 
-const Administrator = sequelize.define('administrator', {
+module.exports = (sequelize) => {
+sequelize.define(
+  'administrator', {
   id: {
     type: DataTypes.UUID,
     defaultValue: DataTypes.UUIDV4,
@@ -42,5 +43,4 @@ Administrator.beforeCreate(async (administrator, options) => {
   const hashedPassword = await bcrypt.hash(administrator.password, saltRounds);
   administrator.password = hashedPassword;
 });
-
-export default Administrator;
+}

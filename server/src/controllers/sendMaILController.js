@@ -1,6 +1,6 @@
 import nodemailer from "nodemailer"
 
-export const sendMail = async (email, subject, text) => {
+const sendMail = async (email, subject, text) => {
     try {
      const transporter = nodemailer.createTransport({
         host: 'smtp.mailtrap.io',
@@ -26,4 +26,5 @@ export const sendMail = async (email, subject, text) => {
         return { error: error.message };
     }
 }
+module.exports = sendMail;
 

@@ -1,35 +1,43 @@
-import 'dotenv/config';
-import { Sequelize } from 'sequelize';
-import fs from 'fs';
-import path from 'path';
+require("dotenv").config();
+const { Sequelize } = require("sequelize");
+const fs = require("fs");
+const path = require("path");
+const { DB_USER, DB_PASSWORD, DB_HOST, DB_PORT, DATABASE } = process.env;
+// import "dotenv/config";
+// import Sequelize from "sequelize";
+// import fs from "fs";
+// import path from "path";
 
-const {
-  DB_USER, DB_PASSWORD, DB_HOST, DB_PORT, DATABASE
-} = process.env;
+const sequelize = new Sequelize(
+  `postgres://${DB_USER}:${DB_PASSWORD}@${DB_HOST}:${DB_PORT}/${DATABASE}`,
+  {
+    logging: false,
+    native: false,
+  }
+);
 
-const sequelize = new Sequelize(`postgres://${DB_USER}:${DB_PASSWORD}@${DB_HOST}:${DB_PORT}/${DATABASE}`, {
-  logging: false,
-  native: false,
-});
-
-const __filename = fileURLToPath( import.meta.url );
-const __dirname = path.dirname(__filename);
-
+const basename = path.basename(__filename);
 const modelDefiners = [];
 
-fs.readdirSync(path.join(__dirname, 'models'))
-  .filter((file) => (file.indexOf('.') !== 0) && (file.slice(-3) === '.js'))
+fs.readdirSync(path.join(__dirname, "/models"))
+  .filter(
+    (file) =>
+      file.indexOf(".") !== 0 && file !== basename && file.slice(-3) === ".js"
+  )
   .forEach((file) => {
-    const model = await import(path.join(__dirname, 'models', file));
-    modelDefiners.push(model.default);
+    modelDefiners.push(require(path.join(__dirname, '/models', file)));
   });
 
-modelDefiners.forEach((modelDefiner) => modelDefiner(sequelize));
+modelDefiners.forEach((model) => model(sequelize));
 
-const entries = Object.entries(sequelize.models);
-const capsEntries = entries.map((entry) => [entry[0][0].toUpperCase() + entry[0].slice(1), entry[1]]);
+let entries = Object.entries(sequelize.models);
+let capsEntries = entries.map((entry) => [
+  entry[0][0].toUpperCase() + entry[0].slice(1),
+  entry[1],
+]);
 sequelize.models = Object.fromEntries(capsEntries);
 
+//Aca vendrian las relaciones
 const { Diary, Bookings, Testimonials, Bedrooms, Users } = sequelize.models;
 
 Diary.belongsTo(Bedrooms, { foreignKey: 'id_room' });
@@ -39,7 +47,7 @@ Testimonials.belongsTo(Users, { foreignKey: 'id_res' });
 Testimonials.belongsTo(Users, { foreignKey: 'id_us' });
 Testimonials.belongsTo(Bedrooms, { foreignKey: 'id_room' });
 
-export default {
+module.exports = {
   ...sequelize.models,
   conn: sequelize,
 };

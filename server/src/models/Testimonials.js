@@ -1,7 +1,9 @@
-import { DataTypes } from 'sequelize';
-import sequelize from '../config/db'; // Asegúrate de ajustar la ruta
+const { DataTypes } = require('sequelize');
 
-const Testimonials = sequelize.define('testimonials', {
+
+module.exports = (sequelize) => { 
+sequelize.define(
+  'testimonials', {
   id_testimony: {
     type: DataTypes.UUID,
     defaultValue: DataTypes.UUIDV4,
@@ -34,5 +36,4 @@ const Testimonials = sequelize.define('testimonials', {
     allowNull: false,
   },
 });
-
-export default Testimonials;
+}
