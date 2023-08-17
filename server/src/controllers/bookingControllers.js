@@ -1,8 +1,11 @@
-import Bookings from "../config/db";
-import Bookings2 from "../config/db";
-import Users from "../config/db";
 
-export const createBooking = async ({
+const Users = require("../config/db")
+const Bookings2 = require("../config/db")
+const Bookings = require("../config/db")
+
+
+
+const createBooking = async ({
     id_room, 
     id_user, 
     payment_reservation, 
@@ -39,9 +42,7 @@ export const createBooking = async ({
         
        }
        catch(error) {
-        fs.appendFile('error.log', error.message + '\n', (err) => {
-            if (err) throw err;
-        });
+     
         return { error: error.message };
        }
      }   
@@ -52,7 +53,7 @@ export const createBooking = async ({
 
 
 
-     export const updateBooking = async (
+ const updateBooking = async (
     id_reservation,
     {
       id_room,
@@ -106,9 +107,7 @@ export const createBooking = async ({
       throw new Error('Booking not found');
     } 
     catch(error) {
-        fs.appendFile('error.log', error.message + '\n', (err) => {
-            if (err) throw err;
-        });
+      
         return { error: error.message };
        }
 }
@@ -117,7 +116,7 @@ export const createBooking = async ({
 
 
 
-export const deleteBooking = async (id_reservation) => {
+const deleteBooking = async (id_reservation) => {
   try {
 
     const booking = await Bookings.findOne({ where: { id_reservation: id_reservation } });
@@ -145,9 +144,7 @@ export const deleteBooking = async (id_reservation) => {
     throw new Error('Booking not found');
   } 
   catch(error) {
-    fs.appendFile('error.log', error.message + '\n', (err) => {
-        if (err) throw err;
-    });
+ 
     return { error: error.message };
    }
 }
@@ -156,7 +153,7 @@ export const deleteBooking = async (id_reservation) => {
 
 
 
-export const listBooking = async () => {
+ const listBooking = async () => {
     try {
         const booking1 = await Bookings.findAll({
             include: Users
@@ -168,13 +165,16 @@ export const listBooking = async () => {
     }
     catch(error) {
 
-        fs.appendFile('error.log', error.message + '\n', (err) => {
-            if (err) throw err;
-        });
         return { error: error.message };
        }
 };
 
 
 
+module.exports = {
+  listBooking,
+  deleteBooking,
+  updateBooking,
+  createBooking
+}
 

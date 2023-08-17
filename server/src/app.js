@@ -5,6 +5,14 @@ const fs = require("fs");
 const path = require("path");
 const cors = require("cors");
 const indexRouter = require("./routes");
+// import express, { json } from 'express';
+// import { dirname, join } from 'path';
+// import { fileURLToPath } from 'url';
+// import cors from 'cors';
+// import bodyParser from 'body-parser'
+// import indexRoute from './routes/index.js';
+// import morgan from 'morgan';
+// import('./config/db');
 
 const server = express();
 
