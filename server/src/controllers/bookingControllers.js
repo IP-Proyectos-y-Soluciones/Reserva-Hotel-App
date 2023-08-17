@@ -2,9 +2,6 @@ import Bookings from "../config/db";
 import Bookings2 from "../config/db";
 import Users from "../config/db";
 
-
-
-
 export const createBooking = async ({
     id_room, 
     id_user, 
