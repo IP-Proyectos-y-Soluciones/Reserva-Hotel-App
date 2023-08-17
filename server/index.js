@@ -2,6 +2,8 @@ import server from './src/app';
 import 'dotenv/config';
 import { conn } from './src/config/db';
 
+import express from 'express';
+
 server.set('port', process.env.PORT || 3001);
 
 conn.sync({ force: true }) 
