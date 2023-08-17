@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 const { Banner } = require("../config/db");
 const { getAdmins } = require("./administratorasControllers.js");
 
@@ -65,5 +64,3 @@ module.exports = {
   createBanner,
   isAdmin
 }
-=======
->>>>>>> 6b3d96a525363a5d3491920ddc19de95deff531a

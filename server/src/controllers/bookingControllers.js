@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 
 const Users = require("../config/db")
 const Bookings2 = require("../config/db")
@@ -178,5 +177,4 @@ module.exports = {
   updateBooking,
   createBooking
 }
-=======
->>>>>>> 6b3d96a525363a5d3491920ddc19de95deff531a
+
