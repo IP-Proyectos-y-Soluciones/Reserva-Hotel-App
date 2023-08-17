@@ -1,21 +1,17 @@
-import express, { json } from 'express';
-import { dirname, join } from 'path';
-import { fileURLToPath } from 'url';
-import cors from 'cors';
-import bodyParser from 'body-parser'
-import indexRoute from './routes/index.js';
-import morgan from 'morgan';
-
-// import('./config/db');
+const express = require ("express")
+const bodyParser = require("body-parser");
+const morgan = require("morgan");
+const fs = require("fs");
+const path = require("path");
+const cors = require("cors");
+const indexRouter = require("./routes");
 
 const server = express();
 
 server.use( morgan( 'dev' ) );
-server.use( json() );
+server.use( express.json() );
 
-const __dirname = dirname(fileURLToPath(import.meta.url));
-
-server.set('views', join(__dirname, 'views'));
+server.set('views', path.join(__dirname, 'views'));
 server.set('view engine', 'ejs');
 
 const corsOptions = {
@@ -32,8 +28,9 @@ server.use( ( req, res, next ) => {
   next();
 });
 
-server.use('/', indexRoute);
-server.use(express.static(join(__dirname, 'public')));
+server.use('/', indexRouter);
+server.use(express.static(path.join(__dirname, 'public')));
 
 
-export default server;
+
+module.exports = server;
