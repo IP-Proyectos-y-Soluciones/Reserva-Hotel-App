@@ -1,7 +1,7 @@
 import NavBar from "./components/NavBar/NavBar";
 import Landing from "./views/Landing";
 import Detail from "./views/Detail";
-import Booking from "./components/Booking/Booking"
+import Booking from "./components/Booking/Booking";
 import { Route, Routes, useLocation } from "react-router-dom";
 
 
