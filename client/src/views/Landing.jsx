@@ -1,7 +1,11 @@
+import Cards from "../components/Cards";
+
+
+
 const Landing = () => {
     return (
         <div>
-
+            <Cards />
         </div>
     )
 }
