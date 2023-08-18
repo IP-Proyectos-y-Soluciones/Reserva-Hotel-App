@@ -1,4 +1,4 @@
-const { Bedrooms } = require("../db");
+const { Bedrooms } = require("../config/db");
 const { getAdmins } = require("./administratorasControllers.js");
 
 

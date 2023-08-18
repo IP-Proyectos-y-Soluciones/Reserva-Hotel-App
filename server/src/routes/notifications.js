@@ -18,9 +18,10 @@ router.post('/', async (req, res) => {
     }
 })
 
-router.put('/', async (req, res) => {
+router.put('/:id', async (req, res) => {
     try {
-        const {id, kind, amount} = req.body
+        const { id } = req.params
+        const { kind, amount} = req.body
 
         const updatedNotification = await updateNotification(id, kind, amount)
         if (updatedNotification.error) {

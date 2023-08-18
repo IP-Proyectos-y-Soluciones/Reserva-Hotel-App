@@ -18,9 +18,10 @@ router.post('/', async (req, res) => {
     }
 })
 
-router.put('/', async (req, res) => {
+router.put('/:id', async (req, res) => {
     try {
-        const { id, kind, img, description, hight_price, low_price } = req.body
+        const {id} = req.params;
+        const { kind, img, description, hight_price, low_price } = req.body
 
         const updatedPlan = await updatePlan(id, kind, img, description, hight_price, low_price)
         if (updatedPlan.error) {

@@ -1,5 +1,5 @@
 const bcrypt = require('bcrypt'); 
-const { Administrators } = require("../db")
+const { Administrators } = require("../config/db")
 
 const createAdmin = async (profile, name, user, password, status) => {
     try {

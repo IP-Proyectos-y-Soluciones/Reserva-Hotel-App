@@ -19,9 +19,10 @@ router.post('/', async (req, res) => {
     }
 })
 
-router.put('/', async (req, res) => {
+router.put('/:id', async (req, res) => {
     try {
-        const {id, img, description} = req.body
+        const { id } = req.params;
+        const { img, description} = req.body
 
         const updatedRestaurant = await updateRestaurant(id, img, description)
         if (updatedRestaurant.error) {

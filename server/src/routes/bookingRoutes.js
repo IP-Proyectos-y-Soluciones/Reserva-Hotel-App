@@ -1,9 +1,10 @@
 const express = require('express');
 const router = express.Router();
+const { Users } = require("../config/db")
 const { listBooking, deleteBooking, createBooking, updateBooking } = require('../controllers/bookingControllers');
 const {sendMail} = require("../controllers/sendMailController")
 
-// Liste fonksiyonu
+
 router.get('/', async (req, res) => {
   try {
     const bookings = await listBooking();
@@ -13,7 +14,7 @@ router.get('/', async (req, res) => {
   }
 });
 
-// Silme fonksiyonu
+
 router.delete('/:id_reservation', async (req, res) => {
   try {
     const { id_reservation } = req.params;
@@ -24,9 +25,9 @@ router.delete('/:id_reservation', async (req, res) => {
   }
 });
 
-// Güncelleme fonksiyonu
 router.put('/:id_reservation', async (req, res) => {
   try {
+    const { id_reservation } = req.params;
     const {id_room, id_user, payment_reservation, transaction_number, reservation_description, admission_date, departure_date, reservation_date} = req.body;
 
     const result = await updateBooking(id_reservation,
@@ -37,18 +38,26 @@ router.put('/:id_reservation', async (req, res) => {
         reservation_description,
         admission_date,
         departure_date,
-        reservation_date,);
-        let subject = "UPDATED YOUR RESERVACION"
-        let text = `YOUR NEW RESERVACION IS ${reservation_description, admission_date, departure_date, reservation_date}`
-        //todavia por aca falta email por relacion de controllers
-        sendMail(email, subject, text)
+        reservation_date);
+    
+  
+    const user = await Users.findOne({ where: { id: id_user } });
+    const email = user.email;
+
+ 
+    let subject = "UPDATED YOUR RESERVACION"
+    let text = `YOUR NEW RESERVACION IS ${reservation_description, admission_date, departure_date, reservation_date}`
+    sendMail(email, subject, text)
+
     res.status(200).json(result);
   } catch (error) {
     res.status(500).json({ error: error.message });
   }
 });
 
-// Oluşturma fonksiyonu
+
+
+
 router.post('/', async (req, res) => {
   try {
     const {id_room, id_user, payment_reservation, transaction_number, reservation_description, admission_date, departure_date, reservation_date} = req.body;
@@ -59,7 +68,15 @@ router.post('/', async (req, res) => {
         reservation_description,
         admission_date,
         departure_date,
-        reservation_date,);
+        reservation_date);
+
+    const user = await Users.findOne({ where: { id: id_user } });
+    const email = user.email;
+
+    let subject = "Su reserva se ha realizado con éxito."
+    let text = `SU RESERVA ES ${reservation_description}, DESDE ${admission_date} A ${departure_date}`
+    sendMail(email, subject, text)
+
     res.status(200).json(result);
   } catch (error) {
     res.status(500).json({ error: error.message });
