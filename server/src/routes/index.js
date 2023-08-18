@@ -14,6 +14,7 @@ const categorias = require("./categoriasRoutes")
 
 const router = express.Router(); // Sadece bir kez Router tanımlanır
 router.use(express.json());
+// router.use("/" );
 router.use("/admin", adminis);
 router.use("/banner", banner);
 router.use("/bedroom", bedroom);
