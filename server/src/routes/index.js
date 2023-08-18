@@ -9,6 +9,7 @@ const plan = require("./plan")
 const resturant = require("./restaurant")
 const travel = require("./travel")
 const testimonials = require("./testimonialsRoutes")
+const categorias = require("./categoriasRoutes")
 
 
 const router = express.Router(); // Sadece bir kez Router tanımlanır
@@ -23,6 +24,7 @@ router.use("/plan", plan);
 router.use("/resturant", resturant);
 router.use("/travel", travel);
 router.use("/testimonials", testimonials);
+router.use("/categorias", categorias);
 
 
 
