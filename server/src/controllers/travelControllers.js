@@ -1,9 +1,21 @@
 const {Travel} = require('../config/db')
 const fs = require('fs')
+const { getAdmins } = require("./administratorasControllers.js");
+
+
+const isAdmin = async (userId) => {
+  const admin = await getAdmins();
+  const adminIds = admin.map(admins => admins.id);
+  return adminIds.includes(userId);
+};
+
 
 const createTravel = async (photo_small, big_photo, title, description) => {
   try {
 
+    if (!isAdmin) {
+      throw new Error("No estás autorizado");
+    }
     const travel = await Travel.create({
       photo_small,
       big_photo,
@@ -24,6 +36,9 @@ const createTravel = async (photo_small, big_photo, title, description) => {
 const updateTravel = async (id, photo_small, big_photo, title, description) => {
   try {
 
+    if (!isAdmin) {
+      throw new Error("No estás autorizado");
+    }
     const [updated] = await Travel.update(
       {
         photo_small,
@@ -52,7 +67,9 @@ const updateTravel = async (id, photo_small, big_photo, title, description) => {
 
 const deleteTravel = async (id) => {
   try {
-
+    if (!isAdmin) {
+      throw new Error("No estás autorizado");
+    }
     const deleted = await Travel.destroy({ where: { id: id } });
     if (deleted) {
 
@@ -71,25 +88,6 @@ const deleteTravel = async (id) => {
    }
 }
 
-const getTravel = async (id) => {
-  try {
-
-    const travel = await Travel.findOne({ where: { id: id } });
-    if (travel) {
-
-      return travel;
-    }
-
-    throw new Error('Travel not found');
-  } 
-  
-  catch(error){
-    fs.appendFile('error.log', error.message + '\n', (err) => {
-        if (err) throw err;
-    });
-    return { error: error.message };
-   }
-}
 
 const getAllTravels = async () => {
   try {
@@ -107,7 +105,6 @@ const getAllTravels = async () => {
 
 module.exports = {
     getAllTravels,
-    getTravel,
     deleteTravel,
     updateTravel,
     createTravel
