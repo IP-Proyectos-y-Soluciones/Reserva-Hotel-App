@@ -1,15 +1,14 @@
-import { useEffect } from "react";
-import { useSelector, useDispatch } from "react-redux";
-import { useParams } from "react-router-dom";
-import Nav from "../components/navbar/nav";
+// import { useEffect } from "react";
+// import { useSelector, useDispatch } from "react-redux";
+// import { useParams } from "react-router-dom";
+import NavBar from "../components/NavBar/NavBar";
 
-import React from 'react'; 
 
 function Detail() {
     return (
         <div className="detail">
             <div>
-                <Nav/>
+                <NavBar />
             </div>
             <div>
                 <h2> Aquí va el componente de apartado y preview de otras habitaciones </h2>
