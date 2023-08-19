@@ -20,8 +20,8 @@ module.exports = (sequelize) => {
         type: DataTypes.TEXT,
         allowNull: false,
       },
-      gallery: {
-        type: DataTypes.TEXT,
+      gallery: { 
+        type: DataTypes.ARRAY(DataTypes.STRING), 
         allowNull: false,
       },
       video: {
@@ -45,4 +45,3 @@ module.exports = (sequelize) => {
     { timestamps: false }
   );
 };
-

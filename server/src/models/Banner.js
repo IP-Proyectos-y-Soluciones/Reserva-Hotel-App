@@ -1,7 +1,9 @@
 const { DataTypes } = require("sequelize");
 
 module.exports = (sequelize) => {
-  sequelize.define("banner", {
+  sequelize.define(
+    "banner",
+     {
     // Define los atributos del modelo
     // ...
     id: {
