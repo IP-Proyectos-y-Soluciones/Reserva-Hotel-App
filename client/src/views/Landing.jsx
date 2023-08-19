@@ -1,8 +1,11 @@
+import NavBar from "../components/NavBar/NavBar"
 
 const Landing = () => {
     return (
         <div>
-            <h1>Landing</h1>
+                <header>
+                    <NavBar />
+                </header>
         </div>
     )
 }
