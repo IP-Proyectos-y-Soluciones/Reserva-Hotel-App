@@ -1,12 +1,11 @@
-import Cards from "../components/Cards/Cards";
-
-
+import NavBar from "../components/NavBar/NavBar"
 
 const Landing = () => {
     return (
         <div>
-            <h1>Landing</h1>
-            <Cards />
+                <header>
+                    <NavBar />
+                </header>
         </div>
     )
 }
