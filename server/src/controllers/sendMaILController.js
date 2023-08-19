@@ -1,28 +1,28 @@
-const nodemailer = require("nodemailer")
+const nodemailer = require("nodemailer");
+
 const sendMail = async (email, subject, text) => {
     try {
-     const transporter = nodemailer.createTransport({
-        host: 'smtp.mailtrap.io',
-        port: 2525,
-        auth: {
-            user: "kubathasanengin@gmail.com",
-            pass: "be1e90b92fa3e518eaafbf7d9d80c1c3"
-        },
-     });
-     const info = await transporter.sendMail({
-        from: '"Hotel" <kubathasanengin@gmail.com>',
-        to: email,
-        subject,
-        text
-     })
-     return info;
-     
-    }
-    catch (error) {
-        fs.appendFile('error.log', error.message + '\n', (err) => {
-            if (err) throw err;
+        let transporter = nodemailer.createTransport({
+            service: 'gmail',
+            auth: {
+                user: "kubathasanengin@gmail.com",
+                pass: "jkjdlawtctcurpob"
+            },
         });
-        return { error: error.message };
-    }
+
+        let info = await transporter.sendMail({
+            to: email,
+            subject: subject,
+            text: text
+        });
+
+        console.log("Mail gönderildi:", info.response);
+        return info;
+    } catch (error) {
+        console.error("Mail gönderilirken bir hata oluştu:", error);
 }
-module.exports = sendMail;
+};
+
+module.exports = {
+    sendMail
+};
