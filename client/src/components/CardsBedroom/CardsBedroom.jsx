@@ -1,6 +1,7 @@
 import CardBedroom from "../CardBedroom/CardBedroom";
 import { getBedroom } from '../../redux/actions/bedroomsActions';
 import { useDispatch, useSelector } from 'react-redux';
+import { useEffect } from "react";
 
 const CardsBedroom = () => {
 
