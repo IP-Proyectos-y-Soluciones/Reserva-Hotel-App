@@ -5,7 +5,7 @@ const CardBedroom = ({id_h, gallery, kind_h}) =>{
                     
         <div>
             
-            <Link to={`/booking/${id_h}`}> 
+            <Link to={`/detail/${id_h}`}> 
             <p>{kind_h}</p>
             <img src={gallery} alt={kind_h}/>
             </Link>
