@@ -26,8 +26,8 @@ const bedroomSlice = createSlice({
         })
         .addCase(getBedroom.fulfilled, (state, action) => {
           state.status = 'succeeded';
-          state.bookings = action.payload;
-          state.filteredBookings = action.payload;
+          state.bedrooms = action.payload;
+          state.reserveBedroom = action.payload;
         })
         .addCase(getBedroom.rejected, (state, action) => {
           state.status = 'failed';
