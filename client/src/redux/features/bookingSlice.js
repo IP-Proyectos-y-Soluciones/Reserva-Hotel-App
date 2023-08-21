@@ -46,4 +46,4 @@ const bookingsSlice = createSlice({
 });
 
 export const { setFilters, clearFilters } = bookingsSlice.actions;
-export const bookingsReducer = bookingsSlice.reducer;
+export default bookingsSlice.reducer;
