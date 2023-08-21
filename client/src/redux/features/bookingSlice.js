@@ -1,5 +1,5 @@
 import { createSlice } from '@reduxjs/toolkit';
-import { getBookings } from './bookingsThunk';
+import { getBookings } from '../actions/bookingActions';
 
 const bookingsSlice = createSlice({
   name: 'bookings',
