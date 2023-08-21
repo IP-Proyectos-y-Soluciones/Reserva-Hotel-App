@@ -4,7 +4,7 @@ const NavBar = () =>{
     return(
         <div className= "bg-blue-500" >
           <ul>
-          <div className="flex-row">
+          <div className="flex space-x-4 parte1 1">
             <li>
             habitaciones
             </li>
@@ -18,13 +18,17 @@ const NavBar = () =>{
               Contacto
             </li>
           </div>
-          <div className="flex-row-reverse">
-            <li>
+          <div className="flex flex-row-reverse w-6/4">
+            <div className="flex-row-reverse p-4">
+            <li >
               Reserva
             </li>
+            </div>
+            <div className="p-4">
             <li>
               Login
             </li>
+            </div>
           </div>
           </ul>
         </div>
