@@ -1,5 +1,5 @@
 import { createSlice } from "@reduxjs/toolkit";
-//import { getBedroom } from "../actions/bedroomsActions";
+import { getBedroom } from "../actions/bedroomsActions";
 
 
 const bedroomSlice = createSlice({
@@ -18,6 +18,21 @@ const bedroomSlice = createSlice({
           bedroom.id_h === id ? { ...bedroom, reserved: true } : bedroom
         );
       },
+    },
+    extraReducers: (builder) => {
+      builder
+        .addCase(getBedroom.pending, (state) => {
+          state.status = 'loading';
+        })
+        .addCase(getBedroom.fulfilled, (state, action) => {
+          state.status = 'succeeded';
+          state.bookings = action.payload;
+          state.filteredBookings = action.payload;
+        })
+        .addCase(getBedroom.rejected, (state, action) => {
+          state.status = 'failed';
+          state.error = action.error.message;
+        });
     },
   });
   
