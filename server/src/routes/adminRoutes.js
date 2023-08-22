@@ -2,6 +2,18 @@ const express = require("express");
 const router = express.Router();
 const { createAdmin, getAdmins, updateAdmin, deleteAdmin, login } = require("../controllers/administratorasControllers") 
 
+router.get('/create', (req, res) => {
+  res.render('pages/admin/admin-create.ejs');
+});
+
+router.get('/update', async (req, res) => {
+  try {
+    res.render('pages/admin/admin-update.ejs');
+  } catch (error) {
+    res.status(500).json({ error: error.message });
+  }
+});
+
 
 router.post('/', async (req, res) => {
 
@@ -22,24 +34,23 @@ router.post('/', async (req, res) => {
     }
   });
 
-  router.get('/', async (req, res) => {
+  router.get('/get', async (req, res) => {
     try {
       const admins = await getAdmins();
       if (admins.error) {
         res.status(400).json({ error: newAdmin.error });
       } 
       else{
-      res.status(201).json(admins);
+      res.render('pages/admin/admin-get.ejs', { admins })
       }
     } catch (error) {
       res.status(500).json({ error: error.message });
     }
   });
   
-  router.put('/:id', async (req, res) => {
+  router.put('/', async (req, res) => {
     try {
-      const {id} = req.params;
-      const { profile, name, user, password, status } = req.body;
+      const { profile, name, user, password, status, id } = req.body;
   
       const updatedAdmin = await updateAdmin(id, profile, name, user, password, status);
       res.json(updatedAdmin);
