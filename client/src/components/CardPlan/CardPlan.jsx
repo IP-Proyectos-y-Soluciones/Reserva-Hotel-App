@@ -2,10 +2,10 @@ const CardPlan = ({onMouseEnter, onMouseLeave, img, kind}) =>{
     
     return (
                     
-        <div onMouseEnter={onMouseEnter} onMouseLeave={onMouseLeave}>             
+        <div onMouseEnter={onMouseEnter} onMouseLeave={onMouseLeave} className="max-w-[400px]">             
             
             <p>{kind}</p>
-            <img src={img} alt={kind}/>                
+            <img src={img} alt={kind} className="w-100 h-85"/>                
 
         </div>
     )
