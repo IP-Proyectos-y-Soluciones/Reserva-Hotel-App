@@ -1,7 +1,7 @@
 import NavBar from "../components/NavBar/NavBar";
 import CardsPlan from "../components/CardsPlan/CardsPlan";
 import CardsBedroom from "../components/CardsBedroom/CardsBedroom";
-// import CardsAmeneties from "../components/CardsAmenitie/CardsAmenitie";
+import CardsAmenitie from "../components/CardsAmenitie/CardsAmenitie";
 import Banner from "../components/Banner/Banner";
 import Footer from "../components/Footer/Footer";
 
@@ -18,9 +18,9 @@ const Landing = () => {
                 <div className="flex-grow">
                     <CardsBedroom />
                 </div>
-                {/* <div className="flex-grow">
-                    <CardsAmenities />
-                </div> */}
+                <div className="flex-grow">
+                    <CardsAmenitie />
+                </div>
             </div>
             <Footer/>
         </div>
