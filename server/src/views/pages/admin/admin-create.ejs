@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Create Admin</title>
+</head>
+<body>
+    <h1>Create Admin</h1>
+
+    <form id="adminForm" action="/admin/create" method="POST">
+        <input type="text" name="profile" placeholder="Profile">
+        <input type="text" name="name" placeholder="Name">
+        <input type="text" name="user" placeholder="Username">
+        <input type="password" name="password" placeholder="Password">
+        <select name="status">
+            <option value=1>Active</option>
+            <option value=0>Inactive</option>
+        </select>
+        <button type="submit">Create Admin</button>
+    </form>
+</body>
+</html>
