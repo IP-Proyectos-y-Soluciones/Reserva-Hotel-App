@@ -1,5 +1,5 @@
 import NavBar from "../components/NavBar/NavBar";
-import CardsPlan from "../components/CardPlan/CardPlan";
+import CardsPlan from "../components/CardsPlan/CardsPlan";
 import CardsBedroom from "../components/CardsBedroom/CardsBedroom";
 // import CardsAmeneties from "../components/CardsAmenitie/CardsAmenitie";
 import Banner from "../components/Banner/Banner";
