@@ -24,13 +24,13 @@ const CardsBedroom = () => {
                                 
     return(
         <div >
-            <h1>El confort que mereces</h1>
+            <h1 className="bg-white">El confort que mereces</h1>
             <div className="flex p-15 space-x-20 overflow-x-auto">
             {
                 eachBedroom.length > 0 &&  
                 eachBedroom.map(bedroom=>{
                     return(
-                        <CardBedroom
+                        <CardBedroom className="bg-white"
                         key={bedroom.id_h}
                         id_h={bedroom.id_h}
                         kind_h={bedroom.kind_h}

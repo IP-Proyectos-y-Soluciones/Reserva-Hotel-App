@@ -7,10 +7,12 @@ import Footer from "../components/Footer/Footer";
 
 const Landing = () => {
     return (
-        <div className="min-h-screen bg-gray-100">
+        <div className="min-h-screen bg-zinc-800">
             <NavBar />
-            <Banner/>
-            {/* <h5 className="py-2 text-center text-white bg-red-500">Banner</h5> */}
+            <h1 className="bg-white">Estilo y distinción</h1>
+            <Banner />
+            <h2 className="bg-white">BIENVENIDOS</h2>
+            <h3 className="bg-white">Descubran un refugio de lujo en el corazón de la ciudad. Con elegantes habitaciones, comodidades de primer nivel y un servicio excepcional, estamos aquí para hacer de su estadía una experiencia inolvidable. Desde relajarse en nuestro spa hasta disfrutar de deliciosas opciones gastronómicas, les invitamos a sumergirse en un mundo de tranquilidad y comodidad. ¡Es un placer tenerles aquí!</h3>
             <div className="container flex flex-row p-4 mx-auto space-x-4">
                 <div className="flex-grow">
                     <CardsPlan />
@@ -22,7 +24,7 @@ const Landing = () => {
                     <CardsAmenities />
                 </div> */}
             </div>
-            <Footer/>
+            <Footer />
         </div>
     )
 }
