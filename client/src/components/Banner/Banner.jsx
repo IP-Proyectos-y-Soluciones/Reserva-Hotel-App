@@ -1,6 +1,6 @@
-import imgHall1 from '../../assets/hall/1.jpg';
+// import imgHall1 from '../../assets/hall/1.jpg';
 import imgHall2 from '../../assets/hall/2.jpg';
-import imgHall3 from '../../assets/hall/3.jpg';
+// import imgHall3 from '../../assets/hall/3.jpg';
 
 const Banner = () => {
     return(
