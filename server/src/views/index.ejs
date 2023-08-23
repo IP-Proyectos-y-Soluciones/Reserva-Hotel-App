@@ -1,11 +1,46 @@
-<%- include('partials/head') %>
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title><%= title %></title>
 
-<div class="wrapper">
-  <%- include('partials/header') %> 
-  <%- include('partials/menu') %> 
+    <%- include('partials/head') %>
+  </head>
 
 
-  <%- include('partials/footer') %> 
 
-  <%- include('partials/scripts') %>
-</div>
+  <body class="hold-transition sidebar-mini sidebar-collapse">
+    <div class="wrapper">
+      <%- include('partials/header') %>
+      <%- include('partials/menu') %>
+
+
+      <% if ( typeof page !== 'undefined' ) { %>
+        <% if ([
+          'index',
+          'administrators',
+          'banner',
+          'plans',
+          'categories',
+          'bedrooms',
+          'bookings',
+          'testimomnials',
+          'users',
+          'travel',
+          'restaurant',
+          'log_out'
+        ].includes(page)) { %>
+          <%- include(`pages/${page}.ejs`) %>
+        <% } else { %>
+          <%- include ('pages/404.ejs') %>
+        <% } %>
+      <% } else { %>
+        <%- include('pages/index.ejs') %>
+      <% } %>
+        <%- include('partials/footer') %>
+
+      <%- include('partials/scripts') %>
+    </div>
+  </body>
+</html>

@@ -10,11 +10,12 @@ const resturant = require("./restaurant")
 const travel = require("./travel")
 const testimonials = require("./testimonialsRoutes")
 const categorias = require("./categoriasRoutes")
+const home = require('./homeRoutes')
 
-
-const router = express.Router(); // Sadece bir kez Router tanımlanır
+const router = express.Router();
 router.use(express.json());
-// router.use("/" );
+router.use("/", home);
+router.use("/index", home);
 router.use("/admin", adminis);
 router.use("/banner", banner);
 router.use("/bedroom", bedroom);
@@ -26,8 +27,5 @@ router.use("/resturant", resturant);
 router.use("/travel", travel);
 router.use("/testimonials", testimonials);
 router.use("/categorias", categorias);
-
-
-
 
 module.exports = router;

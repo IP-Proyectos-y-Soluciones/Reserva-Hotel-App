@@ -65,7 +65,8 @@ router.get('/', async (req, res) => {
         res.status(400).json({ error: users.error });
       } 
       else{
-      res.status(201).json(users);
+      //res.status(201).json(users);
+      res.render('pages/users.ejs', {users, title: 'Hotel Backend'});
       }
     } catch (error) {
       res.status(500).json({ error: error.message });
