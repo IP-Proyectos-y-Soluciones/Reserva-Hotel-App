@@ -3,13 +3,23 @@ import { useState } from "react";
 
 const Login = () => {
 
-    const [name, setName]= useState("");
+    const [email, setEmail]= useState("");
     const [password, setPassword] = useState("");
-    // const [error, setError] = useState(false);
+    const [error, setError] = useState(false);
 
     const HandlerSubmit = (e) => {
         e.preventDefault()
     }
+    const handleLogin = () => {
+        if (!/^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/.test(email)) {
+            setError('Correo electrónico no válido');
+            return;
+        }
+        if (!/(?=.*[a-z])(?=.*[A-Z])(?=.*\d)/.test(password)) {
+            setError('La contraseña debe contener al menos una letra mayúscula, una letra minúscula y un número');
+            return;
+          }
+        };
 
     
     return (
@@ -21,9 +31,9 @@ const Login = () => {
                         <input
                             type="text"
                             className="w-full p-2 border rounded-md focus:outline-none focus:border-blue-500"
-                            value={name}
-                            onChange={event => setName(event.target.value)}
-                            placeholder="Username"
+                            value={email}
+                            onChange={(e) => setEmail(e.target.value)}
+                            placeholder="Email"
                         />
                     </div>
                     <div className="mb-4">
@@ -31,16 +41,18 @@ const Login = () => {
                             type="password"
                             className="w-full p-2 border rounded-md focus:outline-none focus:border-red-500"
                             value={password}
-                            onChange={e => setPassword(e.target.value)}
+                            onChange={(e) => setPassword(e.target.value)}
                             placeholder="Password"
                         />
                     </div>
                     <button
+                        onClick={handleLogin}
                         type="submit"
                         className="w-full px-4 py-2 text-white bg-blue-500 rounded-md hover:bg-blue-600"
                     >
                         Login
                     </button>
+                    {error && <p>{error}</p>}
                 </form>
             </div>
         </div>
