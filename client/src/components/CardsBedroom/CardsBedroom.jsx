@@ -13,7 +13,7 @@ const CardsBedroom = () => {
             key:bedroom.id_h,
             id_h:bedroom.id_h,
             kind_h:bedroom.kind_h,
-            gallery:bedroom.gallery[0]
+            gallery:bedroom.gallery
         }
     })
     // console.log(eachBedroom);
@@ -23,8 +23,9 @@ const CardsBedroom = () => {
     },[dispatch]);
                                 
     return(
-        <div>
+        <div >
             <h1>El confort que mereces</h1>
+            <div className="flex p-15 space-x-20 overflow-x-auto">
             {
                 eachBedroom.length > 0 &&  
                 eachBedroom.map(bedroom=>{
@@ -33,13 +34,14 @@ const CardsBedroom = () => {
                         key={bedroom.id_h}
                         id_h={bedroom.id_h}
                         kind_h={bedroom.kind_h}
-                        gallery={bedroom.gallery[0]}
+                        gallery={bedroom.gallery}
                         />
                     )
                 })           
 
                 
             }
+            </div>
 
         </div>
     )
