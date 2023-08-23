@@ -33,6 +33,9 @@ const CardsPlan = () => {
     return(
         <div>
             <h1>Descubre la magia del lugar</h1>
+
+            {hoveredCard && <div>{hoveredCard}</div>}
+            
             <div className="flex p-15 space-x-20 overflow-x-auto">
             {
                 eachPlan.length > 0 &&  
@@ -48,8 +51,9 @@ const CardsPlan = () => {
                 })
             }
 
-            {hoveredCard && <div>{hoveredCard}</div>}
+            
             </div>
+            
 
         </div>
     )

@@ -11,7 +11,7 @@ const Landing = () => {
             <NavBar />
             <Banner/>
             {/* <h5 className="py-2 text-center text-white bg-red-500">Banner</h5> */}
-            <div className="container flex flex-row p-4 mx-auto space-x-4">
+            <div className="container flex flex-col p-4 mx-auto space-x-4">
                 <div className="flex-grow">
                     <CardsPlan />
                 </div>
