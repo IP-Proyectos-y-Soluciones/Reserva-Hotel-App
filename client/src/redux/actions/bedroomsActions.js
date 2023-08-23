@@ -26,7 +26,7 @@ export const postBedroom = createAsyncThunk(
         }
     }
 );
-export const putbedroom=createAsyncThunk(
+export const putBedroom=createAsyncThunk(
     "bedroom/putBedroom",
     async(obj)=>{
         try{

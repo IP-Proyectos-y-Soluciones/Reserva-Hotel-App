@@ -1,13 +1,11 @@
-const CardPlan = ({description, img, kind}) =>{
-    //falta mostrar la descripcion cuando el cursor pasa por encima de una card
+const CardPlan = ({onMouseEnter, onMouseLeave, img, kind}) =>{
+    
     return (
                     
-        <div>
-            
+        <div onMouseEnter={onMouseEnter} onMouseLeave={onMouseLeave}>             
             
             <p>{kind}</p>
-            <img src={img} alt={kind}/>
-            
+            <img src={img} alt={kind}/>                
 
         </div>
     )
