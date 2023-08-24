@@ -1,9 +1,31 @@
-import { DataTypes } from 'sequelize';
-import sequelize from '../config/db'; // Asegúrate de ajustar la ruta
+const { DataTypes } = require("sequelize");
 
-const Restaurant = sequelize.define('restaurant', {
-  // Define los atributos del modelo
-  // ...
-});
-
-export default Restaurant;
+module.exports = (sequelize) => {
+  sequelize.define(
+    "restaurant",
+    {
+      // Define los atributos del modelo
+      // ...
+      id: {
+        type: DataTypes.UUID,
+        defaultValue: DataTypes.UUIDV4,
+        primaryKey: true,
+        allowNull: false,
+      },
+      img: {
+        type: DataTypes.TEXT,
+        allowNull: false,
+      },
+      description: {
+        type: DataTypes.TEXT,
+        allowNull: false,
+      },
+      date: {
+        type: DataTypes.DATE,
+        defaultValue: DataTypes.NOW,
+        allowNull: false,
+      },
+    },
+    { timestamps: false }
+  );
+};

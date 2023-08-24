@@ -1,34 +1,31 @@
-import { Router } from "express";
+const express = require("express");
+const adminis = require("./adminRoutes");
+const banner = require("./bannerRoutes");
+const bedroom = require("./bedroomRoutes");
+const bookings = require("./bookingRoutes");
+const users = require("./users")
+const notifications = require("./notifications")
+const plan = require("./plan")
+const resturant = require("./restaurant")
+const travel = require("./travel")
+const testimonials = require("./testimonialsRoutes")
+const categorias = require("./categoriasRoutes")
+const home = require('./homeRoutes')
 
-const router = Router();
+const router = express.Router();
+router.use(express.json());
+router.use("/", home);
+router.use("/index", home);
+router.use("/admin", adminis);
+router.use("/banner", banner);
+router.use("/bedroom", bedroom);
+router.use("/bookings", bookings);
+router.use("/users", users);
+router.use("/notifications", notifications);
+router.use("/plan", plan);
+router.use("/resturant", resturant);
+router.use("/travel", travel);
+router.use("/testimonials", testimonials);
+router.use("/categorias", categorias);
 
-router.get('/', (req, res) => res.render(
-  'index', { title: 'Hotel Portobelo | Backend' }
-));
-
-router.get('/index', (req, res) => res.render(
-  'index', { title: 'Hotel Portobelo | Backend' }
-));
-
-router.get('/administrators', (req, res) => res.render(
-  'administrators', { title: 'Hotel Portobelo | Backend - Administrators' }
-));
-
-router.get('/banner', (req, res) => res.render(
-  'banner', { title: 'Hotel Portobelo | Backend - Banner' }
-));
-
-router.get('/login', (req, res) => res.render(
-  'login', { title: 'Hotel Portobelo | Backend - Login' }
-));
-
-router.get('/plans', (req, res) => res.render(
-  'plans', { title: 'Hotel Portobelo | Backend - Plans' }
-));
-
-router.get('/bookings', (req, res) => res.render(
-  'bookings', { title: 'Hotel Portobelo | Backend - Bookings' }
-));
-
-
-export default router;
+module.exports = router;

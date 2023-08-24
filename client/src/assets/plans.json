@@ -1,0 +1,38 @@
+
+{"Catamarán":
+{
+    "kind": "Un día en catamarán",
+    "img": "https://res.cloudinary.com/dm9glx5a7/image/upload/v1692800598/PF-HOTEL-APP/Plans/catamaran_qmi5t2.jpg",
+    "description": "Embárcate en una emocionante aventura caribeña a bordo de nuestro catamarán de lujo. Sumérgete en las aguas cristalinas con sesiones de snorkel en arrecifes coloridos. Deléitate con una comida caribeña fresca preparada por nuestro chef a bordo. Explora playas de ensueño y refréscate con una amplia selección de bebidas. Un día completo que fusiona la belleza natural del Caribe con lujo y comodidad. ¡Una experiencia que recordarás siempre!", 
+    "hight_price": "50usd",
+    "low_price": "65usd",
+    "date": "2023-08-23"
+  },
+  "Aventura":
+{
+    "kind": "Plan aventura",
+    "img": "https://res.cloudinary.com/dm9glx5a7/image/upload/v1692800599/PF-HOTEL-APP/Plans/aventura_sffonu.jpg",
+    "description": "Experimenta una tarde llena de adrenalina y diversión en el Caribe. Sal a remar en kayak y paddleboard, explorando las aguas turquesas y las cuevas escondidas. Luego, acelera la emoción con emocionantes paseos en moto de agua. Disfruta de un atardecer inolvidable en el paraíso caribeño mientras sacias tu sed de aventura. ¡Una tarde que te dejará sin aliento!", 
+    "hight_price": "30usd",
+    "low_price": "40usd",
+    "date": "A beautiful single bedroom with modern design."
+  },
+  "Familiar":
+{
+    "kind": "Plan familiar",
+    "img": "https://res.cloudinary.com/dm9glx5a7/image/upload/v1692800599/PF-HOTEL-APP/Plans/familia_qjin1p.jpg",
+    "description": "Disfruta de un día de diversión en familia en las impresionantes playas del Caribe. Nuestra actividad es apta para todas las edades y comienza con la bienvenida en la playa, donde encontrarás una guardería supervisada para los más pequeños. Mientras los niños se divierten de manera segura, los adultos pueden relajarse en la playa o participar en emocionantes actividades acuáticas como kayak y snorkel. Nuestro personal experimentado se encarga de mantener a todos seguros y entretenidos. El almuerzo es una experiencia culinaria caribeña, con platos que satisfacen todos los gustos. Luego, disfruta de entretenimiento en vivo que incluye música y actividades para toda la familia.", 
+    "hight_price": "40usd",
+    "low_price": "50usd",
+    "date": "2023-08-23"
+  },
+  "Romántico":
+{
+    "kind": "Plan romántico",
+    "img": "https://res.cloudinary.com/dm9glx5a7/image/upload/v1692800599/PF-HOTEL-APP/Plans/luna_de_miel_ntddra.jpg",
+    "description": "Embárcate en una escapada romántica en el corazón del Caribe. Comienza tu día con un apacible recorrido turístico por las bellezas naturales de la isla, explorando playas de arena blanca y exuberante vegetación tropical. Al caer la tarde, disfruta de una cena íntima con vista al mar en un lugar exclusivo. El suave murmullo de las olas y el resplandor de las estrellas crearán el escenario perfecto para una velada inolvidable. Nuestro chef preparará una exquisita cena con sabores locales y platos gourmet. Marida con vinos finos o cócteles artesanales mientras te sumerges en una atmósfera de amor y romance. Esta experiencia te permite conectar con tu ser querido y celebrar el amor en un entorno paradisíaco. ¡Un día de ensueño en el Caribe que recordarás por siempre!", 
+    "hight_price": "55usd",
+    "low_price": "65usd",
+    "date": "2023-08-23"
+  }
+}

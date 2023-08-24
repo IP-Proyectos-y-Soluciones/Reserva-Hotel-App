@@ -1,9 +1,30 @@
-import { DataTypes } from 'sequelize';
-import sequelize from '../config/db'; // Asegúrate de ajustar la ruta
+const { DataTypes } = require("sequelize");
 
-const Diary = sequelize.define('diary', {
-  // Define los atributos del modelo
-  // ...
-});
-
-export default Diary;
+module.exports = (sequelize) => {
+  sequelize.define(
+    "diary",
+    {
+      // Define los atributos del modelo
+      // ...
+      id: {
+        type: DataTypes.UUID,
+        defaultValue: DataTypes.UUIDV4,
+        primaryKey: true,
+        allowNull: false,
+      },
+      // id_room: {
+      //   type: DataTypes.TEXT,
+      //   allowNull: false,
+      // },
+      admission_date: {
+        type: DataTypes.TEXT,
+        allowNull: false,
+      },
+      departure_date: {
+        type: DataTypes.TEXT,
+        allowNull: false,
+      },
+    },
+    { timestamps: false }
+  );
+};
