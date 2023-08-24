@@ -34,7 +34,7 @@ function Detail() {
           </div>
         </div>
         <div className="p-4 bg-gray-200 description">
-          <h2> Aquí va la descripción </h2>
+        <h2>{roomData.description_h}</h2>
         </div>
         <div className="p-4 bg-gray-300 description-of-plan">
           <div className="grid grid-cols-2 gap-4">
