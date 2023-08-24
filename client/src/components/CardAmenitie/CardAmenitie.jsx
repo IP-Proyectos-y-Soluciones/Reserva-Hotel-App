@@ -1,4 +1,4 @@
-const CardAmenitie = ({id, description, img, kind}) =>{
+const CardAmenitie = ({description, img, kind}) =>{
     return (
                     
         <div>
