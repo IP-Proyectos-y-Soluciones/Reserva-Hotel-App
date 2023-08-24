@@ -99,10 +99,22 @@ const createBedroom = async (
       return { error: error.message };
     }
   };
+  const getBedroomById = async (id) => {
+    try {
+      const bedroom = await Bedrooms.findByPk(id);
+      if (!bedroom) {
+        throw new Error("Bedroom not found");
+      }
+      return bedroom;
+    } catch (error) {
+      return { error: error.message };
+    }
+  };
 
   module.exports = {
     getBedrooms,
     createBedroom,
     updateBedroom,
-    deleteBedroom
+    deleteBedroom,
+    getBedroomById
   }

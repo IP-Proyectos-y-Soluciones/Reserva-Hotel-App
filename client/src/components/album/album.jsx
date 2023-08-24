@@ -1,22 +1,23 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 
-const Album = () => {
+const Album = ({id}) => {
   const [currentSlide, setCurrentSlide] = useState(0);
   const [images, setImages] = useState([]);
 
   useEffect(() => {
-    // Realiza una solicitud a la API para obtener los datos de las habitaciones
-    axios.get('http://localhost:3001/bedroom')
+    // Realiza una solicitud a la API para obtener los datos de la habitación específica
+    axios.get(`http://localhost:3001/bedroom/detail/${id}`)
       .then(response => {
-        const bedrooms = response.data;
-        const galleryImages = bedrooms[0].gallery || []; // Suponiendo que solo obtendrás el primer registro
+        const roomData = response.data;
+        const galleryImages = roomData.gallery || [];
         setImages(galleryImages);
       })
       .catch(error => {
         console.error('Error fetching images:', error);
       });
-  }, []);
+  }, [id]);
+  
 
   const showSlide = (index) => {
     setCurrentSlide(index);
