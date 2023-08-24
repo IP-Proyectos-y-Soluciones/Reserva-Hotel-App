@@ -1,6 +1,6 @@
 const express = require('express');
 const router = express.Router();
-const { createBedroom, getBedrooms, updateBedroom, deleteBedroom } = require('../controllers/bedroomControllers');
+const { createBedroom, getBedrooms, updateBedroom, deleteBedroom, getBedroomById } = require('../controllers/bedroomControllers');
 
 router.post('/', async (req, res) => {
   try {
@@ -27,6 +27,20 @@ router.put('/:id', async (req, res) => {
     const { kind_h, style, gallery, video, virtual_tour, description_h } = req.body;
     const result = await updateBedroom(id, kind_h, style, gallery, video, virtual_tour, description_h);
     res.json(result);
+  } catch (error) {
+    res.status(500).json({ error: error.message });
+  }
+});
+
+router.get('/detail/:id', async (req, res) => {
+  try {
+    const { id } = req.params;
+    const result = await getBedroomById(id);
+    if (result.error) {
+      res.status(404).json({ error: result.error });
+    } else {                             
+      res.json(result);
+    }
   } catch (error) {
     res.status(500).json({ error: error.message });
   }
