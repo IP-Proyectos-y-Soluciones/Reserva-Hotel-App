@@ -1,79 +1,76 @@
 const express = require("express");
 const router = express.Router();
-const { createAdmin, getAdmins, updateAdmin, deleteAdmin, login } = require("../controllers/administratorasControllers") 
+const { createAdmin, getAdmins, updateAdmin, deleteAdmin, login, getAdminById } = require("../controllers/administratorasControllers");
 
-router.get('/create', (req, res) => {
-  res.render('pages/admin/admin-create.ejs');
+
+
+
+router.post('/', async (req, res) => {
+  const { profile, name, password, user, status } = req.body;
+
+  try {
+    const newAdmin = await createAdmin(profile, name, user, password, status);
+
+    if (newAdmin.error) {
+      res.status(400).json({ error: newAdmin.error });
+    } else {
+      const admins = await getAdmins();
+      res.render('pages/administrators.ejs', {  newAdmin, admins, title: 'Hotel Backend' });
+
+      //res.status(201).json(newAdmin)
+    }
+  } catch (error) {
+    res.status(500).json({ error: 'Internal server error'});
+  }
 });
 
-router.get('/update', async (req, res) => {
+router.get('/', async (req, res) => {
   try {
-    res.render('pages/admin/admin-update.ejs');
+    const admins = await getAdmins();
+    res.render('pages/administrators.ejs', { admins, title: 'Hotel Backend' }); // admins değişkenini burada gönderin
   } catch (error) {
     res.status(500).json({ error: error.message });
   }
 });
 
 
-router.post('/', async (req, res) => {
+// Admin Güncelleme İşlemi
+router.post('/:id', async (req, res) => {
+  try {
+    const { id } = req.params;
+    const { profile, name, user, password, status } = req.body;
 
-    const { profile, name, password, user, status } = req.body;
-  
-    try {
-      const newAdmin = await createAdmin(profile, name, user, password, status);
+    const updatedAdmin = await updateAdmin(id, profile, name, user, password, status);
 
-      if (newAdmin.error) {
-        res.status(400).json({ error: newAdmin.error });
-      } else {
-
-        res.status(201).json(newAdmin);
-      }
-    } catch (error) {
-
-      res.status(500).json({ error: 'Internal server error'});
-    }
-  });
-
-  router.get('/get', async (req, res) => {
-    try {
-      const admins = await getAdmins();
-      if (admins.error) {
-        res.status(400).json({ error: newAdmin.error });
-      } 
-      else{
-      res.render('pages/admin/admin-get.ejs', { admins })
-      }
-    } catch (error) {
-      res.status(500).json({ error: error.message });
-    }
-  });
-  
-  router.put('/', async (req, res) => {
-    try {
-      const { profile, name, user, password, status, id } = req.body;
-  
-      const updatedAdmin = await updateAdmin(id, profile, name, user, password, status);
-      res.json(updatedAdmin);
-    } catch (error) {
-      res.status(500).json({ error: error.message });
-    }
-  });
-
-  router.delete('/:id', async (req, res) => {
-    try {
-      const {id} = req.params;
-  
-      const result = await deleteAdmin(id);
       
-      if (result.error) {
-        res.status(404).json({ error: result.error });
-      } else {
-        res.status(200).json({ message: 'Admin silindi' });
-      }
-    } catch (error) {
-      res.status(500).json({ error: error.message });
+    const admins = await getAdmins();
+
+    res.render('pages/administrators.ejs', { updatedAdmin, admins, title: 'Hotel Backend' });
+  } catch (error) {
+    res.status(500).json({ error: error.message });
+  }
+});
+
+
+// Admin Silme İşlemi
+router.post('/delete/:id', async (req, res) => {
+  try {
+    const { id } = req.params;
+
+    const result = await deleteAdmin(id);
+
+    if (result.error) {
+      res.status(404).json({ error: result.error });
+    } else {
+      const admins = await getAdmins();
+      res.render('pages/administrators.ejs', { admins, result, title: 'Hotel Backend' })
     }
-  });
+  } catch (error) {
+    res.status(500).json({ error: error.message });
+  }
+});
+
+
 
   router.post('/login', async (req, res) => {
     try {
