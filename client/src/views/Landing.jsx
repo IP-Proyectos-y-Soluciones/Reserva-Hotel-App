@@ -7,6 +7,7 @@ import Footer from "../components/Footer/Footer";
 
 const Landing = () => {
     return (
+
         <div className="min-h-screen bg-zinc-800 text-white">
             <NavBar />
             <h1 >Estilo y distinción</h1>
@@ -16,10 +17,10 @@ const Landing = () => {
                 <div className="container flex flex-row p-4 mx-auto space-x-4">
                     <CardsPlan />
                 </div>
-                <div className="flex-grow">
+                <div className="container flex flex-row p-4 mx-auto space-x-4">
                     <CardsBedroom />
                 </div>
-                <div className="flex-grow">
+                <div className="container flex flex-row p-4 mx-auto space-x-4">
                     <CardsAmenitie />
                 </div>
             <Footer />
