@@ -13,8 +13,7 @@ const Landing = () => {
             <Banner />
             <h2>BIENVENIDOS</h2>
             <h3>Descubran un refugio de lujo en el corazón de la ciudad...</h3>
-            <div className="container flex flex-row p-4 mx-auto space-x-4">
-                <div className="flex-grow">
+                <div className="container flex flex-row p-4 mx-auto space-x-4">
                     <CardsPlan />
                 </div>
                 <div className="flex-grow">
@@ -23,7 +22,6 @@ const Landing = () => {
                 <div className="flex-grow">
                     <CardsAmenitie />
                 </div>
-            </div>
             <Footer />
         </div>
     );
