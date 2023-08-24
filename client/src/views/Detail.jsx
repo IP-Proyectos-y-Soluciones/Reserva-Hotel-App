@@ -4,12 +4,12 @@ import axios from 'axios';
 import Album from "../components/album/album";
 
 function Detail() {
-  const { id } = useParams(); // Cambio a minúscula: { id }
+  const { id } = useParams();
   const [roomData, setRoomData] = useState({});
+  const [plans, setPlans] = useState([]); // State for plans
 
   useEffect(() => {
-    // Realiza una solicitud a la API para obtener los datos de la habitación
-    axios.get(`http://localhost:3001/bedroom/detail/${id}`) // Cambio a minúscula: { id }
+    axios.get(`http://localhost:3001/bedroom/detail/${id}`)
       .then(response => {
         const selectedRoomData = response.data;
 
@@ -21,6 +21,16 @@ function Detail() {
       })
       .catch(error => {
         console.error('Error fetching room data:', error);
+      });
+
+    // Fetch plans from the API
+    axios.get('http://localhost:3001/plan')
+      .then(response => {
+        const fetchedPlans = response.data;
+        setPlans(fetchedPlans);
+      })
+      .catch(error => {
+        console.error('Error fetching plans:', error);
       });
   }, [id]);
 
@@ -38,8 +48,15 @@ function Detail() {
         </div>
         <div className="p-4 bg-gray-300 description-of-plan">
           <div className="grid grid-cols-2 gap-4">
-            <div>
-              <h2> Aquí va la descripción de los planes de la habitación </h2>
+          <div>
+              {plans.map(plan => (
+                <div key={plan.kind}>
+                  <h2>{plan.kind}</h2>
+                  <p>{plan.description}</p>
+                  <p>Precio alto: {plan.hight_price}</p>
+                  <p>Precio bajo: {plan.low_price}</p>
+                </div>
+              ))}
             </div>
             <div className="w-20 iconos " >
               <img src="imagen-de-iconos-de-servicios" alt="img de servicios" />
