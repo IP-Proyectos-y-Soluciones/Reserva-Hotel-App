@@ -63,6 +63,7 @@ const createBedroom = async (
     description_h
   ) => {
     try {
+
       if (!isAdmin) {
         throw new Error("You are not authorized");
       }
@@ -77,7 +78,8 @@ const createBedroom = async (
         await bedroomUp.save();
         return bedroomUp;
       }
-    } catch (error) {
+    } 
+    catch (error) {
     
       return { error: error.message };
     }
@@ -99,10 +101,22 @@ const createBedroom = async (
       return { error: error.message };
     }
   };
+  const getBedroomById = async (id) => {
+    try {
+      const bedroom = await Bedrooms.findByPk(id);
+      if (!bedroom) {
+        throw new Error("Bedroom not found");
+      }
+      return bedroom;
+    } catch (error) {
+      return { error: error.message };
+    }
+  };
 
   module.exports = {
     getBedrooms,
     createBedroom,
     updateBedroom,
-    deleteBedroom
+    deleteBedroom,
+    getBedroomById
   }
