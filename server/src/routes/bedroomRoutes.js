@@ -32,20 +32,6 @@ router.put('/:id', async (req, res) => {
   }
 });
 
-router.get('/detail/:id', async (req, res) => {
-  try {
-    const { id } = req.params;
-    const result = await getBedroomById(id);
-    if (result.error) {
-      res.status(404).json({ error: result.error });
-    } else {                             
-      res.json(result);
-    }
-  } catch (error) {
-    res.status(500).json({ error: error.message });
-  }
-});
-
 
 router.delete('/:id', async (req, res) => {
     try {
@@ -62,4 +48,20 @@ router.delete('/:id', async (req, res) => {
       res.status(500).json({ error: error.message });
     }
   });
+//AGREGE ESTA PARTE DE CODIGO 
+
+  router.get('/detail/:id', async (req, res) => {
+    try {
+      const { id } = req.params;
+      const result = await getBedroomById(id);
+      if (result.error) {
+        res.status(404).json({ error: result.error });
+      } else {                             
+        res.json(result);
+      }
+    } catch (error) {
+      res.status(500).json({ error: error.message });
+    }
+  });
+  
 module.exports = router;
