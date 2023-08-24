@@ -21,6 +21,7 @@ router.post('/', async (req, res) => {
         } else {
 
 
+
             const verificationCode = generateVerificationCode();
             
             verificationCodes[email] = verificationCode;
