@@ -20,12 +20,14 @@ router.post('/', async (req, res) => {
             res.status(400).json({ error: newUser.error });
         } else {
 
+
             const verificationCode = generateVerificationCode();
             
             verificationCodes[email] = verificationCode;
 
             let subject = "NUEVO CUENTA";
             let text = `Su cuenta ha sido creada sin problemas! ¡Felicidades! por Name:${name} verifica tu código: ${verificationCode} `;
+
             sendMail(email, subject, text);
             res.status(201).json(newUser);
         }
