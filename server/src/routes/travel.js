@@ -58,7 +58,8 @@ router.get('/', async (req, res) => {
         if (getTravels.error) {
             res.status(400).json({ error: getTravels.error })
         } else {
-            res.status(201).json(getTravels)
+            //res.status(201).json(getTravels)
+            res.render('pages/travel.ejs', {getTravels, title: 'Hotel Backend'});
         }
     } catch (error) {
         res.status(500).json({ error: 'Internal server error' })

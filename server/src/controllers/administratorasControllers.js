@@ -17,7 +17,7 @@ const createAdmin = async (profile, name, user, password, status) => {
           password: hashedPassword,
           status
         });
-  
+        
         return newAdmin;
       }
     } catch (error) {
@@ -42,25 +42,31 @@ const getAdmins = async () => {
 };
 
 // Actualizar administrador
- const updateAdmin = async (id, profile, name, user, password, status) => {
+const updateAdmin = async (id, profile, name, user, password, status) => {
   try {
     const admin = await Administrators.findByPk(id);
     if (admin) {
       admin.profile = profile;
       admin.name = name;
       admin.user = user;
-      admin.password = password;
       admin.status = status;
+
+      if (password) {
+        const hashedPassword = await bcrypt.hash(password, 10);
+        admin.password = hashedPassword;
+      }
+
       await admin.save();
       return admin;
     } else {
       throw new Error("Administrador no encontrado");
     }
   } catch (error) {
-    console.log(error)
+    console.log(error);
     return { error: error.message };
   }
 };
+
 
 // Eliminar administrador
 const deleteAdmin = async (id) => {
@@ -78,9 +84,7 @@ const deleteAdmin = async (id) => {
       throw new Error("Administrador no encontrado");
     }
   } catch (error) {
-    fs.appendFile('error.log', error.message + '\n', (err) => {
-      if (err) throw err;
-    });
+   
     return { error: error.message };
   }
 };
@@ -106,10 +110,21 @@ const deleteAdmin = async (id) => {
 };
 
 
+const getAdminById = async (id) => {
+  try {
+    const admin = await Administrators.findByPk(id);
+    return admin;
+  } catch (error) {
+    console.error(error);
+    return { error: error.message };
+  }
+};
+
 module.exports = {
   login,
   deleteAdmin,
   updateAdmin,
   createAdmin,
-  getAdmins
+  getAdmins,
+  getAdminById
 }

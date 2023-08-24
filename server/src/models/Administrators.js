@@ -27,7 +27,7 @@ module.exports = (sequelize) => {
         allowNull: false, // Cambio: Agregar allowNull
       },
       status: {
-        type: DataTypes.INTEGER,
+        type: DataTypes.TEXT,
         allowNull: false, // Cambio: Agregar allowNull
       },
       date: {

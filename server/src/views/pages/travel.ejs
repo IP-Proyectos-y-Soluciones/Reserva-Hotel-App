@@ -1,3 +1,7 @@
+<%- include('../partials/header') %>
+  <%- include('../partials/head') %>
+    <%- include('../partials/menu') %>
+
 <div class="content-wrapper" style="min-height: 717px">
   <!-- Content Header (Page header) -->
   <section class="content-header">
@@ -72,6 +76,19 @@
               </td>
 
             </tr> -->
+            <% for(let i=0; i < getTravels.length; i++) { %>
+              <tr>
+                <td><%= getTravels[i].id %></td>
+                <td><%= getTravels[i].title %></td>
+                <td><%= getTravels[i].description %></td>
+                <td><%= getTravels[i].big_photo %></td>
+                <td><%= getTravels[i].photo_small %></td>
+                <td>
+                  <button class="btn btn-warning btn-sm"><i class="fas fa-pencil-alt text-white"></i></button>  
+                  <button class="btn btn-danger btn-sm"><i class="fas fa-trash-alt"></i></button> 
+                </td>
+              </tr>
+              <% } %>
           </tbody>
         </table>
       </div>
