@@ -44,6 +44,13 @@ const Banner = () => {
     <div className='hidden group-hover:block absolute top-[50%] -translate-x-0 translate-y-[50%] right-5 text-2xl rounded-full p-2 bg-black/20 text-white cursor-pointer'>
     <BsChevronCompactRight onClick={nextSlide} size={38}/>
     </div>
+    <div
+        className="absolute inset-x-[15%] bottom-1/2 hidden py-5 text-center text-yellow-500 md:block absolute top-1/2 transform -translate-y-1/2">
+        <h5 className="text-5xl">Estilo y Distinción</h5>
+        <p className="text-2xl">
+          Hotel PF 
+        </p>
+      </div>
   </div>) 
 
     
