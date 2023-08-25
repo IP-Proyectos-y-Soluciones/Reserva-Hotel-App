@@ -61,7 +61,7 @@
                 <tbody>
                   <% for (const bedroom of bedrooms) { %>
                     <tr>
-                      <td><%= bedroom.id_h %></td>
+                      <td><%= bedroom.id %></td>
                       <td><%= bedroom.kind_h %></td>
                       <td><%= bedroom.style %></td>  
                       <td>
@@ -74,13 +74,14 @@
                       <td><%= bedroom.description_h %></td>
                       <td><%= bedroom.date_h %></td>
                       <td>
-                        <button class="btn btn-warning btn-sm editarBtn" data-toggle="modal" data-target="#editarBedroom" data-id_h="<%= bedroom.id_h %>">
+                        <button class="btn btn-warning btn-sm editarBtn" data-toggle="modal" data-target="#editarBedroom" data-id="<%= bedroom.id %>">
                           <i class="fas fa-pencil-alt text-white"></i>
                       </button>
-                      
-                      <button class="btn btn-danger btn-sm eliminarBtn" data-toggle="modal" data-target="#eliminarBedroom<%= bedroom.id_h %>" data-id_h="<%= bedroom.id_h %>">
-                        <i class="fas fa-trash-alt"></i>
-                    </button>
+                                    
+                        <button class="btn btn-danger btn-sm eliminarBtn" data-toggle="modal" data-target="#eliminarBedroom<%= bedroom.id %>" data-id="<%= bedroom.id %>">
+                          <i class="fas fa-trash-alt"></i>
+                      </button>
+                                       
                                                                   
                       </td>
                     </tr>
@@ -202,13 +203,11 @@ Modal Crear Bedroom
 <!--=====================================
 Modal Editar Banner
 ======================================-->
-
-
 <% for (const bedroom of bedrooms) { %>
   <div class="modal" id="editarBedroom">
     <div class="modal-dialog">
       <div class="modal-content">
-        <form method="post" action="/bedroom/<%= bedroom.id_h %>">
+        <form method="post" action="/bedroom/<%= bedroom.id %>">
           <div class="modal-header bg-info">
             <h4 class="modal-title">Editar Bedroom</h4>
             <button type="button" class="close" data-dismiss="modal">&times;</button>
@@ -285,19 +284,6 @@ Modal Editar Banner
               />
             </div>
 
-  
-            <div class="input-group mb-3">
-              <div class="input-group-append input-group-text">
-                <span class="fas fa-key"></span>
-              </div>
-              <select class="form-control" name="status" required>
-                <option class="editarPerfilOption"></option>
-                <option value="">Seleccione perfil</option>
-                <option value="Administrador">Administrador</option>
-                <option value="Editor">Editor</option>
-              </select>
-            </div>
-          </div>
           <div class="modal-footer d-flex justify-content-between">
             <div>
               <button type="button" class="btn btn-danger" data-dismiss="modal">
@@ -317,7 +303,7 @@ Modal Editar Banner
 
 <!-- eleminar -->
 <% for (const bedroom of bedrooms) { %>
-  <div class="modal" id="eliminarBedroom<%= bedroom.id_h %>">
+  <div class="modal" id="eliminarBedroom<%= bedroom.id %>">
       <div class="modal-dialog">
           <div class="modal-content">
               <div class="modal-header bg-danger text-white">
@@ -329,7 +315,7 @@ Modal Editar Banner
               </div>
               <div class="modal-footer">
                   <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
-                  <form method="post" action="/bedroom/delete/<%= bedroom.id_h %>">
+                  <form method="post" action="/bedroom/delete/<%= bedroom.id %>">
                       <input type="hidden" name="_method" value="delete">
                       <button type="submit" class="btn btn-danger">Eliminar</button>
                   </form>
