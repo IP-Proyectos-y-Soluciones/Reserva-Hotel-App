@@ -36,21 +36,21 @@ const Album = ({ id }) => {
       <h1>Este es el Album</h1>
 
       <div className="flex items-center justify-center">
-  <div className="w-full overflow-hidden bg-white rounded-lg shadow-lg">
+  <div className="w-[900px] h-[400px] overflow-hidden bg-white rounded-lg shadow-lg">
     <div className="relative">
-      <div id="slider" className="flex">
+      <div id="slider" className="flex" style={{ width: '100%', overflowX: 'auto' }}>
         {images.map((image, index) => (
           <div
             key={index}
             className={`slide ${index === currentSlide ? 'block' : 'hidden'}`}
             style={{ minWidth: '100%', display: 'flex', justifyContent: 'center' }}
           >
-            <img src={image} alt={`Image ${index + 1}`} className="h-auto max-w-full" />
+            <img src={image} alt={`Image ${index + 1}`} className="object-cover w-full h-full max-w-full" />
           </div>
         ))}
       </div>
     </div>
-  
+
 
           <div className="flex items-center justify-center mt-4">
             <div
