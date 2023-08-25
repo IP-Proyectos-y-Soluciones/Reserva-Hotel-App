@@ -1,3 +1,9 @@
+<%- include('../partials/header') %>
+<%- include('../partials/head') %>
+<%- include('../partials/menu') %>
+
+
+
 <div class="content-wrapper" style="min-height: 717px">
   <section class="content-header">
     <div class="container-fluid">
@@ -49,24 +55,26 @@
                 </thead>
 
                 <tbody>
-                  <!--  <tr>
-              
-                    <td>1</td> 
-                    <td>
-                      <img src="vistas/img/banner/banner01.jpg" class="img-fluid">
-                    </td> 
-                    <td>
-                      <div class="btn-group">
-                        <button class="btn btn-warning btn-sm">
-                          <i class="fas fa-pencil-alt text-white"></i>
-                        </button>  
-                        <button class="btn btn-danger btn-sm">
-                          <i class="fas fa-trash-alt"></i>
-                        </button>  
-                      </div>
-                    </td>
+                  <% for (const banner of banners) { %>
+                    <tr>
+                      <td><%= banner.id %></td>
+                      <td>
+                        <img src="<%= banner.img %>" class="img-fluid" style="width:1300px; height: 205px;" />
 
-                  </tr> -->
+
+                      </td>
+                      <td>
+                        <button class="btn btn-warning btn-sm editarBtn" data-toggle="modal" data-target="#editarBanner" data-id="<%= banner.id %>">
+                          <i class="fas fa-pencil-alt text-white"></i>
+                      </button>
+                                    
+                        <button class="btn btn-danger btn-sm eliminarBtn" data-toggle="modal" data-target="#eliminarBanner<%= banner.id %>" data-id="<%= banner.id %>">
+                          <i class="fas fa-trash-alt"></i>
+                      </button>
+                                                                
+                      </td>
+                    </tr>
+                  <% } %>
                 </tbody>
               </table>
             </div>
@@ -79,7 +87,6 @@
   </section>
   <!-- /.content -->
 </div>
-
 <!--=====================================
 Modal Crear Banner
 ======================================-->
@@ -87,7 +94,7 @@ Modal Crear Banner
 <div class="modal" id="crearBanner">
   <div class="modal-dialog">
     <div class="modal-content">
-      <form method="post" enctype="multipart/form-data">
+      <form method="post" action="/banner">
         <!-- Modal Header -->
         <div class="modal-header bg-info">
           <h4 class="modal-title">Crear Banner</h4>
@@ -98,17 +105,18 @@ Modal Crear Banner
         <div class="modal-body">
           <div class="form-group my-2">
             <input
-              type="file"
-              class="form-control-file border"
-              name="subirBanner"
+              type="text"
+              class="form-control border"
+              name="img"
+              placeholder="URL PIC"
               required
             />
 
             <p class="help-block small">
-              Dimensiones: 1440px * 600px | Peso Max. 2MB | Formato: JPG o PNG
+              Dimensiones: 1440px * 600px
             </p>
 
-            <img class="previsualizarBanner img-fluid" />
+            <img class="previsualizarBanner img-fluid" src="" />
           </div>
         </div>
 
@@ -133,51 +141,77 @@ Modal Crear Banner
 Modal Editar Banner
 ======================================-->
 
-<div class="modal" id="editarBanner">
-  <div class="modal-dialog">
-    <div class="modal-content">
-      <form method="post" enctype="multipart/form-data">
-        <!-- Modal Header -->
-        <div class="modal-header bg-info">
-          <h4 class="modal-title">Editar Banner</h4>
-          <button type="button" class="close" data-dismiss="modal">&times;</button>
-        </div>
 
-        <!-- Modal body -->
-        <div class="modal-body">
-          <input type="hidden" class="form-control" name="idBanner" />
+<% for (const banner of banners) { %>
+  <div class="modal" id="editarBanner">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <form method="post" action="/banner/<%= banner.id %>">
+          <div class="modal-header bg-info">
+            <h4 class="modal-title">Editar Banner</h4>
+            <button type="button" class="close" data-dismiss="modal">&times;</button>
+          </div>
+          <div class="modal-body">
+            <input type="hidden" name="_method" value="put" />
+            
+            <div class="form-group my-2">
 
-          <div class="form-group my-2">
-            <input
-              type="file"
-              class="form-control-file border"
-              name="editarBanner"
+              <input
+              type="text"
+              class="form-control border"
+              name="img"
+              placeholder="URL PIC"
               required
             />
 
-            <input type="hidden" name="bannerActual" />
+              <input type="hidden" name="adminActual" />
 
-            <p class="help-block small">
-              Dimensiones: 1440px * 600px | Peso Max. 2MB | Formato: JPG o PNG
-            </p>
+              <p class="help-block small">
+                Dimensiones: 1440px * 600px
+              </p>
 
-            <img class="previsualizarBanner img-fluid" />
-          </div>
-        </div>
-
-        <!-- Modal footer -->
-        <div class="modal-footer d-flex justify-content-between">
-          <div>
-            <button type="button" class="btn btn-danger" data-dismiss="modal">
-              Cerrar
-            </button>
+              <img class="previsualizarAdmin img-fluid" src="<%= banner.img %>" />
+            </div>
           </div>
 
-          <div>
-            <button type="submit" class="btn btn-primary">Guardar</button>
+          <!-- Modal footer -->
+          <div class="modal-footer d-flex justify-content-between">
+            <div>
+              <button type="button" class="btn btn-danger" data-dismiss="modal">
+                Cerrar
+              </button>
+            </div>
+
+            <div>
+              <button type="submit" class="btn btn-primary">Guardar</button>
+            </div>
           </div>
-        </div>
-      </form>
+        </form>
+      </div>
     </div>
   </div>
-</div>
+<% } %>
+
+<!-- eleminar -->
+<% for (const banner of banners) { %>
+  <div class="modal" id="eliminarBanner<%= banner.id %>">
+      <div class="modal-dialog">
+          <div class="modal-content">
+              <div class="modal-header bg-danger text-white">
+                  <h4 class="modal-title">Eliminar Banner</h4>
+                  <button type="button" class="close" data-dismiss="modal">&times;</button>
+              </div>
+              <div class="modal-body">
+                  <p>¿Está seguro de que desea eliminar al Banner <%= banner.name %>?</p>
+              </div>
+              <div class="modal-footer">
+                  <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
+                  <form method="post" action="/banner/delete/<%= banner.id %>">
+                      <input type="hidden" name="_method" value="delete">
+                      <button type="submit" class="btn btn-danger">Eliminar</button>
+                  </form>
+              </div>
+          </div>
+      </div>
+  </div>
+  <% } %>

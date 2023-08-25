@@ -2,66 +2,79 @@ const express = require('express');
 const router = express.Router();
 const { createBedroom, getBedrooms, updateBedroom, deleteBedroom, getBedroomById } = require('../controllers/bedroomControllers');
 
+
+
 router.post('/', async (req, res) => {
   try {
-    const { kind_h, style, gallery, video, virtual_tour, description_h } = req.body;
-    const result = await createBedroom(kind_h, style, gallery, video, virtual_tour, description_h);
-    res.json(result);
+    const { kind_h, style, gallery, description_h } = req.body;
+    const result = await createBedroom(kind_h, style, gallery, description_h);
+    const bedrooms = await getBedrooms();
+    res.render('pages/bedrooms.ejs', {  result, bedrooms, title: 'Hotel Backend' })
   } catch (error) {
+    console.error(error)
     res.status(500).json({ error: error.message });
   }
 });
 
 router.get('/', async (req, res) => {
   try {
-    const result = await getBedrooms();
-    res.json(result);
+    const bedrooms = await getBedrooms();
+    res.render('pages/bedrooms.ejs', { bedrooms, title: 'Hotel Backend' })
   } catch (error) {
+    console.error(error)
     res.status(500).json({ error: error.message });
   }
 });
 
-router.put('/:id', async (req, res) => {
+router.post('/:id_h', async (req, res) => {
   try {
-    const { id } = req.params;
-    const { kind_h, style, gallery, video, virtual_tour, description_h } = req.body;
-    const result = await updateBedroom(id, kind_h, style, gallery, video, virtual_tour, description_h);
-    res.json(result);
+
+    const {id_h} = req.params;
+
+    const { kind_h, style, gallery, description_h } = req.body;
+    const result = await updateBedroom(id_h, kind_h, style, gallery, description_h);
+    const bedrooms = await getBedrooms();
+    res.render('pages/bedrooms.ejs', {  result, bedrooms, title: 'Hotel Backend' })
   } catch (error) {
+    console.error(error)
     res.status(500).json({ error: error.message });
   }
 });
 
 
-router.delete('/:id', async (req, res) => {
+router.get('/detail/:id_h', async (req, res) => {
+  try {
+    const { id_h } = req.params;
+    const result = await getBedroomById(id_h);
+    if (result.error) {
+      res.status(404).json({ error: result.error });
+    } else {                             
+      res.json(result);
+    }
+  } catch (error) {
+    console.error(error)
+    res.status(500).json({ error: error.message });
+  }
+});
+
+
+
+router.post('/delete/:id_h', async (req, res) => {
     try {
-      const {id} = req.params;
+      const {id_h} = req.params;
   
-      const result = await deleteBedroom(id);
-      
+      const result = await deleteBedroom(id_h);
       if (result.error) {
         res.status(404).json({ error: result.error });
       } else {
-        res.status(200).json({ message: 'Bedroom silindi' });
+        const bedrooms = await getBedrooms();
+        res.render('pages/bedrooms.ejs', {  result, bedrooms, title: 'Hotel Backend' })
       }
     } catch (error) {
+      console.error(error)
       res.status(500).json({ error: error.message });
     }
   });
-//AGREGE ESTA PARTE DE CODIGO 
 
-  router.get('/detail/:id', async (req, res) => {
-    try {
-      const { id } = req.params;
-      const result = await getBedroomById(id);
-      if (result.error) {
-        res.status(404).json({ error: result.error });
-      } else {                             
-        res.json(result);
-      }
-    } catch (error) {
-      res.status(500).json({ error: error.message });
-    }
-  });
-  
+
 module.exports = router;
