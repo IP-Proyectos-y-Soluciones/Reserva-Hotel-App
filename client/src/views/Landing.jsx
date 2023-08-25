@@ -8,9 +8,8 @@ import Footer from "../components/Footer/Footer";
 const Landing = () => {
     return (
 
-        <div className="min-h-screen bg-zinc-800 text-white">
+        <div className="min-h-screen text-white bg-zinc-800">
             <NavBar />
-            <h1 >Estilo y distinción</h1>
             <Banner />
             <h2>BIENVENIDOS</h2>
             <h3>Descubran un refugio de lujo en el corazón de la ciudad...</h3>
