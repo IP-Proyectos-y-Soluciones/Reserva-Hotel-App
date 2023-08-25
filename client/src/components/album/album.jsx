@@ -1,7 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
+import { BsChevronCompactLeft, BsChevronCompactRight } from 'react-icons/bs';
 
-const Album = ({id}) => {
+const Album = ({ id }) => {
   const [currentSlide, setCurrentSlide] = useState(0);
   const [images, setImages] = useState([]);
 
@@ -17,11 +18,6 @@ const Album = ({id}) => {
         console.error('Error fetching images:', error);
       });
   }, [id]);
-  
-
-  const showSlide = (index) => {
-    setCurrentSlide(index);
-  };
 
   const prevSlide = () => {
     if (currentSlide > 0) {
@@ -38,26 +34,37 @@ const Album = ({id}) => {
   return (
     <div>
       <h1>Este es el Album</h1>
-      
+
       <div className="flex items-center justify-center">
-        <div className="w-full overflow-hidden bg-white rounded-lg shadow-lg md:w-2/3 lg:w-1/2 xl:w-1/3">
-          <div className="relative">
-            <div id="slider" className="flex">
-              {images.map((image, index) => (
-                <div key={index} className={`slide ${index === currentSlide ? 'block' : 'hidden'}`}>
-                  <img src={image} alt={`Image ${index + 1}`} className="w-full h-auto" />
-                </div>
-              ))}
-            </div>
+  <div className="w-full overflow-hidden bg-white rounded-lg shadow-lg">
+    <div className="relative">
+      <div id="slider" className="flex">
+        {images.map((image, index) => (
+          <div
+            key={index}
+            className={`slide ${index === currentSlide ? 'block' : 'hidden'}`}
+            style={{ minWidth: '100%', display: 'flex', justifyContent: 'center' }}
+          >
+            <img src={image} alt={`Image ${index + 1}`} className="h-auto max-w-full" />
           </div>
-          
+        ))}
+      </div>
+    </div>
+  
+
           <div className="flex items-center justify-center mt-4">
-            <button onClick={prevSlide} className="px-4 py-2 text-white bg-blue-500 rounded-l hover:bg-blue-600">
-              Previous
-            </button>
-            <button onClick={nextSlide} className="px-4 py-2 text-white bg-blue-500 rounded-r hover:bg-blue-600">
-              Next
-            </button>
+            <div
+              className="px-4 py-2 text-white bg-blue-500 rounded-l cursor-pointer hover:bg-blue-600"
+              onClick={prevSlide}
+            >
+              <BsChevronCompactLeft size={20} />
+            </div>
+            <div
+              className="px-4 py-2 text-white bg-blue-500 rounded-r cursor-pointer hover:bg-blue-600"
+              onClick={nextSlide}
+            >
+              <BsChevronCompactRight size={20} />
+            </div>
           </div>
         </div>
       </div>
