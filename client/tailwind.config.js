@@ -7,9 +7,8 @@ export default {
   ],
   theme: {
     extend: {
-      colors: {
-        
-      }
+      divideColor: ['group-hover'],
+      padding: ['hover']
     },
   },
   plugins: [

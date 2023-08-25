@@ -1,10 +1,18 @@
 import { createSlice } from '@reduxjs/toolkit';
-import {getUsers, putUser,updatedUser } from '../actions/userActions';
+import {getUsers, putUser,updatedsUser,createUsersVerify } from '../actions/userActions';
 
+const loadUserFromLocalStorage = () => {
+  try {
+    const userJSON = localStorage.getItem('user');
+    return JSON.parse(userJSON) || null;
+  } catch (error) {
+    return null;
+  }
+};
 const initialState = {
   users: [],
   usersCopy: [],
-  user: []
+  user:loadUserFromLocalStorage(),
 };
 
 const usersSlice = createSlice({
@@ -18,7 +26,12 @@ const usersSlice = createSlice({
         state.usersCopy = state.users.filter(user=> user.name.toLowerCase().includes(search?.toLowerCase()) || user.surname.toLowerCase().includes(search?.toLowerCase()))
         : 
         state.usersCopy = state.users.filter(user=> user.isMember === (member == "true"? true : false) && ( user.name.toLowerCase().includes(search.toLowerCase()) || user.surname.toLowerCase().includes(search.toLowerCase())) ) ;
-    } 
+    },
+    updatedUser:(state,action)=>{
+      state.user=action.payload,
+      localStorage.setItem('user', JSON.stringify(action.payload));
+      //console.log(user)
+    }
   },
   extraReducers: (builder) => {
     builder
@@ -36,11 +49,14 @@ const usersSlice = createSlice({
         state.users = action.payload;
         state.usersCopy = action.payload;
       })
-      .addCase(updatedUser.fulfilled, (state, action) => {
+      .addCase(createUsersVerify.fulfilled, (state,action)=>{
+        state.user=action.payload;
+      })
+      .addCase(updatedsUser.fulfilled, (state, action) => {
         state.user = action.payload;
       });
   },
 });
 
-export const { filterUsers } = usersSlice.actions;
+export const { filterUsers,updatedUser } = usersSlice.actions;
 export default usersSlice.reducer;
