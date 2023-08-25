@@ -29,7 +29,7 @@ server.use( express.json() );
 
 server.set('views', path.join(__dirname, 'views'));
 server.set('view engine', 'ejs');
-// server.locals.uploadPath = path.join(__dirname, 'uploads');
+server.set('upload', path.join(__dirname, 'public/uploads'));
 const corsOptions = {
   origin: '*',
   methods: '*',
