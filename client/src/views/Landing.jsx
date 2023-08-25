@@ -16,7 +16,7 @@ const Landing = () => {
                 <div className="container flex flex-row p-4 mx-auto space-x-4">
                     <CardsPlan />
                 </div>
-                <div className="container flex flex-row p-4 mx-auto space-x-4">
+                <div >
                     <CardsBedroom />
                 </div>
                 <div className="container flex flex-row p-4 mx-auto space-x-4">

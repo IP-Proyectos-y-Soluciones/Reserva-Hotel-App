@@ -1,26 +1,17 @@
 const { Bedrooms } = require("../config/db");
-const { getAdmins } = require("./administratorasControllers.js");
 
 
-const isAdmin = async (userId) => {
-    const admin = await getAdmins();
-    const adminIds = admin.map(admins => admins.id);
-    return adminIds.includes(userId);
-  };
+
 
 const createBedroom = async (
     kind_h,
     style,
     gallery,
-    video,
-    virtual_tour,
     description_h
   ) => {
     try {
-      if (!isAdmin()) {
-        throw new Error("You are not authorized");
-      }
-      if (!kind_h || !style || !gallery || !video || !virtual_tour || !description_h) {
+
+      if (!kind_h) {
         throw new Error("Missing data to create a new bedroom");
       } else {
         const date_h = new Date();
@@ -28,15 +19,13 @@ const createBedroom = async (
           kind_h,
           style,
           gallery,
-          video,
-          virtual_tour,
           description_h,
           date_h
         });
         return newBedroom;
       }
     } catch (error) {
-      
+      console.error(error)
       return { error: error.message };
     }
   };
@@ -46,34 +35,26 @@ const createBedroom = async (
       const bedrooms = await Bedrooms.findAll();
       return bedrooms;
     } catch (error) {
-      fs.appendFile("error.log", error.message + "\n", err => {
-        if (err) throw err;
-      });
+      console.error(error)
       return { error: error.message };
     }
   };
   
   const updateBedroom = async (
-    id,
+    id_h,
     kind_h,
     style,
     gallery,
-    video,
-    virtual_tour,
     description_h
   ) => {
     try {
 
-      if (!isAdmin) {
-        throw new Error("You are not authorized");
-      }
-      const bedroomUp = await Bedrooms.findByPk(id);
+   
+      const bedroomUp = await Bedrooms.findByPk(id_h);
       if (bedroomUp) {
         bedroomUp.kind_h = kind_h;
         bedroomUp.style = style;
         bedroomUp.gallery = gallery;
-        bedroomUp.video = video;
-        bedroomUp.virtual_tour = virtual_tour;
         bedroomUp.description_h = description_h;
         await bedroomUp.save();
         return bedroomUp;
@@ -85,12 +66,14 @@ const createBedroom = async (
     }
   };
   
-  const deleteBedroom = async id => {
+  const deleteBedroom = async (id_h) => {
     try {
-      if (!isAdmin) {
-        throw new Error("You are not authorized");
-      }
-      const bedroom = await Bedrooms.findByPk(id);
+ 
+      const bedroom = await Bedrooms.findOne({
+        where: {
+          id_h: id_h
+        }
+      });
       if (bedroom) {
         await bedroom.destroy();
       } else {
@@ -101,9 +84,9 @@ const createBedroom = async (
       return { error: error.message };
     }
   };
-  const getBedroomById = async (id) => {
+  const getBedroomById = async (id_h) => {
     try {
-      const bedroom = await Bedrooms.findByPk(id);
+      const bedroom = await Bedrooms.findByPk(id_h);
       if (!bedroom) {
         throw new Error("Bedroom not found");
       }
