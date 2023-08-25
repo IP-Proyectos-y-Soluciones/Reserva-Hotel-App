@@ -10,8 +10,8 @@ const CardsBedroom = () => {
 
     const eachBedroom = bedrooms.map(bedroom=>{
         return {
-            key:bedroom.id_h,
-            id_h:bedroom.id_h,
+            key:bedroom.id,
+            id_h:bedroom.id,
             kind_h:bedroom.kind_h,
             gallery:bedroom.gallery
         }
