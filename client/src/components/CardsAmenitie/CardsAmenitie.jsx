@@ -1,4 +1,4 @@
-import CardAmenitie from "../CardAmenities/CardAmenitie";
+import CardAmenitie from '../CardAmenitie/CardAmenitie';
 import gym from './assets/gym.jpg';
 import spa from './assets/spa.jpg';
 import restaurant from './assets/restaurant.jpg';
@@ -38,7 +38,8 @@ const CardsAmenitie = () => {
                                 
     return(
         <div>
-            <h1>El confort que mereces</h1>
+            <h1>Hacemos la diferencia</h1>
+            <div className="flex p-15 space-x-20 overflow-x-auto">
             {
                 allAmenities.length > 0 &&  //al tener el redux, reemplazamos allAmenities por amenitie
                 allAmenities.map(amenitie=>{
@@ -51,7 +52,7 @@ const CardsAmenitie = () => {
                     />)
                 })
             }
-
+            </div>
         </div>
     )
 };

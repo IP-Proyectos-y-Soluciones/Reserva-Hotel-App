@@ -13,11 +13,13 @@ module.exports = (sequelize) => {
         allowNull: false,
       },
       photo_small: {
-        type: DataTypes.TEXT,
+        //type: DataTypes.TEXT,
+        type: DataTypes.BLOB,
         allowNull: false,
       },
       big_photo: {
-        type: DataTypes.TEXT,
+        //type: DataTypes.TEXT,
+        type: DataTypes.BLOB,
         allowNull: false,
       },
       title: {

@@ -41,6 +41,7 @@ router.post('/:id_h', async (req, res) => {
   }
 });
 
+
 router.get('/detail/:id_h', async (req, res) => {
   try {
     const { id_h } = req.params;
@@ -55,6 +56,7 @@ router.get('/detail/:id_h', async (req, res) => {
     res.status(500).json({ error: error.message });
   }
 });
+
 
 
 router.post('/delete/:id_h', async (req, res) => {
@@ -73,4 +75,6 @@ router.post('/delete/:id_h', async (req, res) => {
       res.status(500).json({ error: error.message });
     }
   });
+
+
 module.exports = router;

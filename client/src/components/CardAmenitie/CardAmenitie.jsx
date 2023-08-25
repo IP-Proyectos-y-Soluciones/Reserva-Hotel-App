@@ -4,7 +4,7 @@ const CardAmenitie = ({description, img, kind}) =>{
         <div>
             
             <p>{kind}</p>
-            <img src={img} alt={kind}/>
+            <img src={img} alt={kind} className="w-100 h-85"/>
             
 
         </div>
