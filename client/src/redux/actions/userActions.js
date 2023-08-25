@@ -2,6 +2,7 @@ import { createAsyncThunk } from "@reduxjs/toolkit";
 import axios from "axios";
 
 const urlUsers= "http://localhost:3001/users";
+const urlUsersPost ="http://localhost:3001/users/verify";
 
 export const getUsers=createAsyncThunk(
     "users/getUsers",
@@ -14,6 +15,17 @@ export const getUsers=createAsyncThunk(
      throw new Error(error.response.data.message)
     }
    }  
+);
+export const createUsersVerify = createAsyncThunk(
+    "users/createUsersVerify",
+    async()=>{
+        try{
+            const res = await axios.post(urlUsersPost);
+            return res.data
+        }catch(error){
+            throw new Error(error.response.data.message)
+        }
+    }
 );
 export const createUsers =createAsyncThunk(
     "users/createUsers",
@@ -38,8 +50,8 @@ export const putUser = createAsyncThunk(
     }
 );
 
-export const updatedUser=createAsyncThunk(
-    "users/updateUser",
+export const updatedsUser=createAsyncThunk(
+    "users/updatedsUser",
     async(id) =>{
         try{
             const res= await axios.get(urlUsers,{data:{id:id}})
@@ -49,4 +61,5 @@ export const updatedUser=createAsyncThunk(
         }
     }
 );
+
 

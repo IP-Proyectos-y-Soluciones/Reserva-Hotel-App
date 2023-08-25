@@ -55,7 +55,7 @@ function Detail() {
              
             ))}
           </h2>
-          <div className="w-full mx-auto md:w-2/3 lg:w-1/2 xl:w-1/3">
+          <div className=""> 
             <Album id={id} />
           </div>
         </div>

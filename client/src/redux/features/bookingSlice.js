@@ -5,6 +5,7 @@ const bookingsSlice = createSlice({
   name: 'bookings',
   initialState: {
     bookings: [],
+    searchBooking:[],
     status: 'idle',
     error: null,
     filters: {
@@ -27,6 +28,17 @@ const bookingsSlice = createSlice({
       };
       state.filteredBookings = state.bookings;
     },
+    searchBooking:(state,action)=>{
+      const {startDate, endDate}= action.payload;
+      const filterBook=state.bookings.filter(booking=>{
+        const departureDate= new Date(booking.departure_date);
+        const admissionDate= new Date(booking.admission_date);
+        return(
+          departureDate >= startDate && departureDate <= endDate && admissionDate >= startDate && admissionDate <= endDate
+        );
+      });
+      state.searchBooking = filterBook;
+    }
   },
   extraReducers: (builder) => {
     builder
@@ -45,5 +57,5 @@ const bookingsSlice = createSlice({
   },
 });
 
-export const { setFilters, clearFilters } = bookingsSlice.actions;
+export const { setFilters, clearFilters, searchBooking } = bookingsSlice.actions;
 export default bookingsSlice.reducer;
