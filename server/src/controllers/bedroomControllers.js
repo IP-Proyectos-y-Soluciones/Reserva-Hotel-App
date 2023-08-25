@@ -40,17 +40,11 @@ const createBedroom = async (
     }
   };
   
-  const updateBedroom = async (
-    id_h,
-    kind_h,
-    style,
-    gallery,
-    description_h
-  ) => {
+  const updateBedroom = async (  id, kind_h, style, gallery, description_h) => {
     try {
 
    
-      const bedroomUp = await Bedrooms.findByPk(id_h);
+      const bedroomUp = await Bedrooms.findByPk(id);
       if (bedroomUp) {
         bedroomUp.kind_h = kind_h;
         bedroomUp.style = style;
@@ -66,27 +60,29 @@ const createBedroom = async (
     }
   };
   
-  const deleteBedroom = async (id_h) => {
+  const deleteBedroom = async (id) => {
     try {
- 
       const bedroom = await Bedrooms.findOne({
         where: {
-          id_h: id_h
+          id: id
         }
       });
-      if (bedroom) {
-        await bedroom.destroy();
-      } else {
+  
+      if (!bedroom) {
         throw new Error("Bedroom not found");
       }
+  
+      await bedroom.destroy();
+      return { success: true };
+  
     } catch (error) {
-    
-      return { error: error.message };
+      return { error: error.message }; 
     }
   };
-  const getBedroomById = async (id_h) => {
+  
+  const getBedroomById = async (id) => {
     try {
-      const bedroom = await Bedrooms.findByPk(id_h);
+      const bedroom = await Bedrooms.findByPk(id);
       if (!bedroom) {
         throw new Error("Bedroom not found");
       }

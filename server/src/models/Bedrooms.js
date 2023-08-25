@@ -6,7 +6,7 @@ module.exports = (sequelize) => {
     {
       // Define los atributos del modelo
       // ...
-      id_h: {
+      id: {
         type: DataTypes.UUID,
         defaultValue: DataTypes.UUIDV4,
         primaryKey: true,
