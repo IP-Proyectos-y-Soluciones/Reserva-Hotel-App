@@ -1,8 +1,8 @@
 //BEDROOMS//
 SINGLE ROOM
-https://res.cloudinary.com/dm9glx5a7/image/upload/v1692147891/PF-HOTEL-APP/SINGLE%20ROOM/3_ncbpuz.jpg
-https://res.cloudinary.com/dm9glx5a7/image/upload/v1692147891/PF-HOTEL-APP/SINGLE%20ROOM/1_fatqsq.jpg
-https://res.cloudinary.com/dm9glx5a7/image/upload/v1692147891/PF-HOTEL-APP/SINGLE%20ROOM/2_h9xtes.jpg
+https://res.cloudinary.com/dm9glx5a7/image/upload/v1692802654/PF-HOTEL-APP/Bedrooms/SINGLE%20ROOM/2_mnvvzj.jpg
+https://res.cloudinary.com/dm9glx5a7/image/upload/v1692802654/PF-HOTEL-APP/Bedrooms/SINGLE%20ROOM/1_mtzkee.jpg
+https://res.cloudinary.com/dm9glx5a7/image/upload/v1692802653/PF-HOTEL-APP/Bedrooms/SINGLE%20ROOM/3_f4scmi.jpg
 
 DOUBLE ROOM
 https://res.cloudinary.com/dm9glx5a7/image/upload/v1692802640/PF-HOTEL-APP/Bedrooms/DOUBLE%20ROOM/2_vhwjbr.jpg
