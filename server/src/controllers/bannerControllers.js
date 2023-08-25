@@ -1,18 +1,9 @@
 const { Banner } = require("../config/db");
-const { getAdmins } = require("./administratorasControllers.js");
 
-// Solo para ver el administrador
-const isAdmin = async (userId) => {
-  const admin = await getAdmins();
-  const adminIds = admin.map(admins => admins.id);
-  return adminIds.includes(userId);
-};
+
 
  const createBanner = async (img) => {
   try {
-    if (!isAdmin) {
-      throw new Error("No estás autorizado");
-    }
     if (!img) {
       throw new Error("Falta la imagen para crear el banner");
     } else {
@@ -22,21 +13,17 @@ const isAdmin = async (userId) => {
       return newBanner;
     }
   } catch (error) {
-   
+   console.error(error)
     return { error: error.message };
   }
 };
 
-const updateBanner = async (id, img, date) => {
+const updateBanner = async (id, img) => {
   try {
-    if (!isAdmin) {
-      throw new Error("No estás autorizado");
-    }
     const bannerUpdate = await Banner.findByPk(id);
     if (bannerUpdate) {
       bannerUpdate.id = id;
       bannerUpdate.img = img;
-      bannerUpdate.date = date;
       await bannerUpdate.save();
       return bannerUpdate;
     }
@@ -51,16 +38,35 @@ const updateBanner = async (id, img, date) => {
     const banner = await Banner.findAll();
     return banner;
   } catch (error) {
-    fs.appendFile('error.log', error.message + '\n', (err) => {
-      if (err) throw err;
-    });
+    
     return { error: error.message };
   }
 };
+
+const deleteBanner = async (id) => {
+  try {
+    const banners = await Banner.findOne({
+      where: {
+        id: id
+      }
+    });
+    
+    if (banners) {
+      await banners.destroy();
+      return { message: 'Banner eliminado' };
+    } else {
+      throw new Error("Administrador no encontrado");
+    }
+  } catch (error) {
+   
+    return { error: error.message };
+  }
+};
+
 
 module.exports = {
   getBanner,
   updateBanner,
   createBanner,
-  isAdmin
+  deleteBanner
 }
