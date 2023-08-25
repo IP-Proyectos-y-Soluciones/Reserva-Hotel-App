@@ -34,7 +34,7 @@ const CardsBedroom = () => {
                         key={bedroom.id_h}
                         id_h={bedroom.id_h}
                         kind_h={bedroom.kind_h}
-                        gallery={bedroom.gallery}
+                        gallery={bedroom.gallery[0]}
                         />
                     )
                 })           
