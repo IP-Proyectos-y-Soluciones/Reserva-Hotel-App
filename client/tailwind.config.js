@@ -7,8 +7,11 @@ export default {
   ],
   theme: {
     extend: {
-      colors: {
-        
+      divideColor: ['group-hover'],
+      padding: ['hover'],
+      color: {
+        stone: '#B99768',
+        zinc: '#313131',
       }
     },
   },

@@ -1,25 +1,22 @@
+import ItemsContainer from "./ItemsContainers";
+import SocialIcons from "./SocialIcon";
+import { Icons } from "./Menus";
+
 const Footer = () => {
     return(
-        <div>
-            <div>
-                Nuestras redes
-                <a href="https://www.facebook.com/">Facebook</a>
-                <a href="https://www.instagram.com/">Instagram</a>
-            </div>
-
-            <div>
-                Politicas
-                <a href="https://www.facebook.com/">Políticas de cancelación</a>
-                <a href="https://www.instagram.com/">Políticas generales</a>
-            </div>
-
-            <div>
-                Contáctenos
-                reservas@hotel.com
-            </div>
-
+        <footer className="bg-gray-900 text-white">
+        <div className="md:flex md:justify-between md:items-center sm:px-12 px-4 bg-[#ffffff19] py-7">
         </div>
-    )
-};
+        <ItemsContainer />
+        <div
+            className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-10 text-center pt-2 text-gray-400 text-sm pb-8"
+        >
+        <span>© 2020 Appy. All rights reserved.</span>
+        <span>Terms · Privacy Policy</span>
+        <SocialIcons Icons={Icons} />
+        </div>
+    </footer>
+    );
+  };
 
 export default Footer;

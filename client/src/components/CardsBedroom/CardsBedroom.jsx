@@ -10,8 +10,8 @@ const CardsBedroom = () => {
 
     const eachBedroom = bedrooms.map(bedroom=>{
         return {
-            key:bedroom.id_h,
-            id_h:bedroom.id_h,
+            key:bedroom.id,
+            id_h:bedroom.id,
             kind_h:bedroom.kind_h,
             gallery:bedroom.gallery
         }
@@ -25,7 +25,7 @@ const CardsBedroom = () => {
     return(
         <div >
             <h1>El confort que mereces</h1>
-            <div className="flex p-15 space-x-20 overflow-x-auto">
+            <div className="container flex flex-row p-4 mx-auto space-x-4">
             {
                 eachBedroom.length > 0 &&  
                 eachBedroom.map(bedroom=>{
@@ -34,7 +34,7 @@ const CardsBedroom = () => {
                         key={bedroom.id_h}
                         id_h={bedroom.id_h}
                         kind_h={bedroom.kind_h}
-                        gallery={bedroom.gallery}
+                        gallery={bedroom.gallery[0]}
                         />
                     )
                 })           

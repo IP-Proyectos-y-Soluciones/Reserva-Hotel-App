@@ -1,53 +1,50 @@
 
-const Users = require("../config/db")
-const Bookings2 = require("../config/db")
-const Bookings = require("../config/db")
+const { Users } = require("../config/db")
+const { Bookings2 } = require("../config/db")
+const { Bookings } = require("../config/db")
 
 
 
 const createBooking = async ({
-    id_room, 
-    id_user, 
-    payment_reservation, 
-    transaction_number,
-    reservation_code, 
-    reservation_description, 
-    admission_date,
-    depertura_data, 
-    reservation_date}) => {
+  id_room, 
+  id,
+  payment_reservation, 
+  transaction_number,
+  reservation_description, 
+  admission_date,
+  departure_date, 
+  reservation_date
+}) => {
 
-       try {
+  try {
+    const user = await Users.findOne({ where: { id } });
+    if (!user) {
+      throw new Error('User not found');
+    }
 
-        const user = await Users.findOne({ where: { id_u: id_user } });
-        if (!user) {
-            throw new Error('User not found');
-        }
+    const booking = await Bookings.create({
+      id_user: id,
+      payment_reservation, 
+      transaction_number,
+      reservation_code: '', // You need to set this value as well
+      reservation_description, 
+      admission_date,
+      departure_date, 
+      reservation_date
+    });
 
-        const books = await Bookings.create({
-            id_user, 
-            payment_reservation, 
-            transaction_number,
-            reservation_code, 
-            reservation_description, 
-            admission_date,
-            depertura_data, 
-            reservation_date
-        })
-        const books2 = await Bookings2.create({
-            id_room,
-            admission_date,
-            departure_date,
-        })
-        return {books, books2}
-        
-       }
-       catch(error) {
-     
-        return { error: error.message };
-       }
-     }   
+    const booking2 = await Bookings2.create({
+      id_room,
+      admission_date,
+      departure_date,
+    });
 
-     
+    return { booking, booking2 };
+  } catch (error) {
+    return { error: error.message };
+  }
+}
+
 
 
 
