@@ -1,75 +1,78 @@
-<%- include('../partials/header') %>
-  <%- include('../partials/head') %>
-    <%- include('../partials/menu') %>
+<%- include('../partials/head') %>
+<div class="wrapper">
+  <%- include('../partials/header') %>
+      <%- include('../partials/menu') %>
 
-<div class="content-wrapper" style="min-height: 717px">
-  <!-- Content Header (Page header) -->
-  <section class="content-header">
-    <div class="container-fluid">
-      <div class="row mb-2">
-        <div class="col-sm-6">
-          <h1>Gestor Recorrido</h1>
-        </div>
-        <div class="col-sm-6">
-          <ol class="breadcrumb float-sm-right">
-            <li class="breadcrumb-item"><a href="index">Inicio</a></li>
-            <li class="breadcrumb-item active">Gestor Recorrido</li>
-          </ol>
+  <div class="content-wrapper" style="min-height: 717px">
+    <!-- Content Header (Page header) -->
+    <section class="content-header">
+      <div class="container-fluid">
+        <div class="row mb-2">
+          <div class="col-sm-6">
+            <h1>Gestor Recorrido</h1>
+          </div>
+          <div class="col-sm-6">
+            <ol class="breadcrumb float-sm-right">
+              <li class="breadcrumb-item"><a href="index">Inicio</a></li>
+              <li class="breadcrumb-item active">Gestor Recorrido</li>
+            </ol>
+          </div>
         </div>
       </div>
-    </div>
-    <!-- /.container-fluid -->
-  </section>
+      <!-- /.container-fluid -->
+    </section>
 
-  <section class="content">
-    <div class="card card-primary card-outline">
-      <div class="card-header pl-2 pl-sm-3">
-        <button
-          class="btn btn-primary btn-sm"
-          data-toggle="modal"
-          data-target="#crearRecorrido"
-        >
-          Crear nuevo recorrido
-        </button>
-      </div>
+    <section class="content">
+      <div class="card card-primary card-outline">
+        <div class="card-header pl-2 pl-sm-3">
+          <button
+            class="btn btn-primary btn-sm"
+            data-toggle="modal"
+            data-target="#crearRecorrido"
+          >
+            Crear nuevo recorrido
+          </button>
+        </div>
 
-      <div class="card-body">
-        <table
-          class="table table-bordered table-striped dt-responsive tablaRecorrido"
-          width="100%"
-        >
-          <thead>
-            <tr>
-              <th style="width: 10px">#</th>
-              <th>Título</th>
-              <th>Descripción</th>
-              <th>Foto Grande</th>
-              <th>Foto Pequeña</th>
-              <th style="width: 100px">Acciones</th>
-            </tr>
-          </thead>
-
-          <tbody>
-            <% for (const travel of travels) { %>
+        <div class="card-body">
+          <table
+            class="table table-bordered table-striped dt-responsive tablaRecorrido"
+            width="100%"
+          >
+            <thead>
               <tr>
-                <td><%= travel.id %></td>
-                <td><%= travel.title %></td>
-                <td><%= travel.description %></td>
-                <td><img src="<%= travel.big_photo %>" alt="<%= travel.title %> grande" class="img-fluid"></td>
-                <td><img src="<%= travel.photo_small %>" alt="<%= travel.title %> pequeño" class="img-fluid"></td>
-                <td>
-                  <button class="btn btn-warning btn-sm" data-toggle="modal" data-target="#editarRecorrido" data-id="<%= travel.id %>"><i class="fas fa-pencil-alt text-white"></i></button>
-                  <button class="btn btn-danger btn-sm" data-toggle="modal" data-target="#delete<%= travel.id %>" data-id="<%= travel.id %>"><i class="fas fa-trash-alt"></i></button>  
-                </td>
+                <th style="width: 10px">#</th>
+                <th>Título</th>
+                <th>Descripción</th>
+                <th>Foto Grande</th>
+                <th>Foto Pequeña</th>
+                <th style="width: 100px">Acciones</th>
               </tr>
-              <% } %>
-          </tbody>
-        </table>
+            </thead>
+
+            <tbody>
+              <% for (const travel of travels) { %>
+                <tr>
+                  <td><%= travel.id %></td>
+                  <td><%= travel.title %></td>
+                  <td><%= travel.description %></td>
+                  <td><img src="<%= travel.big_photo %>" alt="<%= travel.title %> grande" class="img-fluid"></td>
+                  <td><img src="<%= travel.photo_small %>" alt="<%= travel.title %> pequeño" class="img-fluid"></td>
+                  <td>
+                    <button class="btn btn-warning btn-sm" data-toggle="modal" data-target="#editarRecorrido" data-id="<%= travel.id %>"><i class="fas fa-pencil-alt text-white"></i></button>
+                    <button class="btn btn-danger btn-sm" data-toggle="modal" data-target="#delete<%= travel.id %>" data-id="<%= travel.id %>"><i class="fas fa-trash-alt"></i></button>  
+                  </td>
+                </tr>
+                <% } %>
+            </tbody>
+          </table>
+        </div>
       </div>
-    </div>
-    <!-- /.card -->
-  </section>
-  <!-- /.content -->
+      <!-- /.card -->
+    </section>
+    <!-- /.content -->
+  </div>
+  <%- include('../partials/footer') %>
 </div>
 
 <!--=====================================
@@ -278,4 +281,3 @@ Eliminar Recorrido
       </div>
   </div>
   <% } %>
-
