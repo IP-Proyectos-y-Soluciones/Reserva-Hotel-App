@@ -37,7 +37,7 @@ router.put('/:id', async (req, res) => {
 
     const result = await updateBedroom(id, kind_h, style, gallery, description_h);
    const bedrooms = await getBedrooms();
-   // res.render('pages/bedrooms.ejs', {  result, bedrooms, title: 'Hotel Backend' })
+    //res.render('pages/bedrooms.ejs', {  result, bedrooms, title: 'Hotel Backend' })
     res.status(201).json(result)
   } catch (error) {
     console.error(error)
@@ -73,8 +73,8 @@ router.delete('/delete/:id', async (req, res) => {
         console.log(error)
       } else {
       const bedrooms = await getBedrooms();
-     // res.render('pages/bedrooms.ejs', {  result, bedrooms, title: 'Hotel Backend' })
-         res.status(201).json(result)
+      //res.render('pages/bedrooms.ejs', {  result, bedrooms, title: 'Hotel Backend' })
+         res.json(result)
       }
     } catch (error) {
       console.error(error)

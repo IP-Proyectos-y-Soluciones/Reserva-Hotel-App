@@ -5,7 +5,7 @@ import Booking from "./components/Booking/Booking";
 import Login from "./components/Login/Login"
 import CardBedroom from "./components/CardBedroom/CardBedroom";
 import { Route, Routes, useLocation } from "react-router-dom";
-import PageNotFound from "./PageNotFound/PageNotFound";
+import PageNotFound from "./components/PageNotFound/PageNotFound";
 
 
 const App = () => {
