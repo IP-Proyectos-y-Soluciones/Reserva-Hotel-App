@@ -22,3 +22,4 @@ const Preview1 = ({ id }) => {
     );
   };
   
+  export default Preview1;
