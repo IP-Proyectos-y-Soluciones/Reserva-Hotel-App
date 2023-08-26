@@ -51,9 +51,7 @@ const CardsPlan = () => {
                     onMouseLeave={handleCardLeave}
                     />)
                 })
-            }
-
-            
+            }            
             </div>
             
 
