@@ -32,9 +32,7 @@ const CardsPlan = () => {
                                 
     return(
         <div >
-            <div >
-            <h1>Descubre la magia del lugar</h1>
-            </div>
+            
             
             <div>
             {hoveredCard && <div>{hoveredCard}</div>}
