@@ -13,10 +13,10 @@ const Landing = () => {
             <Banner />
             <h2>BIENVENIDOS</h2>
             <h3>Descubran un refugio de lujo en el corazón de la ciudad...</h3>
-                <div className="container flex flex-row p-4 mx-auto space-x-4">
+                <div className='flex justify-center items-center'>
                     <CardsPlan />
-                </div>
-                <div >
+                </div >
+                <div className='flex justify-center items-center'>
                     <CardsBedroom />
                 </div>
                 <div className="container flex flex-row p-4 mx-auto space-x-4">
