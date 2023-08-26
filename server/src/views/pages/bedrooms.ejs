@@ -1,0 +1,326 @@
+<%- include('../partials/header') %>
+<%- include('../partials/head') %>
+<%- include('../partials/menu') %>
+
+
+
+<div class="content-wrapper" style="min-height: 717px">
+  <section class="content-header">
+    <div class="container-fluid">
+      <div class="row mb-2">
+        <div class="col-sm-6">
+          <h1>Habitacion</h1>
+        </div>
+
+        <div class="col-sm-6">
+          <ol class="breadcrumb float-sm-right">
+            <li class="breadcrumb-item"><a href="index">Inicio</a></li>
+            <li class="breadcrumb-item active">Habitacion</li>
+          </ol>
+        </div>
+      </div>
+    </div>
+    <!-- /.container-fluid -->
+  </section>
+
+  <!-- Main content -->
+  <section class="content">
+    <div class="container-fluid">
+      <div class="row">
+        <div class="col-12">
+          <!-- Default box -->
+          <div class="card card-info card-outline">
+            <div class="card-header">
+              <button
+              class="btn btn-primary btn-sm"
+              data-toggle="modal"
+              data-target="#crearBedroom"
+            >
+              Crear nuevo bedroom
+            </button>
+            </div>
+            <!-- /.card-header -->
+
+            <div class="card-body">
+              <table
+                class="table table-bordered table-striped dt-responsive tablaBanner"
+                width="100%"
+              >
+                <thead>
+                  <tr>
+                    <th style="width: 10px">#</th>
+                    <th>Tipo</th>
+                    <th>Estilo</th>
+                    <th>Galería</th>
+                    <th>Description</th>
+                    <th>Fecha</th>
+                    <th style="width: 100px">Acciones</th>
+                  </tr>
+                </thead>
+
+                <tbody>
+                  <% for (const bedroom of bedrooms) { %>
+                    <tr>
+                      <td><%= bedroom.id %></td>
+                      <td><%= bedroom.kind_h %></td>
+                      <td><%= bedroom.style %></td>  
+                      <td>
+                        <div>
+                            <% bedroom.gallery.forEach(imageUrl => { %>
+                                <img src="<%= imageUrl %>" class="img-fluid" style="margin-top: 20px; margin-right: 20px; border-radius: 100em; display: inline-block;">
+                            <% }); %>
+                        </div>
+                    </td>      
+                      <td><%= bedroom.description_h %></td>
+                      <td><%= bedroom.date_h %></td>
+                      <td>
+                        <button class="btn btn-warning btn-sm editarBtn" data-toggle="modal" data-target="#editarBedroom" data-id="<%= bedroom.id %>">
+                          <i class="fas fa-pencil-alt text-white"></i>
+                      </button>
+                                    
+                        <button class="btn btn-danger btn-sm eliminarBtn" data-toggle="modal" data-target="#eliminarBedroom<%= bedroom.id %>" data-id="<%= bedroom.id %>">
+                          <i class="fas fa-trash-alt"></i>
+                      </button>
+                                       
+                                                                  
+                      </td>
+                    </tr>
+                  <% } %>
+                </tbody>
+              </table>
+            </div>
+            <!-- /.card-body -->
+          </div>
+          <!-- /.card -->
+        </div>
+      </div>
+    </div>
+  </section>
+  <!-- /.content -->
+</div>
+<!--=====================================
+Modal Crear Bedroom
+======================================-->
+
+<div class="modal" id="crearBedroom">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <form method="post">
+        <div class="modal-header bg-info">
+          <h4 class="modal-title">Crear Bedroom</h4>
+
+          <button type="button" class="close" data-dismiss="modal">&times;</button>
+        </div>
+
+        <div class="modal-body">
+          <!-- input estilo -->
+
+          <div class="input-group mb-3">
+            <div class="input-group-append input-group-text">
+              <span class="fas fa-user"></span>
+            </div>
+
+            <input
+              type="text"
+              class="form-control"
+              name="kind_h"
+              placeholder="ESTILO"
+              required
+            />
+          </div>
+
+             <!-- input tipo -->
+
+             <div class="input-group mb-3">
+                <div class="input-group-append input-group-text">
+                  <span class="fas fa-user-lock"></span>
+                </div>
+                <input
+                  type="text"
+                  class="form-control"
+                  name="style"
+                  placeholder="TIPO"
+                  required
+                />
+              </div>
+
+          <!-- input gallery -->
+
+          <div class="input-group mb-3">
+            <div class="input-group-append input-group-text">
+              <span class="fas fa-user-lock"></span>
+            </div>
+            <input
+            type="text"
+            class="form-control"
+            name="gallery"
+            placeholder="URL POR FOTO"
+            required
+          />
+          
+          <input
+            type="text"
+            class="form-control"
+            name="gallery"
+            placeholder="URL POR FOTO"
+            required
+          />
+          </div>
+
+          <!-- input description -->
+
+          <div class="input-group mb-3">
+            <div class="input-group-append input-group-text">
+              <span class="fas fa-user-lock"></span>
+            </div>
+            <input
+              type="text"
+              class="form-control"
+              name="description_h"
+              placeholder="description"
+              required
+            />
+          </div>
+ 
+
+
+        <div class="modal-footer d-flex justify-content-between">
+          <div>
+            <button type="button" class="btn btn-danger" data-dismiss="modal">
+              Cerrar
+            </button>
+          </div>
+
+          <div>
+            <button type="submit" class="btn btn-primary">Guardar</button>
+          </div>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
+
+<!--=====================================
+Modal Editar Banner
+======================================-->
+<% for (const bedroom of bedrooms) { %>
+  <div class="modal" id="editarBedroom">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <form method="post" action="/bedroom/<%= bedroom.id %>">
+          <div class="modal-header bg-info">
+            <h4 class="modal-title">Editar Bedroom</h4>
+            <button type="button" class="close" data-dismiss="modal">&times;</button>
+          </div>
+          <div class="modal-body">
+            <input type="hidden" name="_method" value="put" />
+            <!-- input estilo -->
+  
+            <div class="input-group mb-3">
+              <div class="input-group-append input-group-text">
+                <span class="fas fa-user"></span>
+              </div>
+  
+              <input
+                type="text"
+                class="form-control"
+                name="kind_h"
+                placeholder="ESTILO"
+                required
+              />
+            </div>
+  
+               <!-- input tipo -->
+  
+               <div class="input-group mb-3">
+                  <div class="input-group-append input-group-text">
+                    <span class="fas fa-user-lock"></span>
+                  </div>
+                  <input
+                    type="text"
+                    class="form-control"
+                    name="style"
+                    placeholder="TIPO"
+                    required
+                  />
+                </div>
+            
+  
+            <!-- input gallery -->
+  
+            <div class="input-group mb-3">
+              <div class="input-group-append input-group-text">
+                <span class="fas fa-user-lock"></span>
+              </div>
+              <input
+              type="text"
+              class="form-control"
+              name="gallery[]"
+              placeholder="URL POR FOTO"
+              required
+            />
+            
+            <input
+              type="text"
+              class="form-control"
+              name="gallery[]"
+              placeholder="URL POR FOTO"
+              required
+            />
+            </div>
+  
+            <!-- input description -->
+  
+            <div class="input-group mb-3">
+              <div class="input-group-append input-group-text">
+                <span class="fas fa-user-lock"></span>
+              </div>
+              <input
+                type="text"
+                class="form-control"
+                name="description_h"
+                placeholder="description"
+                required
+              />
+            </div>
+
+          <div class="modal-footer d-flex justify-content-between">
+            <div>
+              <button type="button" class="btn btn-danger" data-dismiss="modal">
+                Cerrar
+              </button>
+            </div>
+            <div>
+              <button type="submit" class="btn btn-primary">Guardar</button>
+            </div>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+  <% } %>
+
+
+<!-- eleminar -->
+<% for (const bedroom of bedrooms) { %>
+  <div class="modal" id="eliminarBedroom<%= bedroom.id %>">
+      <div class="modal-dialog">
+          <div class="modal-content">
+              <div class="modal-header bg-danger text-white">
+                  <h4 class="modal-title">Eliminar Bedroom</h4>
+                  <button type="button" class="close" data-dismiss="modal">&times;</button>
+              </div>
+              <div class="modal-body">
+                  <p>¿Está seguro de que desea eliminar al Bedroom <%= bedroom.kind_h %>?</p>
+              </div>
+              <div class="modal-footer">
+                  <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
+                  <form method="post" action="/bedroom/delete/<%= bedroom.id %>">
+                      <input type="hidden" name="_method" value="delete">
+                      <button type="submit" class="btn btn-danger">Eliminar</button>
+                  </form>
+              </div>
+          </div>
+      </div>
+  </div>
+  <% } %>

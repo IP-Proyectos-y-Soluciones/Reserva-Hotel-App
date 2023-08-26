@@ -1,0 +1,95 @@
+const { Categories, Plan, Banner, Restaurant, Travel } = require('../config/db');
+
+// Obtener todas las categorías
+async function getAllCategories() {
+  try {
+    const categories = await Categories.findAll({
+      include: [Plan, Banner, Restaurant, Travel],
+    });
+    res.json(categories);
+  } catch (err) {
+    res.status(500).json({ error: err.message });
+  }
+}
+
+// Crear una nueva categoría
+async function createCategory( route,
+    color,
+    kind,
+    img,
+    description,
+    includes,
+    continental_alta,
+    continental_baja,
+    americano_alta,
+    americano_baja,) {
+  try {
+    
+    const newCategory = await Categories.create({
+      route,
+      color,
+      kind,
+      img,
+      description,
+      includes,
+      continental_alta,
+      continental_baja,
+      americano_alta,
+      americano_baja,
+    });
+    return newCategory;
+  } catch (error) {
+    return { error: error.message };
+  }
+}
+
+// Actualizar una categoría existente
+async function updateCategory(id, route,
+    color,
+    kind,
+    img,
+    description,
+    includes,
+    continental_alta,
+    continental_baja,
+    americano_alta,
+    americano_baja) {
+  try {
+    
+    const updated = await Categories.update(
+      {
+        route,
+        color,
+        kind,
+        img,
+        description,
+        includes,
+        continental_alta,
+        continental_baja,
+        americano_alta,
+        americano_baja,
+      },
+      { where: { id } }
+    );
+    return updated;
+  } catch (error) {
+    return { error: error.message };
+  }
+}
+
+
+async function deleteCategory(id) {
+  try {
+    await Categories.destroy({ where: { id } });
+  
+  } catch (error) {
+    return { error: error.message };
+  }
+}
+
+module.exports = {
+  getAllCategories,
+  createCategory,
+  updateCategory,
+  deleteCategory,
+};

@@ -1,0 +1,31 @@
+<%- include('partials/head') %>
+
+  <div class="wrapper">
+    <%- include('partials/header') %>
+    <%- include('partials/menu') %>
+
+    <% if ( typeof page !== 'undefined' ) { %>
+      <% if ([
+        'index',
+        'administrators',
+        'banner',
+        'plans',
+        'categories',
+        'bedrooms',
+        'bookings',
+        'testimomnials',
+        'users',
+        'travel',
+        'restaurant',
+        'log_out'
+      ].includes(page)) { %>
+        <%- include(`pages/${page}.ejs`) %>
+      <% } else { %>
+        <%- include ('pages/404.ejs') %>
+      <% } %>
+    <% } else { %>
+      <%- include('pages/index.ejs') %>
+    <% } %>
+      <%- include('partials/footer') %>
+  </div>
+<%- include('partials/scripts') %>

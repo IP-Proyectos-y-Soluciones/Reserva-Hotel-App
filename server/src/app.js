@@ -1,21 +1,61 @@
-import express, { json } from 'express';
-import cookieParser from 'cookie-parser';
-import bodyParser from 'body-parser'
-import cors from 'cors';
-import morgan from 'morgan';
-
-
-
+const express = require ("express");
+const cookieParser = require('cookie-parser');
+const expressSession = require('express-session');
+const SessionStore = require('express-session-sequelize')(expressSession.Store);
+const bodyParser = require("body-parser");
+const morgan = require("morgan");
+const fs = require("fs");
+const path = require("path");
+const cors = require("cors");
+const indexRouter = require("./routes");
+require("dotenv").config();
+// import express, { json } from 'express';
+// import { dirname, join } from 'path';
+// import { fileURLToPath } from 'url';
+// import cors from 'cors';
+// import bodyParser from 'body-parser'
+// import indexRoute from './routes/index.js';
+// import morgan from 'morgan';
+const { DATABASE } = process.env;
+require=('./config/db');
+// const sequelizeSessionStore = new SessionStore({
+//   db: `${DATABASE}`,
+// });
 
 const server = express();
 
-// server.name = 'SERVER';
-
-server.use( bodyParser.json( { limit: '50mb' } ) );
-server.use( cookieParser() );
 server.use( morgan( 'dev' ) );
-server.use( json() );
-server.use( cors() );
+server.use( express.json() );
+
+server.set('views', path.join(__dirname, 'views'));
+server.set('view engine', 'ejs');
+server.set('upload', path.join(__dirname, 'public/uploads'));
+const corsOptions = {
+  origin: '*',
+  methods: '*',
+};
+
+server.use( cors( corsOptions ) );
+server.use( bodyParser.json() );
+server.use( bodyParser.urlencoded( { extended: false } ) );
+server.use( cookieParser() );
+// server.use( expressSession({
+//   secret: 'keep it secret, keep it safe.',
+//   store: sequelizeSessionStore,
+//   resave: false,
+//   saveUninitialized: false,
+// }));
 
 
-export default server;
+server.use( ( req, res, next ) => {
+  console.log( `${ req.url } -${ req.method }` );
+  next();
+});
+
+server.use('/', indexRouter);
+server.use(express.static(path.join(__dirname, 'public')));
+server.use(express.static(path.join(__dirname, 'public/uploads')));
+
+
+
+module.exports = server;

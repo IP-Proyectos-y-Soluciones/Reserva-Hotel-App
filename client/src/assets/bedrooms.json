@@ -1,0 +1,41 @@
+
+{"Single room":
+{
+    "kind_h": "Single room",
+    "style": "Modern",
+    "gallery": ["https://res.cloudinary.com/dm9glx5a7/image/upload/v1692802654/PF-HOTEL-APP/Bedrooms/SINGLE%20ROOM/2_mnvvzj.jpg",
+  "https://res.cloudinary.com/dm9glx5a7/image/upload/v1692802654/PF-HOTEL-APP/Bedrooms/SINGLE%20ROOM/1_mtzkee.jpg",
+  "https://res.cloudinary.com/dm9glx5a7/image/upload/v1692802653/PF-HOTEL-APP/Bedrooms/SINGLE%20ROOM/3_f4scmi.jpg"
+  ], 
+    "video": "video_url_here",
+    "virtual_tour": "virtual_tour_url_here",
+    "description_h": "A beautiful single bedroom with modern design."
+  },
+  "Double room":  
+  {
+    "kind_h": "Double room",
+    "style": "Modern",
+    "gallery": ["https://res.cloudinary.com/dm9glx5a7/image/upload/v1692802640/PF-HOTEL-APP/Bedrooms/DOUBLE%20ROOM/2_vhwjbr.jpg",
+  "https://res.cloudinary.com/dm9glx5a7/image/upload/v1692802640/PF-HOTEL-APP/Bedrooms/DOUBLE%20ROOM/1_ogkvwe.jpg",
+  "https://res.cloudinary.com/dm9glx5a7/image/upload/v1692802639/PF-HOTEL-APP/Bedrooms/DOUBLE%20ROOM/3_rd5hgf.jpg"
+  ], 
+    "video": "video_url_here",
+    "virtual_tour": "virtual_tour_url_here",
+    "description_h": "A beautiful single bedroom with modern design."
+  },
+  "Premium loft":
+  {
+    "kind_h": "Premium loft",
+    "style": "Modern",
+    "gallery": ["https://res.cloudinary.com/dm9glx5a7/image/upload/v1692802573/PF-HOTEL-APP/Bedrooms/PREMIUM%20LOFT/3_lv73fo.jpg",
+  "https://res.cloudinary.com/dm9glx5a7/image/upload/v1692802572/PF-HOTEL-APP/Bedrooms/PREMIUM%20LOFT/4_k0swlm.jpg",
+  "https://res.cloudinary.com/dm9glx5a7/image/upload/v1692802571/PF-HOTEL-APP/Bedrooms/PREMIUM%20LOFT/5_tlsnv4.jpg",
+  "https://res.cloudinary.com/dm9glx5a7/image/upload/v1692802571/PF-HOTEL-APP/Bedrooms/PREMIUM%20LOFT/1_two8dc.jpg",
+  "https://res.cloudinary.com/dm9glx5a7/image/upload/v1692802570/PF-HOTEL-APP/Bedrooms/PREMIUM%20LOFT/2_dzmkgh.jpg",
+  "https://res.cloudinary.com/dm9glx5a7/image/upload/v1692802569/PF-HOTEL-APP/Bedrooms/PREMIUM%20LOFT/6_ebxhv8.jpg"
+  ], 
+    "video": "video_url_here",
+    "virtual_tour": "virtual_tour_url_here",
+    "description_h": "A beautiful single bedroom with modern design."
+  }  
+}
