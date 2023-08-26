@@ -4,6 +4,7 @@ import CardsBedroom from "../components/CardsBedroom/CardsBedroom";
 import CardsAmenitie from "../components/CardsAmenitie/CardsAmenitie";
 import Banner from "../components/Banner/Banner";
 import Footer from "../components/Footer/Footer";
+import ButtonBackToTop from "../components/ButtonBackToTop/ButtonBackToTop";
 
 const Landing = () => {
     return (
@@ -42,6 +43,8 @@ const Landing = () => {
                 </div>
 
             <Footer />
+            <ButtonBackToTop/>
+
 
         </div>
     );
