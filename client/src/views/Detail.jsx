@@ -2,6 +2,9 @@ import React, { useState, useEffect } from 'react';
 import { useParams, Link } from 'react-router-dom';
 import axios from 'axios';
 import Album from "../components/album/album";
+import Preview1 from '../components/bedroomPreview/preview1';
+import FormDisponibilidad from '../components/FormDisponibilidad/FormDisponibilidad';
+import Preview2 from '../components/bedroomPreview/preview2';
 
 function Detail() {
   const { id } = useParams();
@@ -82,10 +85,10 @@ function Detail() {
           <h2> Aquí están los testimonios </h2>
         </div>
       </div>
-      <div className="grid grid-rows-3 gap-4 barra-lateral w-50">
-        <div className="p-4 bg-gray-300"><h2>cuadro de pre-reserva  </h2></div>
-        <div className="p-4 bg-gray-300"><h2>preview 1  </h2></div>
-        <div className="p-4 bg-gray-300"><h2>preview 2</h2></div>
+      <div className="grid flex-shrink-0 grid-rows-3 gap-4 barra-lateral w-50">
+        <div className="p-4 bg-gray-300"><h2><FormDisponibilidad/>  </h2></div>
+        <div className="p-4 bg-gray-300"> <Preview1/></div>
+        <div className="p-4 bg-gray-300"><Preview2/></div>
       </div>
     </div>
   );

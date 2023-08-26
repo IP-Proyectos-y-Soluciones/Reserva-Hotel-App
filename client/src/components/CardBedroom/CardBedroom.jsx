@@ -3,28 +3,26 @@ import "tw-elements";
 
 const CardBedroom = ({id_h, gallery, kind_h}) =>{
   
-    return (      
-        <div
-        className="relative max-w-xs overflow-hidden bg-no-repeat bg-cover"
-        data-te-ripple-init
-        data-te-ripple-color="light">
-            <Link to={`/detail/${id_h}`}> 
-            
-        <img
-          src={gallery}
-          className="max-w-xs"
-          alt={kind_h} />
-        <a>
-          <div
-            className="absolute bottom-0 left-0 right-0 top-0 h-full w-full overflow-hidden bg-[hsl(0,0%,98.4%,0.2)] bg-fixed opacity-0 transition duration-300 ease-in-out hover:opacity-100"></div>
-        </a>
-      {/* <div className="absolute top-0 bottom-0 left-0 right-0 w-full h-full overflow-hidden bg-fixed">
-                  <div className="flex items-end justify-start h-full">
-                    <h5 className="m-6 text-lg font-bold text-white">{kind_h}</h5>
-                  </div>
-                </div> */}
-        </Link> 
-      </div>
+    return ( 
+      <div>
+      <figure class="relative max-w-sm transition-all duration-300 cursor-pointer filter grayscale hover:grayscale-0">
+         <a href="#">
+           <img class="rounded-lg" src={gallery} alt={kind_h}/>
+         </a>
+           <figcaption class="absolute px-4 text-lg text-white bottom-6">
+             <p>{kind_h}</p>
+             <Link to={`/detail/${id_h}`}>
+             <button 
+             type="button" 
+             class="text-gray-900 hover:text-white border border-gray-800 hover:bg-gray-900 focus:ring-4 focus:outline-none focus:ring-gray-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center mr-2 mb-2 dark:border-gray-600 dark:text-gray-400 dark:hover:text-white dark:hover:bg-gray-600 dark:focus:ring-gray-800"
+             >Reservar</button>
+             </Link>
+           </figcaption>
+           
+     </figure>
+   </div>
+
+
       
 
     )

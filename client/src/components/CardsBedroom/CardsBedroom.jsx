@@ -24,7 +24,7 @@ const CardsBedroom = () => {
                                 
     return(
         <div >
-            <h1>El confort que mereces</h1>
+            
             <div className="container flex flex-row p-4 mx-auto space-x-4">
             {
                 eachBedroom.length > 0 &&  
