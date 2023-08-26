@@ -1,7 +1,8 @@
-import React, { useState, useEffect } from 'react';
-import axios from 'axios';
-import { BsChevronCompactLeft, BsChevronCompactRight } from 'react-icons/bs';
-import { defaults } from 'autoprefixer';
+// import React, { useState, useEffect } from 'react';
+// import axios from 'axios';
+// import { BsChevronCompactLeft, BsChevronCompactRight } from 'react-icons/bs';
+// import { defaults } from 'autoprefixer';
+
 import { Link } from 'react-router-dom';
 
 
@@ -27,3 +28,4 @@ const Preview1 = ({ nextRoomId } ) => {
   };
   
   export default Preview1;
+  // to={`/detail/${nextRoomId}`}
