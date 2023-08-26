@@ -40,7 +40,7 @@ const CardsPlan = () => {
             {hoveredCard && <div>{hoveredCard}</div>}
             </div>
 
-            <div className="container flex flex-row p-6 mx-auto space-x-7 justify-center">
+            <div className="container flex flex-row p-6 mx-auto space-x-7">
             {
                 eachPlan.length > 0 &&  
                 eachPlan.map(plan=>{
