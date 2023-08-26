@@ -17,13 +17,13 @@ const Landing = () => {
             <h3 className="text-3x1">Descubran un refugio de lujo en el corazón de la ciudad. Con elegantes habitaciones, comodidades de primer nivel y un servicio excepcional, estamos aquí para hacer de su estadía una experiencia inolvidable. Desde relajarse en nuestro spa hasta disfrutar de deliciosas opciones gastronómicas, les invitamos a sumergirse en un mundo de tranquilidad y comodidad. ¡Es un placer tenerles aquí!</h3>
                 </div>
             </div>
-                <div className="container flex flex-row p-4 mx-auto space-x-4 ">
+                <div className='flex justify-center items-center'>
                     <CardsPlan />
                 </div>
-                <div >
+                <div className='flex justify-center items-center'>
                     <CardsBedroom />
                 </div>
-                <div className="container flex flex-row p-4 mx-auto space-x-4">
+                <div className='flex justify-center items-center'>
                     <CardsAmenitie />
                 </div>
             <Footer />
