@@ -10,9 +10,8 @@ const Landing = () => {
 
         <div className="min-h-screen bg-[#585552]">
             <NavBar />
-            <div className='flex justify-center items-center'>
-            <Banner  />
-            </div>
+            
+            <Banner/>
             <div>
                 <div className="font-semibold leading-10 tracking-widest text-center text-zinc-800">
             <h2 className="text-white">BIENVENIDOS</h2>
