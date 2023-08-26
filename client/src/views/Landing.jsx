@@ -10,17 +10,13 @@ const Landing = () => {
 
         <div className="min-h-screen bg-[#585552]">
             <NavBar />
-            <Banner  />
-            <div>
-                <div className="font-semibold leading-10 tracking-widest text-center text-zinc-800">
-            <h2 className="text-lg text-white">BIENVENIDOS</h2>
-            <h3 className="text-3x1">Descubran un refugio de lujo en el corazón de la ciudad. Con elegantes habitaciones, comodidades de primer nivel y un servicio excepcional, estamos aquí para hacer de su estadía una experiencia inolvidable. Desde relajarse en nuestro spa hasta disfrutar de deliciosas opciones gastronómicas, les invitamos a sumergirse en un mundo de tranquilidad y comodidad. ¡Es un placer tenerles aquí!</h3>
-                </div>
-            </div>
-                <div className="container flex flex-row p-4 mx-auto space-x-4 ">
+            <Banner />
+            <h2>BIENVENIDOS</h2>
+            <h3>Descubran un refugio de lujo en el corazón de la ciudad...</h3>
+                <div className="container flex flex-row p-4 mx-auto space-x-4">
                     <CardsPlan />
-                </div>
-                <div >
+                </div >
+                <div className='flex items-center justify-center'>
                     <CardsBedroom />
                 </div>
                 <div className="container flex flex-row p-4 mx-auto space-x-4">

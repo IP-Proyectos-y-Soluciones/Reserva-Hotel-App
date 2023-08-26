@@ -9,7 +9,7 @@ router.post('/', async (req, res) => {
     const { kind_h, style, gallery, description_h } = req.body;
     const result = await createBedroom(kind_h, style, gallery, description_h);
     const bedrooms = await getBedrooms();
-    //res.render('pages/bedrooms.ejs', {  result, bedrooms, title: 'Hotel Backend' })
+   // res.render('pages/bedrooms.ejs', {  result, bedrooms, title: 'Hotel Backend' })
     res.status(201).json(result)
   } catch (error) {
     console.error(error)
@@ -74,7 +74,7 @@ router.delete('/delete/:id', async (req, res) => {
       } else {
       const bedrooms = await getBedrooms();
       //res.render('pages/bedrooms.ejs', {  result, bedrooms, title: 'Hotel Backend' })
-        res.json(result)
+         res.json(result)
       }
     } catch (error) {
       console.error(error)
