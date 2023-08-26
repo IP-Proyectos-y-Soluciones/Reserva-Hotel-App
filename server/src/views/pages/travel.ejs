@@ -50,42 +50,16 @@
           </thead>
 
           <tbody>
-            <!-- <tr>
-              
-              <td style="width:10px">1</td>
-               
-              <td>
-                LOREM IPSUM
-              </td> 
-
-              <td>
-                Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quas suscipit quis eligendi voluptatibus dolore libero quasi delectus odit impedit optio eius corporis cumque numquam aliquid repudiandae quisquam dolor explicabo, totam.
-              </td> 
-
-              <td>
-                <img src="vistas/img/recorrido/pueblo01b.png" class="img-fluid">
-              </td> 
-
-              <td>
-                <img src="vistas/img/recorrido/pueblo01a.png" class="img-fluid">
-              </td> 
-               
-              <td>
-                <button class="btn btn-warning btn-sm"><i class="fas fa-pencil-alt text-white"></i></button>  
-                <button class="btn btn-danger btn-sm"><i class="fas fa-trash-alt"></i></button>  
-              </td>
-
-            </tr> -->
-            <% for(let i=0; i < getTravels.length; i++) { %>
+            <% for (const travel of travels) { %>
               <tr>
-                <td><%= getTravels[i].id %></td>
-                <td><%= getTravels[i].title %></td>
-                <td><%= getTravels[i].description %></td>
-                <td><%= getTravels[i].big_photo %></td>
-                <td><%= getTravels[i].photo_small %></td>
+                <td><%= travel.id %></td>
+                <td><%= travel.title %></td>
+                <td><%= travel.description %></td>
+                <td><img src="<%= travel.big_photo %>" alt="<%= travel.title %> grande" class="img-fluid"></td>
+                <td><img src="<%= travel.photo_small %>" alt="<%= travel.title %> pequeño" class="img-fluid"></td>
                 <td>
-                  <button class="btn btn-warning btn-sm"><i class="fas fa-pencil-alt text-white"></i></button>  
-                  <button class="btn btn-danger btn-sm"><i class="fas fa-trash-alt"></i></button> 
+                  <button class="btn btn-warning btn-sm" data-toggle="modal" data-target="#editarRecorrido" data-id="<%= travel.id %>"><i class="fas fa-pencil-alt text-white"></i></button>
+                  <button class="btn btn-danger btn-sm" data-toggle="modal" data-target="#delete<%= travel.id %>" data-id="<%= travel.id %>"><i class="fas fa-trash-alt"></i></button>  
                 </td>
               </tr>
               <% } %>
@@ -105,7 +79,7 @@ Modal Crear Recorrido
 <div class="modal" id="crearRecorrido">
   <div class="modal-dialog">
     <div class="modal-content">
-      <form method="post" enctype="multipart/form-data">
+      <form method="post">
         <!-- Modal Header -->
         <div class="modal-header bg-info">
           <h4 class="modal-title">Crear Recorrido</h4>
@@ -138,37 +112,32 @@ Modal Crear Recorrido
             ></textarea>
           </div>
 
-          <div class="form-group">
-            <div class="form-group my-2">
-              <div class="btn btn-default btn-file">
-                <i class="fas fa-paperclip"></i> Adjuntar Imagen Pequeña del
-                Recorrido
-
-                <input type="file" name="photo_small" />
-              </div>
-
-              <img class="previsualizarImgPeqRecorrido img-fluid py-2" />
-
-              <p class="help-block small">
-                Dimensiones: 455px x 280px | Peso Max. 2MB | Formato: JPG o PNG
-              </p>
+          <div class="input-group mb-3">
+            <div class="input-group-append input-group-text">
+              <span class="fas fa-paperclip"></span>
             </div>
+
+            <input
+              type="text"
+              class="form-control"
+              name="photo_small"
+              placeholder="Ingresa la url de la imagen pequeña"
+              required
+            />
           </div>
 
-          <div class="form-group">
-            <div class="form-group my-2">
-              <div class="btn btn-default btn-file">
-                <i class="fas fa-paperclip"></i> Adjuntar Imagen Grande del Recorrido
-
-                <input type="file" name="big_photo" />
-              </div>
-
-              <img class="previsualizarImgGrandeRecorrido img-fluid py-2" />
-
-              <p class="help-block small">
-                Dimensiones: 650px x 450px | Peso Max. 2MB | Formato: JPG o PNG
-              </p>
+          <div class="input-group mb-3">
+            <div class="input-group-append input-group-text">
+              <span class="fas fa-paperclip"></span>
             </div>
+
+            <input
+              type="text"
+              class="form-control"
+              name="big_photo"
+              placeholder="Ingresa la url de la imagen grande"
+              required
+            />
           </div>
         </div>
 
@@ -193,10 +162,11 @@ Modal Crear Recorrido
 Modal Editar Recorrido
 ======================================-->
 
+<% for (const travel of travels) { %>
 <div class="modal" id="editarRecorrido">
   <div class="modal-dialog">
     <div class="modal-content">
-      <form method="post" enctype="multipart/form-data">
+      <form method="post" action="/travel/<%= travel.id %>">
         <!-- Modal Header -->
         <div class="modal-header bg-info">
           <h4 class="modal-title">Editar Recorrido</h4>
@@ -205,7 +175,7 @@ Modal Editar Recorrido
 
         <!-- Modal body -->
         <div class="modal-body">
-          <input type="hidden" class="form-control" name="idRecorrido" />
+          <input type="hidden" name="_method" value="put" />
 
           <div class="input-group mb-3">
             <div class="input-group-append input-group-text">
@@ -215,7 +185,8 @@ Modal Editar Recorrido
             <input
               type="text"
               class="form-control"
-              name="editarRecorrido"
+              name="title"
+              value="<%= travel.title %>"
               required
             />
           </div>
@@ -224,47 +195,40 @@ Modal Editar Recorrido
             <textarea
               class="form-control"
               maxlength="220"
-              name="editarDescripcionRecorrido"
+              name="description"
               required
-            ></textarea>
+            ><%= travel.description %></textarea>
           </div>
 
-          <div class="form-group">
-            <div class="form-group my-2">
-              <div class="btn btn-default btn-file">
-                <i class="fas fa-paperclip"></i> Adjuntar Imagen Pequeña del
-                Recorrido
-
-                <input type="file" name="editarImgPeqRecorrido" />
-
-                <input type="hidden" name="imgPeqRecorridoActual" />
-              </div>
-
-              <img class="previsualizarImgPeqRecorrido img-fluid py-2" />
-
-              <p class="help-block small">
-                Dimensiones: 455px x 280px | Peso Max. 2MB | Formato: JPG o PNG
-              </p>
+          <div class="input-group mb-3">
+            <div class="input-group-append input-group-text">
+              <span class="fas fa-paperclip"></span>
             </div>
+
+            <input
+              type="text"
+              class="form-control"
+              name="photo_small"
+              value="<%= travel.photo_small %>"
+              required
+            />
           </div>
 
-          <div class="form-group">
-            <div class="form-group my-2">
-              <div class="btn btn-default btn-file">
-                <i class="fas fa-paperclip"></i> Adjuntar Imagen Grande del Recorrido
-
-                <input type="file" name="editarImgGrandeRecorrido" />
-
-                <input type="hidden" name="imgGrandeRecorridoActual" />
-              </div>
-
-              <img class="previsualizarImgGrandeRecorrido img-fluid py-2" />
-
-              <p class="help-block small">
-                Dimensiones: 650px x 450px | Peso Max. 2MB | Formato: JPG o PNG
-              </p>
+          <div class="input-group mb-3">
+            <div class="input-group-append input-group-text">
+              <span class="fas fa-paperclip"></span>
             </div>
+
+            <input
+              type="text"
+              class="form-control"
+              name="big_photo"
+              value="<%= travel.big_photo %>"
+              required
+            />
           </div>
+
+
         </div>
 
         <!-- Modal footer -->
@@ -283,3 +247,35 @@ Modal Editar Recorrido
     </div>
   </div>
 </div>
+<% } %>
+
+<!--=====================================
+Eliminar Recorrido
+======================================-->
+
+<% for (const travel of travels) { %>
+  <div class="modal" id="delete<%= travel.id %>">
+      <div class="modal-dialog">
+          <div class="modal-content">
+            <form method="post" action="/travel/delete/<%= travel.id %>">
+            <!-- Modal header -->
+              <div class="modal-header bg-danger text-white">
+                  <h4 class="modal-title">Eliminar Recorrido</h4>
+                  <button type="button" class="close" data-dismiss="modal">&times;</button>
+              </div>
+              <!-- Modal body -->
+              <div class="modal-body">
+                <input type="hidden" name="_method" value="delete">
+                  <p>¿Está seguro de que desea eliminar el recorrido <%= travel.title %>?</p>
+              </div>
+              <!-- Modal footer -->
+              <div class="modal-footer">
+                  <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
+                  <button type="submit" class="btn btn-danger">Eliminar</button>
+              </div>
+            </form>
+          </div>
+      </div>
+  </div>
+  <% } %>
+
