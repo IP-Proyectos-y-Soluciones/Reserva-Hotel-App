@@ -3,9 +3,9 @@ import { Link } from "react-router-dom";
 
 const NavBar = () =>{
     return(
-      <div className="bg-[#313131] shadow align-middle text-lg ">
-      <ul className="flex items-center justify-between text-[#B99768]"> 
-        <div className="flex space-x-4 font-normal">
+      <div className="bg-[#313131] shadow align-middle text-lg  h-9 ">
+      <ul className="flex items-center justify-between text-[#B99768] px-3"> 
+        <div className="flex space-x-4 font-normal ">
           <Link to="/" className="hover:underline">
           <li> Home</li>
           </Link>
@@ -22,7 +22,7 @@ const NavBar = () =>{
           <li>Contacto</li>
           </Link>
         </div>
-        <div className="flex space-x-4 ">
+        <div className="flex py-px space-x-4">
           <div className="bg-[#B99768] text-white px-4">
           <Link to="/Booking" className="hover:underline">
             <li>Reserva</li>
