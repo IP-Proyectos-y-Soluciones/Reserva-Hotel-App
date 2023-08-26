@@ -23,7 +23,7 @@ router.use("/bookings", bookings);
 router.use("/users", users);
 router.use("/notifications", notifications);
 router.use("/plan", plan);
-router.use("/resturant", resturant);
+router.use("/restaurant", resturant);
 router.use("/travel", travel);
 router.use("/testimonials", testimonials);
 router.use("/categorias", categorias);
