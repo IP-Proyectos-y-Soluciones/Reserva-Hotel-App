@@ -9,8 +9,8 @@ router.post('/', async (req, res) => {
     const { kind_h, style, gallery, description_h } = req.body;
     const result = await createBedroom(kind_h, style, gallery, description_h);
     const bedrooms = await getBedrooms();
-    res.render('pages/bedrooms.ejs', {  result, bedrooms, title: 'Hotel Backend' })
-    //res.status(201).json(result)
+    //res.render('pages/bedrooms.ejs', {  result, bedrooms, title: 'Hotel Backend' })
+    res.status(201).json(result)
   } catch (error) {
     console.error(error)
     res.status(500).json({ error: error.message });
@@ -20,8 +20,8 @@ router.post('/', async (req, res) => {
 router.get('/', async (req, res) => {
   try {
     const bedrooms = await getBedrooms();
-    res.render('pages/bedrooms.ejs', { bedrooms, title: 'Hotel Backend' })
-    //res.status(201).json(bedrooms)
+    //res.render('pages/bedrooms.ejs', { bedrooms, title: 'Hotel Backend' })
+    res.status(201).json(bedrooms)
   } catch (error) {
     console.error(error)
     res.status(500).json({ error: error.message });
@@ -37,8 +37,8 @@ router.put('/:id', async (req, res) => {
 
     const result = await updateBedroom(id, kind_h, style, gallery, description_h);
    const bedrooms = await getBedrooms();
-    res.render('pages/bedrooms.ejs', {  result, bedrooms, title: 'Hotel Backend' })
-    //res.status(201).json(result)
+    //res.render('pages/bedrooms.ejs', {  result, bedrooms, title: 'Hotel Backend' })
+    res.status(201).json(result)
   } catch (error) {
     console.error(error)
     res.status(500).json({ error: error.message });
@@ -73,8 +73,8 @@ router.delete('/delete/:id', async (req, res) => {
         console.log(error)
       } else {
       const bedrooms = await getBedrooms();
-      res.render('pages/bedrooms.ejs', {  result, bedrooms, title: 'Hotel Backend' })
-         //res.json(result)
+      //res.render('pages/bedrooms.ejs', {  result, bedrooms, title: 'Hotel Backend' })
+        res.json(result)
       }
     } catch (error) {
       console.error(error)
