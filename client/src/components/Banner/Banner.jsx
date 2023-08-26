@@ -36,15 +36,17 @@ const Banner = () => {
 
   return (
     <div className='max-w-[1400px] h-[780px] w-full m-auto py-16 px-4 relative group'>
-      <div style={{ backgroundImage: `url(${slides[currentIndex].url})` }} className='w-full h-full bg-center bg-cover duration-500'></div>
+      <div style={{ backgroundImage: `url(${slides[currentIndex].url})` }} className='w-full h-full duration-500 bg-center bg-cover'></div>
 
       
-      <div className="absolute inset-x-[15%] bottom-1/2 hidden py-5 text-center text-yellow-500 md:block absolute top-1/2 transform -translate-y-1/2">
-        <h5 className="text-5xl">Estilo y Distinción</h5>
-        <p className="text-2xl">
+      <div className="absolute inset-x-[15%] bottom-1/2 hidden py-5 text-center md:block top-1/2 transform -translate-y-1/2 text-black" >
+        <h5 className="text-6xl font-normal tracking-widest text-center leading-2">Estilo y Distinción</h5>
+        <p className="text-4xl font-normal tracking-widest text-center py-7 ">
           Hotel PF 
         </p>
       </div>
+
+      
     </div>
   );
 };
