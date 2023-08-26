@@ -1,18 +1,30 @@
 import { Link } from 'react-router-dom';
+import "tw-elements";
 
 const CardBedroom = ({id_h, gallery, kind_h}) =>{
-    return (
-                     
-        <div className="max-w-[400px]">
-            
-            <Link to={`/detail/${id_h}`}> 
-            <p>{kind_h}</p>
-            <img src={gallery} alt={kind_h} className="w-100 h-85"/>
-            </Link>
-            
-            
+  
+    return ( 
+      <div>
+      <figure class="relative max-w-sm transition-all duration-300 cursor-pointer filter grayscale hover:grayscale-0">
+         <a href="#">
+           <img class="rounded-lg" src={gallery} alt={kind_h}/>
+         </a>
+           <figcaption class="absolute px-4 text-lg text-white bottom-6">
+             <p>{kind_h}</p>
+             <Link to={`/detail/${id_h}`}>
+             <button 
+             type="button" 
+             class="text-gray-900 hover:text-white border border-gray-800 hover:bg-gray-900 focus:ring-4 focus:outline-none focus:ring-gray-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center mr-2 mb-2 dark:border-gray-600 dark:text-gray-400 dark:hover:text-white dark:hover:bg-gray-600 dark:focus:ring-gray-800"
+             >Reservar</button>
+             </Link>
+           </figcaption>
+           
+     </figure>
+   </div>
 
-        </div>
+
+      
+
     )
 }
 export default CardBedroom;

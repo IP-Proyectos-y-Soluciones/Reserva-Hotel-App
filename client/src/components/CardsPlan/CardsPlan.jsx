@@ -31,9 +31,14 @@ const CardsPlan = () => {
     };
                                 
     return(
-        <div>
-            <h1>Descubre la magia del lugar</h1>
-            <div className="flex p-15 space-x-20 overflow-x-auto">
+        <div >
+            
+            
+            <div>
+            {hoveredCard && <div>{hoveredCard}</div>}
+            </div>
+
+            <div className="container flex flex-row p-6 mx-auto space-x-7">
             {
                 eachPlan.length > 0 &&  
                 eachPlan.map(plan=>{
@@ -46,10 +51,9 @@ const CardsPlan = () => {
                     onMouseLeave={handleCardLeave}
                     />)
                 })
-            }
-
-            {hoveredCard && <div>{hoveredCard}</div>}
+            }            
             </div>
+            
 
         </div>
     )
