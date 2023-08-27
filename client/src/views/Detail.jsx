@@ -46,13 +46,16 @@ function Detail() {
       });
   }, [id]);
 
+  // Genera un ID diferente para la otra habitación que se mostrará en las vistas previas
+  const otherRoomId = "id_de_otra_habitacion"; // Reemplaza con el ID correcto
+
   return (
     <div className="flex h-screen detail">
       <div className="grid flex-1 gap-4 p-4 auto-rows-min">
         <div className="imagen&type bg-gray-100 p-4">
           <h2 className="">
             {roomList.map(room => (
-              <Link key={room.id} to={`/detail/${room.id}`}>
+              <Link className='hover:underline' key={room.id} to={`/detail/${room.id}`}>
                 {room.kind_h}{' / '}
               </Link>
              
@@ -87,11 +90,12 @@ function Detail() {
       </div>
       <div className="grid flex-shrink-0 grid-rows-3 gap-4 barra-lateral w-50">
         <div className="p-4 bg-gray-300"><h2><FormDisponibilidad/>  </h2></div>
-        <div className="p-4 bg-gray-300"> <Preview1/></div>
-        <div className="p-4 bg-gray-300"><Preview2/></div>
+        <div className="p-4 bg-gray-300"> <Preview1 id={otherRoomId} /></div>
+        <div className="p-4 bg-gray-300"><Preview2 id={otherRoomId} /></div>
       </div>
     </div>
   );
 }
 
 export default Detail;
+
