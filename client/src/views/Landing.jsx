@@ -25,7 +25,7 @@ const Landing = () => {
             <NavBar />
             
             <Banner/>
-                <div className="leading-10 tracking-widest text-center">
+                <div className="leading-10 tracking-widest text-center shadow-lg">
                 <div className="py-2 text-4xl font-semibold tracking-widest font">
                     <h2 className="text-[#B99768]">BIENVENIDOS</h2>
                 </div>
