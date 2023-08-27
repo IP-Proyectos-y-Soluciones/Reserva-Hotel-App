@@ -39,7 +39,7 @@ const CardsAmenitie = () => {
     <div className='max-w-[1400px] h-[780px] w-full m-auto py-16 px-4 relative group'>
       <div
         style={{ backgroundImage: `url(${images[currentIndex]})` }}
-        className='w-full h-full duration-500 bg-center bg-cover rounded-lg'
+        className='w-full h-full duration-500 bg-center bg-cover rounded-lg hover:blur-none blur'
       ></div>
 
       <div className='hidden group-hover:block absolute top-[50%] -translate-x-0 translate-y-[50%] left-5 text-2xl rounded-full p-2 bg-black/20 text-[#B99768] cursor-pointer'>
@@ -50,8 +50,8 @@ const CardsAmenitie = () => {
         <BsChevronCompactRight onClick={nextSlide} size={20} />
       </div>
 
-      <div className="absolute inset-x-[15%] bottom-1/2 hidden py-5 text-center text-[#B99768] md:block absolute top-1/2 transform -translate-y-1/2">
-        <p className="text-3xl">
+      <div className="absolute inset-x-[15%] bottom-1/2 hidden py-5 text-center text-white tracking-widest md:block absolute top-1/2 transform -translate-y-1/2">
+        <p className="text-4xl font-semibold transition-opacity duration-500 cursor-auto group-hover:opacity-0">
         Relájate en nuestro spa de clase mundial, mantente activo en nuestro gimnasio de última generación y deleita tus sentidos en nuestro exquisito restaurante, tu escape de ensueño comienza aquí. 
         </p>
       </div>
