@@ -43,7 +43,8 @@ const { Diary, Bookings, Testimonials, Bedrooms, Users } = sequelize.models;
 Diary.belongsTo(Bedrooms, { foreignKey: 'id_room' });
 Bookings.belongsTo(Users, { foreignKey: 'id_user' });
 Bookings.belongsTo(Bedrooms, { foreignKey: 'id_room' });
-Testimonials.belongsTo(Users, { foreignKey: 'id_res' });
+//Testimonials.belongsTo(Users, { foreignKey: 'id_res' });
+Testimonials.belongsTo(Bookings, { foreignKey: 'id_res' });
 Testimonials.belongsTo(Users, { foreignKey: 'id_us' });
 Testimonials.belongsTo(Bedrooms, { foreignKey: 'id_room' });
 
