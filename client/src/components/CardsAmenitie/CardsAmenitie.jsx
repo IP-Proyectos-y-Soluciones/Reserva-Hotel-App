@@ -51,7 +51,7 @@ const CardsAmenitie = () => {
       </div>
 
       <div className="absolute inset-x-[15%] bottom-1/2 hidden py-5 text-center text-[#B99768] md:block absolute top-1/2 transform -translate-y-1/2">
-        <p className="text-2xl">
+        <p className="text-3xl">
         Relájate en nuestro spa de clase mundial, mantente activo en nuestro gimnasio de última generación y deleita tus sentidos en nuestro exquisito restaurante, tu escape de ensueño comienza aquí. 
         </p>
       </div>
