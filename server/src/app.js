@@ -9,19 +9,17 @@ const path = require("path");
 const cors = require("cors");
 const indexRouter = require("./routes");
 require("dotenv").config();
-// import express, { json } from 'express';
-// import { dirname, join } from 'path';
-// import { fileURLToPath } from 'url';
-// import cors from 'cors';
-// import bodyParser from 'body-parser'
-// import indexRoute from './routes/index.js';
-// import morgan from 'morgan';
+
 const { DATABASE } = process.env;
 require=('./config/db');
+const { config } = require( 'dotenv' );
+const pg = require( 'pg' );
+const DB_INTERNAL_URL = process.env;
+
 // const sequelizeSessionStore = new SessionStore({
 //   db: `${DATABASE}`,
 // });
-
+config();
 const server = express();
 
 server.use( morgan( 'dev' ) );
@@ -34,6 +32,10 @@ const corsOptions = {
   origin: '*',
   methods: '*',
 };
+
+new pg.Pool({
+  connectionString:  DB_INTERNAL_URL,
+});
 
 server.use( cors( corsOptions ) );
 server.use( bodyParser.json() );
