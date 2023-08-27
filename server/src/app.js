@@ -9,13 +9,6 @@ const path = require("path");
 const cors = require("cors");
 const indexRouter = require("./routes");
 require("dotenv").config();
-// import express, { json } from 'express';
-// import { dirname, join } from 'path';
-// import { fileURLToPath } from 'url';
-// import cors from 'cors';
-// import bodyParser from 'body-parser'
-// import indexRoute from './routes/index.js';
-// import morgan from 'morgan';
 const { DATABASE } = process.env;
 require=('./config/db');
 // const sequelizeSessionStore = new SessionStore({
