@@ -51,7 +51,7 @@ const Landing = () => {
                 <div>
                     <h1>El confort que mereces</h1>
                 </div>
-                <div ref={ref} className='flex justify-center items-center'>
+                <div className='flex justify-center items-center'>
                     <CardsBedroom />
                 </div>
             </div>
