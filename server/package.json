@@ -59,8 +59,8 @@
     "url": "https://github.com/ipproyectosysoluciones/Reserva-Hotel-App.git"
   },
   "engines": {
-    "node": ">=18.17.1  < 20.5.1",
-    "npm": ">=8.19.4 < 9.8.0"
+    "node": ">=18.17.1",
+    "npm": ">=8.19.4"
   },
   "author": "Equipo desaroollo soy Henry WEBFT39B",
   "license": "ISC",
