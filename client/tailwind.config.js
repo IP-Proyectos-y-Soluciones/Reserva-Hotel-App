@@ -12,6 +12,7 @@ export default {
       color: {
         stone: '#B99768',
         zinc: '#313131',
+        carbon: '#585552',
       }
     },
   },
