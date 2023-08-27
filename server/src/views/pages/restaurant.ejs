@@ -1,3 +1,7 @@
+<%- include('../partials/header') %>
+  <%- include('../partials/head') %>
+    <%- include('../partials/menu') %>
+
 <div class="content-wrapper" style="min-height: 717px">
   <!-- Content Header (Page header) -->
   <section class="content-header">
@@ -37,7 +41,7 @@
           <thead>
             <tr>
               <th style="width: 10px">#</th>
-              <th>img</th>
+              <th>Imagen</th>
               <th>Descripción</th>
               <th style="width: 100px">Acciones</th>
             </tr>
@@ -62,6 +66,17 @@
               </td>
 
             </tr> -->
+            <% for (const restaurant of getRestaurants) { %>
+              <tr>
+                <td><%= restaurant.id %></td>
+                <td><img src="<%= restaurant.img %>" alt="<%= restaurant.id %>" class="img-fluid"></td>
+                <td><%= restaurant.description %></td>
+                <td>
+                  <button class="btn btn-warning btn-sm" data-toggle="modal" data-target="#editarRestaurante" data-id="<%= restaurant.id %>"><i class="fas fa-pencil-alt text-white"></i></button>  
+                  <button class="btn btn-danger btn-sm" data-toggle="modal" data-target="#delete<%= restaurant.id %>" data-id="<%= restaurant.id %>"><i class="fas fa-trash-alt"></i></button>
+                </td>
+              </tr>
+            <% } %>
           </tbody>
         </table>
       </div>
@@ -78,7 +93,7 @@ Modal Crear Restaurante
 <div class="modal" id="crearRestaurante">
   <div class="modal-dialog">
     <div class="modal-content">
-      <form method="post" enctype="multipart/form-data">
+      <form method="post">
         <!-- Modal Header -->
         <div class="modal-header bg-info">
           <h4 class="modal-title">Crear Restaurante</h4>
@@ -88,20 +103,18 @@ Modal Crear Restaurante
         <!-- Modal body -->
         <div class="modal-body">
           <div class="form-group">
-            <div class="form-group my-2">
-              <div class="btn btn-default btn-file">
-                <i class="fas fa-paperclip"></i> Adjuntar Imagen del plato
-
-                <input type="file" name="subirImgRestaurante" />
+            <div class="input-group mb-3">
+              <div class="input-group-append input-group-text">
+                <span class="fas fa-paperclip"></span>
               </div>
-
-              <br />
-
-              <img class="previsualizarImgRestaurante img-fluid py-2" />
-
-              <p class="help-block small">
-                Dimensiones: 169px x 169px | Peso Max. 2MB | Formato: JPG o PNG
-              </p>
+  
+              <input
+                type="text"
+                class="form-control"
+                name="img"
+                placeholder="Ingresa la url de la imagen"
+                required
+              />
             </div>
           </div>
 
@@ -109,7 +122,7 @@ Modal Crear Restaurante
             <textarea
               class="form-control"
               maxlength="40"
-              name="descripcionRestaurante"
+              name="description"
               placeholder="Ingresa la descripción del Plato"
               required
             ></textarea>
@@ -137,10 +150,11 @@ Modal Crear Restaurante
 Modal Editar Restaurante
 ======================================-->
 
+<% for (const restaurant of getRestaurants) { %>
 <div class="modal" id="editarRestaurante">
   <div class="modal-dialog">
     <div class="modal-content">
-      <form method="post" enctype="multipart/form-data">
+      <form method="post" action="/restaurant/<%= restaurant.id %>">
         <!-- Modal Header -->
         <div class="modal-header bg-info">
           <h4 class="modal-title">Editar Restaurante</h4>
@@ -149,25 +163,21 @@ Modal Editar Restaurante
 
         <!-- Modal body -->
         <div class="modal-body">
-          <input type="hidden" class="form-control" name="idRestaurante" />
+          <input type="hidden" name="_method" value="put" />
 
           <div class="form-group">
-            <div class="form-group my-2">
-              <div class="btn btn-default btn-file">
-                <i class="fas fa-paperclip"></i> Adjuntar Imagen del plato
-
-                <input type="file" name="editarImgRestaurante" />
-
-                <input type="hidden" name="imgRestauranteActual" />
+            <div class="input-group mb-3">
+              <div class="input-group-append input-group-text">
+                <span class="fas fa-paperclip"></span>
               </div>
-
-              <br />
-
-              <img class="previsualizarImgRestaurante img-fluid py-2" />
-
-              <p class="help-block small">
-                Dimensiones: 169px x 169px | Peso Max. 2MB | Formato: JPG o PNG
-              </p>
+  
+              <input
+                type="text"
+                class="form-control"
+                name="img"
+                value="<%= restaurant.img %>"
+                required
+              />
             </div>
           </div>
 
@@ -175,9 +185,9 @@ Modal Editar Restaurante
             <textarea
               class="form-control"
               maxlength="40"
-              name="editarDescripcionRestaurante"
+              name="description"
               required
-            ></textarea>
+            ><%= restaurant.description %></textarea>
           </div>
         </div>
 
@@ -197,3 +207,35 @@ Modal Editar Restaurante
     </div>
   </div>
 </div>
+
+<% } %>
+
+<!--=====================================
+Eliminar Recorrido
+======================================-->
+
+<% for (const restaurant of getRestaurants) { %>
+  <div class="modal" id="delete<%= restaurant.id %>">
+      <div class="modal-dialog">
+          <div class="modal-content">
+            <form method="post" action="/restaurant/delete/<%= restaurant.id %>">
+            <!-- Modal header -->
+              <div class="modal-header bg-danger text-white">
+                  <h4 class="modal-title">Eliminar Restaurante</h4>
+                  <button type="button" class="close" data-dismiss="modal">&times;</button>
+              </div>
+              <!-- Modal body -->
+              <div class="modal-body">
+                <input type="hidden" name="_method" value="delete">
+                  <p>¿Está seguro de que desea eliminar el restaurante <%= restaurant.id %>?</p>
+              </div>
+              <!-- Modal footer -->
+              <div class="modal-footer">
+                  <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
+                  <button type="submit" class="btn btn-danger">Eliminar</button>
+              </div>
+            </form>
+          </div>
+      </div>
+  </div>
+  <% } %>
