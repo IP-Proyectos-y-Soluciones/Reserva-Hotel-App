@@ -11,13 +11,12 @@ router.get('/', async (req, res) => {
 
 
 router.post('/', async (req, res) => {
-  const { testimony, approved, id_us, id_room, id_res } = req.body;
+  const { testimony, approved, id_us, id_room } = req.body;
   const newTestimonial = await createTestimonial(
     testimony,
     approved,
     id_us,
-    id_room,
-    id_res
+    id_room
   );
   res.json(newTestimonial);
 });
