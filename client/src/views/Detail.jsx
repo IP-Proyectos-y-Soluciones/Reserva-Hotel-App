@@ -13,6 +13,7 @@ function Detail() {
   const [roomList, setRoomList] = useState([]);
   const [plans, setPlans] = useState([]);
   const [otherRoomId, setOtherRoomId] = useState(null);
+  const [otherRoomId2, setOtherRoomId2] = useState(null);
 
   useEffect(() => {
     const getNextRoomId = () => {
@@ -20,6 +21,12 @@ function Detail() {
       const nextIndex = (currentIndex + 1) % roomList.length;
       return roomList[nextIndex].id;
     };
+    const getNextRoomId2 = () => {
+      const currentIndex = roomList.findIndex(room => room.id === id);
+      const nextIndex = (currentIndex + 2) % roomList.length;
+      return roomList[nextIndex].id;
+    };
+    
 
     axios.get(`http://localhost:3001/bedroom`)
       .then(response => {
@@ -28,10 +35,14 @@ function Detail() {
 
         const nextId = getNextRoomId();
         setOtherRoomId(nextId);
+        
+        const nextId2 = getNextRoomId2();
+        setOtherRoomId2(nextId2);
       })
       .catch(error => {
         console.error('Error fetching room list:', error);
       });
+
 
     axios.get(`http://localhost:3001/bedroom/detail/${id}`)
       .then(response => {
@@ -106,7 +117,7 @@ function Detail() {
       <div className="grid flex-shrink-0 grid-rows-3 gap-4 barra-lateral w-50">
         <div className="p-4 bg-gray-300"><h2><FormDisponibilidad/>  </h2></div>
         <div className="p-4 bg-gray-300"> <Preview1 nextRoomId={otherRoomId} /></div>
-        <div className="p-4 bg-gray-300"><Preview2 /></div>
+        <div className="p-4 bg-gray-300"><Preview2 nextRoomId={otherRoomId2}  /></div>
       </div>
     </div>
   );
