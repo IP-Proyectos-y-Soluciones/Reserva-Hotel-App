@@ -19,7 +19,7 @@ const Preview2 = ({ nextRoomId } ) => {
         <div className='text-center '>
   <div className='bg-gray-800 rounded-lg text-gold '>Detalles resumen</div>
   <div className='text-black bg-yellow-300 rounded-lg '>precio de la habitacion</div>
-  <div className='bg-gray-800 rounded-lg text-gold hover:underline'> <Link  >ver detalles</Link></div>
+  <div className='bg-gray-800 rounded-lg text-gold hover:underline'> <Link  to={`/detail/${nextRoomId}`}>ver detalles</Link></div>
 </div>
 
       </div>
