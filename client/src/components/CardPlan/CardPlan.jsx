@@ -8,9 +8,9 @@ const CardPlan = ({onMouseEnter, onMouseLeave, img, kind}) =>{
 
 
 <div>
-<figure className="relative max-w-sm transition-all cursor-pointer duration-900" onMouseEnter={onMouseEnter} onMouseLeave={onMouseLeave}>
+<figure className="relative transition-all duration-300 cursor-pointer" onMouseEnter={onMouseEnter} onMouseLeave={onMouseLeave}>
    <a href="#">
-     <img className="rounded-lg" src={img} alt={kind}/>
+     <img className="rounded-lg max-w-1xl" src={img} alt={kind}/>
    </a>     
 </figure>
 </div>
