@@ -12,7 +12,7 @@ router.post('/', async (req, res) => {
         if (newRestaurant.error) {
             res.status(400).json({ error: newRestaurant.error })
         } else {
-            //res.status(201).json(newRestaurant)
+            // res.status(201).json(newRestaurant)
             const getRestaurants = await getAllRestaurants()
             res.render('pages/restaurant.ejs', {newRestaurant, getRestaurants, title: 'Hotel Backend'})
         }
