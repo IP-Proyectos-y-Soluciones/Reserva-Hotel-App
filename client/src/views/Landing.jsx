@@ -38,7 +38,7 @@ const Landing = () => {
                     <h1>Descubre la magia del lugar</h1>
                 </div>
                     <div className='flex items-center justify-center'>
-                        <CardsPlan />
+                        <CardsPlan onCardHover={handleCardHover} onCardLeave={handleCardLeave} />
                     </div>
             </div>
 
