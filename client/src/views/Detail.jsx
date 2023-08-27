@@ -6,21 +6,43 @@ import Preview1 from '../components/bedroomPreview/preview1';
 import FormDisponibilidad from '../components/FormDisponibilidad/FormDisponibilidad';
 import Preview2 from '../components/bedroomPreview/preview2';
 
+
 function Detail() {
   const { id } = useParams();
   const [roomData, setRoomData] = useState({});
   const [roomList, setRoomList] = useState([]);
   const [plans, setPlans] = useState([]);
+  const [otherRoomId, setOtherRoomId] = useState(null);
+  const [otherRoomId2, setOtherRoomId2] = useState(null);
 
   useEffect(() => {
+    const getNextRoomId = () => {
+      const currentIndex = roomList.findIndex(room => room.id === id);
+      const nextIndex = (currentIndex + 1) % roomList.length;
+      return roomList[nextIndex].id;
+    };
+    const getNextRoomId2 = () => {
+      const currentIndex = roomList.findIndex(room => room.id === id);
+      const nextIndex = (currentIndex + 2) % roomList.length;
+      return roomList[nextIndex].id;
+    };
+    
+
     axios.get(`http://localhost:3001/bedroom`)
       .then(response => {
         const roomListData = response.data;
         setRoomList(roomListData);
+
+        const nextId = getNextRoomId();
+        setOtherRoomId(nextId);
+        
+        const nextId2 = getNextRoomId2();
+        setOtherRoomId2(nextId2);
       })
       .catch(error => {
         console.error('Error fetching room list:', error);
       });
+
 
     axios.get(`http://localhost:3001/bedroom/detail/${id}`)
       .then(response => {
@@ -44,10 +66,14 @@ function Detail() {
       .catch(error => {
         console.error('Error fetching plans:', error);
       });
-  }, [id]);
+  }, [id, roomList]);
+//   const getNextRoomId = () => {
+//   const currentIndex = roomList.findIndex(room => room.id === id);
+//   const nextIndex = (currentIndex + 1) % roomList.length;
+//   return roomList[nextIndex].id;
+// };
 
-  // Genera un ID diferente para la otra habitación que se mostrará en las vistas previas
-  const otherRoomId = "id_de_otra_habitacion"; // Reemplaza con el ID correcto
+// const otherRoomId = getNextRoomId();
 
   return (
     <div className="flex h-screen detail">
@@ -90,8 +116,8 @@ function Detail() {
       </div>
       <div className="grid flex-shrink-0 grid-rows-3 gap-4 barra-lateral w-50">
         <div className="p-4 bg-gray-300"><h2><FormDisponibilidad/>  </h2></div>
-        <div className="p-4 bg-gray-300"> <Preview1 id={otherRoomId} /></div>
-        <div className="p-4 bg-gray-300"><Preview2 id={otherRoomId} /></div>
+        <div className="p-4 bg-gray-300"> <Preview1 nextRoomId={otherRoomId} /></div>
+        <div className="p-4 bg-gray-300"><Preview2 nextRoomId={otherRoomId2}  /></div>
       </div>
     </div>
   );
@@ -99,3 +125,11 @@ function Detail() {
 
 export default Detail;
 
+// const getNextRoomId = () => {
+//   const currentIndex = roomList.findIndex(room => room.id === id);
+//   const nextIndex = (currentIndex + 1) % roomList.length;
+//   return roomList[nextIndex].id;
+// };
+
+// const otherRoomId = getNextRoomId();
+// nextRoomId={otherRoomId}

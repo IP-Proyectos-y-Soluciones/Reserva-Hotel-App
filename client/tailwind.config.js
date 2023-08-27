@@ -7,13 +7,17 @@ export default {
   ],
   theme: {
     extend: {
-      divideColor: ['group-hover'],
-      padding: ['hover'],
+        divideColor: ['group-hover'],
+        padding: ['hover'],
       color: {
         stone: '#B99768',
         zinc: '#313131',
         carbon: '#585552',
-      }
+      fontSize: {
+        '6x1': '4rem',
+        '5x1': '3rem',
+      },
+      },
     },
   },
   plugins: [
