@@ -10,9 +10,14 @@ router.post('/', async (req, res) => {
     const result = await createBedroom(kind_h, style, gallery, description_h);
     const bedrooms = await getBedrooms();
 
+
     res.render('pages/bedrooms.ejs', {  bedrooms, result, title: 'Hotel Backend' })
     //res.status(201).json(result)
    // res.render('pages/bedrooms.ejs', {  result, bedrooms, title: 'Hotel Backend' })
+
+   res.render('pages/bedrooms.ejs', {  result, bedrooms, title: 'Hotel Backend' })
+    res.status(201).json(result)
+
   } catch (error) {
     console.error(error)
     res.status(500).json({ error: error.message });
@@ -23,7 +28,11 @@ router.get('/', async (req, res) => {
   try {
     const bedrooms = await getBedrooms();
     res.render('pages/bedrooms.ejs', { bedrooms, title: 'Hotel Backend' })
+
     //res.status(201).json(bedrooms)
+
+    res.status(201).json(bedrooms)
+
   } catch (error) {
     console.error(error)
     res.status(500).json({ error: error.message });
