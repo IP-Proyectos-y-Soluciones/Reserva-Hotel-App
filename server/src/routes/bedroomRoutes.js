@@ -9,13 +9,10 @@ router.post('/', async (req, res) => {
     const { kind_h, style, gallery, description_h } = req.body;
     const result = await createBedroom(kind_h, style, gallery, description_h);
     const bedrooms = await getBedrooms();
-<<<<<<< HEAD
+
     res.render('pages/bedrooms.ejs', {  bedrooms, result, title: 'Hotel Backend' })
     //res.status(201).json(result)
-=======
    // res.render('pages/bedrooms.ejs', {  result, bedrooms, title: 'Hotel Backend' })
-    res.status(201).json(result)
->>>>>>> 9bb892bfeec40b595fcf82638428eac514b9af2d
   } catch (error) {
     console.error(error)
     res.status(500).json({ error: error.message });
@@ -25,8 +22,8 @@ router.post('/', async (req, res) => {
 router.get('/', async (req, res) => {
   try {
     const bedrooms = await getBedrooms();
-    //res.render('pages/bedrooms.ejs', { bedrooms, title: 'Hotel Backend' })
-    res.status(201).json(bedrooms)
+    res.render('pages/bedrooms.ejs', { bedrooms, title: 'Hotel Backend' })
+    //res.status(201).json(bedrooms)
   } catch (error) {
     console.error(error)
     res.status(500).json({ error: error.message });
@@ -42,13 +39,13 @@ router.post('/:id', async (req, res) => {
 
     const result = await updateBedroom(id, kind_h, style, gallery, description_h);
    const bedrooms = await getBedrooms();
-<<<<<<< HEAD
+
     res.render('pages/bedrooms.ejs', {  result, bedrooms, title, title: 'Hotel Backend' })
     //res.status(201).json(result)
-=======
+
     //res.render('pages/bedrooms.ejs', {  result, bedrooms, title: 'Hotel Backend' })
     res.status(201).json(result)
->>>>>>> 9bb892bfeec40b595fcf82638428eac514b9af2d
+
   } catch (error) {
     console.error(error)
     res.status(500).json({ error: error.message });
@@ -83,21 +80,19 @@ router.post('/delete/:id', async (req, res) => {
 
     } else {
       const bedrooms = await getBedrooms();
-<<<<<<< HEAD
       res.render('pages/bedrooms.ejs', { bedrooms, result, title: 'Hotel Backend' });
-=======
+
       //res.render('pages/bedrooms.ejs', {  result, bedrooms, title: 'Hotel Backend' })
-         res.json(result)
+      // res.json(result)
       }
     } catch (error) {
       console.error(error)
       res.status(500).json({ error: error.message });
->>>>>>> 9bb892bfeec40b595fcf82638428eac514b9af2d
+
     }
-  } catch (error) {
-    console.error(error);
-    res.status(500).json({ error: error.message });
-  }
-});
+  } )
+  
+  
+
 
 module.exports = router;
