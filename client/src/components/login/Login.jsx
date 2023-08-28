@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { useDispatch } from "react-redux";
 //import { updatedUser } from "../../redux/features/userSlice";
-import GoogleLogin from 'react-google-login';
+//import GoogleLogin from 'react-google-login';
 import { loginUser } from "../../redux/actions/userActions";
 
 
@@ -39,9 +39,9 @@ const Login = () => {
     // localStorage.setItem("user", JSON.stringify(user));
      //   dispatch(updatedUser(user))
 }
-     const responseGoogle=(response)=>{
-     console.log(response);
-    }
+   //  const responseGoogle=(response)=>{
+   //  console.log(response);
+   // }
 
     
     return (
@@ -79,14 +79,15 @@ const Login = () => {
                     <br></br>
                     <br></br>
                     {error && <p>{error}</p>}
+                   {/* 
                     <GoogleLogin
-                    clientId="287795968171-f9l08gai1j18gh3j6ek425kbnmla0kum.apps.googleusercontent.com"
-                    buttonText="Login"
-                    onSuccess={responseGoogle}
-                    onFailure={responseGoogle}
-                    cookiePolicy={'single_host_origin'}
-    />
-                </form>
+                   clientId="287795968171-f9l08gai1j18gh3j6ek425kbnmla0kum.apps.googleusercontent.com"
+                   buttonText="Login"
+                   onSuccess={responseGoogle}
+                   onFailure={responseGoogle}
+                   cookiePolicy={'single_host_origin'}
+    /> */}
+                   </form>
 
             </div>
         </div>
