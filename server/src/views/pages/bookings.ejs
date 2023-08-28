@@ -1,56 +1,58 @@
-<div class="content-wrapper" style="min-height: 717px">
-  <section class="content-header">
-    <div class="container-fluid">
-      <div class="row mb-2">
-        <div class="col-sm-6">
-          <h1>Reservas</h1>
-        </div>
+<%- include('../partials/head') %>
+  <div class="wrapper">
+    <%- include('../partials/header') %>
+      <%- include('../partials/menu') %>
 
-        <div class="col-sm-6">
-          <ol class="breadcrumb float-sm-right">
-            <li class="breadcrumb-item"><a href="index">Inicio</a></li>
-            <li class="breadcrumb-item active">Reservas</li>
-          </ol>
-        </div>
-      </div>
-    </div>
-    <!-- /.container-fluid -->
-  </section>
+        <div class="content-wrapper" style="min-height: 717px">
+          <section class="content-header">
+            <div class="container-fluid">
+              <div class="row mb-2">
+                <div class="col-sm-6">
+                  <h1>Reservas</h1>
+                </div>
 
-  <!--=====================================
+                <div class="col-sm-6">
+                  <ol class="breadcrumb float-sm-right">
+                    <li class="breadcrumb-item"><a href="index">Inicio</a></li>
+                    <li class="breadcrumb-item active">Reservas</li>
+                  </ol>
+                </div>
+              </div>
+            </div>
+            <!-- /.container-fluid -->
+          </section>
+
+          <!--=====================================
   Módulo de gráfico de ventas
   ======================================-->
 
-  import include from './modules/sales.ejs';
+          <%- include('./modules/sales') %>
 
-  <!-- Main content -->
-  <section class="content">
-    <div class="container-fluid">
-      <div class="row">
-        <div class="col-12">
-          <!-- Default box -->
-          <div class="card card-info card-outline">
-            <div class="card-body">
-              <table
-                class="table table-bordered table-striped dt-responsive tablaReservas"
-                width="100%"
-              >
-                <thead>
-                  <tr>
-                    <th style="width: 10px">#</th>
-                    <th>Código</th>
-                    <th>Descripción</th>
-                    <th>Usuario</th>
-                    <th>Pago</th>
-                    <th>Transacción</th>
-                    <th>Ingreso</th>
-                    <th>Salida</th>
-                    <th style="width: 100px">Acciones</th>
-                  </tr>
-                </thead>
+          <!-- Main content -->
+          <section class="content">
+            <div class="container-fluid">
+              <div class="row">
+                <div class="col-12">
+                  <!-- Default box -->
+                  <div class="card card-info card-outline">
+                    <div class="card-body">
+                      <table class="table table-bordered table-striped dt-responsive tablaReservas" width="100%">
+                        <thead>
+                          <tr>
+                            <th style="width: 10px">#</th>
+                            <th>Código</th>
+                            <th>Descripción</th>
+                            <th>Usuario</th>
+                            <th>Pago</th>
+                            <th>Transacción</th>
+                            <th>Ingreso</th>
+                            <th>Salida</th>
+                            <th style="width: 100px">Acciones</th>
+                          </tr>
+                        </thead>
 
-                <tbody>
-                  <!--   <tr>
+                        <tbody>
+                          <!--   <tr>
 
                   <td>1</td>
                   <td>6NJS06V8L</td>
@@ -71,133 +73,160 @@
 
 
                 </tr>
+                
  -->
-                </tbody>
-              </table>
+                          <% for (const booking of bookings) { %>
+                            <tr>
+                              <td><%= booking.id_reservation %></td>
+                              <td><%= booking.reservation_code %></td>
+                              <td><%= booking.reservation_description %></td>
+                              <td><%= booking.user.name %></td>
+                              <td><%= booking.payment_reservation %> $USD</td>
+                              <td><%= booking.transaction_number %></td>
+                              <td><%= booking.admission_date %></td>
+                              <td><%= booking.departure_date %></td>
+                              <td>
+                                <button class="btn btn-warning btn-sm" data-toggle="modal" data-target="#editarReserva" data-id="<%= booking.id_reservation %>"><i class="fas fa-pencil-alt text-white"></i></button>
+                                <button class="btn btn-danger btn-sm" data-toggle="modal" data-target="#delete<%= booking.id_reservation %>" data-id="<%= booking.id_reservation %>"><i class="fas fa-trash-alt"></i></button> 
+                              </td>
+                            </tr>
+                          <% } %>
+                        </tbody>
+                      </table>
+                    </div>
+                    <!-- /.card-body -->
+                  </div>
+                  <!-- /.card -->
+                </div>
+              </div>
             </div>
-            <!-- /.card-body -->
-          </div>
-          <!-- /.card -->
+          </section>
+          <!-- /.content -->
         </div>
-      </div>
-    </div>
-  </section>
-  <!-- /.content -->
-</div>
+        <%- include('../partials/footer') %>
+  </div>
 
-<!--=====================================
+  <!--=====================================
 Modal Editar Reserva
 ======================================-->
 
-<div class="modal" id="editarReserva">
-  <div class="modal-dialog modal-lg">
-    <div class="modal-content">
-      <!-- Modal Header -->
-      <div class="modal-header bg-info">
-        <h4 class="modal-title">Editar Reserva: <span class="small"></span></h4>
-        <button type="button" class="close" data-dismiss="modal">&times;</button>
-      </div>
+<% for (const booking of bookings) { %>
+  <div class="modal" id="editarReserva">
+    <div class="modal-dialog modal-lg">
+      <div class="modal-content">
+        <!-- Modal Header -->
+        <div class="modal-header bg-info">
+          <h4 class="modal-title">Editar Reserva: <span class="small"><%= booking.reservation_description %></span></h4>
+          <button type="button" class="close" data-dismiss="modal">&times;</button>
+        </div>
 
-      <!-- Modal body -->
-      <div class="modal-body">
-        <h6 class="lead pt-4 pb-2">
-          Puede modificar la fecha de acuerdo a los días disponibles:
-        </h6>
+        <!-- Modal body -->
+        <div class="modal-body">
+          <h6 class="lead pt-4 pb-2">
+            Puede modificar la fecha de acuerdo a los días disponibles:
+          </h6>
 
-        <div class="container mb-3">
-          <div class="row py-2" style="background: #509cc3">
-            <div class="col-6 col-md-3 input-group pr-1">
-              <input
-                type="text"
-                class="form-control datepicker entrada"
-                autocomplete="off"
-                placeholder="Entrada"
-                value=""
-                required
-              />
+          <div class="container mb-3">
+            <div class="row py-2" style="background: #509cc3">
+              <div class="col-6 col-md-3 input-group pr-1">
+                <input type="text" class="form-control datepicker entrada" autocomplete="off" placeholder="Entrada"
+                  value="<%= booking.admission_date %>" required />
 
-              <div class="input-group-append">
-                <span class="input-group-text"
-                  ><i class="far fa-calendar-alt small text-gray-dark"></i
-                ></span>
+                <div class="input-group-append">
+                  <span class="input-group-text"><i class="far fa-calendar-alt small text-gray-dark"></i></span>
+                </div>
+              </div>
+
+              <div class="col-6 col-md-3 input-group pl-1">
+                <input type="text" class="form-control datepicker salida" value="<%= booking.departure_date %>" readonly required />
+
+                <div class="input-group-append">
+                  <span class="input-group-text"><i class="far fa-calendar-alt small text-gray-dark"></i></span>
+                </div>
+              </div>
+
+              <div class="col-12 col-md-6 mt-2 mt-lg-0 input-group">
+                <button class="btn btn-block btn-md text-white verDisponibilidad" idHabitacion
+                  style="background: black">
+                  Ver disponibilidad
+                </button>
               </div>
             </div>
+          </div>
 
-            <div class="col-6 col-md-3 input-group pl-1">
-              <input
-                type="text"
-                class="form-control datepicker salida"
-                readonly
-                required
-              />
-
-              <div class="input-group-append">
-                <span class="input-group-text"
-                  ><i class="far fa-calendar-alt small text-gray-dark"></i
-                ></span>
-              </div>
+          <div class="bg-white p-4 calendarioReservas">
+            <div class="infoDisponibilidad">
+              <h1 class="pb-5 float-left infoDisponibilidad">¡Está disponible!</h1>
             </div>
 
-            <div class="col-12 col-md-6 mt-2 mt-lg-0 input-group">
-              <button
-                class="btn btn-block btn-md text-white verDisponibilidad"
-                idHabitacion
-                style="background: black"
-              >
-                Ver disponibilidad
-              </button>
+            <div class="float-right pb-3">
+              <ul style="list-style: none">
+                <li>
+                  <i class="fas fa-square-full" style="color: #847059"></i> No
+                  disponible
+                </li>
+
+                <li>
+                  <i class="fas fa-square-full" style="color: #eee"></i> Disponible
+                </li>
+
+                <li>
+                  <i class="fas fa-square-full" style="color: #ffcc29"></i> Tu reserva
+                </li>
+              </ul>
             </div>
           </div>
+
+          <div class="clearfix"></div>
+
+          <div class="agregarCalendario p-3"></div>
         </div>
 
-        <div class="bg-white p-4 calendarioReservas">
-          <div class="infoDisponibilidad">
-            <h1 class="pb-5 float-left infoDisponibilidad">¡Está disponible!</h1>
+        <!-- Modal footer -->
+        <div class="modal-footer d-flex justify-content-between">
+          <div>
+            <button type="button" class="btn btn-danger" data-dismiss="modal">
+              Cerrar
+            </button>
           </div>
 
-          <div class="float-right pb-3">
-            <ul style="list-style: none">
-              <li>
-                <i class="fas fa-square-full" style="color: #847059"></i> No
-                disponible
-              </li>
-
-              <li>
-                <i class="fas fa-square-full" style="color: #eee"></i> Disponible
-              </li>
-
-              <li>
-                <i class="fas fa-square-full" style="color: #ffcc29"></i> Tu reserva
-              </li>
-            </ul>
+          <div>
+            <button type="button" class="btn btn-primary guardarNuevaReserva" fechaIngreso fechaSalida idReserva>
+              Guardar
+            </button>
           </div>
-        </div>
-
-        <div class="clearfix"></div>
-
-        <div class="agregarCalendario p-3"></div>
-      </div>
-
-      <!-- Modal footer -->
-      <div class="modal-footer d-flex justify-content-between">
-        <div>
-          <button type="button" class="btn btn-danger" data-dismiss="modal">
-            Cerrar
-          </button>
-        </div>
-
-        <div>
-          <button
-            type="button"
-            class="btn btn-primary guardarNuevaReserva"
-            fechaIngreso
-            fechaSalida
-            idReserva
-          >
-            Guardar
-          </button>
         </div>
       </div>
     </div>
   </div>
-</div>
+<% } %>
+
+<!--=====================================
+Eliminar Reserva
+======================================-->
+
+<% for (const booking of bookings) { %>
+  <div class="modal" id="delete<%= booking.id_reservation %>">
+      <div class="modal-dialog">
+          <div class="modal-content">
+            <form method="post" action="/bookings/delete/<%= booking.id_reservation %>">
+            <!-- Modal header -->
+              <div class="modal-header bg-danger text-white">
+                  <h4 class="modal-title">Eliminar Reserva</h4>
+                  <button type="button" class="close" data-dismiss="modal">&times;</button>
+              </div>
+              <!-- Modal body -->
+              <div class="modal-body">
+                <input type="hidden" name="_method" value="delete">
+                  <p>¿Está seguro de que desea eliminar la reserva <%= booking.reservation_description %> del cliente <%= booking.user.name %>?</p>
+              </div>
+              <!-- Modal footer -->
+              <div class="modal-footer">
+                  <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
+                  <button type="submit" class="btn btn-danger">Eliminar</button>
+              </div>
+            </form>
+          </div>
+      </div>
+  </div>
+  <% } %>

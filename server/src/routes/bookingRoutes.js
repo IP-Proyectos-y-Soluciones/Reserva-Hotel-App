@@ -2,29 +2,32 @@ const express = require('express');
 const router = express.Router();
 const { Users } = require("../config/db")
 const { listBooking, deleteBooking, createBooking, updateBooking } = require('../controllers/bookingControllers');
-<<<<<<< HEAD
 const { sendMail } = require("../controllers/sendMailController")
-=======
-const {sendMail} = require("../controllers/sendMailController.js")
->>>>>>> 9bb892bfeec40b595fcf82638428eac514b9af2d
+
+
 
 
 router.get('/', async (req, res) => {
   try {
     const bookings = await listBooking();
-    res.status(200).json(bookings);
+    //res.status(200).json(bookings);
+    res.render('pages/bookings.ejs', {bookings, title: 'Hotel Backend'})
   } catch (error) {
     res.status(500).json({ error: error.message });
-    //res.render('pages/booking.ejs', {bookings, title: 'Hotel Backend'})
   }
 });
 
 
-router.delete('/:id_reservation', async (req, res) => {
+//router.delete('/:id_reservation', async (req, res) => {
+//ELIMINAR
+router.post('/delete/:id_reservation', async (req, res) => {
   try {
     const { id_reservation } = req.params;
-    const result = await deleteBooking(id_reservation);
-    res.status(200).json(result);
+
+    const deletedBooking = await deleteBooking(id_reservation);
+    const bookings = await listBooking();
+    //res.status(200).json(result);
+    res.render('pages/bookings.ejs', {deletedBooking, bookings, title: 'Hotel Backend'})
   } catch (error) {
     res.status(500).json({ error: error.message });
   }
@@ -69,6 +72,8 @@ function generateRandomCode() {
 
 router.post('/', async (req, res) => {
   try {
+
+    //const { id_room, id, payment_reservation, transaction_number, reservation_code, reservation_description, admission_date, departure_date, reservation_date } = req.body;
     const { id_room, id, payment_reservation, transaction_number, reservation_description, admission_date, departure_date, reservation_date } = req.body;
     const reservation_code = generateRandomCode();
 
