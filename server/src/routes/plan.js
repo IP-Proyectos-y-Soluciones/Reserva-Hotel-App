@@ -53,12 +53,27 @@ router.post('/delete/:id', async (req, res) => {
 });
 
 router.get('/', async (req, res) => {
+
   try {
     const plans = await getAllPlans();
     if (plans.error) {
       console.error(plans.error);
     } else {
       res.render('pages/plans.ejs', { plans, title: 'Hotel Backend' });
+
+
+    try {
+
+        const getPlans = await getAllPlans()
+        if (getPlans.error) {
+            res.status(400).json({ error: getPlans.error })
+        } else {
+            res.status(201).json(getPlans)
+            res.render('pages/plans.ejs', {getPlans, title: 'Hotel Backend'});
+        }
+    } catch (error) {
+        res.status(500).json({ error: 'Internal server error' })
+
     }
   } catch (error) {
     console.error(error);
