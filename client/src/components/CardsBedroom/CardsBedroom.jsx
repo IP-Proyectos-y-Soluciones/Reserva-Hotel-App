@@ -7,6 +7,7 @@ const CardsBedroom = () => {
 
     const dispatch = useDispatch();
     const { bedrooms } = useSelector((state)=>state.bedrooms);     
+    console.log(bedrooms);
 
     const eachBedroom = bedrooms.map(bedroom=>{
         return {

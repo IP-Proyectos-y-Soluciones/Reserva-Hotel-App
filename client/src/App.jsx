@@ -20,7 +20,7 @@ const App = () => {
       <Routes>
         <Route  exact path="/" element={<Landing />} />
         <Route path="/bedroom" element={<CardBedroom />} />
-        <Route path="/detail/:id" element={<Detail />} />
+        {/* <Route path="/detail/:id" element={<Detail />} /> */}
         <Route path="/booking" element={<Booking />} />
         <Route path="/users/login" element={<Login />} />
         <Route path="*" element={<PageNotFound />} />
