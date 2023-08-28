@@ -1,5 +1,5 @@
 const fs = require('fs')
-const {Users} = require('../config/db')
+const { Users, Testimonials, Bookings } = require('../config/db')
 const bcrypt = require('bcryptjs')
 
 const createUser = async (password, email, name, photo, mode, check, encrypted_email) => {
@@ -78,6 +78,14 @@ const login = async (email, password) => {
 const getUsers = async () => {
   try {
     const users = await Users.findAll();
+    // const users = await Users.findAll({
+    //   include: [
+    //     {
+    //       model: Testimonials,
+    //       attributes: ['testimony']
+    //     }
+    //   ]
+    // });
     return users;
   } catch (error) {
     fs.appendFile("error.log", error.message + "\n", err => {
