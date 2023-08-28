@@ -29,6 +29,7 @@ const Login = () => {
         }
         try {
             const response = dispatch(loginUser({ email, password }));
+            console.log(loginUser)
             if (response && response.error) {
                 setError(response.error.message);
             }
@@ -69,15 +70,6 @@ const Login = () => {
                             placeholder="Password"
                         />
                     </div>
-                    <button
-            
-                        type="submit"
-                        className="w-full px-4 py-2 text-white bg-blue-500 rounded-md hover:bg-blue-600"
-                    >
-                        Sign up 
-                    </button>
-                    <br></br>
-                    <br></br>
                     <button
             
                         type="submit"
