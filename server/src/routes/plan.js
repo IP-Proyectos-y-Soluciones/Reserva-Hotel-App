@@ -60,7 +60,6 @@ router.get('/', async (req, res) => {
     } else {
       res.render('pages/plans.ejs', { plans, title: 'Hotel Backend' });
     }
-
     try {
       const getPlans = await getAllPlans();
       if (getPlans.error) {

@@ -5,6 +5,7 @@ import CardsAmenitie from "../components/CardsAmenitie/CardsAmenitie";
 import Banner from "../components/Banner/Banner";
 import Footer from "../components/Footer/Footer";
 import ButtonBackToTop from "../components/ButtonBackToTop/ButtonBackToTop";
+import Filtros from "../components/Filtros/Filtros";
 import { useState } from 'react';
 
 const Landing = () => {
@@ -25,6 +26,7 @@ const Landing = () => {
             <NavBar />
             
             <Banner/>
+            {/* <div><Filtros></Filtros> </div> */}
                 <div className="leading-10 tracking-widest text-center shadow-lg">
                 <div className="py-2 text-4xl font-semibold tracking-widest font">
                     <h2 className="text-[#B99768]">BIENVENIDOS</h2>
@@ -62,8 +64,15 @@ const Landing = () => {
           <p className="text-black">{hoveredCard}</p>
         </div>
       )}
+
+    
             
         </div>
+
+    
+    
+
+        
     );
 
 }
