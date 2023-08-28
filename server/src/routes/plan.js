@@ -8,7 +8,7 @@ router.post('/', async (req, res) => {
     const newPlan = await createPlan(kind, img, description, high_price, low_price);
 
     if (newPlan.error) {
-      console.error(newPlan.error); // Değişiklik: newPlan.error olarak düzeltildi
+      console.error(newPlan.error); 
     } else {
       const plans = await getAllPlans();
       res.render('pages/plans.ejs', { plans, newPlan, title: 'Hotel Backend' });
@@ -60,21 +60,10 @@ router.get('/', async (req, res) => {
     } else {
       res.render('pages/plans.ejs', { plans, title: 'Hotel Backend' });
     }
-
-    try {
-      const getPlans = await getAllPlans();
-      if (getPlans.error) {
-        res.status(400).json({ error: getPlans.error });
-      } else {
-        res.status(201).json(getPlans);
-        res.render('pages/plans.ejs', { getPlans, title: 'Hotel Backend' });
-      }
+  
     } catch (error) {
       res.status(500).json({ error: 'Internal server error' });
     }
-  } catch (error) {
-    console.error(error);
-  }
-});
+  } );
 
 module.exports = router;
