@@ -12,8 +12,6 @@ router.post('/', async (req, res) => {
 
 
     res.render('pages/bedrooms.ejs', {  bedrooms, result, title: 'Hotel Backend' })
-    res.status(201).json(result)
-    res.render('pages/bedrooms.ejs', {  result, bedrooms, title: 'Hotel Backend' })
 
   //  res.render('pages/bedrooms.ejs', {  result, bedrooms, title: 'Hotel Backend' })
   //   res.status(201).json(result)
@@ -27,17 +25,14 @@ router.post('/', async (req, res) => {
 router.get('/', async (req, res) => {
   try {
     const bedrooms = await getBedrooms();
-    res.render('pages/bedrooms.ejs', { bedrooms, title: 'Hotel Backend' })
-
-    //res.status(201).json(bedrooms)
-
-    res.status(201).json(bedrooms)
-
+     res.render('pages/bedrooms.ejs', { bedrooms, title: 'Hotel Backend' });
+    //res.status(200).json(bedrooms); // Status kodunu 200 OK olarak değiştirildi.
   } catch (error) {
-    console.error(error)
+    console.error(error);
     res.status(500).json({ error: error.message });
   }
 });
+
 
 router.post('/:id', async (req, res) => {
   try {
@@ -85,7 +80,7 @@ router.post('/delete/:id', async (req, res) => {
     const result = await deleteBedrooms(id);
 
     if (result.error) {
-      res.render('pages/404.ejs', { result, title: 'Hotel Backend' });
+   console.error(result.error)
 
     } else {
       const bedrooms = await getBedrooms();
