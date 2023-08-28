@@ -12,7 +12,7 @@ router.post('/', async (req, res) => {
     const newAdmin = await createAdmin(profile, name, user, password, status);
 
     if (newAdmin.error) {
-      res.status(400).json({ error: newAdmin.error });
+      res.render('pages/404.ejs', { newAdmin, title: 'Hotel Backend' });
     } else {
       const admins = await getAdmins();
       res.render('pages/administrators.ejs', {  newAdmin, admins, title: 'Hotel Backend' });
@@ -27,7 +27,7 @@ router.post('/', async (req, res) => {
 router.get('/', async (req, res) => {
   try {
     const admins = await getAdmins();
-    res.render('pages/administrators.ejs', { admins, title: 'Hotel Backend' }); // admins değişkenini burada gönderin
+    res.render('pages/administrators.ejs', { admins, title: 'Hotel Backend' });
   } catch (error) {
     res.status(500).json({ error: error.message });
   }
@@ -60,7 +60,8 @@ router.post('/delete/:id', async (req, res) => {
     const result = await deleteAdmin(id);
 
     if (result.error) {
-      res.status(404).json({ error: result.error });
+      res.render('pages/404.ejs', { result, title: 'Hotel Backend' });
+
     } else {
       const admins = await getAdmins();
       res.render('pages/administrators.ejs', { admins, result, title: 'Hotel Backend' })

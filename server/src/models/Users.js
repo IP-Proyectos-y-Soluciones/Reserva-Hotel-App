@@ -4,8 +4,7 @@ module.exports = (sequelize) => {
   sequelize.define(
     "users",
     {
-      // Define los atributos del modelo
-      // ...
+  
       id: {
         type: DataTypes.UUID,
         defaultValue: DataTypes.UUIDV4,
@@ -39,6 +38,10 @@ module.exports = (sequelize) => {
       encrypted_email: {
         type: DataTypes.TEXT,
         allowNull: false,
+      },
+      verificationCode: {
+        type: DataTypes.STRING,
+        allowNull: true,
       },
       date: {
         type: DataTypes.DATE,

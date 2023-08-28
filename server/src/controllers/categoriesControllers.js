@@ -3,12 +3,10 @@ const { Categories, Plan, Banner, Restaurant, Travel } = require('../config/db')
 // Obtener todas las categorías
 async function getAllCategories() {
   try {
-    const categories = await Categories.findAll({
-      include: [Plan, Banner, Restaurant, Travel],
-    });
-    res.json(categories);
+    const categories = await Categories.findAll();
+    return categories;
   } catch (err) {
-    res.status(500).json({ error: err.message });
+    console.error(err)
   }
 }
 
@@ -39,7 +37,7 @@ async function createCategory( route,
     });
     return newCategory;
   } catch (error) {
-    return { error: error.message };
+    throw new Error(error.message);
   }
 }
 
@@ -73,7 +71,7 @@ async function updateCategory(id, route,
     );
     return updated;
   } catch (error) {
-    return { error: error.message };
+    throw new Error(error.message);
   }
 }
 
@@ -83,7 +81,7 @@ async function deleteCategory(id) {
     await Categories.destroy({ where: { id } });
   
   } catch (error) {
-    return { error: error.message };
+    throw new Error(error.message);
   }
 }
 
