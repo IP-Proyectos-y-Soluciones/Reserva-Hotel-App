@@ -26,7 +26,7 @@ router.post('/', async (req, res) => {
             
             verificationCodes[email] = verificationCode;
 
-            let subject = "NUEVO CUENTA";
+            let subject = "NUEVA CUENTA";
             let text = `Su cuenta ha sido creada sin problemas! ¡Felicidades! por Name:${name} verifica tu código: ${verificationCode} `;
 
 
