@@ -9,7 +9,7 @@ router.post('/', async (req, res) => {
 
         const newNotification = await createNotification(kind, amount)
         if (newNotification.error) {
-            res.status(400).json({ error: newNotification.error })
+            res.render('pages/404.ejs', { newNotification, title: 'Hotel Backend' });
         } else {
             res.status(201).json(newNotification)
         }
@@ -25,7 +25,7 @@ router.put('/:id', async (req, res) => {
 
         const updatedNotification = await updateNotification(id, kind, amount)
         if (updatedNotification.error) {
-            res.status(400).json({ error: updatedNotification.error })
+            res.render('pages/404.ejs', { updatedNotification, title: 'Hotel Backend' });
         } else {
             res.status(201).json(updatedNotification)
         }
@@ -40,7 +40,7 @@ router.delete('/:id', async (req, res) => {
 
         const deletedNotification = await deleteNotification(id)
         if (deletedNotification.error) {
-            res.status(400).json({ error: deletedNotification.error })
+            res.render('pages/404.ejs', { deletedNotification, title: 'Hotel Backend' });
         } else {
             res.status(201).json(deletedNotification)
         }
@@ -55,7 +55,7 @@ router.get('/', async (req, res) => {
 
         const getNotifications = await getAllNotifications()
         if (getNotifications.error) {
-            res.status(400).json({ error: getNotifications.error })
+            res.render('pages/404.ejs', { getNotifications, title: 'Hotel Backend' });
         } else {
             res.status(201).json(getNotifications)
         }

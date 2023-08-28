@@ -10,7 +10,7 @@ router.post('/', async (req, res) => {
 
         const newTravel = await createTravel(photo_small, big_photo, title, description)
         if (newTravel.error) {
-            res.status(400).json({ error: newTravel.error })
+            res.render('pages/404.ejs', { newTravel, title: 'Hotel Backend' });
         } else {
             res.status(201).json(newTravel)
         }
@@ -26,7 +26,7 @@ router.put('/:id', async (req, res) => {
 
         const updatedTravel = await updateTravel(id, photo_small, big_photo, title, description)
         if (updatedTravel.error) {
-            res.status(400).json({ error: updatedTravel.error })
+            res.render('pages/404.ejs', { updatedTravel, title: 'Hotel Backend' });
         } else {
             res.status(201).json(updatedTravel)
         }
@@ -41,7 +41,7 @@ router.delete('/:id', async (req, res) => {
 
         const deletedTravel = await deleteTravel(id)
         if (deletedTravel.error) {
-            res.status(400).json({ error: deletedTravel.error })
+            res.render('pages/404.ejs', { deletedTravel, title: 'Hotel Backend' });
         } else {
             res.status(201).json(deletedTravel)
         }
@@ -59,7 +59,7 @@ router.get('/', async (req, res) => {
             res.status(400).json({ error: getTravels.error })
         } else {
             //res.status(201).json(getTravels)
-            res.render('pages/travel.ejs', {getTravels, title: 'Hotel Backend'});
+            res.render('pages/404.ejs', { getTravels, title: 'Hotel Backend' });
         }
     } catch (error) {
         res.status(500).json({ error: 'Internal server error' })

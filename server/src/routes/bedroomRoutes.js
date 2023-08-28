@@ -1,6 +1,6 @@
 const express = require('express');
 const router = express.Router();
-const { createBedroom, getBedrooms, updateBedroom, deleteBedroom, getBedroomById } = require('../controllers/bedroomControllers');
+const { createBedroom, getBedrooms, updateBedroom, deleteBedrooms, getBedroomById } = require('../controllers/bedroomControllers');
 
 
 
@@ -9,7 +9,7 @@ router.post('/', async (req, res) => {
     const { kind_h, style, gallery, description_h } = req.body;
     const result = await createBedroom(kind_h, style, gallery, description_h);
     const bedrooms = await getBedrooms();
-    res.render('pages/bedrooms.ejs', {  result, bedrooms, title: 'Hotel Backend' })
+    res.render('pages/bedrooms.ejs', {  bedrooms, result, title: 'Hotel Backend' })
     //res.status(201).json(result)
   } catch (error) {
     console.error(error)
@@ -28,7 +28,7 @@ router.get('/', async (req, res) => {
   }
 });
 
-router.put('/:id', async (req, res) => {
+router.post('/:id', async (req, res) => {
   try {
 
     const { id } = req.params;
@@ -37,7 +37,7 @@ router.put('/:id', async (req, res) => {
 
     const result = await updateBedroom(id, kind_h, style, gallery, description_h);
    const bedrooms = await getBedrooms();
-    res.render('pages/bedrooms.ejs', {  result, bedrooms, title: 'Hotel Backend' })
+    res.render('pages/bedrooms.ejs', {  result, bedrooms, title, title: 'Hotel Backend' })
     //res.status(201).json(result)
   } catch (error) {
     console.error(error)
@@ -62,25 +62,23 @@ router.get('/detail/:id', async (req, res) => {
 });
 
 
+router.post('/delete/:id', async (req, res) => {
+  try {
+    const { id } = req.params
 
-router.delete('/delete/:id', async (req, res) => {
-    try {
-      const { id } = req.params;
-  
-      const result = await deleteBedroom(id);
-      if (result.error) {
-        res.status(404).json({ error: result.error });
-        console.log(error)
-      } else {
+    const result = await deleteBedrooms(id);
+
+    if (result.error) {
+      res.render('pages/404.ejs', { result, title: 'Hotel Backend' });
+
+    } else {
       const bedrooms = await getBedrooms();
-      res.render('pages/bedrooms.ejs', {  result, bedrooms, title: 'Hotel Backend' })
-         //res.json(result)
-      }
-    } catch (error) {
-      console.error(error)
-      res.status(500).json({ error: error.message });
+      res.render('pages/bedrooms.ejs', { bedrooms, result, title: 'Hotel Backend' });
     }
-  });
-
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ error: error.message });
+  }
+});
 
 module.exports = router;

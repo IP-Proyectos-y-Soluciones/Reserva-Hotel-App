@@ -10,7 +10,7 @@ router.post('/', async (req, res) => {
 
         const newRestaurant = await createRestaurant(img, description)
         if (newRestaurant.error) {
-            res.status(400).json({ error: newRestaurant.error })
+            res.render('pages/404.ejs', { newRestaurant, title: 'Hotel Backend' });
         } else {
             res.status(201).json(newRestaurant)
         }
@@ -26,7 +26,7 @@ router.put('/:id', async (req, res) => {
 
         const updatedRestaurant = await updateRestaurant(id, img, description)
         if (updatedRestaurant.error) {
-            res.status(400).json({ error: updatedRestaurant.error })
+            res.render('pages/404.ejs', { updatedRestaurant, title: 'Hotel Backend' });
         } else {
             res.status(201).json(updatedRestaurant)
         }
@@ -41,7 +41,7 @@ router.delete('/:id', async (req, res) => {
 
         const deletedRestaurant = await deleteRestaurant(id)
         if (deletedRestaurant.error) {
-            res.status(400).json({ error: deletedRestaurant.error })
+            res.render('pages/404.ejs', { deletedRestaurant, title: 'Hotel Backend' });
         } else {
             res.status(201).json(deletedRestaurant)
         }
@@ -56,7 +56,7 @@ router.get('/', async (req, res) => {
 
         const getRestaurants = await getAllRestaurants()
         if (getRestaurants.error) {
-            res.status(400).json({ error: getRestaurants.error })
+            res.render('pages/404.ejs', { getRestaurants, title: 'Hotel Backend' });
         } else {
             res.status(201).json(getRestaurants)
         }
