@@ -1,6 +1,7 @@
-<%- include('../partials/header') %>
-  <%- include('../partials/head') %>
-    <%- include('../partials/menu') %>
+<%- include('../partials/head') %>
+<div class="wrapper">
+  <%- include('../partials/header') %>
+      <%- include('../partials/menu') %>
 
 <div class="content-wrapper" style="min-height: 717px">
   <!-- Content Header (Page header) -->
@@ -71,15 +72,18 @@
               </td> 
 
             </tr>  -->
-            <% for(let i=0; i < testimonials.length; i++) { %>
+            <% for (const testimonial of testimonials) { %>
               <tr>
-                <td><%= testimonials[i].id_testimony %></td>
-                <td><%= testimonials[i].id_res %></td>
-                <td><%= testimonials[i].id_us %></td>
-                <td><%= testimonials[i].id_room %></td>
-                <td><%= testimonials[i].testimony %></td>
-                <td><%= testimonials[i].approved %></td>
-                <td><%= testimonials[i].date %></td>
+                <td><%= testimonial.id_testimony %></td>
+                <td><%= testimonial.booking.transaction_number %></td>
+                <td><%= testimonial.user.name %></td>
+                <td><%= testimonial.bedroom.kind_h %></td>
+                <td><%= testimonial.testimony %></td>
+                <!-- <td><%= testimonial.approved %></td> -->
+                <td>
+                  <button class="btn btn-dark btn-sm">Aprobar</button>
+                </td>
+                <td><%= testimonial.date %></td>
               </tr>
               <% } %>
           </tbody>
@@ -89,4 +93,6 @@
     <!-- /.card -->
   </section>
   <!-- /.content -->
+</div>
+<%- include('../partials/footer') %>
 </div>

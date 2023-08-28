@@ -3,10 +3,7 @@ const { Sequelize } = require("sequelize");
 const fs = require("fs");
 const path = require("path");
 const { DB_USER, DB_PASSWORD, DB_HOST, DB_PORT, DATABASE } = process.env;
-// import "dotenv/config";
-// import Sequelize from "sequelize";
-// import fs from "fs";
-// import path from "path";
+
 console.log( DB_USER, DB_PASSWORD, DB_HOST, DB_PORT, DATABASE )
 const sequelize = new Sequelize(
   `postgres://${DB_USER}:${DB_PASSWORD}@${DB_HOST}:${DB_PORT}/${DATABASE}`,
@@ -15,6 +12,10 @@ const sequelize = new Sequelize(
     native: false,
   }
 );
+// const sequelize = new Sequelize(`${DB_INTERNAL_URL}`, {
+//   logging: false, 
+//   native: false, 
+// });
 
 const basename = path.basename(__filename);
 const modelDefiners = [];
@@ -43,7 +44,8 @@ const { Diary, Bookings, Testimonials, Bedrooms, Users } = sequelize.models;
 Diary.belongsTo(Bedrooms, { foreignKey: 'id_room' });
 Bookings.belongsTo(Users, { foreignKey: 'id_user' });
 Bookings.belongsTo(Bedrooms, { foreignKey: 'id_room' });
-Testimonials.belongsTo(Users, { foreignKey: 'id_res' });
+//Testimonials.belongsTo(Users, { foreignKey: 'id_res' });
+Testimonials.belongsTo(Bookings, { foreignKey: 'id_res' });
 Testimonials.belongsTo(Users, { foreignKey: 'id_us' });
 Testimonials.belongsTo(Bedrooms, { foreignKey: 'id_room' });
 

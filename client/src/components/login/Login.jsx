@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 import React, { useState } from "react";
 import { useDispatch } from "react-redux";
 import GoogleLogin from 'react-google-login';
@@ -42,6 +43,51 @@ const Login = () => {
     }
 
     const responseGoogle = (response) => {
+=======
+import { useState } from "react";
+import { useDispatch } from "react-redux";
+import { updatedUser } from "../../redux/features/userSlice";
+// import GoogleLogin from 'react-google-login';
+
+
+
+
+
+const Login = () => {
+
+
+
+    
+    const [email, setEmail]= useState("");
+    const [password, setPassword] = useState("");
+    const [error, setError] = useState(false);
+    
+    const HandleSubmit = (e) => {
+        e.preventDefault();
+        handleLogin();
+    }
+    const handleLogin = () => {
+        setError("");
+        if (!/^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/.test(email)) {
+            setError('Correo electrónico no válido');
+            return;
+        }
+        if (!/(?=.*[a-z])(?=.*[A-Z])(?=.*\d)/.test(password)) {
+            setError('La contraseña debe contener al menos una letra mayúscula, una letra minúscula y un número');
+            return;
+        }
+    }
+    const user ={
+        email,
+        password,
+    };
+    const dispatch=useDispatch();
+    
+    localStorage.setItem("user", JSON.stringify(user));
+        dispatch(updatedUser(user))
+
+    const responseGoogle=(response)=>{
+>>>>>>> 9bb892bfeec40b595fcf82638428eac514b9af2d
         console.log(response);
     }
 
@@ -49,7 +95,11 @@ const Login = () => {
         <div className="flex items-center justify-center min-h-screen bg-gray-100">
             <div className="max-w-md p-6 bg-white rounded-lg shadow-md">
                 <h1 className="mb-4 text-2xl font-semibold">Login</h1>
+<<<<<<< HEAD
                 <form onSubmit={handleSubmit}>
+=======
+                <form onSubmit={HandleSubmit}>
+>>>>>>> 9bb892bfeec40b595fcf82638428eac514b9af2d
                     <div className="mb-4">
                         <input
                             name="email"
@@ -82,13 +132,22 @@ const Login = () => {
                     <br></br>
                     {error && <p>{error}</p>}
                     <GoogleLogin
+<<<<<<< HEAD
                         clientId="Your-Google-Client-ID"
                         buttonText="Login"
                         onSuccess={responseGoogle}
                         onFailure={responseGoogle}
                         cookiePolicy={'single_host_origin'}
+=======
+                    clientId="287795968171-f9l08gai1j18gh3j6ek425kbnmla0kum.apps.googleusercontent.com"
+                    buttonText="Login"
+                    onSuccess={responseGoogle}
+                    onFailure={responseGoogle}
+                    cookiePolicy={'single_host_origin'}
+>>>>>>> 9bb892bfeec40b595fcf82638428eac514b9af2d
                     />
                 </form>
+
             </div>
         </div>
     );
