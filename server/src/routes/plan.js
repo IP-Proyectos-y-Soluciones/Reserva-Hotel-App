@@ -53,15 +53,13 @@ router.post('/delete/:id', async (req, res) => {
 });
 
 router.get('/', async (req, res) => {
-
   try {
     const plans = await getAllPlans();
     if (plans.error) {
       console.error(plans.error);
     } else {
       res.render('pages/plans.ejs', { plans, title: 'Hotel Backend' });
-
-
+    }
     try {
 
         const getPlans = await getAllPlans()
