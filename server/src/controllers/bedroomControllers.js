@@ -1,14 +1,9 @@
 const { Bedrooms } = require("../config/db");
+const fs = require('fs');
 
 
 
-
-const createBedroom = async (
-    kind_h,
-    style,
-    gallery,
-    description_h
-  ) => {
+const createBedroom = async ( kind_h, style, gallery, description_h ) => {
     try {
 
       if (!kind_h) {
@@ -35,10 +30,14 @@ const createBedroom = async (
       const bedrooms = await Bedrooms.findAll();
       return bedrooms;
     } catch (error) {
-      console.error(error)
+      fs.appendFile('error.log', error.message + '\n', (err) => {
+        if (err) throw err;
+      });
       return { error: error.message };
     }
   };
+
+
   
   const updateBedroom = async (  id, kind_h, style, gallery, description_h) => {
     try {
@@ -60,7 +59,7 @@ const createBedroom = async (
     }
   };
   
-  const deleteBedroom = async (id) => {
+  const deleteBedrooms = async (id) => {
     try {
       const bedroom = await Bedrooms.findOne({
         where: {
@@ -68,17 +67,20 @@ const createBedroom = async (
         }
       });
   
-      if (!bedroom) {
-        throw new Error("Bedroom not found");
+      if (bedroom) {
+        await bedroom.destroy();
+        return { message: 'ELEMINADO BEDROOM' };
+      } else {
+        throw new Error("Bedroom no encontrado");
       }
-  
-      await bedroom.destroy();
-      return { success: true };
+      
   
     } catch (error) {
       return { error: error.message }; 
     }
   };
+
+
   
   const getBedroomById = async (id) => {
     try {
@@ -96,6 +98,6 @@ const createBedroom = async (
     getBedrooms,
     createBedroom,
     updateBedroom,
-    deleteBedroom,
+    deleteBedrooms,
     getBedroomById
   }

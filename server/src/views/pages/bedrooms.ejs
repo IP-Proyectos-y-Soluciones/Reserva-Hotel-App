@@ -74,15 +74,13 @@
                       <td><%= bedroom.description_h %></td>
                       <td><%= bedroom.date_h %></td>
                       <td>
-                        <button class="btn btn-warning btn-sm editarBtn" data-toggle="modal" data-target="#editarBedroom" data-id="<%= bedroom.id %>">
+                        <button class="btn btn-warning btn-sm editarBtn" data-toggle="modal" data-target="#editarBedrooms" data-id="<%= bedroom.id %>">
                           <i class="fas fa-pencil-alt text-white"></i>
                       </button>
-                                    
-                        <button class="btn btn-danger btn-sm eliminarBtn" data-toggle="modal" data-target="#eliminarBedroom<%= bedroom.id %>" data-id="<%= bedroom.id %>">
-                          <i class="fas fa-trash-alt"></i>
-                      </button>
-                                       
-                                                                  
+                                   
+                       <button class="btn btn-danger btn-sm eliminarBtn" data-toggle="modal" data-target="#eliminarBedroom<%= bedroom.id %>" data-id="<%= bedroom.id %>">
+    <i class="fas fa-trash-alt"></i>
+  </button>
                       </td>
                     </tr>
                   <% } %>
@@ -133,7 +131,7 @@ Modal Crear Bedroom
 
              <div class="input-group mb-3">
                 <div class="input-group-append input-group-text">
-                  <span class="fas fa-user-lock"></span>
+                  <span class="fas fa-user"></span>
                 </div>
                 <input
                   type="text"
@@ -148,7 +146,7 @@ Modal Crear Bedroom
 
           <div class="input-group mb-3">
             <div class="input-group-append input-group-text">
-              <span class="fas fa-user-lock"></span>
+              <span class="fas fa-user"></span>
             </div>
             <input
             type="text"
@@ -157,6 +155,34 @@ Modal Crear Bedroom
             placeholder="URL POR FOTO"
             required
           />
+          <input
+          type="text"
+          class="form-control"
+          name="gallery"
+          placeholder="URL POR FOTO"
+          required
+        />
+        <input
+        type="text"
+        class="form-control"
+        name="gallery"
+        placeholder="URL POR FOTO"
+        required
+      />
+      <input
+      type="text"
+      class="form-control"
+      name="gallery"
+      placeholder="URL POR FOTO"
+      required
+    />
+    <input
+    type="text"
+    class="form-control"
+    name="gallery"
+    placeholder="URL POR FOTO"
+    required
+  />
           
           <input
             type="text"
@@ -171,7 +197,7 @@ Modal Crear Bedroom
 
           <div class="input-group mb-3">
             <div class="input-group-append input-group-text">
-              <span class="fas fa-user-lock"></span>
+              <span class="fas fa-user"></span>
             </div>
             <input
               type="text"
@@ -204,7 +230,7 @@ Modal Crear Bedroom
 Modal Editar Banner
 ======================================-->
 <% for (const bedroom of bedrooms) { %>
-  <div class="modal" id="editarBedroom">
+  <div class="modal" id="editarBedrooms">
     <div class="modal-dialog">
       <div class="modal-content">
         <form method="post" action="/bedroom/<%= bedroom.id %>">
@@ -234,7 +260,7 @@ Modal Editar Banner
   
                <div class="input-group mb-3">
                   <div class="input-group-append input-group-text">
-                    <span class="fas fa-user-lock"></span>
+                    <span class="fas fa-user"></span>
                   </div>
                   <input
                     type="text"
@@ -250,7 +276,7 @@ Modal Editar Banner
   
             <div class="input-group mb-3">
               <div class="input-group-append input-group-text">
-                <span class="fas fa-user-lock"></span>
+                <span class="fas fa-user"></span>
               </div>
               <input
               type="text"
@@ -273,7 +299,7 @@ Modal Editar Banner
   
             <div class="input-group mb-3">
               <div class="input-group-append input-group-text">
-                <span class="fas fa-user-lock"></span>
+                <span class="fas fa-user"></span>
               </div>
               <input
                 type="text"
@@ -301,6 +327,8 @@ Modal Editar Banner
   <% } %>
 
 
+
+
 <!-- eleminar -->
 <% for (const bedroom of bedrooms) { %>
   <div class="modal" id="eliminarBedroom<%= bedroom.id %>">
@@ -311,7 +339,7 @@ Modal Editar Banner
                   <button type="button" class="close" data-dismiss="modal">&times;</button>
               </div>
               <div class="modal-body">
-                  <p>¿Está seguro de que desea eliminar al Bedroom <%= bedroom.kind_h %>?</p>
+                  <p>¿Está seguro de que desea eliminar al bedroom <%= bedroom.kind_h %>?</p>
               </div>
               <div class="modal-footer">
                   <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
