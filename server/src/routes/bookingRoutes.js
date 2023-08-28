@@ -2,7 +2,7 @@ const express = require('express');
 const router = express.Router();
 const { Users } = require("../config/db")
 const { listBooking, deleteBooking, createBooking, updateBooking } = require('../controllers/bookingControllers');
-const {sendMail} = require("../controllers/sendMailController")
+const {sendMail} = require("../controllers/sendMailController.js")
 
 
 router.get('/', async (req, res) => {
