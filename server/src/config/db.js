@@ -12,6 +12,10 @@ const sequelize = new Sequelize(
     native: false,
   }
 );
+// const sequelize = new Sequelize(`${DB_INTERNAL_URL}`, {
+//   logging: false, 
+//   native: false, 
+// });
 
 const basename = path.basename(__filename);
 const modelDefiners = [];

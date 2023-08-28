@@ -10,7 +10,7 @@ const NavBar = () =>{
           <li> Home</li>
           </Link>
           <Link className="hover:underline" >
-          <li> Habitaciones</li>
+          <li>Habitaciones</li>
           </Link>
           <Link className="hover:underline">
           <li>Planes</li>
