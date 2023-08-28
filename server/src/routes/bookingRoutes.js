@@ -2,11 +2,9 @@ const express = require('express');
 const router = express.Router();
 const { Users } = require("../config/db")
 const { listBooking, deleteBooking, createBooking, updateBooking } = require('../controllers/bookingControllers');
-<<<<<<< HEAD
 const { sendMail } = require("../controllers/sendMailController")
-=======
-const {sendMail} = require("../controllers/sendMailController.js")
->>>>>>> 9bb892bfeec40b595fcf82638428eac514b9af2d
+
+
 
 
 router.get('/', async (req, res) => {

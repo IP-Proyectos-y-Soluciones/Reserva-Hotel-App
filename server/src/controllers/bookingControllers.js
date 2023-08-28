@@ -30,7 +30,8 @@ const createBooking = async ({
       reservation_description, 
       admission_date,
       departure_date, 
-      reservation_date
+      reservation_date,
+      id_room
     });
 
     const booking2 = await Bookings2.create({
