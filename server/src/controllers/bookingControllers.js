@@ -5,16 +5,7 @@ const { Bookings } = require("../config/db")
 
 
 
-const createBooking = async ({
-  id_room, 
-  id,
-  payment_reservation, 
-  transaction_number,
-  reservation_description, 
-  admission_date,
-  departure_date, 
-  reservation_date
-}) => {
+const createBooking = async ({ id_room, id, payment_reservation, transaction_number, reservation_code, reservation_description, admission_date, departure_date, reservation_date }) => {
 
   try {
     const user = await Users.findOne({ where: { id } });
@@ -24,22 +15,23 @@ const createBooking = async ({
 
     const booking = await Bookings.create({
       id_user: id,
-      payment_reservation, 
+      payment_reservation,
       transaction_number,
-      reservation_code: '', // You need to set this value as well
-      reservation_description, 
+      reservation_code,
+      reservation_description,
       admission_date,
-      departure_date, 
+      departure_date,
       reservation_date
     });
 
-    const booking2 = await Bookings2.create({
-      id_room,
-      admission_date,
-      departure_date,
-    });
+    // const booking2 = await Bookings2.create({
+    //   id_room,
+    //   admission_date,
+    //   departure_date,
+    // });
 
-    return { booking, booking2 };
+    //return { booking, booking2 };
+    return { booking };
   } catch (error) {
     return { error: error.message };
   }
@@ -50,63 +42,63 @@ const createBooking = async ({
 
 
 
- const updateBooking = async (
-    id_reservation,
-    {
-      id_room,
-      id_user,
-      payment_reservation,
-      transaction_number,
-      reservation_description,
-      admission_date,
-      departure_date,
-      reservation_date,
+const updateBooking = async (
+  id_reservation,
+  {
+    id_room,
+    id_user,
+    payment_reservation,
+    transaction_number,
+    reservation_description,
+    admission_date,
+    departure_date,
+    reservation_date,
+  }
+) => {
+  try {
+
+    const user = await Users.findOne({ where: { id_u: id_user } });
+
+    if (!user) {
+      throw new Error('User not found');
     }
-  ) => {
-    try {
 
-      const user = await Users.findOne({ where: { id_u: id_user } });
+    const [updated] = await Bookings.update(
+      {
+        id_room,
+        id_user,
+        payment_reservation,
+        transaction_number,
+        reservation_description,
+        admission_date,
+        departure_date,
+        reservation_date,
+      },
+      { where: { id_reservation: id_reservation } }
+    );
 
-      if (!user) {
-          throw new Error('User not found');
-      }
+    const [updated2] = await Bookings2.update(
 
-      const [updated] = await Bookings.update(
-        {
-          id_room,
-          id_user,
-          payment_reservation,
-          transaction_number,
-          reservation_description,
-          admission_date,
-          departure_date,
-          reservation_date,
-        },
-        { where: { id_reservation: id_reservation } }
-      );
-
-      const [updated2] = await Bookings2.update(
-
-        {
-          id_room,
-          admission_date,
-          departure_date,
-        },
-        { where: { id: id_reservation } }
-      );
+      {
+        id_room,
+        admission_date,
+        departure_date,
+      },
+      { where: { id: id_reservation } }
+    );
 
 
-      if (updated && updated2) {
-        const updatedBooking = await Bookings.findOne({ where: { id_reservation: id_reservation } });
-        const updatedBooking2 = await Bookings2.findOne({ where: { id: id_reservation } });
-        return { updatedBooking, updatedBooking2 };
-      }
-      throw new Error('Booking not found');
-    } 
-    catch(error) {
-      
-        return { error: error.message };
-       }
+    if (updated && updated2) {
+      const updatedBooking = await Bookings.findOne({ where: { id_reservation: id_reservation } });
+      const updatedBooking2 = await Bookings2.findOne({ where: { id: id_reservation } });
+      return { updatedBooking, updatedBooking2 };
+    }
+    throw new Error('Booking not found');
+  }
+  catch (error) {
+
+    return { error: error.message };
+  }
 }
 
 
@@ -120,14 +112,14 @@ const deleteBooking = async (id_reservation) => {
 
 
     if (!booking) {
-        throw new Error('Booking not found');
+      throw new Error('Booking not found');
     }
 
 
     const user = await Users.findOne({ where: { id_u: booking.id_user } });
     if (!user) {
 
-        throw new Error('User not found');
+      throw new Error('User not found');
     }
     const deleted = await Bookings.destroy({ where: { id_reservation: id_reservation } });
 
@@ -139,31 +131,32 @@ const deleteBooking = async (id_reservation) => {
     }
 
     throw new Error('Booking not found');
-  } 
-  catch(error) {
- 
+  }
+  catch (error) {
+
     return { error: error.message };
-   }
+  }
 }
 
 
 
 
 
- const listBooking = async () => {
-    try {
-        const booking1 = await Bookings.findAll({
-            include: Users
-        });
-        const booking2 = await Bookings2.findAll({
-            include: Users
-        });
-        return {booking1, booking2}
-    }
-    catch(error) {
+const listBooking = async () => {
+  try {
+    const booking1 = await Bookings.findAll({
+      include: Users
+    });
+    // const booking2 = await Bookings2.findAll({
+    //   include: Users
+    // });
+    //return { booking1, booking2 }
+    return booking1
+  }
+  catch (error) {
 
-        return { error: error.message };
-       }
+    return { error: error.message };
+  }
 };
 
 
