@@ -5,17 +5,19 @@ const { getAllTestimonials, createTestimonial, updateTestimonial, deleteTestimon
 
 router.get('/', async (req, res) => {
   const testimonials = await getAllTestimonials();
-  res.json(testimonials);
+  //res.json(testimonials);
+  res.render('pages/testimonials.ejs', {testimonials, title: 'Hotel Backend'});
 });
 
 
 router.post('/', async (req, res) => {
-  const { testimony, approved, id_us, id_room } = req.body;
+  const { testimony, approved, id_us, id_room, id_res } = req.body;
   const newTestimonial = await createTestimonial(
     testimony,
     approved,
     id_us,
-    id_room
+    id_room,
+    id_res
   );
   res.json(newTestimonial);
 });

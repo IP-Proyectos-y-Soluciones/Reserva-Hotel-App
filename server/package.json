@@ -7,8 +7,64 @@
     "start": "node index.js",
     "dev": "nodemon -L"
   },
-  "keywords": [],
-  "author": "",
+  "keywords": [
+    "JavaScript",
+    "EJS",
+    "AdminLTS",
+    "Express",
+    "Reservas-Hotel",
+    "CSS",
+    "Sequelize",
+    "PostgreSQL",
+    "NodeMailer",
+    "JSONWebToken",
+    "Multer"
+  ],
+  "contributors": [
+    {
+      "name": "Juan Boglione",
+      "url": "https://github.com/juanbog19"
+    },
+    {
+      "name": "Karina Romero",
+      "url": "https://github.com/KariRomero"
+    },
+    {
+      "name": "Daniel Lopez",
+      "url": "https://github.com/Danylopgali"
+    },
+    {
+      "name": "Emiliano Castro",
+      "url": "https://github.com/EmiCastro1997"
+    },
+    {
+      "name": "Hasan Engin Kubat",
+      "url": "https://github.com/hasanenginkubat"
+    },
+    {
+      "name": "Xavier Montalvo",
+      "url": "https://github.com/xmontalvvo"
+    },
+    {
+      "name": "Omar Carrillo",
+      "email": "omarcarrillo1121@gmail.com",
+      "url": "https://github.com/OmarCarrillo1121"
+    },
+    {
+      "name": "Bladimir Parra",
+      "email": "bladyparra@gmail.com",
+      "url": "https://github.com/ipproyectosysoluciones"
+    }
+  ],
+  "repository": {
+    "type": "github",
+    "url": "https://github.com/ipproyectosysoluciones/Reserva-Hotel-App.git"
+  },
+  "engines": {
+    "node": ">=18.17.1",
+    "npm": ">=8.19.4"
+  },
+  "author": "Equipo desaroollo soy Henry WEBFT39B Grupo 5",
   "license": "ISC",
   "devDependencies": {
     "@types/body-parser": "^1.19.2",
@@ -37,6 +93,7 @@
     "express-validator": "^7.0.1",
     "jsonwebtoken": "^9.0.1",
     "morgan": "^1.10.0",
+    "multer": "^1.4.5-lts.1",
     "nodemailer": "^6.9.4",
     "passport": "^0.6.0",
     "passport-local": "^1.0.0",

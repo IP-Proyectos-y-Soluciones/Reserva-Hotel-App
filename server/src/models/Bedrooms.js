@@ -6,7 +6,7 @@ module.exports = (sequelize) => {
     {
       // Define los atributos del modelo
       // ...
-      id_h: {
+      id: {
         type: DataTypes.UUID,
         defaultValue: DataTypes.UUIDV4,
         primaryKey: true,
@@ -24,14 +24,6 @@ module.exports = (sequelize) => {
         type: DataTypes.ARRAY(DataTypes.STRING), 
         allowNull: false,
       },
-      video: {
-        type: DataTypes.TEXT,
-        allowNull: false,
-      },
-      virtual_tour: {
-        type: DataTypes.TEXT,
-        allowNull: false,
-      },
       description_h: {
         type: DataTypes.TEXT,
         allowNull: false,
@@ -39,7 +31,7 @@ module.exports = (sequelize) => {
       date_h: {
         type: DataTypes.DATE,
         defaultValue: DataTypes.NOW,
-        allowNull: false,
+        allowNull: true,
       },
     },
     { timestamps: false }

@@ -4,8 +4,8 @@ import { Icons } from "./Menus";
 
 const Footer = () => {
     return(
-        <footer className="bg-gray-900 text-white">
-        <div className="md:flex md:justify-between md:items-center sm:px-12 px-4 bg-[#ffffff19] py-7">
+        <footer className="bg-[#313131] text-white">
+        <div className="md:flex md:justify-between md:items-center sm:px-12 px-4 bg-[#B99768] shadow-lg py-7">
         </div>
         <ItemsContainer />
         <div

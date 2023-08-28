@@ -11,6 +11,7 @@ router.get('/', async (req, res) => {
     res.status(200).json(bookings);
   } catch (error) {
     res.status(500).json({ error: error.message });
+    //res.render('pages/booking.ejs', {bookings, title: 'Hotel Backend'})
   }
 });
 
@@ -60,17 +61,19 @@ router.put('/:id_reservation', async (req, res) => {
 
 router.post('/', async (req, res) => {
   try {
-    const {id_room, id_user, payment_reservation, transaction_number, reservation_description, admission_date, departure_date, reservation_date} = req.body;
-    const result = await createBooking(id_room,
-        id_user,
-        payment_reservation,
-        transaction_number,
-        reservation_description,
-        admission_date,
-        departure_date,
-        reservation_date);
+    const { id_room, id, payment_reservation, transaction_number, reservation_description, admission_date, departure_date, reservation_date } = req.body;
+    const result = await createBooking({
+      id_room,
+      id,
+      payment_reservation,
+      transaction_number,
+      reservation_description,
+      admission_date,
+      departure_date,
+      reservation_date
+    });
 
-    const user = await Users.findOne({ where: { id: id_user } });
+    const user = await Users.findOne({ where: { id } });
     const email = user.email;
 
     let subject = "Su reserva se ha realizado con éxito."

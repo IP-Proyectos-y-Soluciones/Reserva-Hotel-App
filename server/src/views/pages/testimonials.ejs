@@ -1,3 +1,8 @@
+<%- include('../partials/head') %>
+<div class="wrapper">
+  <%- include('../partials/header') %>
+      <%- include('../partials/menu') %>
+
 <div class="content-wrapper" style="min-height: 717px">
   <!-- Content Header (Page header) -->
   <section class="content-header">
@@ -67,6 +72,20 @@
               </td> 
 
             </tr>  -->
+            <% for (const testimonial of testimonials) { %>
+              <tr>
+                <td><%= testimonial.id_testimony %></td>
+                <td><%= testimonial.booking.transaction_number %></td>
+                <td><%= testimonial.user.name %></td>
+                <td><%= testimonial.bedroom.kind_h %></td>
+                <td><%= testimonial.testimony %></td>
+                <!-- <td><%= testimonial.approved %></td> -->
+                <td>
+                  <button class="btn btn-dark btn-sm">Aprobar</button>
+                </td>
+                <td><%= testimonial.date %></td>
+              </tr>
+              <% } %>
           </tbody>
         </table>
       </div>
@@ -74,4 +93,6 @@
     <!-- /.card -->
   </section>
   <!-- /.content -->
+</div>
+<%- include('../partials/footer') %>
 </div>

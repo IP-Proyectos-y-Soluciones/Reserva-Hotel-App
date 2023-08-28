@@ -2,22 +2,47 @@ import React, { useState, useEffect } from 'react';
 import { useParams, Link } from 'react-router-dom';
 import axios from 'axios';
 import Album from "../components/album/album";
+import Preview1 from '../components/bedroomPreview/preview1';
+import FormDisponibilidad from '../components/FormDisponibilidad/FormDisponibilidad';
+import Preview2 from '../components/bedroomPreview/preview2';
+
 
 function Detail() {
   const { id } = useParams();
   const [roomData, setRoomData] = useState({});
   const [roomList, setRoomList] = useState([]);
   const [plans, setPlans] = useState([]);
+  const [otherRoomId, setOtherRoomId] = useState(null);
+  const [otherRoomId2, setOtherRoomId2] = useState(null);
 
   useEffect(() => {
+    const getNextRoomId = () => {
+      const currentIndex = roomList.findIndex(room => room.id === id);
+      const nextIndex = (currentIndex + 1) % roomList.length;
+      return roomList[nextIndex].id;
+    };
+    const getNextRoomId2 = () => {
+      const currentIndex = roomList.findIndex(room => room.id === id);
+      const nextIndex = (currentIndex + 2) % roomList.length;
+      return roomList[nextIndex].id;
+    };
+    
+
     axios.get(`http://localhost:3001/bedroom`)
       .then(response => {
         const roomListData = response.data;
         setRoomList(roomListData);
+
+        const nextId = getNextRoomId();
+        setOtherRoomId(nextId);
+        
+        const nextId2 = getNextRoomId2();
+        setOtherRoomId2(nextId2);
       })
       .catch(error => {
         console.error('Error fetching room list:', error);
       });
+
 
     axios.get(`http://localhost:3001/bedroom/detail/${id}`)
       .then(response => {
@@ -41,7 +66,14 @@ function Detail() {
       .catch(error => {
         console.error('Error fetching plans:', error);
       });
-  }, [id]);
+  }, [id, roomList]);
+//   const getNextRoomId = () => {
+//   const currentIndex = roomList.findIndex(room => room.id === id);
+//   const nextIndex = (currentIndex + 1) % roomList.length;
+//   return roomList[nextIndex].id;
+// };
+
+// const otherRoomId = getNextRoomId();
 
   return (
     <div className="flex h-screen detail">
@@ -49,13 +81,13 @@ function Detail() {
         <div className="imagen&type bg-gray-100 p-4">
           <h2 className="">
             {roomList.map(room => (
-              <Link key={room.id} to={`/detail/${room.id}`}>
+              <Link className='hover:underline' key={room.id} to={`/detail/${room.id}`}>
                 {room.kind_h}{' / '}
               </Link>
              
             ))}
           </h2>
-          <div className="w-full mx-auto md:w-2/3 lg:w-1/2 xl:w-1/3">
+          <div className=""> 
             <Album id={id} />
           </div>
         </div>
@@ -82,13 +114,22 @@ function Detail() {
           <h2> Aquí están los testimonios </h2>
         </div>
       </div>
-      <div className="grid grid-rows-3 gap-4 barra-lateral w-50">
-        <div className="p-4 bg-gray-300"><h2>cuadro de pre-reserva  </h2></div>
-        <div className="p-4 bg-gray-300"><h2>preview 1  </h2></div>
-        <div className="p-4 bg-gray-300"><h2>preview 2</h2></div>
+      <div className="grid flex-shrink-0 grid-rows-3 gap-4 barra-lateral w-50">
+        <div className="p-4 bg-gray-300"><h2><FormDisponibilidad/>  </h2></div>
+        <div className="p-4 bg-gray-300"> <Preview1 nextRoomId={otherRoomId} /></div>
+        <div className="p-4 bg-gray-300"><Preview2 nextRoomId={otherRoomId2}  /></div>
       </div>
     </div>
   );
 }
 
 export default Detail;
+
+// const getNextRoomId = () => {
+//   const currentIndex = roomList.findIndex(room => room.id === id);
+//   const nextIndex = (currentIndex + 1) % roomList.length;
+//   return roomList[nextIndex].id;
+// };
+
+// const otherRoomId = getNextRoomId();
+// nextRoomId={otherRoomId}
