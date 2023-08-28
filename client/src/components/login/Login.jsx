@@ -29,7 +29,7 @@ const Login = () => {
         }
         try {
             const response = dispatch(loginUser({ email, password }));
-            console.log(loginUser)
+            console.log()
             if (response && response.error) {
                 setError(response.error.message);
             }

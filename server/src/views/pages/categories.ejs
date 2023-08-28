@@ -1,15 +1,19 @@
+<%- include('../partials/header') %>
+  <%- include('../partials/head') %>
+    <%- include('../partials/menu') %>
+
 <div class="content-wrapper" style="min-height: 717px">
   <section class="content-header">
     <div class="container-fluid">
       <div class="row mb-2">
         <div class="col-sm-6">
-          <h1>Categorías</h1>
+          <h1>Categories</h1>
         </div>
 
         <div class="col-sm-6">
           <ol class="breadcrumb float-sm-right">
             <li class="breadcrumb-item"><a href="index">Inicio</a></li>
-            <li class="breadcrumb-item active">Categorías</li>
+            <li class="breadcrumb-item active">Categories</li>
           </ol>
         </div>
       </div>
@@ -17,8 +21,8 @@
     <!-- /.container-fluid -->
   </section>
 
-  <!-- Main content -->
-  <section class="content">
+<!-- Main content -->
+<section class="content">
     <div class="container-fluid">
       <div class="row">
         <div class="col-12">
@@ -28,114 +32,87 @@
               <button
                 class="btn btn-primary btn-sm"
                 data-toggle="modal"
-                data-target="#crearCategoria"
+                data-target="#crearCategories"
               >
-                Crear nueva categoría
+                Crear nuevo categories
               </button>
             </div>
             <!-- /.card-header -->
-
+  
             <div class="card-body">
               <table
-                class="table table-bordered table-striped dt-responsive tablaCategorias"
+                class="table table-bordered table-striped dt-responsive tablaAdministradores"
                 width="100%"
               >
                 <thead>
                   <tr>
                     <th style="width: 10px">#</th>
-                    <th>Ruta</th>
+                    <th>Route</th>
                     <th>Color</th>
-                    <th>Tipo</th>
-                    <th>Imagen</th>
-                    <th>Descripción</th>
-                    <th>Características</th>
-                    <th>Continental Temp. Alta</th>
-                    <th>Continental Temp. Baja</th>
-                    <th>Americano Temp. Alta</th>
-                    <th>Americano Temp. Baja</th>
-                    <th style="width: 100px">Acciones</th>
+                    <th>Kind</th>
+                    <th>Img</th>
+                    <th>Description</th>
+                    <th>Includes</th>
+                    <th>Americano Alta</th>
+                    <th>Americano Baja</th>
+                    <th>Acciones</th>
                   </tr>
                 </thead>
-
+  
                 <tbody>
+                  <% for (const cat of cats) { %>
+                    <tr>
+                      <td><%= cat.id %></td>
+                      <td><%= cat.route %></td>
+                      <td><%= cat.color %></td>
+                      <td><%= cat.kind %></td>
+                      <td>
+                        <img src="<%= cat.img %>" class="img-fluid" style="width:1300px; height: 205px;" />
+                      </td>
+                      <td><%= cat.description %></td>
+                      <td>
+                        <% cat.includes.forEach(cate => { %>
+                          <span style="margin-bottom: 10px;"><%= cate.split(',')[0] %></span>
+                        <% }); %>
+                      </td>
+                      <td><%= cat.americano_alta %></td>
+                      <td><%= cat.americano_baja %></td>
+                      <td>
+                        <button class="btn btn-warning btn-sm editarBtn" data-toggle="modal" data-target="#editarCategories" data-id="<%= cat.id %>">
+                          <i class="fas fa-pencil-alt text-white"></i>
+                        </button>
+                        <button class="btn btn-danger btn-sm eliminarBtn" data-toggle="modal" data-target="#eliminarCategories<%= cat.id %>" data-id="<%= cat.id %>">
+                          <i class="fas fa-trash-alt"></i>
+                        </button>
+                      </td>
+                    </tr>
+                  <% } %>                  
+                </tbody>
+                
+                  
+          
+                  
                   <!--  <tr>
                     
                     <td>1</td>
-                    
+                    <td>Hotel Portobelo</td>
+                    <td>portobelo</td>
+                    <td>Administrador</td>
+                    <td><button class="btn btn-info btn-sm">Activo</button></td>
                     <td>
-                      habitacion-tipo-suite
-                    </td> 
 
-                    <td>
-                      <i style="color:#847059" class="fas fa-square"></i>
-                    </td>
+                      <div class='btn-group'>
+                      
+                        <button class="btn btn-warning btn-sm">
+                          <i class="fas fa-pencil-alt text-white"></i>
+                        </button>  
 
-                    <td>
-                      Suite
-                    </td>
+                        <button class="btn btn-danger btn-sm">
+                          <i class="fas fa-trash-alt"></i>
+                        </button> 
 
-                    <td>
-                      <img src="vistas/img/suite/portada.png" class="img-fluid">
-                    </td> 
+                      </div> 
 
-                    <td>
-                      Lorem ipsum dolor sit amet
-                    </td> 
-
-                    <td>
-                 
-                      <div class="badge badge-secondary">
-                        <i class="fas fa-bed"></i> 
-                        cama 2 x 2
-                      </div>
-               
-                      <div class="badge badge-secondary">
-                        <i class="fas fa-tv"></i> 
-                        TV de 42 Pulg
-                      </div>
-               
-                      <div class="badge badge-secondary">
-                       <i class="fas fa-tint"></i> 
-                        Agua Caliente
-                      </div>
-               
-                      <div class="badge badge-secondary">
-                        <i class="fas fa-water"></i> 
-                        Jacuzzi
-                      </div>
-               
-                      <div class="badge badge-secondary">
-                        <i class="fas fa-toilet"></i> 
-                        Baño privado
-                      </div>
-               
-                      <div class="badge badge-secondary">
-                        <i class="fas fa-couch"></i> 
-                       Sofá
-                      </div>
-               
-                      <div class="badge badge-secondary">
-                        <i class="far fa-image"></i> 
-                        Balcón
-                      </div>
-               
-                      <div class="badge badge-secondary">
-                        <i class="fas fa-wifi"></i> 
-                        Servicio Wifi
-                      </div>
-                       
-                    </td>
-
-                    <td>$ <?php echo number_format(350000)?></td>
-                    <td>$ <?php echo number_format(300000)?></td>
-                    <td>$ <?php echo number_format(420000)?></td>
-                    <td>$ <?php echo number_format(380000)?></td>
-
-                    <td>
-                      <div class="btn-group">
-                        <button class="btn btn-warning btn-sm"><i class="fas fa-pencil-alt text-white"></i></button>  
-                        <button class="btn btn-danger btn-sm"><i class="fas fa-trash-alt"></i></button>  
-                      </div>
                     </td>
 
                   </tr> -->
@@ -143,6 +120,9 @@
               </table>
             </div>
             <!-- /.card-body -->
+
+            <div class="card-footer"></div>
+            <!-- /.card-footer-->
           </div>
           <!-- /.card -->
         </div>
@@ -153,30 +133,31 @@
 </div>
 
 <!--=====================================
-Modal Crear Categorías
+Modal Crear Administrador
 ======================================-->
 
-<div class="modal" id="crearCategoria">
+<div class="modal" id="crearCategories">
   <div class="modal-dialog">
     <div class="modal-content">
-      <form method="post" enctype="multipart/form-data">
-        <!-- Modal Header -->
+      <form method="post">
         <div class="modal-header bg-info">
-          <h4 class="modal-title">Crear Categoría</h4>
+          <h4 class="modal-title">Crear Categories</h4>
+
           <button type="button" class="close" data-dismiss="modal">&times;</button>
         </div>
 
-        <!-- Modal body -->
         <div class="modal-body">
+          <!-- input nombre -->
+
           <div class="input-group mb-3">
             <div class="input-group-append input-group-text">
-              <span class="fas fa-list-ul"></span>
+              <span class="fas fa-user"></span>
             </div>
 
             <input
               type="text"
               class="form-control"
-              name="rutaCategoria"
+              name="route"
               placeholder="Ingresa la ruta de la categoría"
               required
             />
@@ -194,7 +175,7 @@ Modal Crear Categorías
               placeholder="&#xf0a5; Elige color"
               class="form-control"
               style="font-family: Source Sans Pro, Font Awesome\5 Free"
-              name="colorCategoria"
+              name="color"
               required
             />
           </div>
@@ -207,40 +188,43 @@ Modal Crear Categorías
             <input
               type="text"
               class="form-control"
-              name="tipoCategoria"
+              name="kind"
               placeholder="Ingresa el tipo de categoría"
               required
             />
           </div>
-
           <hr class="pb-2" />
 
           <div class="form-group">
             <div class="form-group my-2">
               <div class="btn btn-default btn-file">
-                <i class="fas fa-paperclip"></i> Adjuntar Imagen de la Categoría
-
-                <input type="file" name="subirImgCategoria" />
+                <i class="fas fa-paperclip"></i>
               </div>
-
-              <img class="previsualizarImgCategoria img-fluid py-2" />
-
+          
+              <input
+                type="text"
+                name="img"
+                placeholder="IMG URL"
+                class="form-control"
+              />
+          
+             
               <p class="help-block small">
-                Dimensiones: 359px * 254px | Peso Max. 2MB | Formato: JPG o PNG
+                Dimensiones: 359px * 254px | Peso Max. 2MB | Format: JPG veya PNG
               </p>
             </div>
-
-            <p>Escriba la descripción de la Categoría:</p>
-
+          
+          
             <textarea
               class="p-3"
-              name="descripcionCategoria"
+              name="description"
               style="width: 100%"
               maxlength="30"
             ></textarea>
           </div>
-
+          
           <hr class="pb-2" />
+          
 
           <p>Características de la Categoría:</p>
 
@@ -251,6 +235,7 @@ Modal Crear Categorías
                 type="checkbox"
                 class="ml-3"
                 value="Cama 2 x 2,fas fa-bed"
+                name="includes"
               />
               <span class="badge badge-secondary"
                 ><i class="fas fa-bed"></i> Cama 2 x 2
@@ -265,6 +250,7 @@ Modal Crear Categorías
                 type="checkbox"
                 class="ml-3"
                 value="TV de 42 Pulg,fas fa-tv"
+                name="includes"
               />
               <span class="badge badge-secondary"
                 ><i class="fas fa-tv"></i> TV de 42 Pulg
@@ -279,6 +265,7 @@ Modal Crear Categorías
                 type="checkbox"
                 class="ml-3"
                 value="Agua Caliente,fas fa-tint"
+                name="includes"
               />
               <span class="badge badge-secondary"
                 ><i class="fas fa-tint"></i> Agua Caliente
@@ -293,6 +280,7 @@ Modal Crear Categorías
                 type="checkbox"
                 class="ml-3"
                 value="Jacuzzi,fas fa-water"
+                name="includes"
               />
               <span class="badge badge-secondary"
                 ><i class="fas fa-water"></i> Jacuzzi
@@ -307,6 +295,7 @@ Modal Crear Categorías
                 type="checkbox"
                 class="ml-3"
                 value="Baño privado,fas fa-toilet"
+                name="includes"
               />
               <span class="badge badge-secondary"
                 ><i class="fas fa-toilet"></i> Baño privado
@@ -321,6 +310,7 @@ Modal Crear Categorías
                 type="checkbox"
                 class="ml-3"
                 value="Sofá, as fa-couch"
+                name="includes"
               />
               <span class="badge badge-secondary"
                 ><i class="fas fa-couch"></i> Sofá
@@ -335,6 +325,7 @@ Modal Crear Categorías
                 type="checkbox"
                 class="ml-3"
                 value="Balcón,far fa-image"
+                name="includes"
               />
               <span class="badge badge-secondary"
                 ><i class="far fa-image"></i> Balcón
@@ -349,6 +340,7 @@ Modal Crear Categorías
                 type="checkbox"
                 class="ml-3"
                 value="Servicio Wifi,fas fa-wifi"
+                name="includes"
               />
               <span class="badge badge-secondary"
                 ><i class="fas fa-wifi"></i> Servicio Wifi
@@ -365,16 +357,266 @@ Modal Crear Categorías
               <span class="fas fa-dollar-sign"></span>
             </div>
 
-            <input
+            <div class="input-group mb-3">
+              <div class="input-group-append input-group-text">
+                <span class="fas fa-dollar-sign"></span>
+              </div>
+              <input
               type="number"
-              min="0"
               step="any"
               class="form-control"
-              name="continental_alta"
-              placeholder="Precio Plan Continental temporada alta"
+              name="americano_alta"
+              placeholder="Precio temporada alta"
               required
             />
           </div>
+          
+          <div class="input-group mb-3">
+            <div class="input-group-append input-group-text">
+              <span class="fas fa-dollar-sign"></span>
+            </div>
+          
+            <input
+              type="number"
+              step="any"
+              class="form-control"
+              name="americano_baja"
+              placeholder="Precio temporada baja"
+              required
+            />
+          </div>
+
+
+        <div class="modal-footer d-flex justify-content-between">
+          <div>
+            <button type="button" class="btn btn-danger" data-dismiss="modal">
+              Cerrar
+            </button>
+          </div>
+
+          <div>
+            <button type="submit" class="btn btn-primary">Guardar</button>
+          </div>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
+
+
+<!--=====================================
+Modal Editar Administrador
+======================================-->
+<% for (const cat of cats) { %>
+  <div class="modal" id="editarCategories">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <form method="post" action="/categories/<%= cat.id %>">
+          <div class="modal-header bg-info">
+            <h4 class="modal-title">Editar Categories</h4>
+            <button type="button" class="close" data-dismiss="modal">&times;</button>
+          </div>
+          <div class="modal-body">
+            <input type="hidden" name="_method" value="put" />
+            <!-- input nombre -->
+            <div class="input-group mb-3">
+              <div class="input-group-append input-group-text">
+                <span class="fas fa-user"></span>
+              </div>
+              <input
+              type="text"
+              class="form-control"
+              name="route"
+              placeholder="Ingresa la ruta de la categoría"
+              required
+            />
+          </div>
+
+          <div class="colorPicker input-group mb-3 colorpicker-component">
+            <div class="input-group-append input-group-text">
+              <span class="input-group-addon"
+                ><i style="background-color: rgb(166, 85, 85)"></i
+              ></span>
+            </div>
+
+            <input
+              type="text"
+              placeholder="&#xf0a5; Elige color"
+              class="form-control"
+              style="font-family: Source Sans Pro, Font Awesome\5 Free"
+              name="color"
+              required
+            />
+          </div>
+
+          <div class="input-group mb-4">
+            <div class="input-group-append input-group-text">
+              <span class="fas fa-certificate"></span>
+            </div>
+
+            <input
+              type="text"
+              class="form-control"
+              name="kind"
+              placeholder="Ingresa el tipo de categoría"
+              required
+            />
+          </div>
+
+          <hr class="pb-2" />
+
+          <div class="form-group">
+            <div class="form-group my-2">
+              <div class="btn btn-default btn-file">
+                <i class="fas fa-paperclip"></i> Adjuntar Imagen de la Categoría
+
+                <input type="file" name="img" />
+              </div>
+
+              <img class="previsualizarImgCategoria img-fluid py-2" />
+
+              <p class="help-block small">
+                Dimensiones: 359px * 254px | Peso Max. 2MB | Formato: JPG o PNG
+              </p>
+            </div>
+
+            <p>Escriba la descripción de la Categoría:</p>
+
+            <textarea
+              class="p-3"
+              name="description"
+              style="width: 100%"
+              maxlength="30"
+            ></textarea>
+          </div>
+
+          <hr class="pb-2" />
+
+          <p>Características de la Categoría:</p>
+
+          <div class="form-check">
+            <label class="form-check-label">
+              <input
+                class="checkbox"
+                type="checkbox"
+                class="ml-3"
+                value="Cama 2 x 2,fas fa-bed"
+                name="includes[]"
+              />
+              <span class="badge badge-secondary"
+                ><i class="fas fa-bed"></i> Cama 2 x 2
+              </span>
+            </label>
+          </div>
+
+          <div class="form-check">
+            <label class="form-check-label">
+              <input
+                class="checkbox"
+                type="checkbox"
+                class="ml-3"
+                value="TV de 42 Pulg,fas fa-tv"
+                name="includes[]"
+              />
+              <span class="badge badge-secondary"
+                ><i class="fas fa-tv"></i> TV de 42 Pulg
+              </span>
+            </label>
+          </div>
+
+          <div class="form-check">
+            <label class="form-check-label">
+              <input
+                class="checkbox"
+                type="checkbox"
+                class="ml-3"
+                value="Agua Caliente,fas fa-tint"
+                name="includes[]"
+              />
+              <span class="badge badge-secondary"
+                ><i class="fas fa-tint"></i> Agua Caliente
+              </span>
+            </label>
+          </div>
+
+          <div class="form-check">
+            <label class="form-check-label">
+              <input
+                class="checkbox"
+                type="checkbox"
+                class="ml-3"
+                value="Jacuzzi,fas fa-water"
+                name="includes[]"
+              />
+              <span class="badge badge-secondary"
+                ><i class="fas fa-water"></i> Jacuzzi
+              </span>
+            </label>
+          </div>
+
+          <div class="form-check">
+            <label class="form-check-label">
+              <input
+                class="checkbox"
+                type="checkbox"
+                class="ml-3"
+                value="Baño privado,fas fa-toilet"
+                name="includes[]"
+              />
+              <span class="badge badge-secondary"
+                ><i class="fas fa-toilet"></i> Baño privado
+              </span>
+            </label>
+          </div>
+
+          <div class="form-check">
+            <label class="form-check-label">
+              <input
+                class="checkbox"
+                type="checkbox"
+                class="ml-3"
+                value="Sofá, as fa-couch"
+                name="includes[]"
+              />
+              <span class="badge badge-secondary"
+                ><i class="fas fa-couch"></i> Sofá
+              </span>
+            </label>
+          </div>
+
+          <div class="form-check">
+            <label class="form-check-label">
+              <input
+                class="checkbox"
+                type="checkbox"
+                class="ml-3"
+                value="Balcón,far fa-image"
+                name="includes[]"
+              />
+              <span class="badge badge-secondary"
+                ><i class="far fa-image"></i> Balcón
+              </span>
+            </label>
+          </div>
+
+          <div class="form-check">
+            <label class="form-check-label">
+              <input
+                class="checkbox"
+                type="checkbox"
+                class="ml-3"
+                value="Servicio Wifi,fas fa-wifi"
+                name="includes[]"
+              />
+              <span class="badge badge-secondary"
+                ><i class="fas fa-wifi"></i> Servicio Wifi
+              </span>
+            </label>
+          </div>
+
+          <input type="hidden" name="caracteristicasCategoria" />
+
+          <hr class="pb-2" />
 
           <div class="input-group mb-3">
             <div class="input-group-append input-group-text">
@@ -402,332 +644,81 @@ Modal Crear Categorías
               min="0"
               step="any"
               class="form-control"
+              name="continental_alta"
+              placeholder="Precio Plan Continental temporada alta"
+              required
+            />
+
+            <div class="input-group mb-3">
+              <div class="input-group-append input-group-text">
+                <span class="fas fa-dollar-sign"></span>
+              </div>
+              <input
+              type="number"
+              min="0"
+              step="any"
+              class="form-control"
               name="americano_alta"
-              placeholder="Precio Plan americano temporada alta"
+              placeholder="Precio temporada alta"
               required
             />
           </div>
-
+          
           <div class="input-group mb-3">
             <div class="input-group-append input-group-text">
               <span class="fas fa-dollar-sign"></span>
             </div>
-
+          
             <input
               type="number"
               min="0"
               step="any"
               class="form-control"
               name="americano_baja"
-              placeholder="Precio Plan americano temporada baja"
+              placeholder="Precio temporada baja"
               required
             />
+            </div>
+        
+            </div>
+          <div class="modal-footer d-flex justify-content-between">
+            <div>
+              <button type="button" class="btn btn-danger" data-dismiss="modal">
+                Cerrar
+              </button>
+            </div>
+            <div>
+              <button type="submit" class="btn btn-primary">Guardar</button>
+            </div>
           </div>
-        </div>
-
-        <!-- Modal footer -->
-        <div class="modal-footer d-flex justify-content-between">
-          <div>
-            <button type="button" class="btn btn-danger" data-dismiss="modal">
-              Cerrar
-            </button>
-          </div>
-
-          <div>
-            <button type="submit" class="btn btn-primary">Guardar</button>
-          </div>
-        </div>
-      </form>
+        </form>
+      </div>
     </div>
   </div>
-</div>
+  <% } %>
 
-<!--=====================================
-Modal Editar Categorías
-======================================-->
 
-<div class="modal" id="editarCategoria">
-  <div class="modal-dialog">
-    <div class="modal-content">
-      <form method="post" enctype="multipart/form-data">
-        <!-- Modal Header -->
-        <div class="modal-header bg-info">
-          <h4 class="modal-title">Editar Categoría</h4>
-          <button type="button" class="close" data-dismiss="modal">&times;</button>
+  <!-- eleminar -->
+  <% for (const cat of cats) { %>
+    <div class="modal" id="eliminarCategories<%= cat.id %>">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header bg-danger text-white">
+                    <h4 class="modal-title">Eliminar Categories</h4>
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                </div>
+                <div class="modal-body">
+                    <p>¿Está seguro de que desea eliminar al categories <%= cat.route %>?</p>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
+                    <form method="post" action="/categories/delete/<%= cat.id %>">
+                        <input type="hidden" name="_method" value="delete">
+                        <button type="submit" class="btn btn-danger">Eliminar</button>
+                    </form>
+                </div>
+            </div>
         </div>
-
-        <!-- Modal body -->
-        <div class="modal-body">
-          <input type="hidden" class="form-control" name="idCategoria" />
-
-          <div class="input-group mb-3">
-            <div class="input-group-append input-group-text">
-              <span class="fas fa-list-ul"></span>
-            </div>
-
-            <input
-              type="text"
-              class="form-control"
-              name="editarRutaCategoria"
-              required
-            />
-          </div>
-
-          <div class="colorPicker input-group mb-3 colorpicker-component">
-            <div class="input-group-append input-group-text">
-              <span class="input-group-addon"><i></i></span>
-            </div>
-
-            <input
-              type="text"
-              class="form-control"
-              style="font-family: Source Sans Pro, Font Awesome\5 Free"
-              name="editarColorCategoria"
-              required
-            />
-          </div>
-
-          <div class="input-group mb-4">
-            <div class="input-group-append input-group-text">
-              <span class="fas fa-certificate"></span>
-            </div>
-
-            <input
-              type="text"
-              class="form-control"
-              name="editarTipoCategoria"
-              required
-              readonly
-            />
-          </div>
-
-          <hr class="pb-2" />
-
-          <div class="form-group">
-            <div class="form-group my-2">
-              <div class="btn btn-default btn-file">
-                <i class="fas fa-paperclip"></i> Adjuntar Imagen de la Categoría
-
-                <input type="file" name="editarImgCategoria" />
-
-                <input type="hidden" name="imgCategoriaActual" />
-              </div>
-
-              <img class="previsualizarImgCategoria img-fluid py-2" />
-
-              <p class="help-block small">
-                Dimensiones: 359px * 254px | Peso Max. 2MB | Formato: JPG o PNG
-              </p>
-            </div>
-
-            <p>Escriba la descripción de la Categoría:</p>
-
-            <textarea
-              class="p-3"
-              name="editarDescripcionCategoria"
-              style="width: 100%"
-              maxlength="30"
-            ></textarea>
-          </div>
-
-          <hr class="pb-2" />
-
-          <p>Características de la Categoría:</p>
-
-          <div class="form-check">
-            <label class="form-check-label">
-              <input
-                class="editarCheckbox"
-                type="checkbox"
-                class="ml-3"
-                value="Cama 2 x 2,fas fa-bed"
-              />
-              <span class="badge badge-secondary"
-                ><i class="fas fa-bed"></i> Cama 2 x 2
-              </span>
-            </label>
-          </div>
-
-          <div class="form-check">
-            <label class="form-check-label">
-              <input
-                class="editarCheckbox"
-                type="checkbox"
-                class="ml-3"
-                value="TV de 42 Pulg,fas fa-tv"
-              />
-              <span class="badge badge-secondary"
-                ><i class="fas fa-tv"></i> TV de 42 Pulg
-              </span>
-            </label>
-          </div>
-
-          <div class="form-check">
-            <label class="form-check-label">
-              <input
-                class="editarCheckbox"
-                type="checkbox"
-                class="ml-3"
-                value="Agua Caliente,fas fa-tint"
-              />
-              <span class="badge badge-secondary"
-                ><i class="fas fa-tint"></i> Agua Caliente
-              </span>
-            </label>
-          </div>
-
-          <div class="form-check">
-            <label class="form-check-label">
-              <input
-                class="editarCheckbox"
-                type="checkbox"
-                class="ml-3"
-                value="Jacuzzi,fas fa-water"
-              />
-              <span class="badge badge-secondary"
-                ><i class="fas fa-water"></i> Jacuzzi
-              </span>
-            </label>
-          </div>
-
-          <div class="form-check">
-            <label class="form-check-label">
-              <input
-                class="editarCheckbox"
-                type="checkbox"
-                class="ml-3"
-                value="Baño privado,fas fa-toilet"
-              />
-              <span class="badge badge-secondary"
-                ><i class="fas fa-toilet"></i> Baño privado
-              </span>
-            </label>
-          </div>
-
-          <div class="form-check">
-            <label class="form-check-label">
-              <input
-                class="editarCheckbox"
-                type="checkbox"
-                class="ml-3"
-                value="Sofá,fas fa-couch"
-              />
-              <span class="badge badge-secondary"
-                ><i class="fas fa-couch"></i> Sofá
-              </span>
-            </label>
-          </div>
-
-          <div class="form-check">
-            <label class="form-check-label">
-              <input
-                class="editarCheckbox"
-                type="checkbox"
-                class="ml-3"
-                value="Balcón,far fa-image"
-              />
-              <span class="badge badge-secondary"
-                ><i class="far fa-image"></i> Balcón
-              </span>
-            </label>
-          </div>
-
-          <div class="form-check">
-            <label class="form-check-label">
-              <input
-                class="editarCheckbox"
-                type="checkbox"
-                class="ml-3"
-                value="Servicio Wifi,fas fa-wifi"
-              />
-              <span class="badge badge-secondary"
-                ><i class="fas fa-wifi"></i> Servicio Wifi
-              </span>
-            </label>
-          </div>
-
-          <input type="hidden" name="editarCaracteristicasCategoria" />
-
-          <hr class="pb-2" />
-
-          <div class="input-group mb-3">
-            <div class="input-group-append input-group-text">
-              <span class="fas fa-dollar-sign"></span>
-            </div>
-
-            <input
-              type="number"
-              min="0"
-              step="any"
-              class="form-control"
-              name="editar_continental_alta"
-              placeholder="Precio Plan Continental temporada alta"
-              required
-            />
-          </div>
-
-          <div class="input-group mb-3">
-            <div class="input-group-append input-group-text">
-              <span class="fas fa-dollar-sign"></span>
-            </div>
-
-            <input
-              type="number"
-              min="0"
-              step="any"
-              class="form-control"
-              name="editar_continental_baja"
-              placeholder="Precio Plan Continental temporada baja"
-              required
-            />
-          </div>
-
-          <div class="input-group mb-3">
-            <div class="input-group-append input-group-text">
-              <span class="fas fa-dollar-sign"></span>
-            </div>
-
-            <input
-              type="number"
-              min="0"
-              step="any"
-              class="form-control"
-              name="editar_americano_alta"
-              placeholder="Precio Plan americano temporada alta"
-              required
-            />
-          </div>
-
-          <div class="input-group mb-3">
-            <div class="input-group-append input-group-text">
-              <span class="fas fa-dollar-sign"></span>
-            </div>
-
-            <input
-              type="number"
-              min="0"
-              step="any"
-              class="form-control"
-              name="editar_americano_baja"
-              placeholder="Precio Plan americano temporada baja"
-              required
-            />
-          </div>
-        </div>
-
-        <!-- Modal footer -->
-        <div class="modal-footer d-flex justify-content-between">
-          <div>
-            <button type="button" class="btn btn-danger" data-dismiss="modal">
-              Cerrar
-            </button>
-          </div>
-
-          <div>
-            <button type="submit" class="btn btn-primary">Guardar</button>
-          </div>
-        </div>
-      </form>
     </div>
-  </div>
-</div>
+    <% } %>
+    

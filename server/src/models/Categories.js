@@ -32,18 +32,10 @@ module.exports = (sequelize) => {
         type: DataTypes.TEXT,
         allowNull: false,
       },
-      inludes: {
-        type: DataTypes.TEXT,
+      includes: {
+        type: DataTypes.ARRAY(DataTypes.STRING),
         allowNull: false,
-      },
-      continental_alta: {
-        type: DataTypes.TEXT,
-        allowNull: false,
-      },
-      continental_baja: {
-        type: DataTypes.TEXT,
-        allowNull: false,
-      },
+      },      
       americano_alta: {
         type: DataTypes.TEXT,
         allowNull: false,

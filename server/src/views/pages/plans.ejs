@@ -1,19 +1,21 @@
 <%- include('../partials/header') %>
-  <%- include('../partials/head') %>
-    <%- include('../partials/menu') %>
+<%- include('../partials/head') %>
+<%- include('../partials/menu') %>
+
+
 
 <div class="content-wrapper" style="min-height: 717px">
   <section class="content-header">
     <div class="container-fluid">
       <div class="row mb-2">
         <div class="col-sm-6">
-          <h1>Planes</h1>
+          <h1>Plan</h1>
         </div>
 
         <div class="col-sm-6">
           <ol class="breadcrumb float-sm-right">
             <li class="breadcrumb-item"><a href="index">Inicio</a></li>
-            <li class="breadcrumb-item active">Planes</li>
+            <li class="breadcrumb-item active">Plan</li>
           </ol>
         </div>
       </div>
@@ -30,61 +32,58 @@
           <div class="card card-info card-outline">
             <div class="card-header">
               <button
-                class="btn btn-primary btn-sm"
-                data-toggle="modal"
-                data-target="#crearPlan"
-              >
-                Crear nuevo plan
-              </button>
+              class="btn btn-primary btn-sm"
+              data-toggle="modal"
+              data-target="#crearPlan"
+            >
+              Crear nuevo plan
+            </button>
             </div>
             <!-- /.card-header -->
 
             <div class="card-body">
               <table
-                class="table table-bordered table-striped dt-responsive tablaPlanes"
+                class="table table-bordered table-striped dt-responsive tablaBanner"
                 width="100%"
               >
                 <thead>
                   <tr>
                     <th style="width: 10px">#</th>
-                    <th>Título</th>
-                    <th>Imagen</th>
-                    <th>Descripción</th>
-                    <th>$.Temp.Alta</th>
-                    <th>$.Temp.Baja</th>
-                    <th>Acciones</th>
+                    <th>Tipo</th>
+                    <th>Description</th>
+                    <th>Img</th>
+                    <th>Fecha</th>
+                    <th style="width: 100px">Acciones</th>
                   </tr>
                 </thead>
 
                 <tbody>
-                  <!--   <tr>
-              
-                    <td>1</td>
+                  <% for (const plan of plans) { %>
+                    <tr>
+                      <td><%= plan.id %></td>
+                      <td><%= plan.kind %></td>
+                      <td><%= plan.description %></td>  
+                      <td>
+                        <div>
+                          
+                                <img src="<%= plan.img %>" class="img-fluid" style="margin-top: 20px; margin-right: 20px; border-radius: 100em; display: inline-block;">
+                           
+                        </div>
+                    </td>      
+                      <td><%= plan.date %></td>
+                      <td>
 
-                    <td>
-                      Romántico
-                    </td> 
-
-                    <td>
-                      <img src="vistas/img/planes/plan-romantico.png" class="img-fluid">
-                    </td>
-
-                    <td>
-                      Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quas suscipit quis eligendi voluptatibus dolore libero quasi delectus odit impedit optio eius corporis cumque numquam aliquid repudiandae quisquam dolor explicabo, totam.
-                    </td> 
-
-                    <td>$ <?php echo number_format(50000)?></td>
-                    <td>$ <?php echo number_format(40000)?></td>
-
-                    <td>
-                      <div class="btn-group">
-                        <button class="btn btn-warning btn-sm"><i class="fas fa-pencil-alt text-white"></i></button>  
-                        <button class="btn btn-danger btn-sm"><i class="fas fa-trash-alt"></i></button>
-                      </div>  
-                    </td>
-
-                  </tr>
- -->
+                        <button class="btn btn-warning btn-sm editarBtn" data-toggle="modal" data-target="#editarPlan" data-id="<%= plan.id %>">
+                          <i class="fas fa-pencil-alt text-white"></i>
+                      </button>
+                                   
+                      <button class="btn btn-danger btn-sm eliminarBtn" data-toggle="modal" data-target="#eliminarPlan<%= plan.id %>" data-id="<%= plan.id %>">
+                        <i class="fas fa-trash-alt"></i>
+                      </button>
+                      
+                      </td>
+                    </tr>
+                  <% } %>
                 </tbody>
               </table>
             </div>
@@ -97,7 +96,6 @@
   </section>
   <!-- /.content -->
 </div>
-
 <!--=====================================
 Modal Crear Plan
 ======================================-->
@@ -105,87 +103,96 @@ Modal Crear Plan
 <div class="modal" id="crearPlan">
   <div class="modal-dialog">
     <div class="modal-content">
-      <form method="post" enctype="multipart/form-data">
-        <!-- Modal Header -->
+      <form method="post">
         <div class="modal-header bg-info">
           <h4 class="modal-title">Crear Plan</h4>
+
           <button type="button" class="close" data-dismiss="modal">&times;</button>
         </div>
 
-        <!-- Modal body -->
         <div class="modal-body">
+          <!-- input estilo -->
+
           <div class="input-group mb-3">
             <div class="input-group-append input-group-text">
-              <span class="fas fa-suitcase-rolling"></span>
+              <span class="fas fa-user"></span>
             </div>
 
             <input
+                type="text"
+                class="form-control"
+                name="kind"
+                placeholder="ESTILO"
+                required
+              />
+            </div>
+  
+               <!-- input tipo -->
+  
+               <div class="input-group mb-3">
+                  <div class="input-group-append input-group-text">
+                    <span class="fas fa-user-lock"></span>
+                  </div>
+                  <input
+                  type="number"
+                  min="0"
+                  step="any"
+                  class="form-control"
+                  name="hight_price"
+                  placeholder="Precio temporada alta"
+                  required
+                />
+              </div>
+              
+              <div class="input-group mb-3">
+                <div class="input-group-append input-group-text">
+                  <span class="fas fa-dollar-sign"></span>
+                </div>
+              
+                <input
+                  type="number"
+                  min="0"
+                  step="any"
+                  class="form-control"
+                  name="low_price"
+                  placeholder="Precio temporada baja"
+                  required
+                />
+                </div>
+            
+  
+            <!-- input gallery -->
+  
+            <div class="input-group mb-3">
+              <div class="input-group-append input-group-text">
+                <span class="fas fa-user-lock"></span>
+              </div>
+              <input
               type="text"
               class="form-control"
-              name="tipoPlan"
-              placeholder="Ingresa el nombre del plan"
+              name="img"
+              placeholder="URL POR FOTO"
               required
             />
-          </div>
-
-          <div class="form-group">
-            <div class="form-group my-2">
-              <div class="btn btn-default btn-file">
-                <i class="fas fa-paperclip"></i> Adjuntar Imagen del plan
-
-                <input type="file" name="subirImgPlan" />
+            
+  
+            <!-- input description -->
+  
+            <div class="input-group mb-3">
+              <div class="input-group-append input-group-text">
+                <span class="fas fa-user-lock"></span>
               </div>
-
-              <img class="previsualizarImgPlan img-fluid py-2" />
-
-              <p class="help-block small">
-                Dimensiones: 480px * 382px | Peso Max. 2MB | Formato: JPG o PNG
-              </p>
-            </div>
-
-            <p>Escriba la descripción del plan:</p>
-
-            <textarea
-              id="descripcionPlan"
-              name="descripcionPlan"
-              style="width: 100%"
-            ></textarea>
+              <input
+                type="text"
+                class="form-control"
+                name="description"
+                placeholder="description"
+                required
+              />
           </div>
+ 
 
-          <div class="input-group mb-3">
-            <div class="input-group-append input-group-text">
-              <span class="fas fa-dollar-sign"></span>
-            </div>
 
-            <input
-              type="number"
-              min="0"
-              step="any"
-              class="form-control"
-              name="precio_alta"
-              placeholder="Precio temporada alta"
-              required
-            />
-          </div>
-
-          <div class="input-group mb-3">
-            <div class="input-group-append input-group-text">
-              <span class="fas fa-dollar-sign"></span>
-            </div>
-
-            <input
-              type="number"
-              min="0"
-              step="any"
-              class="form-control"
-              name="precio_baja"
-              placeholder="Precio temporada baja"
-              required
-            />
-          </div>
-        </div>
-
-        <!-- Modal footer -->
         <div class="modal-footer d-flex justify-content-between">
           <div>
             <button type="button" class="btn btn-danger" data-dismiss="modal">
@@ -197,8 +204,6 @@ Modal Crear Plan
             <button type="submit" class="btn btn-primary">Guardar</button>
           </div>
         </div>
-
-
       </form>
     </div>
   </div>
@@ -207,99 +212,139 @@ Modal Crear Plan
 <!--=====================================
 Modal Editar Plan
 ======================================-->
-
-<div class="modal" id="editarPlan">
-  <div class="modal-dialog">
-    <div class="modal-content">
-      <form method="post" enctype="multipart/form-data">
-        <!-- Modal Header -->
-        <div class="modal-header bg-info">
-          <h4 class="modal-title">Editar Plan</h4>
-          <button type="button" class="close" data-dismiss="modal">&times;</button>
-        </div>
-
-        <!-- Modal body -->
-        <div class="modal-body">
-          <input type="hidden" class="form-control" name="idPlan" />
-
-          <div class="input-group mb-3">
-            <div class="input-group-append input-group-text">
-              <span class="fas fa-suitcase-rolling"></span>
-            </div>
-
-            <input type="text" class="form-control" name="editarPlan" required />
+<% for (const plan of plans) { %>
+  <div class="modal" id="editarPlan">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <form method="post" action="/plan/<%= plan.id %>">
+          <div class="modal-header bg-info">
+            <h4 class="modal-title">Editar Plan</h4>
+            <button type="button" class="close" data-dismiss="modal">&times;</button>
           </div>
-
-          <div class="form-group">
+          <div class="modal-body">
+            <input type="hidden" name="_method" value="put" />
+            
             <div class="form-group my-2">
-              <div class="btn btn-default btn-file">
-                <i class="fas fa-paperclip"></i> Cambiar imagen del plan
 
-                <input type="file" name="editarImgPlan" />
-
-                <input type="hidden" name="imgPlanActual" />
+            <!-- input estilo -->
+  
+            <div class="input-group mb-3">
+              <div class="input-group-append input-group-text">
+                <span class="fas fa-user"></span>
               </div>
-
-              <img class="previsualizarImgPlan img-fluid py-2" />
-
-              <p class="help-block small">
-                Dimensiones: 480px * 382px | Peso Max. 2MB | Formato: JPG o PNG
-              </p>
+  
+              <input
+                type="text"
+                class="form-control"
+                name="kind"
+                placeholder="ESTILO"
+                required
+              />
             </div>
-
-            <p>Escriba la descripción del plan:</p>
-
-            <textarea
-              id="editarDescripcionPlan"
-              name="editarDescripcionPlan"
-              style="width: 100%"
-            ></textarea>
-          </div>
-
-          <div class="input-group mb-3">
-            <div class="input-group-append input-group-text">
-              <span class="fas fa-dollar-sign"></span>
-            </div>
-
-            <input
-              type="number"
-              min="0"
-              step="any"
+  
+               <!-- input tipo -->
+  
+               <div class="input-group mb-3">
+                  <div class="input-group-append input-group-text">
+                    <span class="fas fa-dollar-sign"></span>
+                  </div>
+                  <input
+                  type="number"
+                  min="0"
+                  step="any"
+                  class="form-control"
+                  name="hight_price"
+                  placeholder="Precio temporada alta"
+                  required
+                />
+              </div>
+              
+              <div class="input-group mb-3">
+                <div class="input-group-append input-group-text">
+                  <span class="fas fa-dollar-sign"></span>
+                </div>
+              
+                <input
+                  type="number"
+                  min="0"
+                  step="any"
+                  class="form-control"
+                  name="low_price"
+                  placeholder="Precio temporada baja"
+                  required
+                />
+                </div>
+            
+  
+            <!-- input gallery -->
+  
+            <div class="input-group mb-3">
+              <div class="input-group-append input-group-text">
+                <span class="fas fa-user-lock"></span>
+              </div>
+              <input
+              type="text"
               class="form-control"
-              name="editar_precio_alta"
+              name="img"
+              placeholder="URL POR FOTO"
               required
             />
-          </div>
-
-          <div class="input-group mb-3">
-            <div class="input-group-append input-group-text">
-              <span class="fas fa-dollar-sign"></span>
+            
+  
+            <!-- input description -->
+  
+            <div class="input-group mb-3">
+              <div class="input-group-append input-group-text">
+                <span class="fas fa-user-lock"></span>
+              </div>
+              <input
+                type="text"
+                class="form-control"
+                name="description"
+                placeholder="description"
+                required
+              />
             </div>
 
-            <input
-              type="number"
-              min="0"
-              step="any"
-              class="form-control"
-              name="editar_precio_baja"
-              required
-            />
+          <div class="modal-footer d-flex justify-content-between">
+            <div>
+              <button type="button" class="btn btn-danger" data-dismiss="modal">
+                Cerrar
+              </button>
+            </div>
+            <div>
+              <button type="submit" class="btn btn-primary">Guardar</button>
+            </div>
           </div>
-        </div>
-
-        <!-- Modal footer -->
-        <div class="modal-footer d-flex justify-content-between">
-          <div>
-            <button type="button" class="btn btn-danger" data-dismiss="modal">
-              Cerrar
-            </button>
-          </div>
-
-          <div>
-            <button type="submit" class="btn btn-primary">Guardar</button>
-          </div>
-        </div>
-      </form>
+        </form>
+      </div>
     </div>
   </div>
-</div>
+  <% } %>
+
+
+
+
+<!-- eleminar -->
+<% for (const plan of plans) { %>
+  <div class="modal" id="eliminarPlan<%= plan.id %>">
+      <div class="modal-dialog">
+          <div class="modal-content">
+              <div class="modal-header bg-danger text-white">
+                  <h4 class="modal-title">Eliminar Plan</h4>
+                  <button type="button" class="close" data-dismiss="modal">&times;</button>
+              </div>
+              <div class="modal-body">
+                  <p>¿Está seguro de que desea eliminar al plan <%= plan.kind %>?</p>
+              </div>
+              <div class="modal-footer">
+                  <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
+                  <form method="post" action="/plan/delete/<%= plan.id %>">
+                      <input type="hidden" name="_method" value="delete">
+                      <button type="submit" class="btn btn-danger">Eliminar</button>
+                  </form>
+              </div>
+          </div>
+      </div>
+  </div>
+  <% } %>
