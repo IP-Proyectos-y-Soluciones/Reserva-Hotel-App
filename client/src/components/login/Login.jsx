@@ -1,26 +1,23 @@
-import { useState } from "react";
+import React,{ useState } from "react";
 import { useDispatch } from "react-redux";
-import { updatedUser } from "../../redux/features/userSlice";
+//import { updatedUser } from "../../redux/features/userSlice";
 import GoogleLogin from 'react-google-login';
-
-
-
+import { loginUser } from "../../redux/actions/userActions";
 
 
 const Login = () => {
-
-
-
     
-    const [email, setEmail]= useState("");
+    const dispatch = useDispatch();
+    const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
-    const [error, setError] = useState(false);
+    const [error, setError] = useState(null);
     
     const HandleSubmit = (e) => {
         e.preventDefault();
         handleLogin();
     }
-    const handleLogin = () => {
+    const handleLogin = async () => {
+        
         setError("");
         if (!/^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/.test(email)) {
             setError('Correo electrónico no válido');
@@ -30,18 +27,20 @@ const Login = () => {
             setError('La contraseña debe contener al menos una letra mayúscula, una letra minúscula y un número');
             return;
         }
-    }
-    const user ={
-        email,
-        password,
+        try {
+            const response = dispatch(loginUser({ email, password }));
+            if (response && response.error) {
+                setError(response.error.message);
+            }
+        }             
+        catch(error){
+        setError("Error al registrar el usuario");
     };
-    const dispatch=useDispatch();
-    
-    localStorage.setItem("user", JSON.stringify(user));
-        dispatch(updatedUser(user))
-
-    const responseGoogle=(response)=>{
-        console.log(response);
+    // localStorage.setItem("user", JSON.stringify(user));
+     //   dispatch(updatedUser(user))
+}
+     const responseGoogle=(response)=>{
+     console.log(response);
     }
 
     
@@ -52,6 +51,7 @@ const Login = () => {
                 <form onSubmit={HandleSubmit}>
                     <div className="mb-4">
                         <input
+                            name="email"
                             type="text"
                             className="w-full p-2 border rounded-md focus:outline-none focus:border-blue-500"
                             value={email}
@@ -61,6 +61,7 @@ const Login = () => {
                     </div>
                     <div className="mb-4">
                         <input
+                            name="password"
                             type="password"
                             className="w-full p-2 border rounded-md focus:outline-none focus:border-red-500"
                             value={password}
@@ -69,11 +70,23 @@ const Login = () => {
                         />
                     </div>
                     <button
+            
+                        type="submit"
+                        className="w-full px-4 py-2 text-white bg-blue-500 rounded-md hover:bg-blue-600"
+                    >
+                        Sign up 
+                    </button>
+                    <br></br>
+                    <br></br>
+                    <button
+            
                         type="submit"
                         className="w-full px-4 py-2 text-white bg-blue-500 rounded-md hover:bg-blue-600"
                     >
                         Login
                     </button>
+                    <br></br>
+                    <br></br>
                     {error && <p>{error}</p>}
                     <GoogleLogin
                     clientId="287795968171-f9l08gai1j18gh3j6ek425kbnmla0kum.apps.googleusercontent.com"
@@ -81,7 +94,7 @@ const Login = () => {
                     onSuccess={responseGoogle}
                     onFailure={responseGoogle}
                     cookiePolicy={'single_host_origin'}
-                    />
+    />
                 </form>
 
             </div>

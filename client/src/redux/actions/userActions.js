@@ -3,6 +3,7 @@ import axios from "axios";
 
 const urlUsers= "http://localhost:3001/users";
 const urlUsersPost ="http://localhost:3001/users/verify";
+const urlLoginUser="http://localhost:3001/users/login";
 
 export const getUsers=createAsyncThunk(
     "users/getUsers",
@@ -23,6 +24,18 @@ export const createUsersVerify = createAsyncThunk(
             const res = await axios.post(urlUsersPost);
             return res.data
         }catch(error){
+            throw new Error(error.response.data.message)
+        }
+    }
+);
+export const loginUser=createAsyncThunk(
+    "users/loginUser",
+    async()=>{
+        try {
+            const res = await axios.post(urlLoginUser);
+            console.log(res.data)
+            return res.data
+        } catch (error) {
             throw new Error(error.response.data.message)
         }
     }

@@ -6,7 +6,7 @@ import Banner from "../components/Banner/Banner";
 import Footer from "../components/Footer/Footer";
 
 const Landing = () => {
-    return (
+ return (
 
         <div className="min-h-screen bg-zinc-800 text-white">
             <NavBar />
@@ -26,6 +26,7 @@ const Landing = () => {
             <Footer />
         </div>
     );
+
 }
 
 export default Landing
