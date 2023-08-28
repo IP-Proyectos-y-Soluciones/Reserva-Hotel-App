@@ -14,6 +14,10 @@ router.get('/', async (req, res) => {
     res.render('pages/bookings.ejs', {bookings, title: 'Hotel Backend'})
   } catch (error) {
     res.status(500).json({ error: error.message });
+
+
+    res.render('pages/booking.ejs', {bookings, title: 'Hotel Backend'})
+
   }
 });
 
