@@ -20,18 +20,19 @@ router.post('/', async (req, res) => {
 
       } else {
 
-        const verificationCode = generateVerificationCode();
-        
-  
-        newUser.verificationCode = verificationCode;
-        await newUser.save();
-  
-        let subject = "NUEVO CUENTA";
-        let text = `Su cuenta ha sido creada sin problemas! ¡Felicidades! por Name:${name} verifica tu código: ${verificationCode} `;
-  
-        sendMail(email, subject, text);
-        res.status(201).json(newUser);
-      }
+
+
+            const verificationCode = generateVerificationCode();
+            
+            verificationCodes[email] = verificationCode;
+
+            let subject = "NUEVA CUENTA";
+            let text = `Su cuenta ha sido creada sin problemas! ¡Felicidades! por Name:${name} verifica tu código: ${verificationCode} `;
+
+
+            sendMail(email, subject, text);
+            res.status(201).json(newUser);
+        }
     } catch (error) {
       console.error(error);
       res.status(500).json({ error: 'Internal server error' });
