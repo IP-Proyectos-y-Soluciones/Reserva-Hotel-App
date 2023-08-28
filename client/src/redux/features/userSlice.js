@@ -54,8 +54,8 @@ const usersSlice = createSlice({
       .addCase(createUsersVerify.fulfilled, (state,action)=>{
         state.userData=action.payload;
       })
-      .addCase(loginUser.fulfilled,(state)=>{
-        state.userLogin=payload;
+      .addCase(loginUser.fulfilled,(state, action)=>{
+        state.userLogin=action.payload;
       })
       .addCase(updatedsUser.fulfilled, (state, action) => {
         state.userData = action.payload;
