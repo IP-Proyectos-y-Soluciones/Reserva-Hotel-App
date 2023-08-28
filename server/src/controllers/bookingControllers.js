@@ -17,11 +17,7 @@ const createBooking = async ({ id_room, id, payment_reservation, transaction_num
       id_user: id,
       payment_reservation,
       transaction_number,
-<<<<<<< HEAD
       reservation_code: '',
-=======
-      reservation_code,
->>>>>>> 2599ee55c31b90f80149ce9cc90385fad5f43a84
       reservation_description, 
       admission_date,
       departure_date, 
