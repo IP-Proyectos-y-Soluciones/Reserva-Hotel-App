@@ -4,6 +4,7 @@ import axios from "axios";
 const urlUsers= "http://localhost:3001/users";
 const urlUsersPost ="http://localhost:3001/users/verify";
 
+
 export const getUsers=createAsyncThunk(
     "users/getUsers",
     async()=>{
@@ -24,6 +25,29 @@ export const createUsersVerify = createAsyncThunk(
             return res.data
         }catch(error){
             throw new Error(error.response.data.message)
+        }
+    }
+);
+export const loginUser=createAsyncThunk(
+    "users/login",
+    async ({ email, password }) => {
+        try {
+          const response = await fetch("http://localhost:3001/users/login", {
+            method: "POST",
+            headers: {
+              "Content-Type": "application/json",
+            },
+            body: JSON.stringify({ email, password }),
+          });
+    
+          if (!response.ok) {
+            throw new Error("Failed to login");
+          }
+    
+          const data = await response.json();
+          return data; 
+        } catch (error) {
+            throw new Error("Error al iniciar sesión. Por favor, verifica tus credenciales.")
         }
     }
 );
