@@ -6,7 +6,8 @@ import Booking from "./components/Booking/Booking";
 import CardBedroom from "./components/CardBedroom/CardBedroom";
 import { Route, Routes, useLocation } from "react-router-dom";
 import PageNotFound from "./components/PageNotFound/PageNotFound";
-
+import axios from "axios";
+axios.defaults.baseURL = 'http://localhost:3001/';
 
 const App = () => {
 
