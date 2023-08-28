@@ -34,7 +34,7 @@ const Landing = () => {
                 </div>
                 </div>
             <div>
-                <div className="px-5 text-left text-[#B99768] text-4xl tracking-widest font-semibold shadow-lg">
+                <div className="px-5 text-left text-[#B99768] text-4xl tracking-widest font-semibold shadow-lgg">
                     <h1>Descubre la magia del lugar</h1>
                 </div>
                     <div className='flex items-center justify-center'>
