@@ -12,11 +12,11 @@ router.post('/', async (req, res) => {
 
 
     res.render('pages/bedrooms.ejs', {  bedrooms, result, title: 'Hotel Backend' })
-    //res.status(201).json(result)
-   // res.render('pages/bedrooms.ejs', {  result, bedrooms, title: 'Hotel Backend' })
-
-   res.render('pages/bedrooms.ejs', {  result, bedrooms, title: 'Hotel Backend' })
     res.status(201).json(result)
+    res.render('pages/bedrooms.ejs', {  result, bedrooms, title: 'Hotel Backend' })
+
+  //  res.render('pages/bedrooms.ejs', {  result, bedrooms, title: 'Hotel Backend' })
+  //   res.status(201).json(result)
 
   } catch (error) {
     console.error(error)

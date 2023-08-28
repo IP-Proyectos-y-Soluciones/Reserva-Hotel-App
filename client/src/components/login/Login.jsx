@@ -1,4 +1,4 @@
-import React,{ useState } from "react";
+import { useState } from "react";
 import { useDispatch } from "react-redux";
 //import { updatedUser } from "../../redux/features/userSlice";
 import GoogleLogin from 'react-google-login';
@@ -29,14 +29,13 @@ const Login = () => {
         }
         try {
             const response = dispatch(loginUser({ email, password }));
-            console.log()
             if (response && response.error) {
                 setError(response.error.message);
             }
         }             
         catch(error){
         setError("Error al registrar el usuario");
-    };
+    }
     // localStorage.setItem("user", JSON.stringify(user));
      //   dispatch(updatedUser(user))
 }
