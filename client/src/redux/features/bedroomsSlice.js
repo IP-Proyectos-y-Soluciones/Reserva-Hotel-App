@@ -5,7 +5,8 @@ import { getBedroom } from "../actions/bedroomsActions";
 const bedroomSlice = createSlice({
     name: "bedrooms",
     initialState: {
-      bedrooms: [], 
+      bedrooms: [],
+      reservedBedrooms:[], 
     },
     reducers: {
       setBedrooms: (state, action) => {
@@ -27,7 +28,7 @@ const bedroomSlice = createSlice({
         .addCase(getBedroom.fulfilled, (state, action) => {
           state.status = 'succeeded';
           state.bedrooms = action.payload;
-          state.reserveBedroom = action.payload;
+          state.reservedBedrooms = action.payload;
         })
         .addCase(getBedroom.rejected, (state, action) => {
           state.status = 'failed';
