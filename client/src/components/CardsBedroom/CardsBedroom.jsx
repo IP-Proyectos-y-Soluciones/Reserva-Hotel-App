@@ -48,4 +48,6 @@ const CardsBedroom = () => {
     )
 };
 
+
+
 export default CardsBedroom;
