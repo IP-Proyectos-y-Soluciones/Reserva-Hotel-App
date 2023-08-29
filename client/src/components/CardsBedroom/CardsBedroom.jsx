@@ -1,51 +1,39 @@
-import CardBedroom from "../CardBedroom/CardBedroom";
-import { getBedroom } from '../../redux/actions/bedroomsActions';
+import React, { useEffect } from "react";
 import { useDispatch, useSelector } from 'react-redux';
-import { useEffect } from "react";
+import { getBedroom } from '../../redux/actions/bedroomsActions';
+import CardBedroom from "../CardBedroom/CardBedroom";
 
 const CardsBedroom = () => {
-
     const dispatch = useDispatch();
-    const { bedrooms } = useSelector((state)=>state.bedrooms);     
-    console.log(bedrooms);
+    const { bedrooms } = useSelector(state => state.bedrooms);
 
-    const eachBedroom = bedrooms.map(bedroom=>{
-        return {
-            key:bedroom.id,
-            id_h:bedroom.id,
-            kind_h:bedroom.kind_h,
-            gallery:bedroom.gallery
-        }
-    })
-    // console.log(eachBedroom);
-    
-    useEffect(()=>{
-        dispatch(getBedroom()) // action que trae todos los bedrooms
-    },[dispatch]);
-                                
-    return(
-        <div >
-            
-            <div className="container flex flex-row p-4 mx-auto space-x-4">
-            {
-                eachBedroom.length > 0 &&  
-                eachBedroom.map(bedroom=>{
-                    return(
-                        <CardBedroom
-                        key={bedroom.id_h}
-                        id_h={bedroom.id_h}
-                        kind_h={bedroom.kind_h}
-                        gallery={bedroom.gallery[0]}
-                        />
-                    )
-                })           
+    useEffect(() => {
+        dispatch(getBedroom());
+    }, [dispatch]);
 
-                
-            }
-            </div>
+    if (!bedrooms) {
+        return <p>Loading...</p>; // Veriler yüklenene kadar yükleme mesajı göster
+    }
 
+    const eachBedroom = bedrooms.map(bedroom => ({
+        key: bedroom.id,
+        id_h: bedroom.id,
+        kind_h: bedroom.kind_h,
+        gallery: bedroom.gallery
+    }));
+
+    return (
+        <div className="container flex flex-row p-4 mx-auto space-x-4">
+            {eachBedroom.map(bedroom => (
+                <CardBedroom
+                    key={bedroom.id_h}
+                    id_h={bedroom.id_h}
+                    kind_h={bedroom.kind_h}
+                    gallery={bedroom.gallery}
+                />
+            ))}
         </div>
-    )
+    );
 };
 
 
