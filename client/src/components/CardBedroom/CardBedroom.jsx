@@ -1,6 +1,7 @@
 import { Link } from 'react-router-dom';
 import "tw-elements";
 
+
 const CardBedroom = ({id_h, gallery, kind_h}) =>{
   
     return ( 
