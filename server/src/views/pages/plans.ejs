@@ -1,100 +1,103 @@
-<%- include('../partials/header') %>
 <%- include('../partials/head') %>
-<%- include('../partials/menu') %>
+<div class="wrapper">
+  <%- include('../partials/header') %>
+    <%- include('../partials/menu') %>
 
 
 
-<div class="content-wrapper" style="min-height: 717px">
-  <section class="content-header">
-    <div class="container-fluid">
-      <div class="row mb-2">
-        <div class="col-sm-6">
-          <h1>Plan</h1>
-        </div>
-
-        <div class="col-sm-6">
-          <ol class="breadcrumb float-sm-right">
-            <li class="breadcrumb-item"><a href="index">Inicio</a></li>
-            <li class="breadcrumb-item active">Plan</li>
-          </ol>
-        </div>
-      </div>
-    </div>
-    <!-- /.container-fluid -->
-  </section>
-
-  <!-- Main content -->
-  <section class="content">
-    <div class="container-fluid">
-      <div class="row">
-        <div class="col-12">
-          <!-- Default box -->
-          <div class="card card-info card-outline">
-            <div class="card-header">
-              <button
-              class="btn btn-primary btn-sm"
-              data-toggle="modal"
-              data-target="#crearPlan"
-            >
-              Crear nuevo plan
-            </button>
-            </div>
-            <!-- /.card-header -->
-
-            <div class="card-body">
-              <table
-                class="table table-bordered table-striped dt-responsive tablaBanner"
-                width="100%"
-              >
-                <thead>
-                  <tr>
-                    <th style="width: 10px">#</th>
-                    <th>Tipo</th>
-                    <th>Description</th>
-                    <th>Img</th>
-                    <th>Fecha</th>
-                    <th style="width: 100px">Acciones</th>
-                  </tr>
-                </thead>
-
-                <tbody>
-                  <% for (const plan of plans) { %>
-                    <tr>
-                      <td><%= plan.id %></td>
-                      <td><%= plan.kind %></td>
-                      <td><%= plan.description %></td>  
-                      <td>
-                        <div>
-                          
-                                <img src="<%= plan.img %>" class="img-fluid" style="margin-top: 20px; margin-right: 20px; border-radius: 100em; display: inline-block;">
-                           
-                        </div>
-                    </td>      
-                      <td><%= plan.date %></td>
-                      <td>
-
-                        <button class="btn btn-warning btn-sm editarBtn" data-toggle="modal" data-target="#editarPlan" data-id="<%= plan.id %>">
-                          <i class="fas fa-pencil-alt text-white"></i>
-                      </button>
-                                   
-                      <button class="btn btn-danger btn-sm eliminarBtn" data-toggle="modal" data-target="#eliminarPlan<%= plan.id %>" data-id="<%= plan.id %>">
-                        <i class="fas fa-trash-alt"></i>
-                      </button>
-                      
-                      </td>
-                    </tr>
-                  <% } %>
-                </tbody>
-              </table>
-            </div>
-            <!-- /.card-body -->
+  <div class="content-wrapper" style="min-height: 717px">
+    <section class="content-header">
+      <div class="container-fluid">
+        <div class="row mb-2">
+          <div class="col-sm-6">
+            <h1>Plan</h1>
           </div>
-          <!-- /.card -->
+
+          <div class="col-sm-6">
+            <ol class="breadcrumb float-sm-right">
+              <li class="breadcrumb-item"><a href="index">Inicio</a></li>
+              <li class="breadcrumb-item active">Plan</li>
+            </ol>
+          </div>
         </div>
       </div>
-    </div>
-  </section>
-  <!-- /.content -->
+      <!-- /.container-fluid -->
+    </section>
+
+    <!-- Main content -->
+    <section class="content">
+      <div class="container-fluid">
+        <div class="row">
+          <div class="col-12">
+            <!-- Default box -->
+            <div class="card card-info card-outline">
+              <div class="card-header">
+                <button
+                class="btn btn-primary btn-sm"
+                data-toggle="modal"
+                data-target="#crearPlan"
+              >
+                Crear nuevo plan
+              </button>
+              </div>
+              <!-- /.card-header -->
+
+              <div class="card-body">
+                <table
+                  class="table table-bordered table-striped dt-responsive tablaBanner"
+                  width="100%"
+                >
+                  <thead>
+                    <tr>
+                      <th style="width: 10px">#</th>
+                      <th>Tipo</th>
+                      <th>Description</th>
+                      <th>Img</th>
+                      <th>Fecha</th>
+                      <th style="width: 100px">Acciones</th>
+                    </tr>
+                  </thead>
+
+                  <tbody>
+                    <% for (const plan of plans) { %>
+                      <tr>
+                        <td><%= plan.id %></td>
+                        <td><%= plan.kind %></td>
+                        <td><%= plan.description %></td>  
+                        <td>
+                          <div>
+                            
+                            <img src="<%= plan.img %>" class="img-fluid" style="margin-top: 20px; margin-right: 20px; border-radius: 100em; display: inline-block;">
+                            
+                          </div>
+                      </td>      
+                        <td><%= plan.date %></td>
+                        <td>
+
+                          <button class="btn btn-warning btn-sm editarBtn" data-toggle="modal" data-target="#editarPlan" data-id="<%= plan.id %>">
+                            <i class="fas fa-pencil-alt text-white"></i>
+                        </button>
+                                    
+                        <button class="btn btn-danger btn-sm eliminarBtn" data-toggle="modal" data-target="#eliminarPlan<%= plan.id %>" data-id="<%= plan.id %>">
+                          <i class="fas fa-trash-alt"></i>
+                        </button>
+                        
+                        </td>
+                      </tr>
+                    <% } %>
+                  </tbody>
+                </table>
+              </div>
+              <!-- /.card-body -->
+            </div>
+            <!-- /.card -->
+          </div>
+        </div>
+      </div>
+    </section>
+    <!-- /.content -->
+  </div>
+  <%- include('../partials/footer') %>
 </div>
 <!--=====================================
 Modal Crear Plan
