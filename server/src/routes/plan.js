@@ -57,8 +57,10 @@ router.post('/delete/:id', async (req, res) => {
 router.get('/', async (req, res) => {
   try {
     const plans = await getAllPlans();
-    res.render('pages/plans.ejs', { plans, title: 'Hotel Backend' });
+    //res.render('pages/plans.ejs', { plans, title: 'Hotel Backend' });
+         res.status(201).json(plans)
   } catch (error) {
+
     res.status(500).json({ error: error.message });
   }
 });

@@ -8,6 +8,7 @@ export const getPlans=createAsyncThunk(
     async()=>{
         try{
             const res = await axios.get(urlPlans);
+            console.log(res)
             return res.data 
         } catch(error){
           throw new Error (error.response.data.message)

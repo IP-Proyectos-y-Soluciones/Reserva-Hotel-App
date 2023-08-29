@@ -7,6 +7,7 @@ export const getBedroom= createAsyncThunk(
     "bedroom/getBedroom",
     async () =>{
         try{
+            console.log(resp)
             const resp = await axios.get(urlBedroom);
             return resp.data
         }catch(error){
