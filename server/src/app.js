@@ -1,7 +1,7 @@
 const express = require ("express");
 const cookieParser = require('cookie-parser');
 const expressSession = require('express-session');
-const SessionStore = require('express-session-sequelize')(expressSession.Store);
+// const SessionStore = require('express-session-sequelize')(expressSession.Store); // Conexion con la DB via sequelize - Login Session
 const bodyParser = require("body-parser");
 const morgan = require("morgan");
 const fs = require("fs");
