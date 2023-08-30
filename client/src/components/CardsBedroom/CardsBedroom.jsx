@@ -8,13 +8,18 @@ const CardsBedroom = () => {
 
   const { bedrooms } = useSelector(state => state.bedrooms);
 
+
   useEffect(() => {
     dispatch(getBedroom());
   }, [dispatch]);
 
+
+
+
   if (!bedrooms) {
     return <p>Loading...</p>;
   }
+
 
   return (
     <div className="container flex flex-row p-4 mx-auto space-x-4">

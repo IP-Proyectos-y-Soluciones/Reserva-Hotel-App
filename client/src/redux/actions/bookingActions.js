@@ -8,7 +8,10 @@ export const getBookings = createAsyncThunk(
   async(_, { getState }) =>{
     try{
       const { filter } = getState();
-      const res = await axios.get(urlBookings, { params: filter }, {
+
+
+      const res = await axios.get(urlBookings, { params: filter } , {
+
         headers: {
           Accept: 'application/json',
         },
@@ -24,7 +27,11 @@ export const postBookings = createAsyncThunk(
     "bookings/postBookings",
     async(form,{rejectWithValue})=>{
       try{
-        const res= await axios.post(urlBookings,form, {
+
+     
+
+        const res= await axios.post(urlBookings,form , {
+
           headers: {
             Accept: 'application/json',
           },
