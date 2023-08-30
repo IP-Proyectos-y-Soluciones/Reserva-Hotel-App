@@ -12,6 +12,10 @@ export const getPlans=createAsyncThunk(
                   Accept: 'application/json',
                 },
               });
+<<<<<<< Updated upstream
+=======
+            console.log(res)
+>>>>>>> Stashed changes
             return res.data 
         } catch(error){
           throw new Error (error.response.data.message)

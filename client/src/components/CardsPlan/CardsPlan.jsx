@@ -10,12 +10,12 @@ const CardsPlan = () => {
 
     useEffect(() => {
         dispatch(getPlans());
-        console.log(plans)
     }, [dispatch]);
 
 
- 
-    if (!plans) {
+
+
+     if (!plans) {
         return <p>Loading...</p>;
     }
 

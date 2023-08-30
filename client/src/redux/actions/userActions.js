@@ -9,7 +9,11 @@ export const getUsers=createAsyncThunk(
     "users/getUsers",
     async()=>{
         try{
+<<<<<<< Updated upstream
             const res = await axios.get(urlUsers, {
+=======
+            const res = await axios.get(urlUsers , {
+>>>>>>> Stashed changes
                 headers: {
                   Accept: 'application/json',
                 },
@@ -25,7 +29,11 @@ export const createUsersVerify = createAsyncThunk(
     "users/createUsersVerify",
     async()=>{
         try{
+<<<<<<< Updated upstream
             const res = await axios.post(urlUsersPost, {
+=======
+            const res = await axios.post(urlUsersPost , {
+>>>>>>> Stashed changes
                 headers: {
                   Accept: 'application/json',
                 },
@@ -63,7 +71,11 @@ export const createUsers =createAsyncThunk(
     "users/createUsers",
     async(payload)=>{
         try{
+<<<<<<< Updated upstream
             const res= await axios.post(urlUsers, payload, {
+=======
+            const res= await axios.post(urlUsers, payload , {
+>>>>>>> Stashed changes
                 headers: {
                   Accept: 'application/json',
                 },
@@ -78,7 +90,11 @@ export const putUser = createAsyncThunk(
     "users/putUsers",
     async(obj)=>{
         try{
+<<<<<<< Updated upstream
             const res= await axios.put(urlUsers, obj, {
+=======
+            const res= await axios.put(urlUsers, obj , {
+>>>>>>> Stashed changes
                 headers: {
                   Accept: 'application/json',
                 },
@@ -94,7 +110,11 @@ export const updatedsUser=createAsyncThunk(
     "users/updatedsUser",
     async(id) =>{
         try{
+<<<<<<< Updated upstream
             const res= await axios.get(urlUsers,{data:{id:id}}, {
+=======
+            const res= await axios.get(urlUsers,{data:{id:id}} , {
+>>>>>>> Stashed changes
                 headers: {
                   Accept: 'application/json',
                 },
