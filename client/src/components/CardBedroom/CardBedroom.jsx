@@ -3,7 +3,7 @@ import "tw-elements";
 
 
 
-const CardBedroom = ({id, gallery0, gallery1, gallery2, gallery3, gallery4, gallery5, kind_h}) =>{
+const CardBedroom = ({id, gallery0, kind_h }) =>{
 
   
    
@@ -13,21 +13,6 @@ const CardBedroom = ({id, gallery0, gallery1, gallery2, gallery3, gallery4, gall
       <figure className="relative transition-all duration-300 cursor-pointer max-w-fit filter grayscale hover:grayscale-0">
          <a href="#">
            <img className="rounded-lg " src={gallery0} alt={kind_h}/>
-         </a>
-         <a href="#">
-           <img className="rounded-lg " src={gallery1} alt={kind_h}/>
-         </a>
-         <a href="#">
-           <img className="rounded-lg " src={gallery2} alt={kind_h}/>
-         </a>
-         <a href="#">
-           <img className="rounded-lg " src={gallery3} alt={kind_h}/>
-         </a>
-         <a href="#">
-           <img className="rounded-lg " src={gallery4} alt={kind_h}/>
-         </a>
-         <a href="#">
-           <img className="rounded-lg " src={gallery5} alt={kind_h}/>
          </a>
            <figcaption className="absolute px-4 text-lg text-white bottom-6">
              <p>{kind_h}</p>

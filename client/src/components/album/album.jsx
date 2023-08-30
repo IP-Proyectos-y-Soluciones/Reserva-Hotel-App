@@ -1,9 +1,10 @@
-import React, { useState, useEffect } from 'react';
+import{ useState, useEffect } from 'react';
 import axios from 'axios';
 import { BsChevronCompactLeft, BsChevronCompactRight } from 'react-icons/bs';
+import PropTypes from 'prop-types';
 
 
-const Album = ({id}) => {
+const Album = ({ id }) => {
   const [currentIndex,setCurrentIndex] = useState(0);
   const [images, setImages] = useState([]);
   console.log(images);  
@@ -51,5 +52,9 @@ const Album = ({id}) => {
   </div>
   );
 }
+
+Album.propTypes = {
+  id: PropTypes.string.isRequired,
+};
 
 export default Album;
