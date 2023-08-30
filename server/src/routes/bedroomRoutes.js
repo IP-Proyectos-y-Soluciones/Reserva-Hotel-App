@@ -8,15 +8,23 @@ router.post('/', async (req, res) => {
     const result = await createBedroom(kind_h, style, gallery, description_h);
     const bedrooms = await getBedrooms();
 
-
-    res.render('pages/bedrooms.ejs', {  bedrooms, result, title: 'Hotel Backend' })
-
-  //  res.render('pages/bedrooms.ejs', {  result, bedrooms, title: 'Hotel Backend' })
-  //   res.status(201).json(result)
+    if (req.accepts('json')) {
+      res.status(201).json({ result, bedrooms });
+    } else if (req.accepts('html')) {
+      res.render('pages/bedrooms.ejs', { bedrooms, result, title: 'Hotel Backend' });
+    } else {
+      res.status(406).send('Not Acceptable');
+    }
 
   } catch (error) {
-    console.error(error)
-    res.status(500).json({ error: error.message });
+    console.error(error);
+    if (req.accepts('json')) {
+      res.status(500).json({ error: error.message });
+    } else if (req.accepts('html')) {
+      res.status(500).json({ error: error.message });
+    } else {
+      res.status(406).send('Not Acceptable');
+    }
   }
 });
 
@@ -57,26 +65,30 @@ router.get('/', async (req, res) => {
 
 router.post('/:id', async (req, res) => {
   try {
-
     const { id } = req.params;
-
     const { kind_h, style, gallery, description_h } = req.body;
-
     const result = await updateBedroom(id, kind_h, style, gallery, description_h);
-   const bedrooms = await getBedrooms();
+    const bedrooms = await getBedrooms();
 
-    res.render('pages/bedrooms.ejs', {  result, bedrooms, title, title: 'Hotel Backend' })
-    //res.status(201).json(result)
-
-    //res.render('pages/bedrooms.ejs', {  result, bedrooms, title: 'Hotel Backend' })
-    res.status(201).json(result)
+    if (req.accepts('json')) {
+      res.status(201).json(result);
+    } else if (req.accepts('html')) {
+      res.render('pages/bedrooms.ejs', { result, bedrooms, title: 'Hotel Backend' });
+    } else {
+      res.status(406).send('Not Acceptable');
+    }
 
   } catch (error) {
-    console.error(error)
-    res.status(500).json({ error: error.message });
+    console.error(error);
+    if (req.accepts('json')) {
+      res.status(500).json({ error: error.message });
+    } else if (req.accepts('html')) {
+      res.status(500).json({ error: error.message });
+    } else {
+      res.status(406).send('Not Acceptable');
+    }
   }
 });
-
 
 router.get('/detail/:id', async (req, res) => {
   try {
@@ -93,31 +105,30 @@ router.get('/detail/:id', async (req, res) => {
   }
 });
 
-
 router.post('/delete/:id', async (req, res) => {
   try {
-    const { id } = req.params
-
+    const { id } = req.params;
     const result = await deleteBedrooms(id);
 
-    if (result.error) {
-   console.error(result.error)
-
-    } else {
+    if (req.accepts('json')) {
+      res.json(result);
+    } else if (req.accepts('html')) {
       const bedrooms = await getBedrooms();
       res.render('pages/bedrooms.ejs', { bedrooms, result, title: 'Hotel Backend' });
-
-      //res.render('pages/bedrooms.ejs', {  result, bedrooms, title: 'Hotel Backend' })
-      // res.json(result)
-      }
-    } catch (error) {
-      console.error(error)
-      res.status(500).json({ error: error.message });
-
+    } else {
+      res.status(406).send('Not Acceptable');
     }
-  } )
-  
-  
 
+  } catch (error) {
+    console.error(error);
+    if (req.accepts('json')) {
+      res.status(500).json({ error: error.message });
+    } else if (req.accepts('html')) {
+      res.status(500).json({ error: error.message });
+    } else {
+      res.status(406).send('Not Acceptable');
+    }
+  }
+});
 
 module.exports = router;

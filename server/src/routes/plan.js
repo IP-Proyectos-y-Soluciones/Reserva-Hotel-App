@@ -1,4 +1,4 @@
-const express = require("express");
+const express = require('express');
 const router = express.Router();
 const { createPlan, updatePlan, deletePlan, getAllPlans } = require('../controllers/planControllers');
 
@@ -7,14 +7,24 @@ router.post('/', async (req, res) => {
     const { kind, img, description, hight_price, low_price } = req.body;
     const newPlan = await createPlan(kind, img, description, hight_price, low_price);
 
-    if (newPlan.error) {
-      console.error(newPlan.error); 
-    } else {
-      const plans = await getAllPlans();
-      res.render('pages/plans.ejs', { plans, newPlan, title: 'Hotel Backend' });
+    if (req.accepts('json')) {
+      res.status(201).json({ newPlan });
+    } else if (req.accepts('html')) {
+      if (newPlan.error) {
+        console.error(newPlan.error);
+      } else {
+        const plans = await getAllPlans();
+        res.render('pages/plans.ejs', { plans, newPlan, title: 'Hotel Backend' });
+      }
     }
+
   } catch (error) {
     console.error(error);
+    if (req.accepts('json')) {
+      res.status(500).json({ error: error.message });
+    } else if (req.accepts('html')) {
+      res.status(500).json({ error: error.message });
+    }
   }
 });
 
@@ -25,14 +35,24 @@ router.post('/:id', async (req, res) => {
 
     const updatedPlan = await updatePlan(id, kind, img, description, high_price, low_price);
 
-    if (updatedPlan.error) {
-      console.error(updatedPlan.error);
-    } else {
-      const plans = await getAllPlans();
-      res.render('pages/plans.ejs', { plans, updatedPlan, title: 'Hotel Backend' });
+    if (req.accepts('json')) {
+      res.status(201).json({ updatedPlan });
+    } else if (req.accepts('html')) {
+      if (updatedPlan.error) {
+        console.error(updatedPlan.error);
+      } else {
+        const plans = await getAllPlans();
+        res.render('pages/plans.ejs', { plans, updatedPlan, title: 'Hotel Backend' });
+      }
     }
+
   } catch (error) {
     console.error(error);
+    if (req.accepts('json')) {
+      res.status(500).json({ error: error.message });
+    } else if (req.accepts('html')) {
+      res.status(500).json({ error: error.message });
+    }
   }
 });
 
@@ -41,18 +61,26 @@ router.post('/delete/:id', async (req, res) => {
     const { id } = req.params;
     const deletedPlan = await deletePlan(id);
 
-    if (deletedPlan.error) {
-      console.error(deletedPlan.error);
-    } else {
-      const plans = await getAllPlans();
-      res.render('pages/plans.ejs', { plans, deletedPlan, title: 'Hotel Backend' });
+    if (req.accepts('json')) {
+      res.status(200).json({ deletedPlan });
+    } else if (req.accepts('html')) {
+      if (deletedPlan.error) {
+        console.error(deletedPlan.error);
+      } else {
+        const plans = await getAllPlans();
+        res.render('pages/plans.ejs', { plans, deletedPlan, title: 'Hotel Backend' });
+      }
     }
+
   } catch (error) {
     console.error(error);
+    if (req.accepts('json')) {
+      res.status(500).json({ error: error.message });
+    } else if (req.accepts('html')) {
+      res.status(500).json({ error: error.message });
+    }
   }
 });
-
-
 
 // router.get('/', async (req, res) => {
 //   try {
@@ -84,6 +112,7 @@ router.get('/', async (req, res) => {
       }
   } catch (error) {
       res.status(500).json({ error: error.message });
+
   }
 });
 

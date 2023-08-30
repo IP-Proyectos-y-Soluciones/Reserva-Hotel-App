@@ -4,36 +4,35 @@ import { getBedroom } from '../../redux/actions/bedroomsActions';
 import CardBedroom from "../CardBedroom/CardBedroom";
 
 const CardsBedroom = () => {
-    const dispatch = useDispatch();
-    const { bedrooms } = useSelector(state => state.bedrooms);
+  const dispatch = useDispatch();
 
-    useEffect(() => {
-        dispatch(getBedroom());
-    }, [dispatch]);
+  const { bedrooms } = useSelector(state => state.bedrooms);
 
-    if (!bedrooms) {
-        return <p>Loading...</p>; // Veriler yüklenene kadar yükleme mesajı göster
-    }
+  useEffect(() => {
+    dispatch(getBedroom());
+  }, [dispatch]);
 
-    const eachBedroom = bedrooms.map(bedroom => ({
-        key: bedroom.id,
-        id_h: bedroom.id,
-        kind_h: bedroom.kind_h,
-        gallery: bedroom.gallery
-    }));
+  if (!bedrooms) {
+    return <p>Loading...</p>;
+  }
 
-    return (
-        <div className="container flex flex-row p-4 mx-auto space-x-4">
-            {eachBedroom.map(bedroom => (
-                <CardBedroom
-                    key={bedroom.id_h}
-                    id_h={bedroom.id_h}
-                    kind_h={bedroom.kind_h}
-                    gallery={bedroom.gallery}
-                />
-            ))}
-        </div>
-    );
+  return (
+    <div className="container flex flex-row p-4 mx-auto space-x-4">
+      {bedrooms && bedrooms.map(bedroom => (
+        <CardBedroom
+          key={bedroom.id}
+          id={bedroom.id}
+          gallery0={bedroom.gallery[0]}
+          gallery1={bedroom.gallery[1]}
+          gallery2={bedroom.gallery[2]}
+          gallery3={bedroom.gallery[3]}
+          gallery4={bedroom.gallery[4]}
+          gallery5={bedroom.gallery[5]}
+          kind_h={bedroom.kind_h}
+        />
+      ))}
+    </div>
+  );
 };
 
 export default CardsBedroom;
