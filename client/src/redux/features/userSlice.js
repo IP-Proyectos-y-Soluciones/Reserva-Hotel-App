@@ -44,7 +44,7 @@ const usersSlice = createSlice({
       })
       .addCase(getUsers.rejected, (state, action) => {
         state.error = 'Error occurred while fetching sports data.';
-        state.users = [];
+        state.users = action.payload;
       })
       .addCase(putUser.fulfilled, (state, action) => {
         state.error = "";
