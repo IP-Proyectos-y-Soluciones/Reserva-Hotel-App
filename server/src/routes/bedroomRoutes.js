@@ -2,8 +2,6 @@ const express = require('express');
 const router = express.Router();
 const { createBedroom, getBedrooms, updateBedroom, deleteBedrooms, getBedroomById } = require('../controllers/bedroomControllers');
 
-
-
 router.post('/', async (req, res) => {
   try {
     const { kind_h, style, gallery, description_h } = req.body;
@@ -22,17 +20,40 @@ router.post('/', async (req, res) => {
   }
 });
 
+// router.get('/', async (req, res) => {
+//   try {
+//     const bedrooms = await getBedrooms();
+//      res.render('pages/bedrooms.ejs', { bedrooms, title: 'Hotel Backend' });
+//     //res.status(200).json(bedrooms); // Status kodunu 200 OK olarak değiştirildi.
+//   } catch (error) {
+//     console.error(error);
+//     res.status(500).json({ error: error.message });
+//   }
+// });
+
 router.get('/', async (req, res) => {
   try {
-    const bedrooms = await getBedrooms();
-     res.render('pages/bedrooms.ejs', { bedrooms, title: 'Hotel Backend' });
-    //res.status(200).json(bedrooms); // Status kodunu 200 OK olarak değiştirildi.
+      const bedrooms = await getBedrooms();
+      if (bedrooms.error) {
+          return res.status(400).json({ error: bedrooms.error });
+      }
+
+      const responseData = { bedrooms, title: 'Hotel Backend' };
+
+      if (req.accepts('html')) {
+          // Si el cliente acepta HTML, renderiza la vista
+          res.render('pages/bedrooms.ejs', responseData);
+      } else if (req.accepts('json')) {
+          // Si el cliente acepta JSON, devuelve el JSON
+          res.json(bedrooms);
+      } else {
+          // Si el cliente no acepta ni HTML ni JSON, devuelve un error
+          res.status(406).send('Not Acceptable');
+      }
   } catch (error) {
-    console.error(error);
-    res.status(500).json({ error: error.message });
+      res.status(500).json({ error: error.message });
   }
 });
-
 
 router.post('/:id', async (req, res) => {
   try {
