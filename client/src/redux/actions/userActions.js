@@ -9,7 +9,11 @@ export const getUsers=createAsyncThunk(
     "users/getUsers",
     async()=>{
         try{
-            const res = await axios.get(urlUsers);
+            const res = await axios.get(urlUsers, {
+                headers: {
+                  Accept: 'application/json',
+                },
+              });
             return res.data
         
     } catch(error){
@@ -21,7 +25,11 @@ export const createUsersVerify = createAsyncThunk(
     "users/createUsersVerify",
     async()=>{
         try{
-            const res = await axios.post(urlUsersPost);
+            const res = await axios.post(urlUsersPost, {
+                headers: {
+                  Accept: 'application/json',
+                },
+              });
             return res.data
         }catch(error){
             throw new Error(error.response.data.message)
@@ -55,7 +63,11 @@ export const createUsers =createAsyncThunk(
     "users/createUsers",
     async(payload)=>{
         try{
-            const res= await axios.post(urlUsers, payload);
+            const res= await axios.post(urlUsers, payload, {
+                headers: {
+                  Accept: 'application/json',
+                },
+              });
             return res.data
         }catch(error){
             throw new Error(error.response.data.message)
@@ -66,7 +78,11 @@ export const putUser = createAsyncThunk(
     "users/putUsers",
     async(obj)=>{
         try{
-            const res= await axios.put(urlUsers, obj);
+            const res= await axios.put(urlUsers, obj, {
+                headers: {
+                  Accept: 'application/json',
+                },
+              });
             return res.data
         } catch(error){
             throw new Error(error.response.data.message)
@@ -78,7 +94,11 @@ export const updatedsUser=createAsyncThunk(
     "users/updatedsUser",
     async(id) =>{
         try{
-            const res= await axios.get(urlUsers,{data:{id:id}})
+            const res= await axios.get(urlUsers,{data:{id:id}}, {
+                headers: {
+                  Accept: 'application/json',
+                },
+              })
             return res.data
         }catch(error){
             throw new Error(error.response.data.message)
