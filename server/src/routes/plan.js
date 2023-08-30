@@ -4,8 +4,8 @@ const { createPlan, updatePlan, deletePlan, getAllPlans } = require('../controll
 
 router.post('/', async (req, res) => {
   try {
-    const { kind, img, description, high_price, low_price } = req.body;
-    const newPlan = await createPlan(kind, img, description, high_price, low_price);
+    const { kind, img, description, hight_price, low_price } = req.body;
+    const newPlan = await createPlan(kind, img, description, hight_price, low_price);
 
     if (req.accepts('json')) {
       res.status(201).json({ newPlan });
@@ -82,23 +82,37 @@ router.post('/delete/:id', async (req, res) => {
   }
 });
 
+// router.get('/', async (req, res) => {
+//   try {
+//     const plans = await getAllPlans();
+//     res.render('pages/plans.ejs', { plans, title: 'Hotel Backend' });
+//   } catch (error) {
+//     res.status(500).json({ error: error.message });
+//   }
+// });
+
 router.get('/', async (req, res) => {
   try {
-    const plans = await getAllPlans();
+      const plans = await getAllPlans();
+      if (plans.error) {
+          return res.status(400).json({ error: plans.error });
+      }
 
-    if (req.accepts('json')) {
-      res.status(200).json(plans);
-    } else if (req.accepts('html')) {
-      res.render('pages/plans.ejs', { plans, title: 'Hotel Backend' });
-    }
+      const responseData = { plans, title: 'Hotel Backend' };
 
+      if (req.accepts('html')) {
+          // Si el cliente acepta HTML, renderiza la vista
+          res.render('pages/plans.ejs', responseData);
+      } else if (req.accepts('json')) {
+          // Si el cliente acepta JSON, devuelve el JSON
+          res.json(plans);
+      } else {
+          // Si el cliente no acepta ni HTML ni JSON, devuelve un error
+          res.status(406).send('Not Acceptable');
+      }
   } catch (error) {
-    console.error(error);
-    if (req.accepts('json')) {
       res.status(500).json({ error: error.message });
-    } else if (req.accepts('html')) {
-      res.status(500).json({ error: error.message });
-    }
+
   }
 });
 

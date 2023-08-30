@@ -28,27 +28,38 @@ router.post('/', async (req, res) => {
   }
 });
 
+// router.get('/', async (req, res) => {
+//   try {
+//     const bedrooms = await getBedrooms();
+//      res.render('pages/bedrooms.ejs', { bedrooms, title: 'Hotel Backend' });
+//     //res.status(200).json(bedrooms); // Status kodunu 200 OK olarak değiştirildi.
+//   } catch (error) {
+//     console.error(error);
+//     res.status(500).json({ error: error.message });
+//   }
+// });
+
 router.get('/', async (req, res) => {
   try {
-    const bedrooms = await getBedrooms();
+      const bedrooms = await getBedrooms();
+      if (bedrooms.error) {
+          return res.status(400).json({ error: bedrooms.error });
+      }
 
-    if (req.accepts('html')) {
-      res.render('pages/bedrooms.ejs', { bedrooms, title: 'Hotel Backend' });
-    } else if (req.accepts('json')) {
-      res.status(200).json(bedrooms);
-    } else {
-      res.status(406).send('Not Acceptable');
-    }
-    
+      const responseData = { bedrooms, title: 'Hotel Backend' };
+
+      if (req.accepts('html')) {
+          // Si el cliente acepta HTML, renderiza la vista
+          res.render('pages/bedrooms.ejs', responseData);
+      } else if (req.accepts('json')) {
+          // Si el cliente acepta JSON, devuelve el JSON
+          res.json(bedrooms);
+      } else {
+          // Si el cliente no acepta ni HTML ni JSON, devuelve un error
+          res.status(406).send('Not Acceptable');
+      }
   } catch (error) {
-    console.error(error);
-    if (req.accepts('json')) {
       res.status(500).json({ error: error.message });
-    } else if (req.accepts('html')) {
-      res.status(500).json({ error: error.message });
-    } else {
-      res.status(406).send('Not Acceptable');
-    }
   }
 });
 
