@@ -2,9 +2,10 @@
 // import axios from 'axios';
 // import { BsChevronCompactLeft, BsChevronCompactRight } from 'react-icons/bs';
 // import { defaults } from 'autoprefixer';
-import React, { useState, useEffect } from 'react';
+import { useState, useEffect } from 'react';
 import axios from 'axios';
 import { Link } from 'react-router-dom';
+import PropTypes from 'prop-types'
 
 const Preview2 = ({ nextRoomId } ) => {
 
@@ -49,6 +50,10 @@ const Preview2 = ({ nextRoomId } ) => {
       </div>
       
     );
+  };
+
+  Preview2.propTypes = {
+    nextRoomId: PropTypes.string.isRequired
   };
   
   export default Preview2;

@@ -1,5 +1,7 @@
+import PropTypes from 'prop-types'
+
 const CardPlan = ({onMouseEnter, onMouseLeave, img, kind}) =>{
-    
+
     return (
                     
         // <div onMouseEnter={onMouseEnter} onMouseLeave={onMouseLeave}>             
@@ -16,4 +18,13 @@ const CardPlan = ({onMouseEnter, onMouseLeave, img, kind}) =>{
 </div>
     )
 }
+
+  CardPlan.propTypes = {
+    onMouseEnter: PropTypes.func.isRequired,
+    onMouseLeave: PropTypes.func.isRequired,
+    img: PropTypes.string.isRequired,
+    kind: PropTypes.string.isRequired,
+  };
+
+
 export default CardPlan;
