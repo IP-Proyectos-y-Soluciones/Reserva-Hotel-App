@@ -27,12 +27,36 @@ router.post('/:id', async (req, res) => {
   }
 });
 
+// router.get('/', async (req, res) => {
+//   try {
+//     const banners = await getBanner();
+//     res.render('pages/banner.ejs', {  banners, title: 'Hotel Backend' })
+//   } catch (error) {
+//     res.status(500).json({ error: error.message });
+//   }
+// });
+
 router.get('/', async (req, res) => {
   try {
-    const banners = await getBanner();
-    res.render('pages/banner.ejs', {  banners, title: 'Hotel Backend' })
+      const banners = await getBanner();
+      if (banners.error) {
+          return res.status(400).json({ error: banners.error });
+      }
+
+      const responseData = { banners, title: 'Hotel Backend' };
+
+      if (req.accepts('html')) {
+          // Si el cliente acepta HTML, renderiza la vista
+          res.render('pages/banner.ejs', responseData);
+      } else if (req.accepts('json')) {
+          // Si el cliente acepta JSON, devuelve el JSON
+          res.json(banners);
+      } else {
+          // Si el cliente no acepta ni HTML ni JSON, devuelve un error
+          res.status(406).send('Not Acceptable');
+      }
   } catch (error) {
-    res.status(500).json({ error: error.message });
+      res.status(500).json({ error: error.message });
   }
 });
 
