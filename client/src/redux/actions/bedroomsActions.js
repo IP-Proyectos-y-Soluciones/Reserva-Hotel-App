@@ -65,8 +65,5 @@ export const deleteBedroom = createAsyncThunk(
       throw new Error(error.response.data.message);
     }
   }
-<<<<<<< Updated upstream
 );
-=======
-);
->>>>>>> Stashed changes
+
