@@ -54,12 +54,23 @@ router.get('/', async (req, res) => {
     try {
         const travels = await getAllTravels();
         if (travels.error) {
-            res.status(400).json({ error: travels.error });
+            return res.status(400).json({ error: travels.error });
+        }
+
+        const responseData = { travels, title: 'Hotel Backend' };
+
+        if (req.accepts('html')) {
+            // Si el cliente acepta HTML, renderiza la vista
+            res.render('pages/travel.ejs', responseData);
+        } else if (req.accepts('json')) {
+            // Si el cliente acepta JSON, devuelve el JSON
+            res.json(travels);
         } else {
-            res.render('pages/travel.ejs', { travels, title: 'Hotel Backend' });
+            // Si el cliente no acepta ni HTML ni JSON, devuelve un error
+            res.status(406).send('Not Acceptable');
         }
     } catch (error) {
-        res.status(500).json({ error: 'Internal server error' });
+        res.status(500).json({ error: error.message });
     }
 });
 

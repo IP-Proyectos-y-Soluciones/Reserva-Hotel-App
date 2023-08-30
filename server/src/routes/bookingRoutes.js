@@ -4,20 +4,41 @@ const { Users } = require("../config/db")
 const { listBooking, deleteBooking, createBooking, updateBooking } = require('../controllers/bookingControllers');
 const { sendMail } = require("../controllers/sendMailController")
 
+// router.get('/', async (req, res) => {
+//   try {
+//     const bookings = await listBooking();
+//     //res.status(200).json(bookings);
+//     res.render('pages/bookings.ejs', {bookings, title: 'Hotel Backend'})
+//   } catch (error) {
+//     res.status(500).json({ error: error.message });
 
 
+//     res.render('pages/booking.ejs', {bookings, title: 'Hotel Backend'})
+
+//   }
+// });
 
 router.get('/', async (req, res) => {
   try {
-    const bookings = await listBooking();
-    //res.status(200).json(bookings);
-    res.render('pages/bookings.ejs', {bookings, title: 'Hotel Backend'})
+      const bookings = await listBooking();
+      if (bookings.error) {
+          return res.status(400).json({ error: bookings.error });
+      }
+
+      const responseData = { bookings, title: 'Hotel Backend' };
+
+      if (req.accepts('html')) {
+          // Si el cliente acepta HTML, renderiza la vista
+          res.render('pages/bookings.ejs', responseData);
+      } else if (req.accepts('json')) {
+          // Si el cliente acepta JSON, devuelve el JSON
+          res.json(bookings);
+      } else {
+          // Si el cliente no acepta ni HTML ni JSON, devuelve un error
+          res.status(406).send('Not Acceptable');
+      }
   } catch (error) {
-    res.status(500).json({ error: error.message });
-
-
-    res.render('pages/booking.ejs', {bookings, title: 'Hotel Backend'})
-
+      res.status(500).json({ error: error.message });
   }
 });
 
