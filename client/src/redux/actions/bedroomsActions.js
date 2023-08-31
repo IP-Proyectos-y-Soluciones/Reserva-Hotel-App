@@ -3,18 +3,6 @@ import axios from "axios";
 
 const urlBedroom = "http://localhost:3001/bedroom";
 
-<<<<<<< HEAD
-export const getBedroom= createAsyncThunk(
-    "bedroom/getBedroom",
-    async () =>{
-        try{
-            console.log(resp)
-            const resp = await axios.get(urlBedroom);
-            return resp.data
-        }catch(error){
-            throw new Error(error.response.data.message)
-        }
-=======
 export const getBedroom = createAsyncThunk(
   "bedroom/getBedroom",
   async () => {
@@ -27,7 +15,6 @@ export const getBedroom = createAsyncThunk(
       return resp.data;
     } catch (error) {
       throw new Error(error.response.data.message);
->>>>>>> 88d811f3e0cbe9df578fbfca14ff5fdd3808570e
     }
   }
 );

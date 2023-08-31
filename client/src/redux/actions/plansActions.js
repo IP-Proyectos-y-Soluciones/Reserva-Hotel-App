@@ -7,16 +7,11 @@ export const getPlans=createAsyncThunk(
     "plan/getPlan",
     async()=>{
         try{
-<<<<<<< HEAD
-            const res = await axios.get(urlPlans);
-            console.log(res)
-=======
             const res = await axios.get(urlPlans, {
                 headers: {
                   Accept: 'application/json',
                 },
               });
->>>>>>> 88d811f3e0cbe9df578fbfca14ff5fdd3808570e
             return res.data 
         } catch(error){
           throw new Error (error.response.data.message)

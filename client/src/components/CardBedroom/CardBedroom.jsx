@@ -2,11 +2,7 @@ import { Link } from 'react-router-dom';
 import "tw-elements";
 
 
-<<<<<<< HEAD
-const CardBedroom = ({id, gallery, kind_h}) =>{
-=======
 const CardBedroom = ({id, gallery0, gallery1, gallery2, gallery3, gallery4, gallery5, kind_h}) =>{
->>>>>>> 88d811f3e0cbe9df578fbfca14ff5fdd3808570e
   
    
 

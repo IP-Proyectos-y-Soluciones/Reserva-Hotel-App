@@ -6,36 +6,6 @@ import CardBedroom from "../CardBedroom/CardBedroom";
 const CardsBedroom = () => {
   const dispatch = useDispatch();
 
-<<<<<<< HEAD
-    useEffect(() => {
-        dispatch(getBedroom());
-        console.log(bedrooms)
-    }, [dispatch, bedrooms]);
-
-
-       const eachBedroom = Object.values(bedrooms).map(bedroom => ({
-         key: bedroom.id,
-         id: bedroom.id,
-         kind_h: bedroom.kind_h,
-         gallery: bedroom.gallery
-      }));
-
-      if (!eachBedroom) {
-        return <p>Loading...</p>;
-    }
-    return (
-        <div className="container flex flex-row p-4 mx-auto space-x-4">
-    {eachBedroom && eachBedroom.map(bedroom => (
-      <CardBedroom
-        key={bedroom.id}
-        id={bedroom.id}
-        kind_h={bedroom.kind_h}
-        gallery={bedroom.gallery}
-      />
-    ))}
-  </div>
-    );
-=======
   const { bedrooms } = useSelector(state => state.bedrooms);
 
   useEffect(() => {
@@ -63,7 +33,6 @@ const CardsBedroom = () => {
       ))}
     </div>
   );
->>>>>>> 88d811f3e0cbe9df578fbfca14ff5fdd3808570e
 };
 
 export default CardsBedroom;
