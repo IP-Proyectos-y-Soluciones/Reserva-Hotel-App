@@ -1,6 +1,6 @@
 import { Link } from 'react-router-dom';
 import "tw-elements";
-
+import PropTypes from 'prop-types'
 
 
 const CardBedroom = ({id, gallery0, kind_h }) =>{
@@ -32,4 +32,12 @@ const CardBedroom = ({id, gallery0, kind_h }) =>{
 
     )
 }
+
+CardBedroom.propTypes = {
+  id: PropTypes.string.isRequired,
+  gallery0: PropTypes.string.isRequired,
+  kind_h: PropTypes.string.isRequired,
+};
+
+
 export default CardBedroom;
