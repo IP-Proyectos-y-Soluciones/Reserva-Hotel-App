@@ -19,15 +19,17 @@ export const getUsers=createAsyncThunk(
 );
 export const createUsersVerify = createAsyncThunk(
     "users/createUsersVerify",
-    async()=>{
-        try{
-            const res = await axios.post(urlUsersPost);
-            return res.data
-        }catch(error){
-            throw new Error(error.response.data.message)
+    async ({ verificationCode }) => {
+        try {
+            const res = await axios.post(urlUsersPost, { verificationCode });
+            return res.data;
+        } catch (error) {
+            throw new Error(error.response.data.message);
         }
     }
 );
+
+  
 export const loginUser=createAsyncThunk(
     "users/login",
     async ({ email, password }) => {
@@ -51,7 +53,7 @@ export const loginUser=createAsyncThunk(
         }
     }
 );
-export const createUsers =createAsyncThunk(
+export const createUsers=createAsyncThunk(
     "users/createUsers",
     async(payload)=>{
         try{

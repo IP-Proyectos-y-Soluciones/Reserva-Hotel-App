@@ -8,10 +8,9 @@ import ButtonBackToTop from "../components/ButtonBackToTop/ButtonBackToTop";
 import Filtros from "../components/Filtros/Filtros";
 import { useState } from 'react';
 
-const Landing = () => {
+const Landing = ({ isLoggedIn, setIsLoggedIn }) => {
     
     const [hoveredCard, setHoveredCard] = useState(null);
-    
 
     const handleCardHover = (description) => {
         setHoveredCard(description);
@@ -23,7 +22,7 @@ const Landing = () => {
 
     return (
         <div className="min-h-screen bg-[#585552]">
-            <NavBar />
+            <NavBar isLoggedIn={isLoggedIn} setIsLoggedIn={setIsLoggedIn}/>
             
             <Banner/>
              <div><Filtros></Filtros> </div> 
