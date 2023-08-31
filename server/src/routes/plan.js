@@ -2,29 +2,46 @@ const express = require('express');
 const router = express.Router();
 const { createPlan, updatePlan, deletePlan, getAllPlans } = require('../controllers/planControllers');
 
+// router.post('/', async (req, res) => {
+//   try {
+//     const { kind, img, description, hight_price, low_price } = req.body;
+//     const newPlan = await createPlan(kind, img, description, hight_price, low_price);
+
+//     if (req.accepts('json')) {
+//       res.status(201).json({ newPlan });
+//     } else if (req.accepts('html')) {
+//       if (newPlan.error) {
+//         console.error(newPlan.error);
+//       } else {
+//         const plans = await getAllPlans();
+//         res.render('pages/plans.ejs', { plans, newPlan, title: 'Hotel Backend' });
+//       }
+//     }
+
+//   } catch (error) {
+//     console.error(error);
+//     if (req.accepts('json')) {
+//       res.status(500).json({ error: error.message });
+//     } else if (req.accepts('html')) {
+//       res.status(500).json({ error: error.message });
+//     }
+//   }
+// });
+
 router.post('/', async (req, res) => {
   try {
     const { kind, img, description, hight_price, low_price } = req.body;
     const newPlan = await createPlan(kind, img, description, hight_price, low_price);
 
-    if (req.accepts('json')) {
-      res.status(201).json({ newPlan });
-    } else if (req.accepts('html')) {
-      if (newPlan.error) {
-        console.error(newPlan.error);
-      } else {
-        const plans = await getAllPlans();
-        res.render('pages/plans.ejs', { plans, newPlan, title: 'Hotel Backend' });
-      }
+    if (newPlan.error) {
+      res.render('pages/404.ejs', { newPlan, title: 'Hotel Backend' });
+    } else {
+      const plans = await getAllPlans();
+      res.render('pages/plans.ejs', { newPlan, plans, title: 'Hotel Backend' });
     }
 
   } catch (error) {
-    console.error(error);
-    if (req.accepts('json')) {
-      res.status(500).json({ error: error.message });
-    } else if (req.accepts('html')) {
-      res.status(500).json({ error: error.message });
-    }
+    res.status(500).json({ error: 'Internal server error' });
   }
 });
 
@@ -93,25 +110,25 @@ router.post('/delete/:id', async (req, res) => {
 
 router.get('/', async (req, res) => {
   try {
-      const plans = await getAllPlans();
-      if (plans.error) {
-          return res.status(400).json({ error: plans.error });
-      }
+    const plans = await getAllPlans();
+    if (plans.error) {
+      return res.status(400).json({ error: plans.error });
+    }
 
-      const responseData = { plans, title: 'Hotel Backend' };
+    const responseData = { plans, title: 'Hotel Backend' };
 
-      if (req.accepts('html')) {
-          // Si el cliente acepta HTML, renderiza la vista
-          res.render('pages/plans.ejs', responseData);
-      } else if (req.accepts('json')) {
-          // Si el cliente acepta JSON, devuelve el JSON
-          res.json(plans);
-      } else {
-          // Si el cliente no acepta ni HTML ni JSON, devuelve un error
-          res.status(406).send('Not Acceptable');
-      }
+    if (req.accepts('html')) {
+      // Si el cliente acepta HTML, renderiza la vista
+      res.render('pages/plans.ejs', responseData);
+    } else if (req.accepts('json')) {
+      // Si el cliente acepta JSON, devuelve el JSON
+      res.json(plans);
+    } else {
+      // Si el cliente no acepta ni HTML ni JSON, devuelve un error
+      res.status(406).send('Not Acceptable');
+    }
   } catch (error) {
-      res.status(500).json({ error: error.message });
+    res.status(500).json({ error: error.message });
 
   }
 });

@@ -1,4 +1,4 @@
-const {Travel} = require('../config/db')
+const { Service } = require('../config/db')
 const fs = require('fs')
 const { getAdmins } = require("./administratorasControllers.js");
 
@@ -10,36 +10,36 @@ const isAdmin = async (userId) => {
 };
 
 
-const createTravel = async (photo_small, big_photo, title, description) => {
+const createService = async (photo_small, big_photo, title, description) => {
   try {
 
     if (!isAdmin) {
       throw new Error("No estás autorizado");
     }
-    const travel = await Travel.create({
+    const service = await Service.create({
       photo_small,
       big_photo,
       title,
       description,
     });
-    return travel;
-  } 
+    return service;
+  }
 
-  catch(error){
+  catch (error) {
     fs.appendFile('error.log', error.message + '\n', (err) => {
-        if (err) throw err;
+      if (err) throw err;
     });
     return { error: error.message };
-   }
+  }
 }
 
-const updateTravel = async (id, photo_small, big_photo, title, description) => {
+const updateService = async (id, photo_small, big_photo, title, description) => {
   try {
 
     if (!isAdmin) {
       throw new Error("No estás autorizado");
     }
-    const [updated] = await Travel.update(
+    const [updated] = await Service.update(
       {
         photo_small,
         big_photo,
@@ -50,63 +50,63 @@ const updateTravel = async (id, photo_small, big_photo, title, description) => {
     );
     if (updated) {
 
-      const updatedTravel = await Travel.findOne({ where: { id: id } });
-      return updatedTravel;
+      const updatedService = await Service.findOne({ where: { id: id } });
+      return updatedService;
     }
 
     throw new Error('Travel not found');
-  } 
+  }
 
-  catch(error){
+  catch (error) {
     fs.appendFile('error.log', error.message + '\n', (err) => {
-        if (err) throw err;
+      if (err) throw err;
     });
     return { error: error.message };
-   }
+  }
 };
 
-const deleteTravel = async (id) => {
+const deleteService = async (id) => {
   try {
     if (!isAdmin) {
       throw new Error("No estás autorizado");
     }
-    const deleted = await Travel.destroy({ where: { id: id } });
+    const deleted = await Service.destroy({ where: { id: id } });
     if (deleted) {
 
 
-      return { message: 'Travel deleted successfully' };
+      return { message: 'Service deleted successfully' };
     }
 
-    throw new Error('Travel not found');
-  } 
-  
-  catch(error){
+    throw new Error('Service not found');
+  }
+
+  catch (error) {
     fs.appendFile('error.log', error.message + '\n', (err) => {
-        if (err) throw err;
+      if (err) throw err;
     });
     return { error: error.message };
-   }
+  }
 }
 
 
-const getAllTravels = async () => {
+const getAllServices = async () => {
   try {
-    const travels = await Travel.findAll();
-    return travels;
-  } 
-  catch(error){
+    const services = await Service.findAll();
+    return services;
+  }
+  catch (error) {
     fs.appendFile('error.log', error.message + '\n', (err) => {
-        if (err) throw err;
+      if (err) throw err;
     });
     return { error: error.message };
-   }
- 
+  }
+
 }
 
 module.exports = {
-    getAllTravels,
-    deleteTravel,
-    updateTravel,
-    createTravel
+  getAllServices,
+  deleteService,
+  updateService,
+  createService
 
 }
