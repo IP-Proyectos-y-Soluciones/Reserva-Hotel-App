@@ -42,6 +42,8 @@ export const createUsersVerify = createAsyncThunk(
         }
     }
 );
+
+  
 export const loginUser=createAsyncThunk(
     "users/login",
     async ({ email, password }) => {
@@ -65,7 +67,7 @@ export const loginUser=createAsyncThunk(
         }
     }
 );
-export const createUsers =createAsyncThunk(
+export const createUsers=createAsyncThunk(
     "users/createUsers",
     async(payload)=>{
         try{

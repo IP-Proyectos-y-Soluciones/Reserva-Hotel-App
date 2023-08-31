@@ -4,7 +4,7 @@ const bcrypt = require('bcryptjs')
 
 const createUser = async (password, email, name, photo, mode, check, encrypted_email) => {
   try {
-    if (!name || !email || !password || !photo || !mode ) {
+    if (!name || !email || !password ) {
       throw new Error("Missing data to create the user"); // Se arregla el formato de error
     } else {
       const saltRounds = 10;
