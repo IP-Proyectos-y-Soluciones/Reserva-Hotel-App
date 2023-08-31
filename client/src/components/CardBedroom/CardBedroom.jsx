@@ -1,6 +1,6 @@
 import { Link } from 'react-router-dom';
 import "tw-elements";
-import PropTypes from 'prop-types'
+import PropTypes from 'prop-types';
 
 
 const CardBedroom = ({id, gallery0, kind_h }) =>{
