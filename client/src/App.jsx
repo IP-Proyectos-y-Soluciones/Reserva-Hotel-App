@@ -16,12 +16,9 @@ import Verification from "./components/login/verificando";
 import axios from "axios";
 
 
-<<<<<<< HEAD
-=======
 
 import CardPlan from "./components/CardPlan/CardPlan";
 
->>>>>>> 6e6f06565398f50335ebf5a5e6a406223c9e0939
 axios.defaults.baseURL = 'http://localhost:3001/';
 
 const App = () => {

@@ -1,10 +1,15 @@
 import { Link } from 'react-router-dom';
+import { useSelector } from 'react-redux';
 
 const NavBar = ({ isLoggedIn, setIsLoggedIn }) => {
 
   const handleLogout = () => {
     setIsLoggedIn(false);
   };
+
+
+
+
 
   return (
     <div className="bg-[#313131] shadow align-middle text-lg h-9 ">
@@ -34,6 +39,7 @@ const NavBar = ({ isLoggedIn, setIsLoggedIn }) => {
           </div>
           {isLoggedIn ? (
             <div className="px-4 bg-[#B99768] text-white">
+              <img src={userPerfil} alt="Profile" />
               <button onClick={handleLogout}>Logout</button>
             </div>
           ) : (
