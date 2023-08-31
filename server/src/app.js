@@ -13,16 +13,16 @@ require("dotenv").config();
 require=('./config/db');
 
 // Conexion con el Server Remoto de la DB
-// const { config } = require( 'dotenv' );
-// const pg = require( 'pg' );
-// const DB_INTERNAL_URL = process.env;
+const { config } = require( 'dotenv' );
+const pg = require( 'pg' );
+const DB_INTERNAL_URL = process.env;
 
 // Conexion con la DB via sequelize - Login Session
 // const sequelizeSessionStore = new SessionStore({
 //   db: `${DATABASE}`,
 // });
 
-// config();
+config();
 const server = express();
 
 server.use( morgan( 'dev' ) );
