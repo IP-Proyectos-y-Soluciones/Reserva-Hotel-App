@@ -4,7 +4,7 @@ const bcrypt = require('bcryptjs')
 
 const createUser = async (password, email, name, photo, mode, check, encrypted_email) => {
   try {
-    if (!name || !email || !password || !photo || !mode || !check) {
+    if (!name || !email || !password ) {
       throw new Error("Missing data to create the user"); // Se arregla el formato de error
     } else {
       const saltRounds = 10;
@@ -16,7 +16,6 @@ const createUser = async (password, email, name, photo, mode, check, encrypted_e
         name,
         photo,
         mode,
-        check,
         encrypted_email
       });
       return User;
@@ -29,7 +28,7 @@ const createUser = async (password, email, name, photo, mode, check, encrypted_e
   }
 };
 
-const updateUsers = async (id, name, password, email, photo, mode, check, encrypted_email) => {
+const updateUsers = async (id, name, password, email, photo, mode, encrypted_email) => {
   try {
     const saltRounds = 10;
     const hashedPassword = await bcrypt.hash(password, saltRounds);
@@ -37,7 +36,6 @@ const updateUsers = async (id, name, password, email, photo, mode, check, encryp
       {
         password: hashedPassword,
         mode,
-        check,
         photo,
         email,
         name,

@@ -1,50 +1,38 @@
-import CardBedroom from "../CardBedroom/CardBedroom";
-import { getBedroom } from '../../redux/actions/bedroomsActions';
-import { useDispatch, useSelector } from 'react-redux';
 import { useEffect } from "react";
+import { useDispatch, useSelector } from 'react-redux';
+import { getBedroom } from '../../redux/actions/bedroomsActions';
+import CardBedroom from "../CardBedroom/CardBedroom";
 
 const CardsBedroom = () => {
+  const dispatch = useDispatch();
 
-    const dispatch = useDispatch();
-    const { bedrooms } = useSelector((state)=>state.bedrooms);     
+  const { bedrooms } = useSelector(state => state.bedrooms);
 
-    const eachBedroom = bedrooms.map(bedroom=>{
-        return {
-            key:bedroom.id,
-            id_h:bedroom.id,
-            kind_h:bedroom.kind_h,
-            gallery:bedroom.gallery
-        }
-    })
-    // console.log(eachBedroom);
-    
-    useEffect(()=>{
-        dispatch(getBedroom()) // action que trae todos los bedrooms
-    },[dispatch]);
-                                
-    return(
-        <div >
-            
-            <div className="container flex flex-row p-4 mx-auto space-x-4">
-            {
-                eachBedroom.length > 0 &&  
-                eachBedroom.map(bedroom=>{
-                    return(
-                        <CardBedroom
-                        key={bedroom.id_h}
-                        id_h={bedroom.id_h}
-                        kind_h={bedroom.kind_h}
-                        gallery={bedroom.gallery[0]}
-                        />
-                    )
-                })           
 
-                
-            }
-            </div>
+  useEffect(() => {
+    dispatch(getBedroom());
+  }, [dispatch]);
 
-        </div>
-    )
+
+
+
+  if (!bedrooms) {
+    return <p>Loading...</p>;
+  }
+
+
+  return (
+    <div className="container flex flex-row p-4 mx-auto space-x-4">
+      {bedrooms && bedrooms.map(bedroom => (
+        <CardBedroom
+          key={bedroom.id}
+          id={bedroom.id}
+          gallery0={bedroom.gallery[0]}
+          kind_h={bedroom.kind_h}
+        />
+      ))}
+    </div>
+  );
 };
 
 export default CardsBedroom;

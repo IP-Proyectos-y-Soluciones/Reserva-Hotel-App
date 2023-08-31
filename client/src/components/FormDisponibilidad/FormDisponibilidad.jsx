@@ -30,7 +30,7 @@ const FormDisponibilidad = () =>{
 
 
     return(
-        <div className='flex justify-center items-center'>
+        <div className='flex items-center justify-center'>
             <form onSubmit={(e) => handleSubmit(e)}>
                 <div>
                 <select id='kind' defaultValue='' data-te-select-init>
@@ -45,12 +45,12 @@ const FormDisponibilidad = () =>{
                 </div>
 
                 <div>
-                    <div class="relative mb-3" data-te-datepicker-init data-te-input-wrapper-init>
-                      <input type="date" class="peer block min-h-[auto] w-full rounded border-0 bg-transparent px-3 py-[0.32rem] leading-[1.6] outline-none transition-all duration-200 ease-linear focus:placeholder:opacity-100 peer-focus:text-primary data-[te-input-state-active]:placeholder:opacity-100 motion-reduce:transition-none dark:text-neutral-200 dark:placeholder:text-neutral-200 dark:peer-focus:text-primary"/>
+                    <div className="relative mb-3" data-te-datepicker-init data-te-input-wrapper-init>
+                      <input type="date" className="peer block min-h-[auto] w-full rounded border-0 bg-transparent px-3 py-[0.32rem] leading-[1.6] outline-none transition-all duration-200 ease-linear focus:placeholder:opacity-100 peer-focus:text-primary data-[te-input-state-active]:placeholder:opacity-100 motion-reduce:transition-none dark:text-neutral-200 dark:placeholder:text-neutral-200 dark:peer-focus:text-primary"/>
                     </div>
 
-                    <div class="relative mb-3" data-te-datepicker-init data-te-input-wrapper-init>
-                        <input type="date" class="peer block min-h-[auto] w-full rounded border-0 bg-transparent px-3 py-[0.32rem] leading-[1.6] outline-none transition-all duration-200 ease-linear focus:placeholder:opacity-100 peer-focus:text-primary data-[te-input-state-active]:placeholder:opacity-100 motion-reduce:transition-none dark:text-neutral-200 dark:placeholder:text-neutral-200 dark:peer-focus:text-primary"/>
+                    <div className="relative mb-3" data-te-datepicker-init data-te-input-wrapper-init>
+                        <input type="date" className="peer block min-h-[auto] w-full rounded border-0 bg-transparent px-3 py-[0.32rem] leading-[1.6] outline-none transition-all duration-200 ease-linear focus:placeholder:opacity-100 peer-focus:text-primary data-[te-input-state-active]:placeholder:opacity-100 motion-reduce:transition-none dark:text-neutral-200 dark:placeholder:text-neutral-200 dark:peer-focus:text-primary"/>
                     </div>
 
 </div>

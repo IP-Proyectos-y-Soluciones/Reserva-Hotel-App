@@ -58,20 +58,44 @@ router.post('/delete/:id', async (req, res) => {
     }
 })
 
+// router.get('/', async (req, res) => {
+
+//     try {
+
+//         const getRestaurants = await getAllRestaurants()
+//         if (getRestaurants.error) {
+//             res.render('pages/404.ejs', { getRestaurants, title: 'Hotel Backend' });
+//         } else {
+//             //res.status(201).json(getRestaurants)
+//             res.render('pages/restaurant.ejs', { getRestaurants, title: 'Hotel Backend' });
+//         }
+//     } catch (error) {
+//         res.status(500).json({ error: 'Internal server error' })
+//     }
+// })
+
 router.get('/', async (req, res) => {
-
     try {
-
-        const getRestaurants = await getAllRestaurants()
+        const getRestaurants = await getAllRestaurants();
         if (getRestaurants.error) {
-            res.render('pages/404.ejs', { getRestaurants, title: 'Hotel Backend' });
+            return res.status(400).json({ error: getRestaurants.error });
+        }
+  
+        const responseData = { getRestaurants, title: 'Hotel Backend' };
+  
+        if (req.accepts('html')) {
+            // Si el cliente acepta HTML, renderiza la vista
+            res.render('pages/restaurant.ejs', responseData);
+        } else if (req.accepts('json')) {
+            // Si el cliente acepta JSON, devuelve el JSON
+            res.json(getRestaurants);
         } else {
-            //res.status(201).json(getRestaurants)
-            res.render('pages/restaurant.ejs', { getRestaurants, title: 'Hotel Backend' });
+            // Si el cliente no acepta ni HTML ni JSON, devuelve un error
+            res.status(406).send('Not Acceptable');
         }
     } catch (error) {
-        res.status(500).json({ error: 'Internal server error' })
+        res.status(500).json({ error: error.message });
     }
-})
+  });
 
 module.exports = router;

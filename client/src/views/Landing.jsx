@@ -5,12 +5,12 @@ import CardsAmenitie from "../components/CardsAmenitie/CardsAmenitie";
 import Banner from "../components/Banner/Banner";
 import Footer from "../components/Footer/Footer";
 import ButtonBackToTop from "../components/ButtonBackToTop/ButtonBackToTop";
+// import Filtros from "../components/Filtros/Filtros";
 import { useState } from 'react';
 
-const Landing = () => {
+const Landing = ({ isLoggedIn, setIsLoggedIn }) => {
     
     const [hoveredCard, setHoveredCard] = useState(null);
-    
 
     const handleCardHover = (description) => {
         setHoveredCard(description);
@@ -22,9 +22,10 @@ const Landing = () => {
 
     return (
         <div className="min-h-screen bg-[#585552]">
-            <NavBar />
+            <NavBar isLoggedIn={isLoggedIn} setIsLoggedIn={setIsLoggedIn}/>
             
             <Banner/>
+             {/* <div><Filtros></Filtros> </div>  */}
                 <div className="leading-10 tracking-widest text-center shadow-lg">
                 <div className="py-2 text-4xl font-semibold tracking-widest font">
                     <h2 className="text-[#B99768]">BIENVENIDOS</h2>
@@ -34,7 +35,7 @@ const Landing = () => {
                 </div>
                 </div>
             <div>
-                <div className="px-5 text-left text-[#B99768] text-4xl tracking-widest font-semibold shadow-lg">
+                <div className="px-5 text-left text-[#B99768] text-4xl tracking-widest font-semibold shadow-lgg">
                     <h1>Descubre la magia del lugar</h1>
                 </div>
                     <div className='flex items-center justify-center'>
@@ -58,12 +59,19 @@ const Landing = () => {
             <Footer />
             <ButtonBackToTop />
             {hoveredCard && (
-        <div className="fixed bottom-0 left-0 right-0 bg-white p-4 text-center">
+        <div className="fixed bottom-0 left-0 right-0 p-4 text-center bg-white">
           <p className="text-black">{hoveredCard}</p>
         </div>
       )}
+
+    
             
         </div>
+
+    
+    
+
+        
     );
 
 }

@@ -25,19 +25,20 @@ module.exports = (sequelize) => {
       },
       photo: {
         type: DataTypes.TEXT,
-        allowNull: false,
+        allowNull: true,
       },
       mode: {
         type: DataTypes.TEXT,
-        allowNull: false,
+        allowNull: true,
       },
       check: {
-        type: DataTypes.TEXT,
-        allowNull: false,
+        type: DataTypes.BOOLEAN,
+        allowNull: true,
+        defaultValue: false
       },
       encrypted_email: {
         type: DataTypes.TEXT,
-        allowNull: false,
+        allowNull: true,
       },
       verificationCode: {
         type: DataTypes.STRING,
@@ -46,7 +47,7 @@ module.exports = (sequelize) => {
       date: {
         type: DataTypes.DATE,
         defaultValue: DataTypes.NOW,
-        allowNull: false,
+        allowNull: true,
       },
     },
     { timestamps: false }

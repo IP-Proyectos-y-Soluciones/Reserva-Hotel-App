@@ -2,29 +2,58 @@
 // import axios from 'axios';
 // import { BsChevronCompactLeft, BsChevronCompactRight } from 'react-icons/bs';
 // import { defaults } from 'autoprefixer';
-
+import { useState, useEffect } from 'react';
+import axios from 'axios';
 import { Link } from 'react-router-dom';
-
+import PropTypes from 'prop-types'
 
 const Preview2 = ({ nextRoomId } ) => {
+
+  const [roomData, setRoomData] = useState({
+    imageSrc: '',
+    price: '',
+  });
+
+  useEffect(() => {
+    axios.get(`http://localhost:3001/bedroom/detail/${nextRoomId}`)
+      .then(response => {
+        const selectedRoomData = response.data;
+
+        if (selectedRoomData) {
+          setRoomData({
+            imageSrc: selectedRoomData.gallery[0], // Replace with the actual property name
+            price: selectedRoomData.price, // Replace with the actual property name
+          });
+        }
+      })
+      .catch(error => {
+        console.error('Error fetching room data for Preview1:', error);
+      });
+  }, [nextRoomId]);
+
+  
     return (
         <div className='preview1'>
         <div className="max-w-[200px]  overflow-hidden">
           <img
-            src={"https://res.cloudinary.com/dm9glx5a7/image/upload/v1692802571/PF-HOTEL-APP/Bedrooms/PREMIUM%20LOFT/5_tlsnv4.jpg"}
+            src={roomData.imageSrc}
             alt={"imagen"}
             className="w-full h-auto imagenHabitacion"
           />
         </div>
         <div className='text-center '>
   <div className='bg-gray-800 rounded-lg text-gold '>Detalles resumen</div>
-  <div className='text-black bg-yellow-300 rounded-lg '>precio de la habitacion</div>
-  <div className='bg-gray-800 rounded-lg text-gold hover:underline'> <Link  to={`/detail/${nextRoomId}`}>ver detalles</Link></div>
+  <div className='text-black bg-yellow-300 rounded-lg '>{`Precio: ${roomData.price}`}</div>
+  <div className='bg-gray-800 rounded-lg text-gold hover:underline'> <Link to={`/detail/${nextRoomId}`}>ver detalles</Link></div>
 </div>
 
       </div>
       
     );
+  };
+
+  Preview2.propTypes = {
+    nextRoomId: PropTypes.string.isRequired
   };
   
   export default Preview2;

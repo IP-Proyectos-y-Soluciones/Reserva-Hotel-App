@@ -7,7 +7,12 @@ export const getPlans=createAsyncThunk(
     "plan/getPlan",
     async()=>{
         try{
-            const res = await axios.get(urlPlans);
+            const res = await axios.get(urlPlans, {
+                headers: {
+                  Accept: 'application/json',
+                },
+              });
+
             return res.data 
         } catch(error){
           throw new Error (error.response.data.message)
@@ -18,7 +23,11 @@ export const postPlans = createAsyncThunk(
     "plan/postPlan",
     async(obj)=>{
         try{
-            const res = await axios.post(urlPlans, obj);
+            const res = await axios.post(urlPlans, obj, {
+                headers: {
+                  Accept: 'application/json',
+                },
+              });
             console.log(res.data)
             return res.data
         } catch(error){
@@ -30,7 +39,11 @@ export const putPlans=createAsyncThunk(
     "plan/putPlan",
     async (obj)=>{
         try{
-            const res = await axios.put(urlPlans, obj);
+            const res = await axios.put(urlPlans, obj, {
+                headers: {
+                  Accept: 'application/json',
+                },
+              });
             return res.data
         }catch(error){
             throw new Error(error.response.data.message)
@@ -41,7 +54,11 @@ export const deletePlans=createAsyncThunk(
     "plan/deletePlan",
     async(id)=>{
         try{
-            const res = await axios.delete(urlPlans,{data:{id:id}});
+            const res = await axios.delete(urlPlans,{data:{id:id}}, {
+                headers: {
+                  Accept: 'application/json',
+                },
+              });
             return res.data
         }catch(error){
             throw new Error (error.response.data.message)

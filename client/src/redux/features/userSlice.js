@@ -44,7 +44,7 @@ const usersSlice = createSlice({
       })
       .addCase(getUsers.rejected, (state, action) => {
         state.error = 'Error occurred while fetching sports data.';
-        state.users = [];
+        state.users = action.payload;
       })
       .addCase(putUser.fulfilled, (state, action) => {
         state.error = "";
@@ -54,8 +54,8 @@ const usersSlice = createSlice({
       .addCase(createUsersVerify.fulfilled, (state,action)=>{
         state.userData=action.payload;
       })
-      .addCase(loginUser.fulfilled,(state)=>{
-        state.userLogin=payload;
+      .addCase(loginUser.fulfilled,(state, action)=>{
+        state.userLogin=action.payload;
       })
       .addCase(updatedsUser.fulfilled, (state, action) => {
         state.userData = action.payload;
