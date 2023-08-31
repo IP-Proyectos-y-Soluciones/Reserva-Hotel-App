@@ -38,12 +38,11 @@ router.post('/', async (req, res) => {
     res.status(500).json({ error: 'Internal server error' });
   }
 });
-
 router.post('/verify', async (req, res) => {
-  const { email, verificationCode } = req.body;
+  const { verificationCode } = req.body;
 
   try {
-    const user = await Users.findOne({ where: { email, verificationCode } });
+    const user = await Users.findOne({ where: { verificationCode } });
     if (user) {
       user.check = true;
       await user.save();
@@ -56,6 +55,7 @@ router.post('/verify', async (req, res) => {
     res.status(500).json({ error: 'Internal server error' });
   }
 });
+
 
 router.put('/:id', async (req, res) => {
   try {
@@ -77,30 +77,34 @@ router.post('/login', async (req, res) => {
   try {
     const { email, password } = req.body;
     
-    // Kullanıcıyı e-posta ve parola ile kontrol et
+  
     const getUser = await login(email, password);
     
     if (getUser.error) {
-      res.render('pages/404.ejs', { getUser, title: 'Hotel Backend' });
-    } else {
-      
-      if (getUser.user) {
-        const user = await Users.findOne({ where: { verificationCode: getUser.user.verificationCode } });
+      return res.render('pages/404.ejs', { getUser, title: 'Hotel Backend' });
+    }
+    
+    if (getUser.user) {
+      const user = await Users.findOne({ where: { verificationCode: getUser.user.verificationCode } });
 
-        if (user && (user.check !== false && user.check !== null)) {
-          res.status(201).json(getUser);
+      if (user) {
+        if (user.check !== false && user.check !== null) {
+          return res.status(201).json(getUser);
         } else {
-          res.render('pages/404.ejs', { getUser, title: 'Hotel Backend' });
+          return res.render('pages/404.ejs', { getUser, title: 'Hotel Backend' });
         }
       } else {
-        res.status(201).json(getUser);
+        return res.render('pages/404.ejs', { getUser, title: 'Hotel Backend' });
       }
+    } else {
+      return res.status(201).json(getUser);
     }
   } catch (error) {
     console.error(error);
-    res.status(500).json({ error: 'Internal server error' });
+    return res.status(500).json({ error: 'Internal server error' });
   }
 });
+
 
 router.get('/', async (req, res) => {
   try {
