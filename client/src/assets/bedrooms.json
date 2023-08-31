@@ -1,6 +1,5 @@
-
-{"Single room":
-{
+[
+  {
     "kind_h": "Single room",
     "style": "Modern",
     "gallery": ["https://res.cloudinary.com/dm9glx5a7/image/upload/v1692802654/PF-HOTEL-APP/Bedrooms/SINGLE%20ROOM/2_mnvvzj.jpg",
@@ -11,7 +10,6 @@
     "virtual_tour": "virtual_tour_url_here",
     "description_h": "A beautiful single bedroom with modern design."
   },
-  "Double room":  
   {
     "kind_h": "Double room",
     "style": "Modern",
@@ -23,7 +21,6 @@
     "virtual_tour": "virtual_tour_url_here",
     "description_h": "A beautiful single bedroom with modern design."
   },
-  "Premium loft":
   {
     "kind_h": "Premium loft",
     "style": "Modern",
@@ -38,4 +35,4 @@
     "virtual_tour": "virtual_tour_url_here",
     "description_h": "A beautiful single bedroom with modern design."
   }  
-}
+]

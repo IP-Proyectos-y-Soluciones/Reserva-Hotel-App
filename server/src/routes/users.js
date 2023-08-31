@@ -12,25 +12,25 @@ function generateVerificationCode() {
 
 router.post('/', async (req, res) => {
   try {
-    const { password, email, name, photo, mode, check, encrypted_email } = req.body;
+    const { password, email, name, photo, mode, encrypted_email } = req.body;
 
-    const newUser = await createUser(password, email, name, photo, mode, check, encrypted_email);
+    const newUser = await createUser(password, email, name, photo, mode, encrypted_email);
     if (newUser.error) {
       res.render('pages/404.ejs', { newUser, title: 'Hotel Backend' });
 
     } else {
-
-
-
       const verificationCode = generateVerificationCode();
 
-      //verificationCodes[email] = verificationCode;
+      await newUser.update({
+        verificationCode: verificationCode,
+      });
+
 
       let subject = "NUEVA CUENTA";
       let text = `Su cuenta ha sido creada sin problemas! ¡Felicidades! por Name:${name} verifica tu código: ${verificationCode} `;
 
-
       sendMail(email, subject, text);
+
       res.status(201).json(newUser);
     }
   } catch (error) {
@@ -43,10 +43,11 @@ router.post('/verify', async (req, res) => {
   const { email, verificationCode } = req.body;
 
   try {
-    const user = await Users.findOne({ where: { email } });
-
-    if (user && user.verificationCode === verificationCode) {
-      res.render('pages/404.ejs', { user, title: 'Hotel Backend' });
+    const user = await Users.findOne({ where: { email, verificationCode } });
+    if (user) {
+      user.check = true;
+      await user.save();
+      res.status(200).json({ message: 'Es correcto', user });
     } else {
       res.status(400).json({ error: 'Código de verificación incorrecto.' });
     }
@@ -60,9 +61,9 @@ router.put('/:id', async (req, res) => {
   try {
 
     const { id } = req.params
-    const { name, password, email, photo, mode, check, encrypted_email } = req.body
+    const { name, password, email, photo, mode, encrypted_email } = req.body
 
-    const updatedUser = await updateUsers(id, name, password, email, photo, mode, check, encrypted_email)
+    const updatedUser = await updateUsers(id, name, password, email, photo, mode, encrypted_email)
     if (updatedUser.error) {
       res.render('pages/404.ejs', { updatedUser, title: 'Hotel Backend' });
     } else {
@@ -72,23 +73,34 @@ router.put('/:id', async (req, res) => {
     res.status(500).json({ error: 'Internal server error' })
   }
 })
-
 router.post('/login', async (req, res) => {
-
   try {
-
-    const { email, password } = req.body
-
-    const getUser = await login(email, password)
+    const { email, password } = req.body;
+    
+    // Kullanıcıyı e-posta ve parola ile kontrol et
+    const getUser = await login(email, password);
+    
     if (getUser.error) {
       res.render('pages/404.ejs', { getUser, title: 'Hotel Backend' });
     } else {
-      res.status(201).json(getUser)
+      
+      if (getUser.user) {
+        const user = await Users.findOne({ where: { verificationCode: getUser.user.verificationCode } });
+
+        if (user && (user.check !== false && user.check !== null)) {
+          res.status(201).json(getUser);
+        } else {
+          res.render('pages/404.ejs', { getUser, title: 'Hotel Backend' });
+        }
+      } else {
+        res.status(201).json(getUser);
+      }
     }
   } catch (error) {
-    res.status(500).json({ error: 'Internal server error' })
+    console.error(error);
+    res.status(500).json({ error: 'Internal server error' });
   }
-})
+});
 
 router.get('/', async (req, res) => {
   try {
