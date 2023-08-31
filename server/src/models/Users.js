@@ -32,12 +32,13 @@ module.exports = (sequelize) => {
         allowNull: false,
       },
       check: {
-        type: DataTypes.TEXT,
-        allowNull: false,
+        type: DataTypes.BOOLEAN,
+        allowNull: true,
+        defaultValue: false
       },
       encrypted_email: {
         type: DataTypes.TEXT,
-        allowNull: false,
+        allowNull: true,
       },
       verificationCode: {
         type: DataTypes.STRING,
