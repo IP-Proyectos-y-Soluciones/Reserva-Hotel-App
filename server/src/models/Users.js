@@ -25,11 +25,11 @@ module.exports = (sequelize) => {
       },
       photo: {
         type: DataTypes.TEXT,
-        allowNull: false,
+        allowNull: true,
       },
       mode: {
         type: DataTypes.TEXT,
-        allowNull: false,
+        allowNull: true,
       },
       check: {
         type: DataTypes.BOOLEAN,
@@ -47,7 +47,7 @@ module.exports = (sequelize) => {
       date: {
         type: DataTypes.DATE,
         defaultValue: DataTypes.NOW,
-        allowNull: false,
+        allowNull: true,
       },
     },
     { timestamps: false }
