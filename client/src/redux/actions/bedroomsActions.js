@@ -23,7 +23,7 @@ export const getBedroomId = createAsyncThunk(
   "bedroom/getBedroomId",
   async (id) =>{
     try {
-     const resp = await axios.get("http://localhost:3001/bedroom/detail/${id}", {
+     const resp = await axios.get(`http://localhost:3001/bedroom/detail/${id}`, {
       headers: {
         Accept: 'application/json',
       },
