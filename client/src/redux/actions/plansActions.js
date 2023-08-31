@@ -12,6 +12,7 @@ export const getPlans=createAsyncThunk(
                   Accept: 'application/json',
                 },
               });
+
             return res.data 
         } catch(error){
           throw new Error (error.response.data.message)

@@ -66,3 +66,4 @@ export const deleteBedroom = createAsyncThunk(
     }
   }
 );
+
