@@ -1,7 +1,10 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useDispatch } from "react-redux";
 import { useNavigate, NavLink } from "react-router-dom";
 import { createUsers } from "../../redux/actions/userActions";
+import GoogleLogin from "react-google-login";
+import { gapi } from "gapi-script"
+
 
 const Register = () => {
     const dispatch = useDispatch();
@@ -10,15 +13,33 @@ const Register = () => {
     const [password, setPassword] = useState("");
     const [error, setError] = useState(null);
     const navigate = useNavigate();
-    
-    const handleSubmit = (e) => {
-        e.preventDefault();
-        handleRegister();
-    }
-    
-    const handleRegister = async () => {
-        setError("");
+    const clientID = "954982957712-gr3dpedcnotb0r1l3pqp0bj5ovnl6ftt.apps.googleusercontent.com"
+
+    useEffect(() => {
+        const start = () => {
+         gapi.auth2.init({
+             clientId: clientID
+         })
+        }
+       gapi.load("client:auth2", start)
+     },[])
+     const handleSubmit = (e) => {
+         e.preventDefault();
+         handleRegister();
+     }
+ 
+     const onSuccess = (response) => {
+        console.log(response)
         
+     }
+    
+ 
+     const onFailure = (response) => {
+         console.log("Something went error: ", response)
+     }
+     const handleRegister = async () => {
+        setError("");
+    
         if (!/^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/.test(email)) {
             setError('Correo electrónico no válido');
             return;
@@ -30,7 +51,11 @@ const Register = () => {
         }
         
         try {
-            const response = await dispatch(createUsers({ name, email, password }));
+            const userData = { name, email, password };
+            
+    
+    
+            const response = await dispatch(createUsers(userData));
             
             if (response && response.error) {
                 setError(response.error.message);
@@ -38,11 +63,14 @@ const Register = () => {
                 navigate("/verification");
             }
         } catch (error) {
+            console.error("Error al registrar el usuario:", error);
             setError("Error al registrar el usuario");
         }
     }
     
+    
     return (
+      
         <div className="flex items-center justify-center min-h-screen bg-gray-100">
             <div className="max-w-md p-6 bg-white rounded-lg shadow-md">
                 <h1 className="mb-4 text-2xl font-semibold">Registrarse</h1>
@@ -94,6 +122,14 @@ const Register = () => {
                 
                 {error && <p>{error}</p>}
             </div>
+
+            <GoogleLogin 
+            
+            clientId={clientID}
+            onSuccess={onSuccess}
+            onFailure={onFailure}
+            cookiePolicy={"single_host_policy"}
+            />
         </div>
     );
 }
