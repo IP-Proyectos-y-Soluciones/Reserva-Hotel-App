@@ -1,3 +1,5 @@
+import PropTypes from 'prop-types'
+
 
 const SocialIcons = ({ Icons }) => {
     return (
@@ -13,5 +15,13 @@ const SocialIcons = ({ Icons }) => {
         </div>
     );
 };
+
+SocialIcons.propTypes = {
+    Icons: PropTypes.arrayOf(
+      PropTypes.shape({
+        name: PropTypes.string.isRequired,
+      })
+    ).isRequired,
+  };
 
 export default SocialIcons;

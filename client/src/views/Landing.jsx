@@ -5,7 +5,7 @@ import CardsAmenitie from "../components/CardsAmenitie/CardsAmenitie";
 import Banner from "../components/Banner/Banner";
 import Footer from "../components/Footer/Footer";
 import ButtonBackToTop from "../components/ButtonBackToTop/ButtonBackToTop";
-import Filtros from "../components/Filtros/Filtros";
+// import Filtros from "../components/Filtros/Filtros";
 import { useState } from 'react';
 
 const Landing = () => {
@@ -36,7 +36,7 @@ const Landing = () => {
                 </div>
                 </div>
             <div>
-                <div className="px-5 text-left text-[#B99768] text-4xl tracking-widest font-semibold shadow-lg">
+                <div className="px-5 text-left text-[#B99768] text-4xl tracking-widest font-semibold shadow-lgg">
                     <h1>Descubre la magia del lugar</h1>
                 </div>
                     <div className='flex items-center justify-center'>
@@ -60,7 +60,7 @@ const Landing = () => {
             <Footer />
             <ButtonBackToTop />
             {hoveredCard && (
-        <div className="fixed bottom-0 left-0 right-0 bg-white p-4 text-center">
+        <div className="fixed bottom-0 left-0 right-0 p-4 text-center bg-white">
           <p className="text-black">{hoveredCard}</p>
         </div>
       )}

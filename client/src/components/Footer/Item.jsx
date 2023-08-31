@@ -1,3 +1,5 @@
+import PropTypes from 'prop-types'
+
 
 const Item = ({ Links, title }) => {
     return (
@@ -6,7 +8,7 @@ const Item = ({ Links, title }) => {
         {Links.map((link) => (
         <li key={link.name}>
             <a
-            className="text-gray-400 hover:text-teal-400 duration-300 text-sm cursor-pointer leading-6"
+            className="text-sm leading-6 text-gray-400 duration-300 cursor-pointer hover:text-teal-400"
             href={link.link}
             >
             {link.name}
@@ -17,6 +19,14 @@ const Item = ({ Links, title }) => {
     );
 };
 
-
+Item.propTypes = {
+    Links: PropTypes.arrayOf(
+      PropTypes.shape({
+        name: PropTypes.string.isRequired,
+        link: PropTypes.string.isRequired,
+      })
+    ).isRequired,
+    title: PropTypes.string.isRequired,
+  };
 
 export default Item;
