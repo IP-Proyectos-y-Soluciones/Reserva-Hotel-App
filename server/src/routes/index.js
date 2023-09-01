@@ -6,11 +6,11 @@ const bookings = require("./bookingRoutes");
 const users = require("./users")
 const notifications = require("./notifications")
 const plan = require("./plan")
-const resturant = require("./restaurant")
-const travel = require("./travel")
+const service = require("./service")
 const testimonials = require("./testimonialsRoutes")
 const categorias = require("./categoriasRoutes")
 const home = require('./homeRoutes')
+const payment = require("./paymentRoutes");
 
 const router = express.Router();
 router.use(express.json());
@@ -23,9 +23,9 @@ router.use("/bookings", bookings);
 router.use("/users", users);
 router.use("/notifications", notifications);
 router.use("/plan", plan);
-router.use("/restaurant", resturant);
-router.use("/travel", travel);
+router.use("/service", service);
 router.use("/testimonials", testimonials);
 router.use("/categories", categorias);
+router.use("/payment", payment);
 
 module.exports = router;
