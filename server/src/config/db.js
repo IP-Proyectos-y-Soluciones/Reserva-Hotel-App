@@ -30,25 +30,25 @@ let capsEntries = entries.map(entry => [entry[0][0].toUpperCase() + entry[0].sli
 sequelize.models = Object.fromEntries(capsEntries);
 
 //Aca vendrian las relaciones
-const { sequelize, Categories, Bedrooms } = sequelize.models;
+// const { sequelize, Categories, Bedrooms } = sequelize.models;
 
-sequelize
-	.query(
-		`
-  SELECT *
-  FROM categories
-  INNER JOIN bedrooms ON categories.id = bedrooms.category_id
-`,
-		{
-			type: sequelize.QueryTypes.SELECT,
-		},
-	)
-	.then(result => {
-		console.log(result);
-	})
-	.catch(error => {
-		console.error(error);
-	});
+// sequelize
+// 	.query(
+// 		`
+//   SELECT *
+//   FROM categories
+//   INNER JOIN bedrooms ON categories.id = bedrooms.category_id
+// `,
+// 		{
+// 			type: sequelize.QueryTypes.SELECT,
+// 		},
+// 	)
+// 	.then(result => {
+// 		console.log(result);
+// 	})
+// 	.catch(error => {
+// 		console.error(error);
+// 	});
 
 const { Diary, Bookings, Testimonials, Bedrooms, Users, Categories } = sequelize.models;
 
