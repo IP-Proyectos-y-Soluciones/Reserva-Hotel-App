@@ -24,26 +24,30 @@ export const getUsers=createAsyncThunk(
     }
    }  
 );
+
+
+
+
 export const createUsersVerify = createAsyncThunk(
-    "users/createUsersVerify",
-    async()=>{
-        try{
-
-
-            const res = await axios.post(urlUsersPost , {
-
-                headers: {
+  "users/createUsersVerify",
+  async ({ verificationCode }) => {
+      try {
+          const res = await axios.post(urlUsersPost, { verificationCode }, {
+              headers: {
                   Accept: 'application/json',
-                },
-              });
-            return res.data
-        }catch(error){
-            throw new Error(error.response.data.message)
-        }
-    }
+              },
+          });
+          return res.data;
+      } catch (error) {
+          throw new Error(error.response.data.message);
+      }
+  }
 );
 
+
   
+
+
 export const loginUser=createAsyncThunk(
     "users/login",
     async ({ email, password }) => {

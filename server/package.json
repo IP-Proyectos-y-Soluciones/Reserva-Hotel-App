@@ -64,9 +64,7 @@
     "node": ">=18.17.1",
     "npm": ">=8.19.4"
   },
-
   "author": "Equipo desaroollo soy Henry WEBFT39B Grupo 5",
-
   "license": "ISC",
   "devDependencies": {
     "@types/body-parser": "^1.19.2",

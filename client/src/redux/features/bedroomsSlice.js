@@ -1,12 +1,15 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { getBedroom } from "../actions/bedroomsActions";
+import { getBedroom,getBedroomId } from "../actions/bedroomsActions";
 
 
 const bedroomSlice = createSlice({
     name: "bedrooms",
     initialState: {
       bedrooms: [],
-      reservedBedrooms:[], 
+      bedroomData:null,
+      reservedBedrooms:[],
+      loading:false,
+      error:null,
     },
     reducers: {
       setBedrooms: (state, action) => {
@@ -22,6 +25,18 @@ const bedroomSlice = createSlice({
     },
     extraReducers: (builder) => {
       builder
+      .addCase(getBedroomId.pending, (state) => {
+        state.loading = true;
+        state.error = null;
+      })
+      .addCase(getBedroomId.fulfilled, (state, action) => {
+        state.loading = false;
+        state.bedroomData = action.payload;
+      })
+      .addCase(getBedroomId.rejected, (state, action) => {
+        state.loading = false;
+        state.error = action.error.message;
+      })
         .addCase(getBedroom.pending, (state) => {
           state.status = 'loading';
         })

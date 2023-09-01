@@ -36,7 +36,7 @@ const CardsAmenitie = () => {
   };
 
   return (
-    <div className='max-w-[1400px] h-[780px] w-full m-auto py-16 px-4 relative group'>
+    <div className='max-w-[1400px] h-[780px] w-full m-auto py-16 px-4 relative group' id='ameneties'>
       <div
         style={{ backgroundImage: `url(${images[currentIndex]})` }}
         className='w-full h-full duration-500 bg-center bg-cover rounded-lg hover:blur-none blur cursor-cell'
