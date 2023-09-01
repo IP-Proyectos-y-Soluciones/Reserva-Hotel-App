@@ -1,8 +1,7 @@
-<%- include('../partials/header') %>
 <%- include('../partials/head') %>
-<%- include('../partials/menu') %>
-
-
+<div class="wrapper">
+  <%- include('../partials/header') %>
+      <%- include('../partials/menu') %>
 
 <div class="content-wrapper" style="min-height: 717px">
   <section class="content-header">
@@ -59,9 +58,7 @@
                     <tr>
                       <td><%= banner.id %></td>
                       <td>
-                        <img src="<%= banner.img %>" class="img-fluid" style="width:1300px; height: 205px;" />
-
-
+                        <img src="<%= banner.img %>" class="img-fluid" style="width:720px; height: 390px;" />
                       </td>
                       <td>
                         <button class="btn btn-warning btn-sm editarBtn" data-toggle="modal" data-target="#editarBanner" data-id="<%= banner.id %>">
@@ -87,6 +84,9 @@
   </section>
   <!-- /.content -->
 </div>
+<%- include('../partials/footer') %>
+</div>
+
 <!--=====================================
 Modal Crear Banner
 ======================================-->
@@ -113,7 +113,7 @@ Modal Crear Banner
             />
 
             <p class="help-block small">
-              Dimensiones: 1440px * 600px
+              Dimensiones: 1440px * 780px
             </p>
 
             <img class="previsualizarBanner img-fluid" src="" />

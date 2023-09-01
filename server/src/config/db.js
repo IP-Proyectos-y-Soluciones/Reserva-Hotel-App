@@ -48,7 +48,6 @@ Testimonials.belongsTo(Bookings, { foreignKey: 'id_res' });
 Testimonials.belongsTo(Users, { foreignKey: 'id_us' });
 Testimonials.belongsTo(Bedrooms, { foreignKey: 'id_room' });
 
-//Users.belongsTo(Testimonials, { foreignKey: 'id_testimony' });
 
 module.exports = {
   ...sequelize.models,

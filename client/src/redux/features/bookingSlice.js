@@ -1,11 +1,13 @@
 import { createSlice } from '@reduxjs/toolkit';
-import { getBookings } from '../actions/bookingActions';
+import { getBookings,getAllBookings } from '../actions/bookingActions';
 
 const bookingsSlice = createSlice({
   name: 'bookings',
   initialState: {
     bookings: [],
+    allBookings:[],
     searchBooking:[],
+    loading:false,
     status: 'idle',
     error: null,
     filters: {
@@ -42,6 +44,18 @@ const bookingsSlice = createSlice({
   },
   extraReducers: (builder) => {
     builder
+    .addCase(getAllBookings.pending, (state) => {
+      state.loading = true;
+      state.error = null;
+    })
+    .addCase(getAllBookings.fulfilled, (state, action) => {
+      state.loading = false;
+      state.allBookings = action.payload;
+    })
+    .addCase(getAllBookings.rejected, (state, action) => {
+      state.loading = false;
+      state.error = action.error.message;
+    })
       .addCase(getBookings.pending, (state) => {
         state.status = 'loading';
       })
