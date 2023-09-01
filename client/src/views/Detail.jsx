@@ -30,10 +30,10 @@ function Detail() {
 
 
   return (
-    <div className="flex h-screen detail">
-      <div className="grid flex-1 gap-4 p-4 auto-rows-min">
-        <div className="imagen&type bg-gray-100 p-4">
-          <h2 className="">
+    <div className="flex h-screen detail"  >
+      <div className="grid flex-1 gap-4 p-4 auto-rows-min" >
+        <div className="imagen&type bg-gray-100 p-4 ">
+          <h2 className="mt-10 font-bold text-center">
             {bedrooms.map(room => (
               <Link className='hover:underline' key={room.id} to={`/detail/${room.id}`}>
                 {room.kind_h}{' / '}
@@ -63,15 +63,15 @@ function Detail() {
             </div>
           </div>
         </div>
-        <div className="p-4 bg-yellow-200 tesstimonios">
+        <div className="p-4 tesstimonios" style={{ backgroundColor: '#FFE288' }}>
           <h2> Aquí están los testimonios </h2>
         </div>
 
        </div>
       <div className="grid flex-shrink-0 grid-rows-3 gap-4 barra-lateral w-50">
-        <div className="p-4 bg-gray-300"><h2><FormDisponibilidad/>  </h2></div>
-        <div className="p-4 bg-gray-300"> <Preview1 nextRoomId={nextRoomId} /></div>
-        <div className="p-4 bg-gray-300"><Preview2 nextRoomId={nextRoomId2}  /></div>
+      <div className="p-4" style={{ backgroundColor: '#585552' }}><h2><FormDisponibilidad/></h2></div>
+        <div className="p-4"style={{ backgroundColor: '#585552' }}> <Preview1 nextRoomId={nextRoomId} /></div>
+        <div className="p-4"style={{ backgroundColor: '#585552' }}><Preview2 nextRoomId={nextRoomId2}  /></div>
       </div>
     </div>
   );
@@ -91,3 +91,4 @@ export default Detail;
 
 // const otherRoomId = getNextRoomId();
 // nextRoomId={otherRoomId}
+// FFE288  #313131
