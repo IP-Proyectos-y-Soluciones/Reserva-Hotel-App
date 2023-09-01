@@ -16,6 +16,7 @@ const Verification = () => {
     
     const handleVerification = async () => {
         setError("");
+        console.log('verificationCode:', verificationCode);
     
         try {
             const response = await dispatch(createUsersVerify({ verificationCode }));

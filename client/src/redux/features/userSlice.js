@@ -57,6 +57,7 @@ const usersSlice = createSlice({
       .addCase(loginUser.fulfilled,(state, action)=>{
         state.userLogin=action.payload;
       })
+      
       .addCase(updatedsUser.fulfilled, (state, action) => {
         state.userData = action.payload;
       });

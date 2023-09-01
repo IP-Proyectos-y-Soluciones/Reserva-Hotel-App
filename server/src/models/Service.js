@@ -2,7 +2,7 @@ const { DataTypes } = require("sequelize");
 
 module.exports = (sequelize) => {
   sequelize.define(
-    "travel",
+    "service",
     {
       // Define los atributos del modelo
       // ...
