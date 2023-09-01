@@ -2,6 +2,7 @@ import { useSelector, useDispatch } from 'react-redux';
 import { useEffect } from 'react';
 import { useParams, Link } from 'react-router-dom';
 import { getBedroomId, getBedroom } from '../redux/actions/bedroomsActions';
+import { getPlans } from '../redux/actions/plansActions';
 import Album from "../components/album/album";
 import Preview1 from '../components/bedroomPreview/preview1';
 import FormDisponibilidad from '../components/FormDisponibilidad/FormDisponibilidad';
@@ -14,10 +15,11 @@ function Detail() {
   useEffect(() => {
     dispatch(getBedroom());
     dispatch(getBedroomId(id));
+    dispatch(getPlans());
   }, [dispatch, id]);
 
   const { bedrooms, bedroomData } = useSelector(state => state.bedrooms);
-
+  const {plans}= useSelector(state=>state.plans);
   const selectedRoomData = bedroomData || bedrooms.find(room => room.id === id) || {};
 
   const otherRoomId = bedrooms.findIndex(room => room.id === id) + 1;
@@ -25,6 +27,7 @@ function Detail() {
 
   const otherRoomId2 = bedrooms.findIndex(room => room.id === id) + 2;
   const nextRoomId2 = bedrooms[otherRoomId2 % bedrooms.length]?.id;
+
 
   return (
     <div className="flex h-screen detail">
@@ -44,8 +47,27 @@ function Detail() {
         <div className="p-4 bg-gray-200 description">
           <h2>{selectedRoomData.description_h}</h2>
         </div>
-        {/* Resto del código... */}
-      </div>
+        <div className="p-4 bg-gray-300 description-of-plan">
+          <div className="grid grid-cols-2 gap-4">
+            {plans.map(plan => (
+              <div key={plan.kind}>
+                <h2>{plan.kind}</h2>
+                <p>{plan.description}</p>
+                <p>Precio alto: {plan.hight_price}</p>
+                <p>Precio bajo: {plan.low_price}</p>
+              </div>
+            ))}
+            <div className="w-20 iconos " >
+              <img src="imagen-de-iconos-de-servicios" alt="img de servicios" />
+              <h2> Aquí está lo que incluye cada plan </h2>
+            </div>
+          </div>
+        </div>
+        <div className="p-4 bg-yellow-200 tesstimonios">
+          <h2> Aquí están los testimonios </h2>
+        </div>
+
+       </div>
       <div className="grid flex-shrink-0 grid-rows-3 gap-4 barra-lateral w-50">
         <div className="p-4 bg-gray-300"><h2><FormDisponibilidad/>  </h2></div>
         <div className="p-4 bg-gray-300"> <Preview1 nextRoomId={nextRoomId} /></div>
