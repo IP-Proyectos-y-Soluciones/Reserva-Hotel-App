@@ -8,7 +8,7 @@ const fs = require("fs");
 const path = require("path");
 const cors = require("cors");
 const indexRouter = require("./routes");
-require("dotenv").config();
+// require("dotenv").config();
 // const { DATABASE } = process.env;  // Variable de entorno para conexion a DB
 // require=('./config/db');
 
