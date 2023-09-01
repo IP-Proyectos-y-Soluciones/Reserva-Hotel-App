@@ -9,7 +9,7 @@ const store = configureStore({
         bedrooms: bedroomReducer,
         users:userReducer,
         plans: planSlice,
-        bookings: bookingsSlice
+        bookings: bookingsSlice,
     },
 });
 

@@ -22,7 +22,7 @@ const CardsBedroom = () => {
 
 
   return (
-    <div className="container flex flex-row p-4 mx-auto space-x-4">
+    <div className="container flex flex-row p-4 mx-auto space-x-4" id="bedroom">
       {bedrooms && bedrooms.map(bedroom => (
         <CardBedroom
           key={bedroom.id}

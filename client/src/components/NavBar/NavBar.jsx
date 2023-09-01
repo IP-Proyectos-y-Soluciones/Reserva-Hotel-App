@@ -1,5 +1,4 @@
-import { Link } from 'react-router-dom';
-import { useSelector } from 'react-redux';
+import { Link, useLocation } from 'react-router-dom';
 
 const NavBar = ({ isLoggedIn, setIsLoggedIn }) => {
 
@@ -7,6 +6,7 @@ const NavBar = ({ isLoggedIn, setIsLoggedIn }) => {
     setIsLoggedIn(false);
   };
 
+  const location = useLocation();
 
 
 
@@ -18,18 +18,22 @@ const NavBar = ({ isLoggedIn, setIsLoggedIn }) => {
           <Link to="/" className="hover:underline">
             <li>Home</li>
           </Link>
-          <Link to="/habitaciones" className="hover:underline">
-            <li>Habitaciones</li>
-          </Link>
-          <Link to="/planes" className="hover:underline">
-            <li>Planes</li>
-          </Link>
-          <Link to="/servicios" className="hover:underline">
-            <li>Servicios</li>
-          </Link>
-          <Link to="/contacto" className="hover:underline">
-            <li>Contacto</li>
-          </Link>
+          { location.pathname === '/' && (
+          <>
+            <li className="hover:underline">
+            <a href='#plans'>Planes</a>
+            </li>
+            <li className="hover:underline">
+            <a href='#bedroom'>Habitaciones</a>
+            </li>
+            <li className="hover:underline">
+            <a href='#ameneties'>Servicios</a>
+            </li>
+            <li className="hover:underline">
+            <a href='#footer'>Contacto</a>
+            </li>
+          </>
+          )}
         </div>
         <div className="flex py-px space-x-4">
           <div className="bg-[#B99768] text-white px-4">
