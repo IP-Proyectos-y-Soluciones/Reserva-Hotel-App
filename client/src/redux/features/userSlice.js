@@ -57,12 +57,6 @@ const usersSlice = createSlice({
       .addCase(loginUser.fulfilled,(state, action)=>{
         state.userLogin=action.payload;
       })
-      .addCase(loginUser.fulfilled, (state, action) => {
-        state.userLogin = {
-          ...action.payload,
-          id: action.payload.map(user => user.id)
-        };
-      })
       
       .addCase(updatedsUser.fulfilled, (state, action) => {
         state.userData = action.payload;
