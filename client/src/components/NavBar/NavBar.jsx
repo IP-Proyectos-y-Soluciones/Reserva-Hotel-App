@@ -1,7 +1,11 @@
+<<<<<<< HEAD
 import { Link } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
 import { useEffect } from 'react';
 import { getUsers } from '../../redux/actions/userActions';
+=======
+import { Link, useLocation } from 'react-router-dom';
+>>>>>>> 715f541571d405d29e87d9f5317c9bb057374165
 
 const NavBar = ({ isLoggedIn, setIsLoggedIn }) => {
 
@@ -20,6 +24,7 @@ const NavBar = ({ isLoggedIn, setIsLoggedIn }) => {
   }, [dispatch])
   
 
+  const location = useLocation();
 
 
 
@@ -31,6 +36,7 @@ const NavBar = ({ isLoggedIn, setIsLoggedIn }) => {
           <Link to="/" className="hover:underline">
             <li>Home</li>
           </Link>
+<<<<<<< HEAD
           <Link to="/habitaciones" className="hover:underline">
             <li>Habitaciones</li>
           </Link>
@@ -49,6 +55,23 @@ const NavBar = ({ isLoggedIn, setIsLoggedIn }) => {
               </Link>
           ) : (
             null
+=======
+          { location.pathname === '/' && (
+          <>
+            <li className="hover:underline">
+            <a href='#plans'>Planes</a>
+            </li>
+            <li className="hover:underline">
+            <a href='#bedroom'>Habitaciones</a>
+            </li>
+            <li className="hover:underline">
+            <a href='#ameneties'>Servicios</a>
+            </li>
+            <li className="hover:underline">
+            <a href='#footer'>Contacto</a>
+            </li>
+          </>
+>>>>>>> 715f541571d405d29e87d9f5317c9bb057374165
           )}
         </div>
         <div className="flex py-px space-x-4">

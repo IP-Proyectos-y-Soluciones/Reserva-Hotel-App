@@ -23,6 +23,21 @@ export const getBookings = createAsyncThunk(
     }
   }
 );
+export const getAllBookings=createAsyncThunk(
+  "bookings/allBookings",
+  async()=>{
+    try{
+      const res = await axios.get(urlBookings, {
+        headers: {
+          Accept:'application/json',
+        },
+      });
+      return res.data;
+     }catch(error){
+      throw error.response.data.message;
+     }
+  }
+);
 
 export const postBookings = createAsyncThunk(
     "bookings/postBookings",
