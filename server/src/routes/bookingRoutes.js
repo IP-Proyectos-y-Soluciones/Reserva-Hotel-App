@@ -4,6 +4,7 @@ const { Users } = require("../config/db")
 const { listBooking, deleteBooking, createBooking, updateBooking } = require('../controllers/bookingControllers');
 const { sendMail } = require("../controllers/sendMailController")
 
+
 // router.get('/', async (req, res) => {
 //   try {
 //     const bookings = await listBooking();
@@ -21,6 +22,7 @@ const { sendMail } = require("../controllers/sendMailController")
 router.get('/', async (req, res) => {
   try {
       const bookings = await listBooking();
+      
       if (bookings.error) {
           return res.status(400).json({ error: bookings.error });
       }
@@ -129,5 +131,8 @@ router.post('/', async (req, res) => {
     res.status(500).json({ error: error.message });
   }
 });
+
+
+
 
 module.exports = router;

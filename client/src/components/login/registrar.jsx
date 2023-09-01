@@ -15,6 +15,7 @@ const Register = () => {
     const navigate = useNavigate();
     const clientID = "954982957712-gr3dpedcnotb0r1l3pqp0bj5ovnl6ftt.apps.googleusercontent.com"
 
+    
     useEffect(() => {
         const start = () => {
          gapi.auth2.init({
@@ -27,11 +28,25 @@ const Register = () => {
          e.preventDefault();
          handleRegister();
      }
+
+  
  
-     const onSuccess = (response) => {
-        console.log(response)
+     const onSuccess = async (response) => {
+        console.log(response);
         
-     }
+        const profile = response.profileObj;
+        
+        if (profile) {
+            setName(profile.name);
+            setEmail(profile.email);
+            
+            if (profile.imageUrl) {
+                const imageResponse = await fetch(profile.imageUrl);
+                const imageBlob = await imageResponse.blob();
+                const base64Image = await convertFileToBase64(imageBlob);
+            }
+        }
+    }
     
  
      const onFailure = (response) => {
@@ -49,14 +64,13 @@ const Register = () => {
             setError('La contraseña debe contener al menos una letra mayúscula, una letra minúscula y un número');
             return;
         }
-        
-        try {
-            const userData = { name, email, password };
-            
     
+        try {
+    
+            const userData = { name, email, password };
     
             const response = await dispatch(createUsers(userData));
-            
+    
             if (response && response.error) {
                 setError(response.error.message);
             } else {

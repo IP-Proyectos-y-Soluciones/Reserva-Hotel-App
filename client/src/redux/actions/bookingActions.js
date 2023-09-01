@@ -3,6 +3,7 @@ import axios from "axios";
 
 const urlBookings ="http://localhost:3001/bookings";
 
+
 export const getBookings = createAsyncThunk(
   "bookings/getBookings",
   async(_, { getState }) =>{
@@ -43,3 +44,6 @@ export const postBookings = createAsyncThunk(
       }
     }
 );
+
+
+
