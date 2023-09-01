@@ -1,7 +1,8 @@
-import { Link } from 'react-router-dom';
+import { Link, useLocation } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
 import { useEffect } from 'react';
 import { getUsers } from '../../redux/actions/userActions';
+
 
 const NavBar = ({ isLoggedIn, setIsLoggedIn }) => {
 
@@ -32,18 +33,22 @@ const NavBar = ({ isLoggedIn, setIsLoggedIn }) => {
           <Link to="/" className="hover:underline">
             <li>Home</li>
           </Link>
-          <Link to="/habitaciones" className="hover:underline">
-            <li>Habitaciones</li>
-          </Link>
-          <Link to="/planes" className="hover:underline">
-            <li>Planes</li>
-          </Link>
-          <Link to="/servicios" className="hover:underline">
-            <li>Servicios</li>
-          </Link>
-          <Link to="/contacto" className="hover:underline">
-            <li>Contacto</li>
-          </Link>
+          { location.pathname === '/' && (
+          <>
+            <li className="hover:underline">
+            <a href='#plans'>Planes</a>
+            </li>
+            <li className="hover:underline">
+            <a href='#bedroom'>Habitaciones</a>
+            </li>
+            <li className="hover:underline">
+            <a href='#ameneties'>Servicios</a>
+            </li>
+            <li className="hover:underline">
+            <a href='#footer'>Contacto</a>
+            </li>
+          </>
+          )}
           {isLoggedIn ? (
               <Link to="/reservas" className="hover:underline">
                 <li>Reservas</li>
