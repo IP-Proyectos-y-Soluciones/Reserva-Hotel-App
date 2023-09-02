@@ -3,8 +3,12 @@ const router = express.Router();
 const crypto = require('crypto');
 const { Users } = require('../config/db')
 const { createUser, updateUsers, login, getUsers } = require('../controllers/usersControllers')
-const { sendMail } = require("../controllers/sendMailController")
-const fs = require('fs');
+const fs = require( 'fs' );
+const { transporter } = require( '../controllers/sendMailController' );
+require( 'dotenv' ).config();
+
+const { MAIL_USER } = process.env;
+
 
 
 function generateVerificationCode() {
@@ -32,7 +36,20 @@ router.post('/', async (req, res) => {
       let subject = "NUEVA CUENTA";
       let text = `Su cuenta ha sido creada sin problemas! ¡Felicidades! por Name:${name} verifica tu código: ${verificationCode} `;
 
-      sendMail(email, subject, text);
+      async function main () {
+        // Enviar el correo electrónico
+        const info = await transporter.sendMail( {
+          from: `NUEVA CUEBTA <${ MAIL_USER }>`,
+          to: email,
+          subject: subject,
+          text: text,
+          html: `<div style="background-color: rgb(217, 176, 255); padding: 20px; text-align: center; border-radius: 15px;">
+                  <p style="color: white; font-size: 20px; margin: 0;">${ text }</p>
+              </div>`,
+        } );
+        console.log( "Message sent: %s", info.messageId );
+      }
+      main().catch(console.error);
 
       res.status(201).json(newUser);
     }
