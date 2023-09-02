@@ -1,8 +1,14 @@
 const express = require('express');
 const router = express.Router();
-const { Users } = require("../config/db")
+const  { Users }  = require("../config/db")
 const { listBooking, deleteBooking, createBooking, updateBooking } = require('../controllers/bookingControllers');
-const { sendMail } = require("../controllers/sendMailController")
+const { transporter } = require( '../controllers/sendMailController' );
+require('dotenv').config();
+
+const { MAIL_USER } = process.env;
+
+
+
 
 
 // router.get('/', async (req, res) => {
@@ -63,27 +69,47 @@ router.post('/delete/:id_reservation', async (req, res) => {
 router.put('/:id_reservation', async (req, res) => {
   try {
     const { id_reservation } = req.params;
-    const {id_room, id_user, payment_reservation, transaction_number, reservation_description, admission_date, departure_date, reservation_date} = req.body;
+    const {
+      id_room,
+      id_user,
+      payment_reservation,
+      transaction_number,
+      reservation_description,
+      admission_date,
+      departure_date,
+      reservation_date,
+    } = req.body;
 
-    const result = await updateBooking(id_reservation,
-        id_room,
-        id_user,
-        payment_reservation,
-        transaction_number,
-        reservation_description,
-        admission_date,
-        departure_date,
-        reservation_date);
-    
-  
+    const result = await updateBooking(
+      id_reservation,
+      id_room,
+      id_user,
+      payment_reservation,
+      transaction_number,
+      reservation_description,
+      admission_date,
+      departure_date,
+      reservation_date
+    );
+
     const user = await Users.findOne({ where: { id: id_user } });
-    const email = user.email;
 
- 
-    let subject = "UPDATED YOUR RESERVACION"
-    let text = `YOUR NEW RESERVACION IS ${reservation_description, admission_date, departure_date, reservation_date}`
-    sendMail(email, subject, text)
-
+    const text = `YOUR NEW RESERVATION IS ${reservation_description}, Admission Date: ${admission_date}, Departure Date: ${departure_date}, Reservation Date: ${reservation_date}`;
+    
+    async function main () {
+      // Enviar el correo electrónico
+      const info = await transporter.sendMail( {
+        from: `RESERVAS HOTEL <${ MAIL_USER }>`,
+        to: 'recipient@example.com',
+        subject: 'UPDATED YOUR RESERVATION',
+        text: text,
+        html: `<div style="background-color: rgb(217, 176, 255); padding: 20px; text-align: center; border-radius: 15px;">
+                <p style="color: white; font-size: 20px; margin: 0;">${ text }</p>
+            </div>`,
+      } );
+      console.log( "Message sent: %s", info.messageId );
+    }
+    main().catch(console.error);
     res.status(200).json(result);
   } catch (error) {
     res.status(500).json({ error: error.message });
