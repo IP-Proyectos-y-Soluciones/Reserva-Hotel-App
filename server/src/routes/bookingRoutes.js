@@ -96,7 +96,8 @@ router.put('/:id_reservation', async (req, res) => {
               <p style="color: white; font-size: 20px; margin: 0;">${text}</p>
           </div>`, // html body
     });
-
+    
+      console.log("Message sent: %s", info.messageId);
 
     res.status(200).json(result);
   } catch (error) {
