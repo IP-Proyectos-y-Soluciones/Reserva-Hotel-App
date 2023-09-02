@@ -64,12 +64,9 @@ router.post('/delete/:id_reservation', async (req, res) => {
 });
 
 router.put('/:id_reservation', async (req, res) => {
-  try
-  {
+  try {
     const { id_reservation } = req.params;
-    const { id_room, id_user, payment_reservation, transaction_number, reservation_description, admission_date, departure_date, reservation_date } = req.body;
-
-    const result = await updateBooking( id_reservation,
+    const {
       id_room,
       id_user,
       payment_reservation,
@@ -77,26 +74,35 @@ router.put('/:id_reservation', async (req, res) => {
       reservation_description,
       admission_date,
       departure_date,
-      reservation_date );
-    
-  
-    const user = await Users.findOne( { where: { id: id_user } } );
-    
-    // let subject = "UPDATED YOUR RESERVACION";
-    let text = `YOUR NEW RESERVACION IS ${ reservation_description + admission_date + departure_date + reservation_date }`;
-    
-    async function main() {
-  // send mail with defined transport object
+      reservation_date,
+    } = req.body;
+
+    const result = await updateBooking(
+      id_reservation,
+      id_room,
+      id_user,
+      payment_reservation,
+      transaction_number,
+      reservation_description,
+      admission_date,
+      departure_date,
+      reservation_date
+    );
+
+    const user = await Users.findOne({ where: { id: id_user } });
+
+    const text = `YOUR NEW RESERVATION IS ${reservation_description}, Admission Date: ${admission_date}, Departure Date: ${departure_date}, Reservation Date: ${reservation_date}`;
+
+    // Enviar el correo electrónico
     const info = await transporter.sendMail({
-      from: '', // sender address
-      to: "", // list of receivers
-      subject: "UPDATED YOUR RESERVACION", // Subject line
-      text: text, // plain text body
+      from: 'your_email@example.com',
+      to: 'recipient@example.com',
+      subject: 'UPDATED YOUR RESERVATION',
+      text: text,
       html: `<div style="background-color: rgb(217, 176, 255); padding: 20px; text-align: center; border-radius: 15px;">
               <p style="color: white; font-size: 20px; margin: 0;">${text}</p>
-          </div>`, // html body
+          </div>`,
     });
-
 
     res.status(200).json(result);
   } catch (error) {
