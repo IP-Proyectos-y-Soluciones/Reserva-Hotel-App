@@ -1,6 +1,6 @@
-const fs = require('fs')
-const { Users, Testimonials, Bookings } = require('../config/db')
-const bcrypt = require('bcryptjs')
+const fs = require( 'fs' );
+const { Users, Testimonials, Bookings } = require( '../config/db' );
+const bcrypt = require( 'bcryptjs' );
 
 const createUser = async (password, email, name, photo, mode, check, encrypted_email) => {
   try {

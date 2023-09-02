@@ -8,9 +8,6 @@ require('dotenv').config();
 const { MAIL_USER } = process.env;
 
 
-
-
-
 // router.get('/', async (req, res) => {
 //   try {
 //     const bookings = await listBooking();
