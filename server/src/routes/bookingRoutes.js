@@ -92,16 +92,18 @@ router.put('/:id_reservation', async (req, res) => {
       reservation_date
     );
 
-    const user = await Users.findOne({ where: { id: id_user } });
+    const user = await Users.findOne( { where: { id: id_user } } );
+    const email = user.email;
 
-    const text = `YOUR NEW RESERVATION IS ${reservation_description}, Admission Date: ${admission_date}, Departure Date: ${departure_date}, Reservation Date: ${reservation_date}`;
+    const text = `YOUR NEW RESERVATION IS ${ reservation_description }, Admission Date: ${ admission_date }, Departure Date: ${ departure_date }, Reservation Date: ${ reservation_date }`;
+    const subject = 'UPDATED YOUR RESERVATION';
     
     async function main () {
       // Enviar el correo electrónico
       const info = await transporter.sendMail( {
         from: `RESERVAS HOTEL <${ MAIL_USER }>`,
-        to: 'recipient@example.com',
-        subject: 'UPDATED YOUR RESERVATION',
+        to: email,
+        subject: subject,
         text: text,
         html: `<div style="background-color: rgb(217, 176, 255); padding: 20px; text-align: center; border-radius: 15px;">
                 <p style="color: white; font-size: 20px; margin: 0;">${ text }</p>
@@ -144,13 +146,23 @@ router.post('/', async (req, res) => {
     const user = await Users.findOne({ where: { id } });
     const email = user.email;
 
-    let subject = "Su reserva se ha realizado con éxito."
-    let text = `SU RESERVA ES ${reservation_description}, DESDE ${admission_date} A ${departure_date}, 
+    const subject = "Su reserva se ha realizado con éxito."
+    const text = `SU RESERVA ES ${ reservation_description }, DESDE ${ admission_date } A ${ departure_date }, SU CÓDIGO DE RESERVA ES ${ reservation_code }`
     
-    SU CÓDIGO DE RESERVA ES ${reservation_code}
-    
-    `
-    sendMail(email, subject, text)
+    async function main () {
+      // Enviar el correo electrónico
+      const info = await transporter.sendMail( {
+        from: `RESERVAS HOTEL <${ MAIL_USER }>`,
+        to: email,
+        subject: subject,
+        text: text,
+        html: `<div style="background-color: rgb(217, 176, 255); padding: 20px; text-align: center; border-radius: 15px;">
+                <p style="color: white; font-size: 20px; margin: 0;">${ text }</p>
+            </div>`,
+      } );
+      console.log( "Message sent: %s", info.messageId );
+    }
+    main().catch(console.error);
 
     res.status(200).json(result);
   } catch (error) {
