@@ -2,7 +2,10 @@ const express = require('express');
 const router = express.Router();
 const  { Users }  = require("../config/db")
 const { listBooking, deleteBooking, createBooking, updateBooking } = require('../controllers/bookingControllers');
-const { sendMail } = require( "../controllers/sendMailController" );
+const {transporter} = require( '../controllers/sendMailController' );
+
+
+
 
 
 // router.get('/', async (req, res) => {
@@ -61,28 +64,39 @@ router.post('/delete/:id_reservation', async (req, res) => {
 });
 
 router.put('/:id_reservation', async (req, res) => {
-  try {
+  try
+  {
     const { id_reservation } = req.params;
-    const {id_room, id_user, payment_reservation, transaction_number, reservation_description, admission_date, departure_date, reservation_date} = req.body;
+    const { id_room, id_user, payment_reservation, transaction_number, reservation_description, admission_date, departure_date, reservation_date } = req.body;
 
-    const result = await updateBooking(id_reservation,
-        id_room,
-        id_user,
-        payment_reservation,
-        transaction_number,
-        reservation_description,
-        admission_date,
-        departure_date,
-        reservation_date);
+    const result = await updateBooking( id_reservation,
+      id_room,
+      id_user,
+      payment_reservation,
+      transaction_number,
+      reservation_description,
+      admission_date,
+      departure_date,
+      reservation_date );
     
   
-    const user = await Users.findOne({ where: { id: id_user } });
-    const email = user.email;
+    const user = await Users.findOne( { where: { id: id_user } } );
+    
+    // let subject = "UPDATED YOUR RESERVACION";
+    let text = `YOUR NEW RESERVACION IS ${ reservation_description + admission_date + departure_date + reservation_date }`;
+    
+    async function main() {
+  // send mail with defined transport object
+    const info = await transporter.sendMail({
+      from: '', // sender address
+      to: "", // list of receivers
+      subject: "UPDATED YOUR RESERVACION", // Subject line
+      text: text, // plain text body
+      html: `<div style="background-color: rgb(217, 176, 255); padding: 20px; text-align: center; border-radius: 15px;">
+              <p style="color: white; font-size: 20px; margin: 0;">${text}</p>
+          </div>`, // html body
+    });
 
- 
-    let subject = "UPDATED YOUR RESERVACION"
-    let text = `YOUR NEW RESERVACION IS ${reservation_description, admission_date, departure_date, reservation_date}`
-    sendMail(email, subject, text)
 
     res.status(200).json(result);
   } catch (error) {
