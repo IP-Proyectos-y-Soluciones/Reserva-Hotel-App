@@ -1,5 +1,5 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { getAllBanner, postBanner } from "./bannerActions"; // Asegúrate de importar tus acciones correctamente
+import { getAllBanner, postBanner } from "../actions/bannerActions"; // Asegúrate de importar tus acciones correctamente
 
 const bannerSlice = createSlice({
   name: "banner",
