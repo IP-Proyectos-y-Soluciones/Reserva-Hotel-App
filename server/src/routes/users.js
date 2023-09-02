@@ -13,17 +13,11 @@ function generateVerificationCode() {
 
 router.post('/', async (req, res) => {
   try {
-    const { password, email, name, mode, encrypted_email, photoBase64 } = req.body;
+    const { password, email, name, mode, encrypted_email, photo} = req.body;
 
-    let photoPath = null;
+   
 
-    if (photoBase64) {
-      const photoBuffer = Buffer.from(photoBase64, 'base64');
-      photoPath = `uploads/${Date.now()}-photo.jpg`;
-      fs.writeFileSync(photoPath, photoBuffer);
-    }
-
-    const newUser = await createUser(password, email, name, photoPath, mode, encrypted_email);
+    const newUser = await createUser(password, email, name, photo, mode, encrypted_email);
     if (newUser.error) {
       res.render('pages/404.ejs', { newUser, title: 'Hotel Backend' });
 
