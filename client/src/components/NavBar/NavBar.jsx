@@ -1,12 +1,27 @@
-import { Link } from 'react-router-dom';
-import { useSelector } from 'react-redux';
+import { Link, useLocation } from 'react-router-dom';
+import { useSelector, useDispatch } from 'react-redux';
+import { useEffect } from 'react';
+import { getUsers } from '../../redux/actions/userActions';
+
 
 const NavBar = ({ isLoggedIn, setIsLoggedIn }) => {
 
   const handleLogout = () => {
     setIsLoggedIn(false);
   };
+  const dispatch = useDispatch();
+  const userPhotos = useSelector(state => state.users);
 
+  //const userCopyPhotos = userPhotos.usersCopy.map(user => user.photo);
+
+
+  useEffect(() => {
+    dispatch(getUsers())
+    //console.log(userPhotos)
+  }, [dispatch])
+  
+
+  const location = useLocation();
 
 
 
@@ -18,35 +33,25 @@ const NavBar = ({ isLoggedIn, setIsLoggedIn }) => {
           <Link to="/" className="hover:underline">
             <li>Home</li>
           </Link>
-          <Link to="/habitaciones" className="hover:underline">
-            <li>Habitaciones</li>
-          </Link>
-          <Link to="/planes" className="hover:underline">
-            <li>Planes</li>
-          </Link>
-          <Link to="/servicios" className="hover:underline">
-            <li>Servicios</li>
-          </Link>
-          <Link to="/contacto" className="hover:underline">
-            <li>Contacto</li>
-          </Link>
-          {isLoggedIn ? (
-            <Link to="/reservas" className="hover:underline">
-            <li>Mis Reservas</li>
-            </Link>
-          ) : (
-           null
+          { location.pathname === '/' && (
+          <>
+            <li className="hover:underline">
+            <a href='#plans'>Planes</a>
+            </li>
+            <li className="hover:underline">
+            <a href='#bedroom'>Habitaciones</a>
+            </li>
+            <li className="hover:underline">
+            <a href='#ameneties'>Servicios</a>
+            </li>
+            <li className="hover:underline">
+            <a href='#footer'>Contacto</a>
+            </li>
+          </>
           )}
-        </div>
-        <div className="flex py-px space-x-4">
-          <div className="bg-[#B99768] text-white px-4">
-            <Link to="/Booking" className="hover:underline">
-              <li>Reserva</li>
-            </Link>
           </div>
           {isLoggedIn ? (
             <div className="px-4 bg-[#B99768] text-white">
-              <img src={userPerfil} alt="Profile" />
               <button onClick={handleLogout}>Logout</button>
             </div>
           ) : (

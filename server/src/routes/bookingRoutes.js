@@ -1,8 +1,12 @@
 const express = require('express');
 const router = express.Router();
-const { Users } = require("../config/db")
+const  { Users }  = require("../config/db")
 const { listBooking, deleteBooking, createBooking, updateBooking } = require('../controllers/bookingControllers');
-const { sendMail } = require("../controllers/sendMailController")
+const { transporter } = require( '../controllers/sendMailController' );
+require('dotenv').config();
+
+const { MAIL_USER } = process.env;
+
 
 // router.get('/', async (req, res) => {
 //   try {
@@ -21,6 +25,7 @@ const { sendMail } = require("../controllers/sendMailController")
 router.get('/', async (req, res) => {
   try {
       const bookings = await listBooking();
+      
       if (bookings.error) {
           return res.status(400).json({ error: bookings.error });
       }
@@ -61,27 +66,49 @@ router.post('/delete/:id_reservation', async (req, res) => {
 router.put('/:id_reservation', async (req, res) => {
   try {
     const { id_reservation } = req.params;
-    const {id_room, id_user, payment_reservation, transaction_number, reservation_description, admission_date, departure_date, reservation_date} = req.body;
+    const {
+      id_room,
+      id_user,
+      payment_reservation,
+      transaction_number,
+      reservation_description,
+      admission_date,
+      departure_date,
+      reservation_date,
+    } = req.body;
 
-    const result = await updateBooking(id_reservation,
-        id_room,
-        id_user,
-        payment_reservation,
-        transaction_number,
-        reservation_description,
-        admission_date,
-        departure_date,
-        reservation_date);
-    
-  
-    const user = await Users.findOne({ where: { id: id_user } });
+    const result = await updateBooking(
+      id_reservation,
+      id_room,
+      id_user,
+      payment_reservation,
+      transaction_number,
+      reservation_description,
+      admission_date,
+      departure_date,
+      reservation_date
+    );
+
+    const user = await Users.findOne( { where: { id: id_user } } );
     const email = user.email;
 
- 
-    let subject = "UPDATED YOUR RESERVACION"
-    let text = `YOUR NEW RESERVACION IS ${reservation_description, admission_date, departure_date, reservation_date}`
-    sendMail(email, subject, text)
-
+    const text = `YOUR NEW RESERVATION IS ${ reservation_description }, Admission Date: ${ admission_date }, Departure Date: ${ departure_date }, Reservation Date: ${ reservation_date }`;
+    const subject = 'UPDATED YOUR RESERVATION';
+    
+    async function main () {
+      // Enviar el correo electrónico
+      const info = await transporter.sendMail( {
+        from: `RESERVAS HOTEL <${ MAIL_USER }>`,
+        to: email,
+        subject: subject,
+        text: text,
+        html: `<div style="background-color: rgb(217, 176, 255); padding: 20px; text-align: center; border-radius: 15px;">
+                <p style="color: white; font-size: 20px; margin: 0;">${ text }</p>
+            </div>`,
+      } );
+      console.log( "Message sent: %s", info.messageId );
+    }
+    main().catch(console.error);
     res.status(200).json(result);
   } catch (error) {
     res.status(500).json({ error: error.message });
@@ -116,18 +143,31 @@ router.post('/', async (req, res) => {
     const user = await Users.findOne({ where: { id } });
     const email = user.email;
 
-    let subject = "Su reserva se ha realizado con éxito."
-    let text = `SU RESERVA ES ${reservation_description}, DESDE ${admission_date} A ${departure_date}, 
+    const subject = "Su reserva se ha realizado con éxito."
+    const text = `SU RESERVA ES ${ reservation_description }, DESDE ${ admission_date } A ${ departure_date }, SU CÓDIGO DE RESERVA ES ${ reservation_code }`
     
-    SU CÓDIGO DE RESERVA ES ${reservation_code}
-    
-    `
-    sendMail(email, subject, text)
+    async function main () {
+      // Enviar el correo electrónico
+      const info = await transporter.sendMail( {
+        from: `RESERVAS HOTEL <${ MAIL_USER }>`,
+        to: email,
+        subject: subject,
+        text: text,
+        html: `<div style="background-color: rgb(217, 176, 255); padding: 20px; text-align: center; border-radius: 15px;">
+                <p style="color: white; font-size: 20px; margin: 0;">${ text }</p>
+            </div>`,
+      } );
+      console.log( "Message sent: %s", info.messageId );
+    }
+    main().catch(console.error);
 
     res.status(200).json(result);
   } catch (error) {
     res.status(500).json({ error: error.message });
   }
 });
+
+
+
 
 module.exports = router;
