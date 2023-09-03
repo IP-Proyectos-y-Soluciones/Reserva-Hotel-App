@@ -49,19 +49,6 @@ const NavBar = ({ isLoggedIn, setIsLoggedIn }) => {
             </li>
           </>
           )}
-          {isLoggedIn ? (
-              <Link to="/reservas" className="hover:underline">
-                <li>Reservas</li>
-              </Link>
-          ) : (
-            null
-          )}
-        </div>
-        <div className="flex py-px space-x-4">
-          <div className="bg-[#B99768] text-white px-4">
-            <Link to="/Booking" className="hover:underline">
-              <li>Reserva</li>
-            </Link>
           </div>
           {isLoggedIn ? (
             <div className="px-4 bg-[#B99768] text-white">
