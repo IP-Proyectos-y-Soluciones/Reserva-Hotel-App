@@ -42,7 +42,7 @@ const App = () => {
         <Route path="/registrar" element={<Registar/>} />
         <Route path="/verification" element={<Verification/>} />
         <Route path="*" element={<PageNotFound />} />
-       
+        <Route path="/bedrooms" element={<Detail />} />
       </Routes>
     </div>
     
