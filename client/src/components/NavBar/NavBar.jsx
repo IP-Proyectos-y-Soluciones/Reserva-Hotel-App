@@ -49,15 +49,8 @@ const NavBar = ({ isLoggedIn, setIsLoggedIn }) => {
             </li>
           </>
           )}
-          {isLoggedIn ? (
-              <Link to="/reservas" className="hover:underline">
-                <li>Reservas</li>
-              </Link>
-          ) : (
-            null
-          )}
-        </div>
-        <div className="flex py-px space-x-4">
+          </div>
+          <div className="flex py-px space-x-4">
           <div className="bg-[#B99768] text-white px-4">
             <Link to="/Booking" className="hover:underline">
               <li>Reserva</li>
@@ -74,7 +67,7 @@ const NavBar = ({ isLoggedIn, setIsLoggedIn }) => {
               </Link>
             </div>
           )}
-        </div>
+          </div>
       </ul>
     </div>
   );
