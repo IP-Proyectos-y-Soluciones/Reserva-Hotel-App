@@ -2,21 +2,22 @@ import React, { useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { getAllBookings } from "../../redux/actions/bookingActions";
 import { getUsers } from "../../redux/actions/userActions";
-import ReservasCards from "../reservasCard/ReservasCards"
+import ReservasCards from "../reservasCards/ReservasCards"
 
 
 
 
 function ReservasCard() {
   const dispatch = useDispatch();
-  const UserId = useSelector((state) => state.users);
+  const Userlog = useSelector((state) => state.users);
   const { allBookings } = useSelector((state) => state.bookings);
-  const user = UserId.usersCopy.map((user) => user.id);
+  const user = Userlog.user.userId.map((user) => user.id);
 
     
 useEffect(() => {
     dispatch(getUsers());
     dispatch(getAllBookings());
+    console.log(user)
   }, [dispatch]);
 
 

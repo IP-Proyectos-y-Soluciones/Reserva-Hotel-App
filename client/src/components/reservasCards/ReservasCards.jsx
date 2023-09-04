@@ -1,9 +1,13 @@
 import React from "react";
 import PropTypes from "prop-types";
+import { useSelector } from "react-redux";
 
 
 function ReservasCards({ id_reservation, admission_date, departure_date, payment_reservation, reservation_description }) {
 console.log(id_reservation)
+
+const userId = useSelector((state) => state.users.user.userId);
+console.log(userId)
     
     return (
         <div >
