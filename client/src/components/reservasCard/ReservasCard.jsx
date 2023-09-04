@@ -9,9 +9,8 @@ import ReservasCards from "../reservasCards/ReservasCards"
 
 function ReservasCard() {
   const dispatch = useDispatch();
-  const Userlog = useSelector((state) => state.users);
   const { allBookings } = useSelector((state) => state.bookings);
-  const user = Userlog.user.userId.map((user) => user.id);
+  const user = useSelector((state) => state.users.user.userId);
 
     
 useEffect(() => {
