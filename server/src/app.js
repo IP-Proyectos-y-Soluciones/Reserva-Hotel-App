@@ -40,7 +40,7 @@ server.use( express.json() );
 
 server.set('views', path.join(__dirname, 'views'));
 server.set('view engine', 'ejs');
-server.set('upload', path.join(__dirname, 'public/uploads'));
+server.set('upload', path.join(__dirname, 'uploads'));
 
 // Conexion con el Server Remoto de la DB
 // new pg.Pool({
@@ -67,7 +67,7 @@ server.use( ( req, res, next ) => {
 
 server.use('/', indexRouter);
 server.use(express.static(path.join(__dirname, 'public')));
-server.use(express.static(path.join(__dirname, 'public/uploads')));
+server.use(express.static(path.join(__dirname, 'uploads')));
 
 
 module.exports = server;
