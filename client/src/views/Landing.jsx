@@ -6,9 +6,24 @@ import Banner from "../components/Banner/Banner";
 import Footer from "../components/Footer/Footer";
 import ButtonBackToTop from "../components/ButtonBackToTop/ButtonBackToTop";
 // import Filtros from "../components/Filtros/Filtros";
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
+import { useDispatch, useSelector } from "react-redux";
+import { getAllBanner } from "../redux/actions/bannerActions";
 
 const Landing = ({ isLoggedIn, setIsLoggedIn }) => {
+
+    const [banner,setBanner] = useState([]);
+    const { banners } = useSelector(state=>state.banner);   
+
+    const dispatch = useDispatch();
+    useEffect(()=>{
+        dispatch(getAllBanner())                
+    },[dispatch])
+
+    useEffect(()=>{
+        setBanner(banners)
+    },[banners])    
+    // console.log(banner);
     
     const [hoveredCard, setHoveredCard] = useState(null);
 
@@ -24,7 +39,7 @@ const Landing = ({ isLoggedIn, setIsLoggedIn }) => {
         <div className="min-h-screen bg-[#585552]">
             <NavBar isLoggedIn={isLoggedIn} setIsLoggedIn={setIsLoggedIn}/>
             
-            <Banner/>
+            <Banner banner={banner}/>
              {/* <div><Filtros></Filtros> </div>  */}
                 <div className="leading-10 tracking-widest text-center shadow-lg">
                 <div className="py-2 text-4xl font-semibold tracking-widest font">
@@ -38,8 +53,17 @@ const Landing = ({ isLoggedIn, setIsLoggedIn }) => {
                 <div className="px-5 text-left text-[#B99768] text-4xl tracking-widest font-semibold shadow-lgg">
                     <h1>Descubre la magia del lugar</h1>
                 </div>
+
+                <div>
+                {hoveredCard && (
+                    <div >
+                         <p className="text-black">{hoveredCard}</p>
+                     </div>
+                 )}
+                </div>
+
                     <div className='flex items-center justify-center'>
-                        <CardsPlan onCardHover={handleCardHover} onCardLeave={handleCardLeave} />
+                        <CardsPlan handleCardHover={handleCardHover} handleCardLeave={handleCardLeave}/>
                     </div>
             </div>
 
@@ -57,16 +81,10 @@ const Landing = ({ isLoggedIn, setIsLoggedIn }) => {
                 </div>
 
             <Footer />
-            <ButtonBackToTop />
-            {hoveredCard && (
-        <div className="fixed bottom-0 left-0 right-0 p-4 text-center bg-white">
-          <p className="text-black">{hoveredCard}</p>
-        </div>
-      )}
-
-    
+            <ButtonBackToTop /> 
             
-        </div>
+
+    </div>
 
     
     

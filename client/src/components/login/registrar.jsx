@@ -14,7 +14,6 @@ const Register = () => {
     const [error, setError] = useState(null);
     const navigate = useNavigate();
     const clientID = "954982957712-gr3dpedcnotb0r1l3pqp0bj5ovnl6ftt.apps.googleusercontent.com"
-
     
     useEffect(() => {
         const start = () => {

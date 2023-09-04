@@ -3,7 +3,7 @@ require( 'dotenv' ).config();
 const { MAIL_USER, MAIL_PASSWORD } = process.env;
 
 
- const sendMail = async (email, subject, text) => {
+ const transporter = async (email, subject, text) => {
      try {
          let transporter = nodemailer.createTransport({
           service: 'gmail',
@@ -32,5 +32,5 @@ const { MAIL_USER, MAIL_PASSWORD } = process.env;
  };
 
 module.exports = {
-  sendMail
+  transporter
 };
