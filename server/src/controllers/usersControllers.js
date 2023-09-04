@@ -51,14 +51,13 @@ const updateUsers = async (id, name, password, email, photo, mode, encrypted_ema
     return { error: error.message };
   }
 };
-
 const login = async (email, password) => {
   try {
     const user = await Users.findOne({ where: { email } });
     if (user) {
       const isValidPassword = await bcrypt.compare(password, user.password);
       if (isValidPassword) {
-        return { success: true };
+        return { success: true, logged: true, userId: user.id };
       } else {
         throw new Error("Invalid password");
       }
@@ -72,6 +71,8 @@ const login = async (email, password) => {
     return { error: error.message };
   }
 };
+
+
 
 const getUsers = async () => {
   try {
