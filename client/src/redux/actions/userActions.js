@@ -73,6 +73,7 @@ export const loginUser = createAsyncThunk(
         throw new Error("Error al iniciar sesión. Por favor, verifica tus credenciales.");
       }
     } catch (error) {
+      console.error(error)
       throw new Error("Error al iniciar sesión. Por favor, verifica tus credenciales.");
     }
   }

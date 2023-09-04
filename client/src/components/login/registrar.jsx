@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import { useDispatch } from "react-redux";
-import { useNavigate, NavLink } from "react-router-dom";
+import { useNavigate, NavLink, Await } from "react-router-dom";
 import { createUsers, loginUser } from "../../redux/actions/userActions";
 import GoogleLogin from "react-google-login";
 import { gapi } from "gapi-script"
@@ -45,6 +45,7 @@ const Register = ({ setIsLoggedIn }) => {
     
 
   
+ 
     const onSuccess = async (response) => {
         console.log(response);
       
@@ -63,12 +64,15 @@ const Register = ({ setIsLoggedIn }) => {
       
             setError("");
       
-
-             await dispatch(loginUser({ email: profile.email, password: "enginI123" }));
+            await handleRegister()
+            const loginResponse = await dispatch(loginUser({ email: profile.email, password: "enginI123" }));
       
+            if (loginResponse && loginResponse.error) {
+              setError(loginResponse.error.message);
+            } else {
               navigate("/");
               setIsLoggedIn(true);
-            
+            }
           }
         }
       };
