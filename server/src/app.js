@@ -5,13 +5,12 @@ const expressSession = require('express-session');
 // const SessionStore = require('express-session-sequelize')(expressSession.Store); // Conexion con la DB via sequelize - Login Session
 const bodyParser = require("body-parser");
 const morgan = require("morgan");
-const fs = require("fs");
 const path = require("path");
 const cors = require("cors");
 const indexRouter = require("./routes");
 // require("dotenv").config();
 // const { DATABASE } = process.env;  // Variable de entorno para conexion a DB
-// require=('./config/db');
+require('./config/db');
 
 // Conexion con el Server Remoto de la DB
 // const { config } = require( 'dotenv' );
