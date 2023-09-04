@@ -39,6 +39,23 @@ export const getAllBookings=createAsyncThunk(
   }
 );
 
+export const deleteBookings = createAsyncThunk(
+  "bookings/deleteBookings",
+   async (id) => {
+    try {
+      const resp = await axios.delete(urlBookings, { data: { id: id } }, {
+        headers: {
+          Accept: 'application/json',
+        },
+      });
+      return resp.data;
+    } catch (error) {
+      throw new Error(error.response.data.message);
+    }
+  }
+);
+
+
 export const postBookings = createAsyncThunk(
     "bookings/postBookings",
     async(form,{rejectWithValue})=>{
