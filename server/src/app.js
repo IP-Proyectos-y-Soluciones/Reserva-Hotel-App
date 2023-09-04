@@ -25,6 +25,8 @@ require('./config/db');
 // config();
 const server = express();
 
+server.set("trust proxy", true);
+
 // Configurar el limitador de velocidad: máximo de cinco solicitudes por minuto
 const limiter = RateLimit( {
   windowMs: 15 * 60 * 1000, // 15 minutes
