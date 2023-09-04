@@ -57,7 +57,7 @@
     }
   ],
   "repository": {
-    "type": "github",
+    "type": "git",
     "url": "https://github.com/ipproyectosysoluciones/Reserva-Hotel-App.git"
   },
   "engines": {
@@ -88,6 +88,7 @@
     "dotenv": "^16.3.1",
     "ejs": "^3.1.9",
     "express": "^4.18.2",
+    "express-rate-limit": "^6.10.0",
     "express-session": "^1.17.3",
     "express-session-sequelize": "^2.3.0",
     "express-validator": "^7.0.1",
