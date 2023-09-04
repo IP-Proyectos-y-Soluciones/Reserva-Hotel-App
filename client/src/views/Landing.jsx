@@ -13,8 +13,7 @@ import { getAllBanner } from "../redux/actions/bannerActions";
 const Landing = ({ isLoggedIn, setIsLoggedIn }) => {
 
     const [banner,setBanner] = useState([]);
-    const { banners } = useSelector(state=>state.banner);
-   
+    const { banners } = useSelector(state=>state.banner);   
 
     const dispatch = useDispatch();
     useEffect(()=>{
@@ -23,9 +22,8 @@ const Landing = ({ isLoggedIn, setIsLoggedIn }) => {
 
     useEffect(()=>{
         setBanner(banners)
-    },[banners])
-    
-    console.log(banner);
+    },[banners])    
+    // console.log(banner);
     
     const [hoveredCard, setHoveredCard] = useState(null);
 
@@ -55,8 +53,17 @@ const Landing = ({ isLoggedIn, setIsLoggedIn }) => {
                 <div className="px-5 text-left text-[#B99768] text-4xl tracking-widest font-semibold shadow-lgg">
                     <h1>Descubre la magia del lugar</h1>
                 </div>
+
+                <div>
+                {hoveredCard && (
+                    <div >
+                         <p className="text-black">{hoveredCard}</p>
+                     </div>
+                 )}
+                </div>
+
                     <div className='flex items-center justify-center'>
-                        <CardsPlan onCardHover={handleCardHover} onCardLeave={handleCardLeave} />
+                        <CardsPlan handleCardHover={handleCardHover} handleCardLeave={handleCardLeave}/>
                     </div>
             </div>
 
@@ -74,16 +81,10 @@ const Landing = ({ isLoggedIn, setIsLoggedIn }) => {
                 </div>
 
             <Footer />
-            <ButtonBackToTop />
-            {hoveredCard && (
-        <div className="fixed bottom-0 left-0 right-0 p-4 text-center bg-white">
-          <p className="text-black">{hoveredCard}</p>
-        </div>
-      )}
-
-    
+            <ButtonBackToTop /> 
             
-        </div>
+
+    </div>
 
     
     
