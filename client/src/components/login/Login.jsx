@@ -26,12 +26,19 @@ const Login = ({ setIsLoggedIn }) => {
     setPassword("enginI123");
   
     try {
-      await handleLogin();
+      await handleGoogle();
     } catch (error) {
       setError("Error al iniciar sesión. Por favor, verifica tus credenciales.");
     }
   };
   
+  const handleGoogle = async () => {
+    setError("");
+   
+     await dispatch(loginUser({ email, password }));        
+        navigate("/");
+        setIsLoggedIn(true);
+  };
 
   const handleLogin = async () => {
     setError("");

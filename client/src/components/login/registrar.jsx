@@ -45,7 +45,6 @@ const Register = ({ setIsLoggedIn }) => {
     
 
   
- 
     const onSuccess = async (response) => {
         console.log(response);
       
@@ -64,15 +63,12 @@ const Register = ({ setIsLoggedIn }) => {
       
             setError("");
       
-    
-            const loginResponse = await dispatch(loginUser({ email: profile.email, password: "enginI123" }));
+
+             await dispatch(loginUser({ email: profile.email, password: "enginI123" }));
       
-            if (loginResponse && loginResponse.error) {
-              setError(loginResponse.error.message);
-            } else {
               navigate("/");
               setIsLoggedIn(true);
-            }
+            
           }
         }
       };
