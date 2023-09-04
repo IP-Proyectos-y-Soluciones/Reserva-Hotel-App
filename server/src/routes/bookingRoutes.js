@@ -5,7 +5,6 @@ const { listBooking, deleteBooking, createBooking, updateBooking } = require('..
 const { transporter } = require( '../controllers/sendMailController' );
 require('dotenv').config();
 
-const { MAIL_USER } = process.env;
 
 
 // router.get('/', async (req, res) => {
@@ -54,9 +53,18 @@ router.post('/delete/:id_reservation', async (req, res) => {
   try {
     const { id_reservation } = req.params;
 
+    const user = await Users.findOne( { where: { id: id_user } } );
+    const email = user.email;
+
     const deletedBooking = await deleteBooking(id_reservation);
     const bookings = await listBooking();
     //res.status(200).json(result);
+
+    let subject = "CANCELAR RESERVA";
+    let text = `El reserva ha sido eliminado con éxito. ¡Hasta luego, Hotel PF! ${id_reservation}`;
+
+      transporter(email, subject, text)
+      
     res.render('pages/bookings.ejs', {deletedBooking, bookings, title: 'Hotel Backend'})
   } catch (error) {
     res.status(500).json({ error: error.message });
@@ -92,23 +100,10 @@ router.put('/:id_reservation', async (req, res) => {
     const user = await Users.findOne( { where: { id: id_user } } );
     const email = user.email;
 
-    const text = `YOUR NEW RESERVATION IS ${ reservation_description }, Admission Date: ${ admission_date }, Departure Date: ${ departure_date }, Reservation Date: ${ reservation_date }`;
-    const subject = 'UPDATED YOUR RESERVATION';
+    const text = `SU NUEVA RESERVA ES ${reservation_description}, Fecha de Entrada: ${admission_date}, Fecha de Salida: ${departure_date}, Fecha de Reserva: ${reservation_date}`;
+    const subject = 'ACTUALIZADA SU RESERVA';
     
-    async function main () {
-      // Enviar el correo electrónico
-      const info = await transporter.sendMail( {
-        from: `RESERVAS HOTEL <${ MAIL_USER }>`,
-        to: email,
-        subject: subject,
-        text: text,
-        html: `<div style="background-color: rgb(217, 176, 255); padding: 20px; text-align: center; border-radius: 15px;">
-                <p style="color: white; font-size: 20px; margin: 0;">${ text }</p>
-            </div>`,
-      } );
-      console.log( "Message sent: %s", info.messageId );
-    }
-    main().catch(console.error);
+    transporter(email, subject, text)
     res.status(200).json(result);
   } catch (error) {
     res.status(500).json({ error: error.message });
@@ -146,20 +141,7 @@ router.post('/', async (req, res) => {
     const subject = "Su reserva se ha realizado con éxito."
     const text = `SU RESERVA ES ${ reservation_description }, DESDE ${ admission_date } A ${ departure_date }, SU CÓDIGO DE RESERVA ES ${ reservation_code }`
     
-    async function main () {
-      // Enviar el correo electrónico
-      const info = await transporter.sendMail( {
-        from: `RESERVAS HOTEL <${ MAIL_USER }>`,
-        to: email,
-        subject: subject,
-        text: text,
-        html: `<div style="background-color: rgb(217, 176, 255); padding: 20px; text-align: center; border-radius: 15px;">
-                <p style="color: white; font-size: 20px; margin: 0;">${ text }</p>
-            </div>`,
-      } );
-      console.log( "Message sent: %s", info.messageId );
-    }
-    main().catch(console.error);
+    transporter(email, subject, text)
 
     res.status(200).json(result);
   } catch (error) {
