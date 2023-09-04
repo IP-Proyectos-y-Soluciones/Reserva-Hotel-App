@@ -3,6 +3,7 @@ import React, { useState, useEffect } from 'react';
 const Banner = ({banner}) => {  
 
   const slides = banner;
+  //console.log(banner);
   // console.log(slides);
 
   const [currentIndex, setCurrentIndex] = useState(0);
