@@ -4,20 +4,17 @@ import { useEffect } from 'react';
 import { getUsers } from '../../redux/actions/userActions';
 
 
-const NavBar = ({ isLoggedIn, setIsLoggedIn }) => {
+const NavBar = ({ isLoggedIn }) => {
 
-  const handleLogout = () => {
-    setIsLoggedIn(false);
-  };
   const dispatch = useDispatch();
   const userPhotos = useSelector(state => state.users);
 
-  //const userCopyPhotos = userPhotos.usersCopy.map(user => user.photo);
-
+  const userCopyPhotos = userPhotos.usersCopy.map(user => user.photo);
+   const foto = userCopyPhotos[0]
 
   useEffect(() => {
     dispatch(getUsers())
-    //console.log(userPhotos)
+    console.log(userCopyPhotos)
   }, [dispatch])
   
 
@@ -49,13 +46,7 @@ const NavBar = ({ isLoggedIn, setIsLoggedIn }) => {
             </li>
           </>
           )}
-          {isLoggedIn ? (
-              <Link to="/reservas" className="hover:underline">
-                <li>Reservas</li>
-              </Link>
-          ) : (
-            null
-          )}
+        
         </div>
         <div className="flex py-px space-x-4">
           <div className="bg-[#B99768] text-white px-4">
@@ -64,9 +55,18 @@ const NavBar = ({ isLoggedIn, setIsLoggedIn }) => {
             </Link>
           </div>
           {isLoggedIn ? (
-            <div className="px-4 bg-[#B99768] text-white">
-              <button onClick={handleLogout}>Logout</button>
+            <div>
+                <Link to="/reservas" className="hover:underline">
+                <img
+                src={`data:image/jpeg;base64,${foto}`}
+                alt="User Photo"
+                width={40}
+                height={10}
+                style={{ borderRadius: "70%" }}
+              />
+              </Link>
             </div>
+             
           ) : (
             <div className="px-4 bg-[#B99768] text-white">
               <Link to="/users/login" className="hover:underline">

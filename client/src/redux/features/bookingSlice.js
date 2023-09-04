@@ -1,5 +1,5 @@
 import { createSlice } from '@reduxjs/toolkit';
-import { getBookings,getAllBookings } from '../actions/bookingActions';
+import { getBookings,getAllBookings,deleteBookings } from '../actions/bookingActions';
 
 const bookingsSlice = createSlice({
   name: 'bookings',
@@ -53,6 +53,18 @@ const bookingsSlice = createSlice({
       state.allBookings = action.payload;
     })
     .addCase(getAllBookings.rejected, (state, action) => {
+      state.loading = false;
+      state.error = action.error.message;
+    })
+    .addCase(deleteBookings.pending, (state) => {
+      state.loading = true;
+      state.error = null;
+    })
+    .addCase(deleteBookings.fulfilled, (state, action) => {
+      state.loading = false;
+      state.bookings = state.bookings.filter((booking) => booking.id !== action.payload.id);
+    })
+    .addCase(deleteBookings.rejected, (state, action) => {
       state.loading = false;
       state.error = action.error.message;
     })
