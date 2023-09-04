@@ -5,7 +5,6 @@ const expressSession = require('express-session');
 // const SessionStore = require('express-session-sequelize')(expressSession.Store); // Conexion con la DB via sequelize - Login Session
 const bodyParser = require("body-parser");
 const morgan = require("morgan");
-const fs = require("fs");
 const path = require("path");
 const cors = require("cors");
 const indexRouter = require("./routes");
@@ -43,9 +42,9 @@ server.set('view engine', 'ejs');
 server.set('upload', path.join(__dirname, 'uploads'));
 
 // Conexion con el Server Remoto de la DB
-// new pg.Pool({
-//   connectionString:  DB_INTERNAL_URL,
-// });
+new pg.Pool({
+  connectionString:  DB_INTERNAL_URL,
+});
 
 server.use( cors() );
 server.use( bodyParser.json() );
