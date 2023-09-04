@@ -1,4 +1,5 @@
-const express = require ("express");
+const express = require( "express" );
+const RateLimit = require( 'express-rate-limit' ); // Implementar la limitación de velocidad o "rate limiting" en las solicitudes HTTP
 const cookieParser = require('cookie-parser');
 const expressSession = require('express-session');
 // const SessionStore = require('express-session-sequelize')(expressSession.Store); // Conexion con la DB via sequelize - Login Session
@@ -24,6 +25,15 @@ const indexRouter = require("./routes");
 
 // config();
 const server = express();
+
+// Configurar el limitador de velocidad: máximo de cinco solicitudes por minuto
+const limiter = RateLimit( {
+  windowMs: 15 * 60 * 1000, // 15 minutes
+  max: 100, // limitar cada IP a 100 solicitudes por ventana
+} );
+
+// Aplicar limitador de tasa a todas las solicitudes
+server.use( limiter );
 
 server.use( morgan( 'dev' ) );
 server.use( express.json() );
