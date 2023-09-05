@@ -11,10 +11,14 @@ const testimonials = require("./testimonialsRoutes")
 const categorias = require("./categoriasRoutes")
 const home = require('./homeRoutes')
 const payment = require("./paymentRoutes");
+const redirect = require('./redirectRoute')
+const authetication = require('./autheticationRoute')
 
 const router = express.Router();
+
 router.use(express.json());
-router.use("/", home);
+
+router.use("/", redirect);
 router.use("/index", home);
 router.use("/admin", adminis);
 router.use("/banner", banner);
@@ -27,5 +31,6 @@ router.use("/service", service);
 router.use("/testimonials", testimonials);
 router.use("/categories", categorias);
 router.use("/payment", payment);
+router.use('/login', authetication)
 
 module.exports = router;

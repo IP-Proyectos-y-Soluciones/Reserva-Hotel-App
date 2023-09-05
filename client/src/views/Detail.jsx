@@ -3,6 +3,7 @@ import { useEffect } from 'react';
 import { useParams, Link } from 'react-router-dom';
 import { getBedroomId, getBedroom } from '../redux/actions/bedroomsActions';
 import { getPlans } from '../redux/actions/plansActions';
+import { getAllTestimonials } from '../redux/actions/testimonialsActions'; 
 import Album from "../components/album/album";
 import Preview1 from '../components/bedroomPreview/preview1';
 import FormDisponibilidad from '../components/FormDisponibilidad/FormDisponibilidad';
@@ -16,11 +17,13 @@ function Detail() {
     dispatch(getBedroom());
     dispatch(getBedroomId(id));
     dispatch(getPlans());
+    dispatch(getAllTestimonials()); 
   }, [dispatch, id]);
 
   const { bedrooms, bedroomData } = useSelector(state => state.bedrooms);
   const {plans}= useSelector(state=>state.plans);
   const selectedRoomData = bedroomData || bedrooms.find(room => room.id === id) || {};
+  const { testimonials } = useSelector(state => state.testimonials); 
 
   const otherRoomId = bedrooms.findIndex(room => room.id === id) + 1;
   const nextRoomId = bedrooms[otherRoomId % bedrooms.length]?.id;
@@ -63,11 +66,18 @@ function Detail() {
             </div>
           </div>
         </div>
+
         <div className="p-4 tesstimonios" style={{ backgroundColor: '#FFE288' }}>
           <h2> Aquí están los testimonios </h2>
+          <ul>
+            {testimonials.map(testimonial => (
+              <li key={testimonial.id}>
+                <p>{testimonial.testimony}</p>
+              </li>
+            ))}
+          </ul>
         </div>
-
-       </div>
+   </div>
       <div className="grid flex-shrink-0 grid-rows-3 gap-4 barra-lateral w-50">
       <div className="p-4" style={{ backgroundColor: '#585552' }}><h2><FormDisponibilidad/></h2></div>
         <div className="p-4"style={{ backgroundColor: '#585552' }}> <Preview1 nextRoomId={nextRoomId} /></div>

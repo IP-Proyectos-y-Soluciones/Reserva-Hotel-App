@@ -3,8 +3,10 @@ const router = express.Router();
 const crypto = require('crypto');
 const { Users } = require('../config/db')
 const { createUser, updateUsers, login, getUsers } = require('../controllers/usersControllers')
+const { verifyToken } = require('../middlewares/tokenAuthentication')
 const { transporter } = require( '../controllers/sendMailController' );
 require( 'dotenv' ).config();
+
 
 
 function generateVerificationCode() {
@@ -155,6 +157,24 @@ router.get('/', async (req, res) => {
     } catch (error) {
       res.status(500).json({ error: error.message });
     }
- });
+});
+
+//Dashboard admin only
+router.get('/api', verifyToken, async (req, res) => {
+  try {
+    const users = await getUsers();
+
+    if (users.error) {
+      return res.status(400).json({ error: users.error })
+    }
+
+    const responseData = { users, title: 'Hotel Backend' }
+    res.render('pages/users.ejs', responseData)
+
+  } catch (error) {
+    res.status(500).json({ error: error.message });
+  }
+});
+
 
 module.exports = router;

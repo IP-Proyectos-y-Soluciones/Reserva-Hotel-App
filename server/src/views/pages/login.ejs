@@ -1,52 +1,55 @@
 <body class="hold-transition login-page">
-  <div class="login-box">
-    <div class="login-logo">
-      <a href="">Hotel Portobelo</a>
-    </div>
-    <!-- /.login-logo -->
-
-    <div class="card">
-      <div class="card-body login-card-body">
-        <p class="login-box-msg">Iniciar Sesión</p>
-
-        <form method="post">
-          <div class="input-group mb-3">
-            <input
-              type="text"
-              class="form-control"
-              placeholder="Usuario"
-              name="ingresoUsuario"
-            />
-
-            <div class="input-group-append">
-              <div class="input-group-text">
-                <span class="fas fa-envelope"></span>
-              </div>
-            </div>
-          </div>
-
-          <div class="input-group mb-3">
-            <input
-              type="password"
-              class="form-control"
-              placeholder="Password"
-              name="ingresoPassword"
-            />
-
-            <div class="input-group-append">
-              <div class="input-group-text">
-                <span class="fas fa-lock"></span>
-              </div>
-            </div>
-          </div>
-
-          <button type="submit" class="btn btn-primary btn-block btn-flat">
-            Ingresar
-          </button>
-        </form>
+  <%- include('../partials/head') %>
+    <div class="login-box">
+      <div class="login-logo">
+        <a href="/login">Hotel Backend</a>
       </div>
-      <!-- /.login-card-body -->
-    </div>
-  </div>
-  <!-- /.login-box -->
+      <!-- /.login-logo -->
+
+      <div class="card">
+        <div class="card-body login-card-body">
+
+          <% if (errorMessage) { %>
+            <div class="alert alert-danger">
+              <%= errorMessage %>
+            </div>
+            <% } %>
+              <p class="login-box-msg">Iniciar Sesión</p>
+
+              <form method="POST" action="/login/auth">
+                <div class="input-group mb-3">
+                  <input type="text" class="form-control" placeholder="Usuario" name="user" />
+
+                  <div class="input-group-append">
+                    <div class="input-group-text">
+                      <span class="fas fa-envelope"></span>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="input-group mb-3">
+                  <input type="password" class="form-control" placeholder="Password" name="password" />
+
+                  <div class="input-group-append">
+                    <div class="input-group-text">
+                      <span class="fas fa-lock"></span>
+                    </div>
+                  </div>
+                </div>
+
+                <button type="submit" class="btn btn-primary btn-block btn-flat">
+                  Ingresar
+                </button>
+              </form>
+        </div>
+        <!-- /.login-card-body -->
+      </div>
+
+      <div style="text-align: center; display: flex; align-items: center; justify-content: center;">
+        <p style="margin-right: 10px; margin-top: 12px;">Signed by</p>
+        <img
+          src="https://1.bp.blogspot.com/-9jhEkn_uApY/Xxx35kNQB1I/AAAAAAAAMKk/8Jrv75ClwUoh8bkUncTzOJIyH2rU6RkjQCLcBGAsYHQ/s1280/jwt.png"
+          alt="Json Web Token" width="80">
+      </div>
+      <!-- /.login-box -->
 </body>

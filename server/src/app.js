@@ -1,6 +1,7 @@
 const express = require( "express" );
 // const RateLimit = require( 'express-rate-limit' ); // Implementar la limitación de velocidad o "rate limiting" en las solicitudes HTTP
 const cookieParser = require('cookie-parser');
+const expressSession = require('express-session');
 const bodyParser = require("body-parser");
 const morgan = require("morgan");
 const path = require("path");
@@ -30,6 +31,24 @@ const server = express();
 
 server.use( morgan( 'dev' ) );
 server.use( express.json() );
+
+//:::::::::::AGREGADO X::::::::::::::::::::::::::::
+server.use((req, res, next) => {
+  //res.header('Access-Control-Allow-Origin', 'http://localhost:3000');
+  res.header('Access-Control-Allow-Origin', '*'); // update to match the domain you will make the request from
+  res.header('Access-Control-Allow-Credentials', 'true');
+  res.header('Access-Control-Allow-Headers', '*');
+  res.header('Access-Control-Allow-Methods', 'GET, POST, OPTIONS, PUT, DELETE');
+  next();
+});
+
+server.use(expressSession({
+  secret: process.env.AUTHENTICATION_SECRET, // Cambia esto por una cadena de secreto segura
+  resave: false,
+  saveUninitialized: true
+}));
+
+//:::::::::::FIN AGREGADO X::::::::::::::::::::::::::::
 
 server.set('views', path.join(__dirname, 'views'));
 server.set('view engine', 'ejs');
