@@ -1,44 +1,57 @@
 import { useState, useEffect } from 'react';
-import { BsChevronCompactLeft, BsChevronCompactRight } from 'react-icons/bs';
+import { BsChevronCompactLeft, BsChevronCompactRight, BsDiscFill } from 'react-icons/bs';
+import { getAllService } from '../../redux/actions/serviceActions';
+import { useDispatch, useSelector } from 'react-redux';
 
 
-const CardsAmenitie = () => {
-    const img=[
-        "https://res.cloudinary.com/dm9glx5a7/image/upload/v1692802475/PF-HOTEL-APP/Amenities/SPA/1_wbxg5b.jpg",
-        "https://res.cloudinary.com/dm9glx5a7/image/upload/v1692802475/PF-HOTEL-APP/Amenities/SPA/2_bwwepk.jpg",
-        "https://res.cloudinary.com/dm9glx5a7/image/upload/v1692802474/PF-HOTEL-APP/Amenities/SPA/3_pvfxdx.jpg",
-        "https://res.cloudinary.com/dm9glx5a7/image/upload/v1692802509/PF-HOTEL-APP/Amenities/GYM/2_mfhznj.jpg",
-        "https://res.cloudinary.com/dm9glx5a7/image/upload/v1692802509/PF-HOTEL-APP/Amenities/GYM/1_w3wclm.jpg",
-        "https://res.cloudinary.com/dm9glx5a7/image/upload/v1692802509/PF-HOTEL-APP/Amenities/GYM/3_cyzyfq.jpg",
-        "https://res.cloudinary.com/dm9glx5a7/image/upload/v1692802495/PF-HOTEL-APP/Amenities/RESTAURANT/2_dlizcx.jpg",
-        "https://res.cloudinary.com/dm9glx5a7/image/upload/v1692802494/PF-HOTEL-APP/Amenities/RESTAURANT/1_rols9q.jpg"
+const CardsAmenitie = ({images}) => {
 
-    ];
+  const [slides,setSlides]=useState([]);
+ // console.log(slides);
+  
+
+// const img=[
+//         "https://res.cloudinary.com/dm9glx5a7/image/upload/v1692802475/PF-HOTEL-APP/Amenities/SPA/1_wbxg5b.jpg",
+//         "https://res.cloudinary.com/dm9glx5a7/image/upload/v1692802475/PF-HOTEL-APP/Amenities/SPA/2_bwwepk.jpg",
+//         "https://res.cloudinary.com/dm9glx5a7/image/upload/v1692802474/PF-HOTEL-APP/Amenities/SPA/3_pvfxdx.jpg",
+//         "https://res.cloudinary.com/dm9glx5a7/image/upload/v1692802509/PF-HOTEL-APP/Amenities/GYM/2_mfhznj.jpg",
+//         "https://res.cloudinary.com/dm9glx5a7/image/upload/v1692802509/PF-HOTEL-APP/Amenities/GYM/1_w3wclm.jpg",
+//         "https://res.cloudinary.com/dm9glx5a7/image/upload/v1692802509/PF-HOTEL-APP/Amenities/GYM/3_cyzyfq.jpg",
+//         "https://res.cloudinary.com/dm9glx5a7/image/upload/v1692802495/PF-HOTEL-APP/Amenities/RESTAURANT/2_dlizcx.jpg",
+//         "https://res.cloudinary.com/dm9glx5a7/image/upload/v1692802494/PF-HOTEL-APP/Amenities/RESTAURANT/1_rols9q.jpg"
+
+//     ];
 
   const [currentIndex, setCurrentIndex] = useState(0);
-  const [images, setImages] = useState([]);
-
-  // Usar un efecto para inicializar las imágenes
-  useEffect(() => {
-    setImages(img);
-  }, []);
+  
 
   const prevSlide = () => {
     const isFirstSlide = currentIndex === 0;
-    const newIndex = isFirstSlide ? images.length - 1 : currentIndex - 1;
+    const newIndex = isFirstSlide ? slides.length - 1 : currentIndex - 1;
     setCurrentIndex(newIndex);
   };
 
   const nextSlide = () => {
-    const isLastSlide = currentIndex === images.length - 1;
+    const isLastSlide = currentIndex === slides.length - 1;
     const newIndex = isLastSlide ? 0 : currentIndex + 1;
     setCurrentIndex(newIndex);
   };
 
+  useEffect(() => {
+    if (images.length > 0) {
+      setSlides(images)     
+    }
+  }, [images]);
+
+  if (slides.length === 0) {
+    
+    return <div>No hay servicios disponibles.</div>;
+  }
+
   return (
-    <div className='max-w-[1400px] h-[780px] w-full m-auto py-16 px-4 relative group'>
+    <div className='max-w-[1400px] h-[780px] w-full m-auto py-16 px-4 relative group' id='ameneties'>
       <div
-        style={{ backgroundImage: `url(${images[currentIndex]})` }}
+        style={{ backgroundImage: `url(${slides[currentIndex].photo_small})` }}
         className='w-full h-full duration-500 bg-center bg-cover rounded-lg hover:blur-none blur cursor-cell'
       ></div>
 

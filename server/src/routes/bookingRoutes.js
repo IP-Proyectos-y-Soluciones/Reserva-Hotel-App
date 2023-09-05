@@ -1,9 +1,11 @@
 const express = require('express');
 const router = express.Router();
-const { Users } = require("../config/db")
+const  { Users }  = require("../config/db")
 const { listBooking, deleteBooking, createBooking, updateBooking } = require('../controllers/bookingControllers');
-const { sendMail } = require("../controllers/sendMailController")
 const { verifyToken } = require('../middlewares/tokenAuthentication')
+const { transporter } = require( '../controllers/sendMailController' );
+require('dotenv').config();
+
 
 // router.get('/', async (req, res) => {
 //   try {
@@ -22,6 +24,7 @@ const { verifyToken } = require('../middlewares/tokenAuthentication')
 router.get('/', async (req, res) => {
   try {
       const bookings = await listBooking();
+      
       if (bookings.error) {
           return res.status(400).json({ error: bookings.error });
       }
@@ -66,9 +69,18 @@ router.post('/delete/:id_reservation', async (req, res) => {
   try {
     const { id_reservation } = req.params;
 
+    const user = await Users.findOne( { where: { id: id_user } } );
+    const email = user.email;
+
     const deletedBooking = await deleteBooking(id_reservation);
     const bookings = await listBooking();
     //res.status(200).json(result);
+
+    let subject = "CANCELAR RESERVA";
+    let text = `El reserva ha sido eliminado con éxito. ¡Hasta luego, Hotel PF! ${id_reservation}`;
+
+      transporter(email, subject, text)
+      
     res.render('pages/bookings.ejs', {deletedBooking, bookings, title: 'Hotel Backend'})
   } catch (error) {
     res.status(500).json({ error: error.message });
@@ -78,27 +90,36 @@ router.post('/delete/:id_reservation', async (req, res) => {
 router.put('/:id_reservation', async (req, res) => {
   try {
     const { id_reservation } = req.params;
-    const {id_room, id_user, payment_reservation, transaction_number, reservation_description, admission_date, departure_date, reservation_date} = req.body;
+    const {
+      id_room,
+      id_user,
+      payment_reservation,
+      transaction_number,
+      reservation_description,
+      admission_date,
+      departure_date,
+      reservation_date,
+    } = req.body;
 
-    const result = await updateBooking(id_reservation,
-        id_room,
-        id_user,
-        payment_reservation,
-        transaction_number,
-        reservation_description,
-        admission_date,
-        departure_date,
-        reservation_date);
-    
-  
-    const user = await Users.findOne({ where: { id: id_user } });
+    const result = await updateBooking(
+      id_reservation,
+      id_room,
+      id_user,
+      payment_reservation,
+      transaction_number,
+      reservation_description,
+      admission_date,
+      departure_date,
+      reservation_date
+    );
+
+    const user = await Users.findOne( { where: { id: id_user } } );
     const email = user.email;
 
- 
-    let subject = "UPDATED YOUR RESERVACION"
-    let text = `YOUR NEW RESERVACION IS ${reservation_description, admission_date, departure_date, reservation_date}`
-    sendMail(email, subject, text)
-
+    const text = `SU NUEVA RESERVA ES ${reservation_description}, Fecha de Entrada: ${admission_date}, Fecha de Salida: ${departure_date}, Fecha de Reserva: ${reservation_date}`;
+    const subject = 'ACTUALIZADA SU RESERVA';
+    
+    transporter(email, subject, text)
     res.status(200).json(result);
   } catch (error) {
     res.status(500).json({ error: error.message });
@@ -133,18 +154,18 @@ router.post('/', async (req, res) => {
     const user = await Users.findOne({ where: { id } });
     const email = user.email;
 
-    let subject = "Su reserva se ha realizado con éxito."
-    let text = `SU RESERVA ES ${reservation_description}, DESDE ${admission_date} A ${departure_date}, 
+    const subject = "Su reserva se ha realizado con éxito."
+    const text = `SU RESERVA ES ${ reservation_description }, DESDE ${ admission_date } A ${ departure_date }, SU CÓDIGO DE RESERVA ES ${ reservation_code }`
     
-    SU CÓDIGO DE RESERVA ES ${reservation_code}
-    
-    `
-    sendMail(email, subject, text)
+    transporter(email, subject, text)
 
     res.status(200).json(result);
   } catch (error) {
     res.status(500).json({ error: error.message });
   }
 });
+
+
+
 
 module.exports = router;

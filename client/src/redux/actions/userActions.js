@@ -24,49 +24,61 @@ export const getUsers=createAsyncThunk(
     }
    }  
 );
+
+
+
+
 export const createUsersVerify = createAsyncThunk(
-    "users/createUsersVerify",
-    async()=>{
-        try{
-
-
-            const res = await axios.post(urlUsersPost , {
-
-                headers: {
+  "users/createUsersVerify",
+  async ({ verificationCode }) => {
+      try {
+          const res = await axios.post(urlUsersPost, { verificationCode }, {
+              headers: {
                   Accept: 'application/json',
-                },
-              });
-            return res.data
-        }catch(error){
-            throw new Error(error.response.data.message)
-        }
-    }
+              },
+          });
+          return res.data;
+      } catch (error) {
+          throw new Error(error.response.data.message);
+      }
+  }
 );
+
 
   
-export const loginUser=createAsyncThunk(
-    "users/login",
-    async ({ email, password }) => {
-        try {
-          const response = await fetch("http://localhost:3001/users/login", {
-            method: "POST",
-            headers: {
-              "Content-Type": "application/json",
-            },
-            body: JSON.stringify({ email, password }),
-          });
-    
-          if (!response.ok) {
-            throw new Error("Failed to login");
-          }
-    
-          const data = await response.json();
-          return data; 
-        } catch (error) {
-            throw new Error("Error al iniciar sesión. Por favor, verifica tus credenciales.")
-        }
+
+
+export const loginUser = createAsyncThunk(
+  "users/login",
+  async ({ email, password }) => {
+    try {
+      const response = await fetch("http://localhost:3001/users/login", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ email, password }),
+      });
+
+      if (!response.ok) {
+        throw new Error("Failed to login");
+      }
+
+      const data = await response.json();
+      const { success, logged, userId } = data;
+
+      if (success && logged && userId) {
+        return { userId, logged, success };
+      } else {
+        throw new Error("Error al iniciar sesión. Por favor, verifica tus credenciales.");
+      }
+    } catch (error) {
+      console.error(error)
+      throw new Error("Error al iniciar sesión. Por favor, verifica tus credenciales.");
     }
+  }
 );
+
 export const createUsers=createAsyncThunk(
     "users/createUsers",
     async(payload)=>{

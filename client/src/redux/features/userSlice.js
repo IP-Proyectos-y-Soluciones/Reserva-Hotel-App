@@ -15,7 +15,10 @@ const initialState = {
   userData:[],
   userLogin:[],
   user:loadUserFromLocalStorage(),
+  loggedInUserId: "",
+  logged: false,
 };
+
 
 const usersSlice = createSlice({
   name: 'users',
@@ -54,9 +57,15 @@ const usersSlice = createSlice({
       .addCase(createUsersVerify.fulfilled, (state,action)=>{
         state.userData=action.payload;
       })
-      .addCase(loginUser.fulfilled,(state, action)=>{
-        state.userLogin=action.payload;
-      })
+      .addCase(loginUser.fulfilled, (state, action) => {
+        if (action.payload.success && action.payload.logged) {
+          state.userLogin = action.payload;
+          state.loggedInUserId = action.payload.userId;
+          state.logged = true;
+          localStorage.setItem('user', JSON.stringify(action.payload));
+          console.log(localStorage)
+        }
+      })       
       .addCase(updatedsUser.fulfilled, (state, action) => {
         state.userData = action.payload;
       });

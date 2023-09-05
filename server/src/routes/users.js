@@ -3,8 +3,10 @@ const router = express.Router();
 const crypto = require('crypto');
 const { Users } = require('../config/db')
 const { createUser, updateUsers, login, getUsers } = require('../controllers/usersControllers')
-const { sendMail } = require("../controllers/sendMailController")
 const { verifyToken } = require('../middlewares/tokenAuthentication')
+const { transporter } = require( '../controllers/sendMailController' );
+require( 'dotenv' ).config();
+
 
 
 function generateVerificationCode() {
@@ -13,7 +15,9 @@ function generateVerificationCode() {
 
 router.post('/', async (req, res) => {
   try {
-    const { password, email, name, photo, mode, encrypted_email } = req.body;
+    const { password, email, name, mode, encrypted_email, photo} = req.body;
+
+   
 
     const newUser = await createUser(password, email, name, photo, mode, encrypted_email);
     if (newUser.error) {
@@ -30,7 +34,8 @@ router.post('/', async (req, res) => {
       let subject = "NUEVA CUENTA";
       let text = `Su cuenta ha sido creada sin problemas! ¡Felicidades! por Name:${name} verifica tu código: ${verificationCode} `;
 
-      sendMail(email, subject, text);
+     
+      transporter(email, subject, text)
 
       res.status(201).json(newUser);
     }
@@ -39,6 +44,8 @@ router.post('/', async (req, res) => {
     res.status(500).json({ error: 'Internal server error' });
   }
 });
+
+
 router.post('/verify', async (req, res) => {
   const { verificationCode } = req.body;
 
@@ -74,15 +81,15 @@ router.put('/:id', async (req, res) => {
     res.status(500).json({ error: 'Internal server error' })
   }
 })
+
 router.post('/login', async (req, res) => {
   try {
     const { email, password } = req.body;
     
-  
     const getUser = await login(email, password);
     
     if (getUser.error) {
-      return res.render('pages/404.ejs', { getUser, title: 'Hotel Backend' });
+      return res.status(400).json({ error: getUser.error });
     }
     
     if (getUser.user) {
@@ -92,10 +99,10 @@ router.post('/login', async (req, res) => {
         if (user.check !== false && user.check !== null) {
           return res.status(201).json(getUser);
         } else {
-          return res.render('pages/404.ejs', { getUser, title: 'Hotel Backend' });
+          return res.status(400).json({ error: 'Código de verificación incorrecto.' });
         }
       } else {
-        return res.render('pages/404.ejs', { getUser, title: 'Hotel Backend' });
+        return res.status(400).json({ error: 'Código de verificación incorrecto.' });
       }
     } else {
       return res.status(201).json(getUser);
@@ -107,26 +114,49 @@ router.post('/login', async (req, res) => {
 });
 
 
+// router.get('/', async (req, res) => {
+//   try {
+//     const users = await getUsers();
+
+//     if (users.error) {
+//       return res.status(400).json({ error: users.error })
+//     }
+
+//     const responseData = { users, title: 'Hotel Backend' }
+
+//     if (req.accepts('json')) {
+//       res.json(users)
+      
+//     } else if (req.accepts('html')) {
+//       res.render('pages/users.ejs', responseData)
+//     } else {
+//       res.status(406).send('Not Acceptable')
+//     }
+//   } catch (error) {
+//     res.status(500).json({ error: error.message });
+//   }
+// });
+
+
 router.get('/', async (req, res) => {
-  try {
-    const users = await getUsers();
-
-    if (users.error) {
+    try {
+       const users = await getUsers();
+  
+       if (users.error) {
       return res.status(400).json({ error: users.error })
-    }
-
-    const responseData = { users, title: 'Hotel Backend' }
-
-    if (req.accepts('html')) {
-      res.render('pages/users.ejs', responseData)
-    } else if (req.accepts('json')) {
+      }
+  
+     
+   if(users){
       res.json(users)
-    } else {
-      res.status(406).send('Not Acceptable')
+   }
+        
+   else {
+        res.status(406).send('Not Acceptable')
+       }
+    } catch (error) {
+      res.status(500).json({ error: error.message });
     }
-  } catch (error) {
-    res.status(500).json({ error: error.message });
-  }
 });
 
 //Dashboard admin only

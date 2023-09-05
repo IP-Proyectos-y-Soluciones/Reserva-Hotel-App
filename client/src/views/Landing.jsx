@@ -5,13 +5,40 @@ import CardsAmenitie from "../components/CardsAmenitie/CardsAmenitie";
 import Banner from "../components/Banner/Banner";
 import Footer from "../components/Footer/Footer";
 import ButtonBackToTop from "../components/ButtonBackToTop/ButtonBackToTop";
-// import Filtros from "../components/Filtros/Filtros";
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
+import { useDispatch, useSelector } from "react-redux";
+import { getAllBanner } from "../redux/actions/bannerActions";
+import { getAllService } from "../redux/actions/serviceActions";
 
 const Landing = ({ isLoggedIn, setIsLoggedIn }) => {
-    
-    const [hoveredCard, setHoveredCard] = useState(null);
+//Banner
+    const [banner,setBanner] = useState([]);
+    const { banners } = useSelector(state=>state.banner);   
+    const dispatch = useDispatch();
+    useEffect(()=>{
+        dispatch(getAllBanner())                
+    },[dispatch])
 
+    useEffect(()=>{
+        setBanner(banners)
+    },[banners])    
+    //console.log(banner);
+
+//CardsAmenitie
+
+const [images,setImages] =useState([]);
+const { service } = useSelector(state=>state.service);
+useEffect(()=>{
+    dispatch(getAllService())
+},[dispatch]);
+
+useEffect(()=>{
+    setImages(service)
+},[service]);
+
+
+//CardsPlan
+    const [hoveredCard, setHoveredCard] = useState(null);
     const handleCardHover = (description) => {
         setHoveredCard(description);
     };
@@ -24,8 +51,8 @@ const Landing = ({ isLoggedIn, setIsLoggedIn }) => {
         <div className="min-h-screen bg-[#585552]">
             <NavBar isLoggedIn={isLoggedIn} setIsLoggedIn={setIsLoggedIn}/>
             
-            <Banner/>
-             {/* <div><Filtros></Filtros> </div>  */}
+            <Banner banner={banner}/>
+             
                 <div className="leading-10 tracking-widest text-center shadow-lg">
                 <div className="py-2 text-4xl font-semibold tracking-widest font">
                     <h2 className="text-[#B99768]">BIENVENIDOS</h2>
@@ -38,8 +65,17 @@ const Landing = ({ isLoggedIn, setIsLoggedIn }) => {
                 <div className="px-5 text-left text-[#B99768] text-4xl tracking-widest font-semibold shadow-lgg">
                     <h1>Descubre la magia del lugar</h1>
                 </div>
+
+                <div>
+                {hoveredCard && (
+                    <div >
+                         <p className="text-black">{hoveredCard}</p>
+                     </div>
+                 )}
+                </div>
+
                     <div className='flex items-center justify-center'>
-                        <CardsPlan onCardHover={handleCardHover} onCardLeave={handleCardLeave} />
+                        <CardsPlan handleCardHover={handleCardHover} handleCardLeave={handleCardLeave}/>
                     </div>
             </div>
 
@@ -53,20 +89,14 @@ const Landing = ({ isLoggedIn, setIsLoggedIn }) => {
             </div>
                 
                 <div className='flex items-center justify-center'>
-                    <CardsAmenitie />
+                    <CardsAmenitie images={images}/>
                 </div>
 
             <Footer />
-            <ButtonBackToTop />
-            {hoveredCard && (
-        <div className="fixed bottom-0 left-0 right-0 p-4 text-center bg-white">
-          <p className="text-black">{hoveredCard}</p>
-        </div>
-      )}
-
-    
+            <ButtonBackToTop /> 
             
-        </div>
+
+    </div>
 
     
     
