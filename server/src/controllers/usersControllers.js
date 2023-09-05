@@ -68,6 +68,7 @@ const login = async (email, password) => {
     fs.appendFile("error.log", error.message + "\n", err => {
       if (err) throw err;
     });
+    console.error(error)
     return { error: error.message };
   }
 };

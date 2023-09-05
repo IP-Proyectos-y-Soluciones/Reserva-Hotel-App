@@ -43,6 +43,7 @@ router.post('/', async (req, res) => {
   }
 });
 
+
 router.post('/verify', async (req, res) => {
   const { verificationCode } = req.body;
 
@@ -78,15 +79,15 @@ router.put('/:id', async (req, res) => {
     res.status(500).json({ error: 'Internal server error' })
   }
 })
+
 router.post('/login', async (req, res) => {
   try {
     const { email, password } = req.body;
     
-  
     const getUser = await login(email, password);
     
     if (getUser.error) {
-      return res.render('pages/404.ejs', { getUser, title: 'Hotel Backend' });
+      return res.status(400).json({ error: getUser.error });
     }
     
     if (getUser.user) {
@@ -96,10 +97,10 @@ router.post('/login', async (req, res) => {
         if (user.check !== false && user.check !== null) {
           return res.status(201).json(getUser);
         } else {
-          return res.render('pages/404.ejs', { getUser, title: 'Hotel Backend' });
+          return res.status(400).json({ error: 'Código de verificación incorrecto.' });
         }
       } else {
-        return res.render('pages/404.ejs', { getUser, title: 'Hotel Backend' });
+        return res.status(400).json({ error: 'Código de verificación incorrecto.' });
       }
     } else {
       return res.status(201).json(getUser);
@@ -111,28 +112,49 @@ router.post('/login', async (req, res) => {
 });
 
 
-router.get('/', async (req, res) => {
-  try {
-    const users = await getUsers();
+// router.get('/', async (req, res) => {
+//   try {
+//     const users = await getUsers();
 
-    if (users.error) {
-      return res.status(400).json({ error: users.error })
-    }
+//     if (users.error) {
+//       return res.status(400).json({ error: users.error })
+//     }
 
-    const responseData = { users, title: 'Hotel Backend' }
+//     const responseData = { users, title: 'Hotel Backend' }
 
-    if (req.accepts('json')) {
-      res.json(users)
+//     if (req.accepts('json')) {
+//       res.json(users)
       
-    } else if (req.accepts('html')) {
-      res.render('pages/users.ejs', responseData)
-    } else {
-      res.status(406).send('Not Acceptable')
-    }
-  } catch (error) {
-    res.status(500).json({ error: error.message });
-  }
-});
+//     } else if (req.accepts('html')) {
+//       res.render('pages/users.ejs', responseData)
+//     } else {
+//       res.status(406).send('Not Acceptable')
+//     }
+//   } catch (error) {
+//     res.status(500).json({ error: error.message });
+//   }
+// });
 
+
+router.get('/', async (req, res) => {
+    try {
+       const users = await getUsers();
+  
+       if (users.error) {
+      return res.status(400).json({ error: users.error })
+      }
+  
+     
+   if(users){
+      res.json(users)
+   }
+        
+   else {
+        res.status(406).send('Not Acceptable')
+       }
+    } catch (error) {
+      res.status(500).json({ error: error.message });
+    }
+ });
 
 module.exports = router;

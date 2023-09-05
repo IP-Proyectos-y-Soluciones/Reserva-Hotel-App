@@ -2,8 +2,8 @@ import { Link, useLocation } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
 import { useEffect } from 'react';
 import { getUsers } from '../../redux/actions/userActions';
-
-
+import user from "./assets/user.png"
+ 
 const NavBar = ({ isLoggedIn }) => {
 
   const dispatch = useDispatch();
@@ -55,17 +55,29 @@ const NavBar = ({ isLoggedIn }) => {
             </Link>
           </div>
           {isLoggedIn ? (
-            <div>
-                <Link to="/reservas" className="hover:underline">
-                <img
-                src={`data:image/jpeg;base64,${foto}`}
-                alt="User Photo"
-                width={40}
-                height={10}
-                style={{ borderRadius: "70%" }}
-              />
-              </Link>
-            </div>
+           <div>
+           {foto ? (
+             <Link to="/reservas" className="hover:underline">
+               <img
+                 src={`data:image/jpeg;base64,${foto}`}
+                 alt="User Photo"
+                 width={40}
+                 height={10}
+                 style={{ borderRadius: "70%" }}
+               />
+             </Link>
+           ) : (
+             <div>
+               <img
+                 src={user}
+                 alt="Default User Photo"
+                 width={40}
+                 height={10}
+                 style={{ borderRadius: "70%" }}
+               />
+             </div>
+           )}
+         </div>
              
           ) : (
             <div className="px-4 bg-[#B99768] text-white">

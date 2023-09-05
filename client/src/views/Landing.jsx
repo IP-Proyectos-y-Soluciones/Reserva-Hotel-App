@@ -5,16 +5,15 @@ import CardsAmenitie from "../components/CardsAmenitie/CardsAmenitie";
 import Banner from "../components/Banner/Banner";
 import Footer from "../components/Footer/Footer";
 import ButtonBackToTop from "../components/ButtonBackToTop/ButtonBackToTop";
-// import Filtros from "../components/Filtros/Filtros";
 import { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from "react-redux";
 import { getAllBanner } from "../redux/actions/bannerActions";
+import { getAllService } from "../redux/actions/serviceActions";
 
 const Landing = ({ isLoggedIn, setIsLoggedIn }) => {
-
+//Banner
     const [banner,setBanner] = useState([]);
     const { banners } = useSelector(state=>state.banner);   
-
     const dispatch = useDispatch();
     useEffect(()=>{
         dispatch(getAllBanner())                
@@ -23,10 +22,23 @@ const Landing = ({ isLoggedIn, setIsLoggedIn }) => {
     useEffect(()=>{
         setBanner(banners)
     },[banners])    
-    // console.log(banner);
-    
-    const [hoveredCard, setHoveredCard] = useState(null);
+    //console.log(banner);
 
+//CardsAmenitie
+
+const [images,setImages] =useState([]);
+const { service } = useSelector(state=>state.service);
+useEffect(()=>{
+    dispatch(getAllService())
+},[dispatch]);
+
+useEffect(()=>{
+    setImages(service)
+},[service]);
+
+
+//CardsPlan
+    const [hoveredCard, setHoveredCard] = useState(null);
     const handleCardHover = (description) => {
         setHoveredCard(description);
     };
@@ -40,7 +52,7 @@ const Landing = ({ isLoggedIn, setIsLoggedIn }) => {
             <NavBar isLoggedIn={isLoggedIn} setIsLoggedIn={setIsLoggedIn}/>
             
             <Banner banner={banner}/>
-             {/* <div><Filtros></Filtros> </div>  */}
+             
                 <div className="leading-10 tracking-widest text-center shadow-lg">
                 <div className="py-2 text-4xl font-semibold tracking-widest font">
                     <h2 className="text-[#B99768]">BIENVENIDOS</h2>
@@ -77,7 +89,7 @@ const Landing = ({ isLoggedIn, setIsLoggedIn }) => {
             </div>
                 
                 <div className='flex items-center justify-center'>
-                    <CardsAmenitie />
+                    <CardsAmenitie images={images}/>
                 </div>
 
             <Footer />

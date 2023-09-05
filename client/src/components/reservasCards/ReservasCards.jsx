@@ -6,16 +6,9 @@ import { useSelector } from "react-redux";
 function ReservasCards({ id_reservation, admission_date, departure_date, payment_reservation, reservation_description }) {
 console.log(id_reservation)
 
-const allBookings = useSelector((state) => state.bookings);
 const userId = useSelector((state) => state.users.user.userId);
-
-const idUserList = allBookings.map(booking => booking.id_user);
-
-
-console.log(idUserList)
-
-
-
+console.log(userId)
+    
     return (
         <div >
          <span style={{ display: "inline-block" }}>Fecha de entrada: {admission_date}</span> 

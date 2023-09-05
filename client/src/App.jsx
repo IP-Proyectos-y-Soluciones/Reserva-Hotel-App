@@ -16,7 +16,8 @@ import axios from "axios";
 
 import CardPlan from "./components/CardPlan/CardPlan";
 
-axios.defaults.baseURL = 'http://localhost:3001/';
+// axios.defaults.baseURL = 'http://localhost:3001/';
+axios.defaults.baseURL = 'https://reservas-hotel.onrender.com';
 
 const App = () => {
   const [isLoggedIn, setIsLoggedIn] = useState(false);

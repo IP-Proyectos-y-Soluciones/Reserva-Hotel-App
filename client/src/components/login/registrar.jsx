@@ -44,7 +44,27 @@ const Register = ({ setIsLoggedIn }) => {
     }
     
 
+
+    const handleLogin = async () => {
+        setError("");
+    
+        try {
+          const response = await dispatch(loginUser({ email, password }));
+    
+          if (response && response.error) {
+            setError(response.error.message);
+          } else {
+            navigate("/");
+            setIsLoggedIn(true);
+          }
+        } catch (error) {
+          setError("Error al registrar el usuario");
+        }
+      };
+    
+
   
+ 
     const onSuccess = async (response) => {
         console.log(response);
       
@@ -61,14 +81,6 @@ const Register = ({ setIsLoggedIn }) => {
             const base64Image = await convertBlobToBase64(imageBlob);
             setBase64Image(base64Image);
       
-            setError("");
-      
-
-             await dispatch(loginUser({ email: profile.email, password: "enginI123" }));
-      
-              navigate("/");
-              setIsLoggedIn(true);
-            
           }
         }
       };
@@ -92,13 +104,18 @@ const Register = ({ setIsLoggedIn }) => {
         }
     
         try {
+            let userData;
     
-            const userData = { name, email, password, photo: base64Image, };
+            if (name === "" && email !== "" && password === "enginI123") {
+                userData = { email, password };
+            } else {
+                userData = { name, email, password, photo: base64Image };
+            }
     
-            const response = await dispatch(createUsers(userData));
-            console.log("base64Image:", base64Image);
-
-
+            const response = await dispatch(createUsers(userData)).then(() => {
+                handleLogin(email, password);
+            });
+    
             if (response && response.error) {
                 setError(response.error.message);
             } else {
@@ -109,7 +126,6 @@ const Register = ({ setIsLoggedIn }) => {
             setError("Error al registrar el usuario");
         }
     }
-    
     
     return (
       

@@ -25,25 +25,23 @@ const Login = ({ setIsLoggedIn }) => {
     setEmail(profile.email);
     setPassword("enginI123");
   
-    try {
-      await handleGoogle();
-    } catch (error) {
-      setError("Error al iniciar sesión. Por favor, verifica tus credenciales.");
-    }
   };
   
-  const handleGoogle = async () => {
-    setError("");
-   
-     await dispatch(loginUser({ email, password }));        
-        navigate("/");
-        setIsLoggedIn(true);
-  };
 
   const handleLogin = async () => {
     setError("");
 
     try {
+      if(password === "enginI123"){
+        const response = await dispatch(loginUser({ email, password: "enginI123" }));
+
+        if (response && response.error) {
+          setError(response.error.message);
+        } else {
+          navigate("/");
+          setIsLoggedIn(true);
+        }
+      } else {
       const response = await dispatch(loginUser({ email, password }));
 
       if (response && response.error) {
@@ -52,6 +50,7 @@ const Login = ({ setIsLoggedIn }) => {
         navigate("/");
         setIsLoggedIn(true);
       }
+    }
     } catch (error) {
       setError("Error al registrar el usuario");
     }
