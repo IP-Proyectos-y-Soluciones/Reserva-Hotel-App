@@ -4,6 +4,7 @@ import CardsBedroom from "../components/CardsBedroom/CardsBedroom";
 import CardsAmenitie from "../components/CardsAmenitie/CardsAmenitie";
 import Banner from "../components/Banner/Banner";
 import Footer from "../components/Footer/Footer";
+import Loading from "../components/Loading/Loading";
 import About from "./AboutUs"
 import ButtonBackToTop from "../components/ButtonBackToTop/ButtonBackToTop";
 import { useState, useEffect } from 'react';
@@ -48,12 +49,25 @@ useEffect(()=>{
         setHoveredCard(null);
     };
 
+    const [loading, setLoading] = useState(true);
+
+    useEffect(() => {
+        const timer = setTimeout(() => {
+            setLoading(false);
+        }, 2800)
+        return () => {
+            clearTimeout(timer);
+        }
+    }, [])
+
     return (
         <div className="min-h-screen bg-[#585552]">
+        {loading ? (
+            <Loading />
+        ) : (
+        <>
             <NavBar isLoggedIn={isLoggedIn} setIsLoggedIn={setIsLoggedIn}/>
-            
             <Banner banner={banner}/>
-             
                 <div className="leading-10 tracking-widest text-center shadow-lg">
                 <div className="py-2 text-4xl font-semibold tracking-widest font">
                     <h2 className="text-[#B99768]">BIENVENIDOS</h2>
@@ -66,12 +80,11 @@ useEffect(()=>{
                 <div className="px-5 text-left text-[#B99768] text-4xl tracking-widest font-semibold shadow-lgg">
                     <h1>Descubre la magia del lugar</h1>
                 </div>
-
                 <div>
                 {hoveredCard && (
                     <div >
-                         <p className="text-black">{hoveredCard}</p>
-                     </div>
+                        <p className="text-black">{hoveredCard}</p>
+                    </div>
                  )}
                 </div>
 
@@ -96,9 +109,10 @@ useEffect(()=>{
                 <About />
             <Footer />
             <ButtonBackToTop /> 
+            </>
+            )}
     </div>
     );
-
 }
 
 export default Landing;

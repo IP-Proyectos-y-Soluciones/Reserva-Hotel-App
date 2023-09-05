@@ -2,6 +2,7 @@ import React from 'react';
 import { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { setFilters, clearFilters, searchBooking } from '../../redux/features/bookingSlice';
+import Loading from '../Loading/Loading';
 
 const Booking = () => {
   const dispatch = useDispatch();
@@ -34,8 +35,23 @@ const Booking = () => {
     });
   };
 
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+      const timer = setTimeout(() => {
+          setLoading(false);
+      }, 2800)
+      return () => {
+          clearTimeout(timer);
+      }
+  }, [])
+
   return (
     <div className="h-full leading-8 text-center shadow-lg">
+    { loading ? (
+      <Loading />
+    ) : (
+    <>
       <div className="flex flex-wrap shadow-lg">
         <h2 className="flex-auto border-2 border-black">Esta disponible!</h2>
         <div className="border-2 border-black w-96">Simbologia</div>
@@ -78,6 +94,8 @@ const Booking = () => {
           </form>
         </div>
       </div>
+      </>
+    )}
     </div>
   );
 };
