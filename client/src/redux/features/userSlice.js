@@ -20,6 +20,7 @@ const initialState = {
   error:null,
   success:false,
   userId:null,
+  
 };
 
 
