@@ -1,6 +1,7 @@
 const express = require('express');
 const router = express.Router();
 const { getAllCategories, createCategory, updateCategory, deleteCategory } = require('../controllers/categoriesControllers');
+const { verifyToken } = require('../middlewares/tokenAuthentication')
 
 router.post('/', async (req, res) => {
   try {
@@ -62,16 +63,6 @@ router.post('/delete/:id', async (req, res) => {
   }
 });
 
-// router.get('/', async (req, res) => {
-//   try {
-//     const cats = await getAllCategories();
-//     res.render('pages/categories.ejs', { cats, title: 'Hotel Backend' });
-//   } catch (error) {
-//     console.error(error);
-//     res.status(500).send('An error occurred');
-//   }
-// });
-
 router.get('/', async (req, res) => {
   try {
       const cats = await getAllCategories();
@@ -91,6 +82,22 @@ router.get('/', async (req, res) => {
           // Si el cliente no acepta ni HTML ni JSON, devuelve un error
           res.status(406).send('Not Acceptable');
       }
+  } catch (error) {
+      res.status(500).json({ error: error.message });
+  }
+});
+
+//Dashboard admin only
+router.get('/api', verifyToken, async (req, res) => {
+  try {
+      const cats = await getAllCategories();
+      if (cats.error) {
+          return res.status(400).json({ error: cats.error });
+      }
+
+      const responseData = { cats, title: 'Hotel Backend' };
+      res.render('pages/categories.ejs', responseData);
+
   } catch (error) {
       res.status(500).json({ error: error.message });
   }

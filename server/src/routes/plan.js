@@ -1,32 +1,7 @@
 const express = require('express');
 const router = express.Router();
 const { createPlan, updatePlan, deletePlan, getAllPlans } = require('../controllers/planControllers');
-
-// router.post('/', async (req, res) => {
-//   try {
-//     const { kind, img, description, hight_price, low_price } = req.body;
-//     const newPlan = await createPlan(kind, img, description, hight_price, low_price);
-
-//     if (req.accepts('json')) {
-//       res.status(201).json({ newPlan });
-//     } else if (req.accepts('html')) {
-//       if (newPlan.error) {
-//         console.error(newPlan.error);
-//       } else {
-//         const plans = await getAllPlans();
-//         res.render('pages/plans.ejs', { plans, newPlan, title: 'Hotel Backend' });
-//       }
-//     }
-
-//   } catch (error) {
-//     console.error(error);
-//     if (req.accepts('json')) {
-//       res.status(500).json({ error: error.message });
-//     } else if (req.accepts('html')) {
-//       res.status(500).json({ error: error.message });
-//     }
-//   }
-// });
+const { verifyToken } = require('../middlewares/tokenAuthentication')
 
 router.post('/', async (req, res) => {
   try {
@@ -99,15 +74,6 @@ router.post('/delete/:id', async (req, res) => {
   }
 });
 
-// router.get('/', async (req, res) => {
-//   try {
-//     const plans = await getAllPlans();
-//     res.render('pages/plans.ejs', { plans, title: 'Hotel Backend' });
-//   } catch (error) {
-//     res.status(500).json({ error: error.message });
-//   }
-// });
-
 router.get('/', async (req, res) => {
   try {
     const plans = await getAllPlans();
@@ -127,6 +93,23 @@ router.get('/', async (req, res) => {
       // Si el cliente no acepta ni HTML ni JSON, devuelve un error
       res.status(406).send('Not Acceptable');
     }
+  } catch (error) {
+    res.status(500).json({ error: error.message });
+
+  }
+});
+
+//Dashboard admin only
+router.get('/api', verifyToken, async (req, res) => {
+  try {
+    const plans = await getAllPlans();
+    if (plans.error) {
+      return res.status(400).json({ error: plans.error });
+    }
+
+    const responseData = { plans, title: 'Hotel Backend' };
+    res.render('pages/plans.ejs', responseData);
+
   } catch (error) {
     res.status(500).json({ error: error.message });
 
