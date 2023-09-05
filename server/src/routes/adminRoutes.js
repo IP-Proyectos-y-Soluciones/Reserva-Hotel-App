@@ -64,24 +64,6 @@ router.get('/api', verifyToken, async (req, res) => {
   }
 });
 
-// Ruta de cierre de sesión
-router.get( "pages/log_out", async ( req, res ) => {
-  try {
-    await new Promise(( resolve, reject ) => {
-      req.session.destroy(( error ) => {
-        if ( error ) {
-          console.error( "Error al cerrar sesión:", error );
-          reject( error );
-        } else {
-          resolve();
-        }
-      });
-    });
-    res.redirect( "pages/login" );
-  } catch ( error ) {
-    console.error( "Error al cerrar sesión:", error );
-  }
-});
 
 // Admin Güncelleme İşlemi
 router.post('/:id', async (req, res) => {

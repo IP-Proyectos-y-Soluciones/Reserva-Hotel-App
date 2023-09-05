@@ -13,6 +13,7 @@ const home = require('./homeRoutes')
 const payment = require("./paymentRoutes");
 const redirect = require('./redirectRoute')
 const authetication = require('./autheticationRoute')
+const logout = require('./logoutRoutes')
 
 const router = express.Router();
 
