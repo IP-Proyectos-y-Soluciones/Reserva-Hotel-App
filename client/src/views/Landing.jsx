@@ -4,6 +4,7 @@ import CardsBedroom from "../components/CardsBedroom/CardsBedroom";
 import CardsAmenitie from "../components/CardsAmenitie/CardsAmenitie";
 import Banner from "../components/Banner/Banner";
 import Footer from "../components/Footer/Footer";
+import About from "./AboutUs"
 import ButtonBackToTop from "../components/ButtonBackToTop/ButtonBackToTop";
 import { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from "react-redux";
@@ -92,16 +93,10 @@ useEffect(()=>{
                     <CardsAmenitie images={images}/>
                 </div>
 
+                <About />
             <Footer />
             <ButtonBackToTop /> 
-            
-
     </div>
-
-    
-    
-
-        
     );
 
 }
