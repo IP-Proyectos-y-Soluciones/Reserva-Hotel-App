@@ -48,33 +48,58 @@ export const createUsersVerify = createAsyncThunk(
   
 
 
-export const loginUser = createAsyncThunk(
-  "users/login",
-  async ({ email, password }) => {
+export const loginUser=createAsyncThunk(
+    "users/login",
+    async ({ email, password }) => {
+        try {
+          const response = await fetch("http://localhost:3001/users/login", {
+            method: "POST",
+            headers: {
+              "Content-Type": "application/json",
+            },
+            body: JSON.stringify({ email, password }),
+          });
+    
+          if (!response.ok) {
+            throw new Error("Failed to login");
+          }
+    
+          const data = await response.json();
+          const userId = data.id; // Obtén el ID del usuario logueado
+            return { data, userId };
+        } catch (error) {
+            throw new Error("Error al iniciar sesión. Por favor, verifica tus credenciales.")
+        }
+    }
+);
+
+export const logoutUser = createAsyncThunk(
+  "users/logout",
+  async ({ userId }) => {
     try {
-      const response = await fetch("http://localhost:3001/users/login", {
+      const response = await fetch("http://localhost:3001/users/logout", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
         },
-        body: JSON.stringify({ email, password }),
+        body: JSON.stringify({ userId }),
       });
 
       if (!response.ok) {
-        throw new Error("Failed to login");
+        throw new Error(`Failed to logout - HTTP Status: ${response.status}`);
       }
 
       const data = await response.json();
-      const { success, logged, userId } = data;
+      const { success, logged } = data;
 
-      if (success && logged && userId) {
+      if (success && !logged) {
         return { userId, logged, success };
       } else {
-        throw new Error("Error al iniciar sesión. Por favor, verifica tus credenciales.");
+        throw new Error("Error al cerrar sesión.");
       }
     } catch (error) {
       console.error(error)
-      throw new Error("Error al iniciar sesión. Por favor, verifica tus credenciales.");
+      throw new Error("Error al cerrar sesión.");
     }
   }
 );

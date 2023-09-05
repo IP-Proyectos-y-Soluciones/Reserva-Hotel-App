@@ -1,5 +1,5 @@
 import { createSlice } from '@reduxjs/toolkit';
-import {getUsers, putUser,updatedsUser,createUsersVerify, loginUser } from '../actions/userActions';
+import {getUsers, putUser,updatedsUser,createUsersVerify, loginUser,logoutUser } from '../actions/userActions';
 
 const loadUserFromLocalStorage = () => {
   try {
@@ -15,8 +15,11 @@ const initialState = {
   userData:[],
   userLogin:[],
   user:loadUserFromLocalStorage(),
-  loggedInUserId: "",
-  logged: false,
+  loggedInUserId: null, // Agrega un campo para almacenar el ID del usuario logueado
+  isLoading:false,
+  error:null,
+  success:false,
+  userId:null,
 };
 
 
@@ -58,14 +61,26 @@ const usersSlice = createSlice({
         state.userData=action.payload;
       })
       .addCase(loginUser.fulfilled, (state, action) => {
-        if (action.payload.success && action.payload.logged) {
-          state.userLogin = action.payload;
-          state.loggedInUserId = action.payload.userId;
-          state.logged = true;
-          localStorage.setItem('user', JSON.stringify(action.payload));
-          console.log(localStorage)
-        }
-      })       
+        state.userLogin = action.payload;
+        state.loggedInUserId = action.payload.userId; // Actualiza el campo loggedInUserId
+      })
+      .addCase(logoutUser.pending, (state) => {
+        state.isLoading = true;
+        state.error = null;
+        state.success = false;
+      })
+      .addCase(logoutUser.fulfilled, (state, action) => {
+        state.isLoading = false;
+        state.error = null;
+        state.success = action.payload.success;
+        state.userId = action.payload.userId;
+      })
+      .addCase(logoutUser.rejected, (state, action) => {
+        state.isLoading = false;
+        state.error = action.error.message || 'Error al cerrar sesión.';
+        state.success = false;
+      })
+
       .addCase(updatedsUser.fulfilled, (state, action) => {
         state.userData = action.payload;
       });
