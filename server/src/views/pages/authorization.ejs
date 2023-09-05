@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Alerta de Sesión Caducada</title>
+    <style>
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            background-color: #f4f4f4;
+        }
+
+        .alert {
+            background-color: #fff;
+            box-shadow: rgba(0, 0, 0, 0.25) 0px 14px 28px, rgba(0, 0, 0, 0.22) 0px 10px 10px;
+            text-align: center;
+            padding: 20px;
+            border-radius: 5px;
+            font-family: Arial, sans-serif;
+        }
+
+        .alert p {
+            font-size: 18px;
+            margin: 10px 0;
+        }
+
+        .alert a {
+            display: inline-block;
+            padding: 10px 20px;
+            background-color: #007BFF;
+            color: #fff;
+            text-decoration: none;
+            border-radius: 5px;
+            transition: background-color 0.3s;
+        }
+
+        .alert a:hover {
+            background-color: #0056b3;
+        }
+    </style>
+</head>
+<body>
+    <div class="alert">
+        <p><b>La sesión ha caducado</b></p>
+        <p>Por favor, vuelve a iniciar sesión.</p>
+        <a href="/login">Aceptar</a>
+    </div>
+</body>
+</html>
+
+
+

@@ -96,9 +96,9 @@ const deleteAdmin = async (id) => {
     if (admin) {
       const isValidPassword = await bcrypt.compare(password, admin.password);
       if (isValidPassword) {
-        return { success: true };
+        return { admin, success: true };
       } else {
-        throw new Error("Contraseña inválida");
+        throw new Error("El usuario o la contraseña son incorrectos");
       }
     } else {
       throw new Error("Administrador no encontrado");
