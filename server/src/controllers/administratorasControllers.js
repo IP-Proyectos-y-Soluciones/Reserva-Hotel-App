@@ -126,5 +126,6 @@ module.exports = {
   updateAdmin,
   createAdmin,
   getAdmins,
-  getAdminById
+  getAdminById,
+  logout
 }

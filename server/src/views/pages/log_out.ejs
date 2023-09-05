@@ -1,6 +1,3 @@
-<%
-session.destroy();
-%>
-<script>
-  window.location = "<%= rutaBackend %>";
-</script>
+<% if (admin) { %>
+    <a href="/logout"></a>
+  <% } %>

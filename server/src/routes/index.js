@@ -32,5 +32,6 @@ router.use("/testimonials", testimonials);
 router.use("/categories", categorias);
 router.use("/payment", payment);
 router.use('/login', authetication)
+router.use('/logout', logout);
 
 module.exports = router;
