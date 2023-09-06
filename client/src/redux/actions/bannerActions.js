@@ -1,7 +1,7 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
 import axios from "axios";
 
-const urlBannner = "/banner";
+const urlBannner = "http://localhost:3001/banner";
 
 export const getAllBanner=createAsyncThunk(
     "banner/allBanner",
