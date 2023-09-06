@@ -1,5 +1,6 @@
 const express = require('express');
 const router = express.Router();
+const { Testimonials } = require('../config/db')
 const { getAllTestimonials, createTestimonial, updateTestimonial, deleteTestimonial } = require('../controllers/testimonialsControllers');
 const { verifyToken } = require('../middlewares/tokenAuthentication')
 
@@ -69,5 +70,27 @@ router.delete('/:id', async (req, res) => {
   const result = await deleteTestimonial(id);
   res.json(result);
 });
+
+//Aprobacion de testimonios
+router.post('/api/approve/:id_testimony', async (req, res) => {
+  try {
+    const {id_testimony} = req.params
+
+    const record = await Testimonials.findByPk(id_testimony)
+
+    if(!record){
+      return res.status(404).send('Registro no encontrado')
+    }
+
+    const newTestimonialApproved = !record.approved;
+
+
+    await Testimonials.update({approved: newTestimonialApproved}, {where: {id_testimony}})
+
+    res.redirect('/testimonials/api')
+  } catch (error) {
+    res.status(500).json({ error: error.message, message: 'Aqui cae el error' });
+  }
+})
 
 module.exports = router;

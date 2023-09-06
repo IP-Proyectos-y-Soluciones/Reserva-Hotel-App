@@ -33,7 +33,7 @@ const CardsAmenitie = ({ images }) => {
   }
 
   return (
-    <div className='max-w-[1400px] h-[780px] w-full m-auto py-16 px-4 relative group' id='ameneties'>
+    <div className='max-w-[1400px] h-[780px] w-full m-auto py-16 px-4 relative group block' id='ameneties'>
       <div
         style={{ backgroundImage: `url(${slides[currentIndex].photo_small})` }}
         className='w-full h-full bg-center bg-cover rounded-lg '
