@@ -13,6 +13,7 @@ const home = require('./homeRoutes')
 const payment = require("./paymentRoutes");
 const redirect = require('./redirectRoute')
 const authetication = require('./autheticationRoute')
+const logout = require('./logoutRoutes')
 
 const router = express.Router();
 
@@ -32,5 +33,6 @@ router.use("/testimonials", testimonials);
 router.use("/categories", categorias);
 router.use("/payment", payment);
 router.use('/login', authetication)
+router.use('/logout', logout);
 
 module.exports = router;

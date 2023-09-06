@@ -35,15 +35,16 @@ const Login = ({ setIsLoggedIn }) => {
 
     try {
       if(password === "enginI123"){
-        const response = await dispatch(loginUser({ email, password: "enginI123" }));
+        const responseGoogle  = await dispatch(loginUser({ email, password: "enginI123" }));
 
-        if (response && response.error) {
-          setError(response.error.message);
+        if (responseGoogle && responseGoogle.error) {
+          setError(responseGoogle.error.message);
         } else {
           navigate("/");
           setIsLoggedIn(true);
         }
-      } else {
+      } 
+      if(password !== "enginI123"){
       const response = await dispatch(loginUser({ email, password }));
 
       if (response && response.error) {
@@ -54,7 +55,7 @@ const Login = ({ setIsLoggedIn }) => {
       }
     }
     } catch (error) {
-      setError("Error al registrar el usuario");
+      setError("Error al iniciar el usuario");
     }
   };
 

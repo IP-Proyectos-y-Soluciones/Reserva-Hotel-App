@@ -64,6 +64,7 @@ router.get('/api', verifyToken, async (req, res) => {
   }
 });
 
+
 // Admin Güncelleme İşlemi
 router.post('/:id', async (req, res) => {
   try {

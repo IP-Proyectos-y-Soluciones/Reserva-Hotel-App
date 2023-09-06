@@ -1,5 +1,5 @@
 const jwt = require('jsonwebtoken');
-const {AUTHENTICATION_SECRET} = process.env
+const { AUTHENTICATION_SECRET } = process.env
 
 const generateAccessToken = (user) => {
     return jwt.sign(user, AUTHENTICATION_SECRET, { expiresIn: '15m' });
@@ -13,13 +13,13 @@ const verifyToken = (req, res, next) => {
 
     if (!bearerHeader) {
         //return res.status(401).send('Access denied.');
-        res.render('pages/authorization.ejs')
+        return res.render('pages/authorization.ejs')
     }
 
     jwt.verify(bearerHeader, AUTHENTICATION_SECRET, (error, user) => {
         if (error) {
             //return res.status(403).send('Sesión caducada. Por favor, inicia sesión para acceder.');
-            res.render('pages/authorization.ejs')
+            return res.render('pages/authorization.ejs')
         }
         next();
     });
