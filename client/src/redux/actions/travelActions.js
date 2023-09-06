@@ -1,14 +1,14 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
 import axios from "axios";
 
-const urlTravel="http://localhost:3001/travel";
+const URL_TRAVEL="https://reservas-hotel.onrender.com/travel";
 
 export const getTravel=createAsyncThunk(
     "travel/getTravel",
     async()=>{
         try{
 
-   const resp=await axios.get(urlTravel , {
+   const resp=await axios.get(URL_TRAVEL , {
 
                 headers: {
                   Accept: 'application/json',
@@ -25,7 +25,7 @@ export const postTravel=createAsyncThunk(
     async()=>{
         try{
 
-            const resp= await axios.post(urlTravel , {
+            const resp= await axios.post(URL_TRAVEL , {
 
                 headers: {
                   Accept: 'application/json',
@@ -44,7 +44,7 @@ export const deleteTravel=createAsyncThunk(
 
 
 
-            const resp= await axios.delete(urlTravel,{data:{id:id}} , {
+            const resp= await axios.delete(URL_TRAVEL,{data:{id:id}} , {
 
                 headers: {
                   Accept: 'application/json',
@@ -62,7 +62,7 @@ export const putTravel=createAsyncThunk(
         try{
 
 
-            const resp= await axios.put(urlTravel, obj , {
+            const resp= await axios.put(URL_TRAVEL, obj , {
 
                 headers: {
                   Accept: 'application/json',
