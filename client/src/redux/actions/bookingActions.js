@@ -1,7 +1,7 @@
 import {createAsyncThunk} from "@reduxjs/toolkit";
 import axios from "axios";
 
-const urlBookings ="http://localhost:3001/bookings";
+const URL_BOOKINGS ="https://reservas-hotel.onrender.com/bookings/api";
 
 
 export const getBookings = createAsyncThunk(
@@ -11,7 +11,7 @@ export const getBookings = createAsyncThunk(
       const { filter } = getState();
 
 
-      const res = await axios.get(urlBookings, { params: filter } , {
+      const res = await axios.get(URL_BOOKINGS, { params: filter } , {
 
         headers: {
           Accept: 'application/json',
@@ -27,7 +27,7 @@ export const getAllBookings=createAsyncThunk(
   "bookings/allBookings",
   async()=>{
     try{
-      const res = await axios.get(urlBookings, {
+      const res = await axios.get(URL_BOOKINGS, {
         headers: {
           Accept:'application/json',
         },
@@ -43,7 +43,7 @@ export const deleteBookings = createAsyncThunk(
   "bookings/deleteBookings",
    async (id) => {
     try {
-      const resp = await axios.delete(urlBookings, { data: { id: id } }, {
+      const resp = await axios.delete(URL_BOOKINGS, { data: { id: id } }, {
         headers: {
           Accept: 'application/json',
         },
@@ -63,8 +63,7 @@ export const postBookings = createAsyncThunk(
 
      
 
-        const res= await axios.post(urlBookings,form , {
-
+        const res = await axios.post(URL_BOOKINGS, form, {
           headers: {
             Accept: 'application/json',
           },
