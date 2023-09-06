@@ -33,20 +33,34 @@
                     <th>Foto</th>
                     <th>Nombre</th>
                     <th>Email</th>
-                    <th>Reservas</th>
-                    <th>Testimonios</th>
+                    <!-- <th>Reservas</th>
+                    <th>Testimonios</th> -->
+                    <th>Estado</th>
                   </tr>
                 </thead>
 
                 <tbody>
-                  <% for(let i=0; i < users.length; i++) { %>
+                  <% for (const user of users) { %>
                     <tr>
-                      <td><%= users[i].id %></td>
-                      <td><%= users[i].photo %></td>
-                      <td><%= users[i].name %></td>
-                      <td><%= users[i].email %></td>
-                      <td>1</td>
-                      <td>1</td>
+                      <td><%= user.id %></td>
+                      <td><%= user.photo %></td>
+                      <td><%= user.name %></td>
+                      <td><%= user.email %></td>
+                      <!-- <td>1</td>
+                      <td>1</td> -->
+                      <td>
+                        <form action="/users/api/ban/<%= user.id %>" method="POST">
+                          <% if (user.status) { %>
+                            <button class="btn btn-success btn-sm" type="submit">
+                              Activo <i class="fas fa-user-check text-white"></i>
+                            </button>
+                            <% } else { %>
+                            <button class="btn btn-dark btn-sm" type="submit">
+                              Inactivo <i class="fas fa-user-slash text-white"></i>
+                            </button>
+                            <% } %>
+                        </form>
+                      </td>
                     </tr>
                     <% } %>
                 </tbody>

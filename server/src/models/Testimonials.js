@@ -29,8 +29,8 @@ module.exports = (sequelize) => {
         allowNull: false,
       },
       approved: {
-        type: DataTypes.TEXT,
-        allowNull: false,
+        type: DataTypes.BOOLEAN,
+        defaultValue: false,
       },
       date: {
         type: DataTypes.DATE,
