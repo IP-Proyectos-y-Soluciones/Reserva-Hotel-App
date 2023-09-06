@@ -136,7 +136,7 @@ const Register = ({ setIsLoggedIn }) => {
             }
         } catch (error) {
             console.error("Error al registrar el usuario:", error);
-            setError("Error al registrar el usuario", error);
+            setError("Error al registrar el usuario por favor mira tus informaciones", error);
         }
     }
     
