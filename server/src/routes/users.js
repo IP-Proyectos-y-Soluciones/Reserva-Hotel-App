@@ -2,12 +2,8 @@ const express = require("express");
 const router = express.Router();
 const crypto = require('crypto');
 const { Users } = require('../config/db')
-<<<<<<< HEAD
 const { createUser, updateUsers, login, getUsers, logout } = require('../controllers/usersControllers')
-=======
-const { createUser, updateUsers, login, getUsers } = require('../controllers/usersControllers')
 const { verifyToken } = require('../middlewares/tokenAuthentication')
->>>>>>> 641719bb84b3b6c0828078b2ae37742683a57674
 const { transporter } = require( '../controllers/sendMailController' );
 require( 'dotenv' ).config();
 
