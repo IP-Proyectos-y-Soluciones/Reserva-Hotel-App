@@ -39,15 +39,15 @@ useEffect(()=>{
 },[service]);
 
 
-//CardsPlan
-    const [hoveredCard, setHoveredCard] = useState(null);
-    const handleCardHover = (description) => {
-        setHoveredCard(description);
-    };
+// //CardsPlan
+//     const [hoveredCard, setHoveredCard] = useState(null);
+//     const handleCardHover = (description) => {
+//         setHoveredCard(description);
+//     };
 
-    const handleCardLeave = () => {
-        setHoveredCard(null);
-    };
+//     const handleCardLeave = () => {
+//         setHoveredCard(null);
+// };
 
     const [loading, setLoading] = useState(true);
 
@@ -80,16 +80,9 @@ useEffect(()=>{
                 <div className="px-5 text-left text-[#B99768] text-4xl tracking-widest font-semibold shadow-lgg">
                     <h1>Descubre la magia del lugar</h1>
                 </div>
-                <div>
-                {hoveredCard && (
-                    <div >
-                        <p className="text-black">{hoveredCard}</p>
-                    </div>
-                 )}
-                </div>
-
                     <div className='flex items-center justify-center'>
-                        <CardsPlan handleCardHover={handleCardHover} handleCardLeave={handleCardLeave}/>
+                        {/* <CardsPlan handleCardHover={handleCardHover} handleCardLeave={handleCardLeave}/> */}
+                        <CardsPlan />
                     </div>
             </div>
 

@@ -1,14 +1,14 @@
 import PropTypes from 'prop-types'
 
-const CardPlan = ({onMouseEnter, onMouseLeave, img, kind}) =>{
+const CardPlan = ({onMouseEnter, onMouseLeave, description , img, kind}) =>{
 
     return (        
-      <div >
-        <figure className="relative transition-all duration-300 cursor-pointer" onMouseEnter={onMouseEnter} onMouseLeave={onMouseLeave}>
+      <div className='text-white'>
+       <h4>{kind}</h4>
           <a href="#">
-            <img className="rounded-lg h-40 w-60" src={img} alt={kind}/>
+            <img className="h-40 rounded-lg w-60" src={img} alt={kind}/>
           </a>     
-        </figure>
+        <h3>{description}</h3>
       </div>
     )
 }
