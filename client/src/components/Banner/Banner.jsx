@@ -31,7 +31,7 @@ const Banner = ({banner}) => {
   }
 
    return (
-    <div className='max-w h-[780px] w-full relative group bg-black'>
+    <div className='max-w h-[780px] w-full relative group bg-black block'>
 
       <div style={{ backgroundImage: `url(${slides[currentIndex].img})` }} className='w-full h-full duration-500 bg-center bg-cover'></div>
 

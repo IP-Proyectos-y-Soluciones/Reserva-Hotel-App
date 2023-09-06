@@ -15,7 +15,7 @@ const Login = ({ setIsLoggedIn }) => {
   const [password, setPassword] = useState("");
   const [error, setError] = useState(null);
   const navigate = useNavigate();
-  const clientID = "954982957712-gr3dpedcnotb0r1l3pqp0bj5ovnl6ftt.apps.googleusercontent.com"
+  const clientID = "563826116941-ss2c1f2frbuav6s49998mhlg2rff7nhv.apps.googleusercontent.com"
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -35,15 +35,16 @@ const Login = ({ setIsLoggedIn }) => {
 
     try {
       if(password === "enginI123"){
-        const response = await dispatch(loginUser({ email, password: "enginI123" }));
+        const responseGoogle  = await dispatch(loginUser({ email, password: "enginI123" }));
 
-        if (response && response.error) {
-          setError(response.error.message);
+        if (responseGoogle && responseGoogle.error) {
+          setError(responseGoogle.error.message);
         } else {
           navigate("/");
           setIsLoggedIn(true);
         }
-      } else {
+      } 
+      if(password !== "enginI123"){
       const response = await dispatch(loginUser({ email, password }));
 
       if (response && response.error) {
@@ -54,7 +55,7 @@ const Login = ({ setIsLoggedIn }) => {
       }
     }
     } catch (error) {
-      setError("Error al registrar el usuario");
+      setError("Error al iniciar el usuario");
     }
   };
 

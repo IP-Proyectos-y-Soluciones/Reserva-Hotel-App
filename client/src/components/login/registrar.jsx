@@ -14,9 +14,9 @@ const Register = ({ setIsLoggedIn }) => {
     const [email, setEmail] = useState("");
     const [password, setPassword ] = useState("");
     const [base64Image, setBase64Image] = useState("");
-    const [error, setError] = useState(null);
+    const [error, setError] = useState("");
     const navigate = useNavigate();
-    const clientID = "954982957712-gr3dpedcnotb0r1l3pqp0bj5ovnl6ftt.apps.googleusercontent.com"
+    const clientID = "563826116941-ss2c1f2frbuav6s49998mhlg2rff7nhv.apps.googleusercontent.com"
     
     useEffect(() => {
         const start = () => {
@@ -30,7 +30,6 @@ const Register = ({ setIsLoggedIn }) => {
          e.preventDefault();
          handleRegister();
      }
-
 
      async function convertBlobToBase64(blob) {
         return new Promise((resolve, reject) => {
@@ -53,6 +52,7 @@ const Register = ({ setIsLoggedIn }) => {
     
           if (response && response.error) {
             setError(response.error.message);
+            return;
           } else {
             navigate("/");
             setIsLoggedIn(true);
@@ -88,8 +88,10 @@ const Register = ({ setIsLoggedIn }) => {
     
  
      const onFailure = (response) => {
-         console.log("Something went error: ", response)
+         console.log("Something went error: ", response.error)
      }
+
+     
      const handleRegister = async () => {
         setError("");
     
@@ -106,24 +108,35 @@ const Register = ({ setIsLoggedIn }) => {
         try {
             let userData;
     
-            if (name === "" && email !== "" && password === "enginI123") {
-                userData = { email, password };
-            } else {
+            if (name !== "" && email !== "" && password === "enginI123") {
                 userData = { name, email, password, photo: base64Image };
-            }
-    
-            const response = await dispatch(createUsers(userData)).then(() => {
-                handleLogin(email, password);
-            });
-    
-            if (response && response.error) {
-                setError(response.error.message);
-            } else {
-                navigate("/verification");
+                const response = await dispatch(createUsers(userData))
+                    if (!response.error) {
+                        handleLogin(email, password);
+                    }
+                    else {
+                        setError(response.error.message);
+                        return;
+                    }
+                
+                
+            } 
+            if(name !== "" && email !== "" && password !== "enginI123"){
+                userData = { name, email, password, photo: base64Image };
+
+                const response = await dispatch(createUsers(userData))
+                    if (response && response.error) {
+                         setError(response.error.message);
+                        return;
+                    } else {
+                        navigate("/verification");
+                    }
+            
+                
             }
         } catch (error) {
             console.error("Error al registrar el usuario:", error);
-            setError("Error al registrar el usuario");
+            setError("Error al registrar el usuario por favor mira tus informaciones", error);
         }
     }
     

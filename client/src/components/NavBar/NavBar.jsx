@@ -1,27 +1,32 @@
-import { Link, useLocation } from 'react-router-dom';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
 import { useEffect } from 'react';
-import { getUsers } from '../../redux/actions/userActions';
+import { getUsers, logoutUser} from '../../redux/actions/userActions';
 import user from "./assets/user.png"
  
-const NavBar = ({ isLoggedIn }) => {
+const NavBar = () => {
 
-  const dispatch = useDispatch();
-  const userPhotos = useSelector(state => state.users);
-
-  const userCopyPhotos = userPhotos.usersCopy.map(user => user.photo);
-   const foto = userCopyPhotos[0]
-
+const dispatch = useDispatch();
+const userPhoto = useSelector((state) => state.users.userLogin.userPhoto);
+const userId = useSelector((state) => state.users.loggedInUserId);
+const login = useSelector((state) => state.users.logged);
+const navigate = useNavigate() 
+ 
   useEffect(() => {
     dispatch(getUsers())
-    console.log(userCopyPhotos)
   }, [dispatch])
-  
+
 
   const location = useLocation();
 
 
+  function logout(userId){
+    dispatch(logoutUser({ userId })).then(() => {
+      navigate("/")
+    })
 
+  }
+  
 
   return (
     <div className="bg-[#313131] shadow align-middle text-lg h-9 ">
@@ -54,38 +59,46 @@ const NavBar = ({ isLoggedIn }) => {
               <li>Reserva</li>
             </Link>
           </div>
-          {isLoggedIn ? (
-           <div>
-           {foto ? (
-             <Link to="/reservas" className="hover:underline">
-               <img
-                 src={`data:image/jpeg;base64,${foto}`}
-                 alt="User Photo"
-                 width={40}
-                 height={10}
-                 style={{ borderRadius: "70%" }}
-               />
-             </Link>
-           ) : (
-             <div>
-               <img
-                 src={user}
-                 alt="Default User Photo"
-                 width={40}
-                 height={10}
-                 style={{ borderRadius: "70%" }}
-               />
-             </div>
-           )}
-         </div>
-             
-          ) : (
-            <div className="px-4 bg-[#B99768] text-white">
-              <Link to="/users/login" className="hover:underline">
-                <li>Login</li>
-              </Link>
-            </div>
-          )}
+          {login ? (
+  <div>
+    {userPhoto ? (
+      <Link to="/reservas" className="hover:underline">
+        <div>
+          <img
+            src={`data:image/jpeg;base64,${userPhoto}`}
+            alt="User Photo"
+            width={40}
+            height={10}
+            style={{ borderRadius: "70%" }}
+          />
+          <button onClick={() => logout(userId)}>Log Out</button>
+        </div>
+      </Link>
+    ) : (
+      <Link to="/reservas" className="hover:underline">
+        <div>
+          <img
+            src={user}
+            alt="Default User Photo"
+            width={40}
+            height={10}
+            style={{ borderRadius: "70%" }}
+          />
+          <button onClick={() => logout(userId)}>Log Out</button>
+        </div>
+      </Link>
+    )}
+  </div>
+) : (
+  <div className="px-4 bg-[#B99768] text-white">
+    <Link to="/users/login" className="hover:underline">
+      <li>Login</li>
+    </Link>
+  </div>
+)}
+
+          
+
         </div>
       </ul>
     </div>

@@ -2,9 +2,10 @@ const express = require("express");
 const router = express.Router();
 const crypto = require('crypto');
 const { Users } = require('../config/db')
-const { createUser, updateUsers, login, getUsers } = require('../controllers/usersControllers')
+const { createUser, updateUsers, login, getUsers, logout } = require('../controllers/usersControllers')
 const { verifyToken } = require('../middlewares/tokenAuthentication')
 const { transporter } = require( '../controllers/sendMailController' );
+const { log } = require("console");
 require( 'dotenv' ).config();
 
 
@@ -15,29 +16,36 @@ function generateVerificationCode() {
 
 router.post('/', async (req, res) => {
   try {
-    const { password, email, name, mode, encrypted_email, photo} = req.body;
+    const { password, email, name, mode, encrypted_email, photo } = req.body;
 
-   
+    const existingUser = await Users.findOne({
+      where: {
+        email: email
+      }
+    });
 
-    const newUser = await createUser(password, email, name, photo, mode, encrypted_email);
-    if (newUser.error) {
-      res.render('pages/404.ejs', { newUser, title: 'Hotel Backend' });
+    if (existingUser) {
+      return res.status(400).json({ error: "Ya existe ese mail" });
+    }
+      
+      const newUser = await createUser(password, email, name, photo, mode, encrypted_email);
 
-    } else {
-      const verificationCode = generateVerificationCode();
+      if (newUser.error) {
+        res.render('pages/404.ejs', { newUser, title: 'Hotel Backend' });
+      } else {
+        const verificationCode = generateVerificationCode();
 
-      await newUser.update({
-        verificationCode: verificationCode,
-      });
+        await newUser.update({
+          verificationCode: verificationCode,
+        });
 
+        let subject = "NUEVA CUENTA";
+        let text = `Su cuenta ha sido creada sin problemas! ¡Felicidades! por Name:${name} verifica tu código: ${verificationCode} `;
 
-      let subject = "NUEVA CUENTA";
-      let text = `Su cuenta ha sido creada sin problemas! ¡Felicidades! por Name:${name} verifica tu código: ${verificationCode} `;
+        transporter(email, subject, text)
 
-     
-      transporter(email, subject, text)
-
-      res.status(201).json(newUser);
+        res.status(201).json(newUser);
+      
     }
   } catch (error) {
     console.error(error);
@@ -113,6 +121,24 @@ router.post('/login', async (req, res) => {
   }
 });
 
+router.post('/logout', async (req, res) => {
+  try {
+    const { userId } = req.body;
+    
+    const getUser = await logout(userId);
+    
+    if (getUser.error) {
+      return res.status(400).json({ error: getUser.error });
+    }
+    
+    return res.status(201).json(getUser);
+  } catch (error) {
+    console.error(error);
+    return res.status(500).json({ error: 'Internal server error' });
+  }
+});
+
+
 
 // router.get('/', async (req, res) => {
 //   try {
@@ -175,6 +201,26 @@ router.get('/api', verifyToken, async (req, res) => {
     res.status(500).json({ error: error.message });
   }
 });
+
+//Baneo de usuarios
+router.post('/api/ban/:id', async (req, res) => {
+  try {
+    const {id} = req.params
+
+    const record = await Users.findByPk(id)
+
+    if(!record){
+      return res.status(404).send('Registro no encontrado')
+    }
+
+    const newBannedUser = !record.status
+    await Users.update({status: newBannedUser}, {where: {id}})
+    res.redirect('/users/api')
+    
+  } catch (error) {
+    res.status(500).json({ error: error.message });
+  }
+})
 
 
 module.exports = router;

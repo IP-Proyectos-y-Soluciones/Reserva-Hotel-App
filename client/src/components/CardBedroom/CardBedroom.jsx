@@ -3,7 +3,7 @@ import "tw-elements";
 import PropTypes from 'prop-types';
 
 
-const CardBedroom = ({id, img, kind }) =>{
+const CardBedroom = ({id, gallery0, kind_h }) =>{
 
   
    
@@ -11,11 +11,11 @@ const CardBedroom = ({id, img, kind }) =>{
     return ( 
       <div>
       <figure className="relative transition-all duration-300 cursor-pointer max-w-fit filter grayscale hover:grayscale-0">
-         <a href="#">
-           <img className="rounded-lg " src={img} alt={kind}/>
+         <a>
+           <img className="rounded-lg" src={gallery0} alt={kind_h}/>
          </a>
            <figcaption className="absolute px-4 text-lg text-white bottom-6">
-             <p>{kind}</p>
+             <p>{kind_h}</p>
              <Link to={`/detail/${id}`}>
              <button 
              type="button" 
