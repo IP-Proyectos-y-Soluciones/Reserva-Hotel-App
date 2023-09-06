@@ -35,10 +35,10 @@ const Login = ({ setIsLoggedIn }) => {
 
     try {
       if(password === "enginI123"){
-        const responseGOOGLE  = await dispatch(loginUser({ email, password: "enginI123" }));
+        const responseGoogle  = await dispatch(loginUser({ email, password: "enginI123" }));
 
-        if (responseGOOGLE && responseGOOGLE.error) {
-          setError(responseGOOGLE.error.message);
+        if (responseGoogle && responseGoogle.error) {
+          setError(responseGoogle.error.message);
         } else {
           navigate("/");
           setIsLoggedIn(true);

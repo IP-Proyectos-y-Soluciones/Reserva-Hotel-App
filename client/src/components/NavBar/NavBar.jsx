@@ -14,7 +14,6 @@ const navigate = useNavigate()
  
   useEffect(() => {
     dispatch(getUsers())
-    console.log(userPhoto)
   }, [dispatch])
 
 
