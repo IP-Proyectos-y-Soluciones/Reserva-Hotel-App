@@ -3,6 +3,7 @@ import { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { setFilters, clearFilters, searchBooking } from '../../redux/features/bookingSlice';
 import Loading from '../Loading/Loading';
+import Calendar from '../Calendar/Calendar';
 import PaypalPayment from '../Paypal/Paypal';
 
 const Booking = () => {
@@ -58,7 +59,9 @@ const Booking = () => {
             <div className="border-2 border-black w-96">Simbologia</div>
           </div>
           <div className="flex flex-wrap leading-10 text-center shadow-lg">
-            <div className="flex-auto border-2 border-black">Calendario</div>
+            <div className="flex-auto border-2 border-black">
+              <Calendar />
+            </div>
             <div className="border-2 ">
               <form
                 className="flex flex-col gap-1 px-6 py-0 border-2 border-black w-96"
@@ -91,7 +94,9 @@ const Booking = () => {
                   <button className="w-1/2 text-white bg-zinc-900" type="submit">
                     Reservar
                   </button>
-                  <PaypalPayment />
+                  <div>
+                    <PaypalPayment />
+                  </div>
                 </div>
               </form>
             </div>
