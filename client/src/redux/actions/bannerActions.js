@@ -1,7 +1,7 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
 import axios from "axios";
 
-const urlBannner = "/banner";
+const urlBannner = "https://reserva-hotel-app-orig-pcpqczlci-juanbog19.vercel.app/banner";
 
 export const getAllBanner=createAsyncThunk(
     "banner/allBanner",
