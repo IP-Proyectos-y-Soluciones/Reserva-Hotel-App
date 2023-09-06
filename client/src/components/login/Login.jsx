@@ -15,7 +15,7 @@ const Login = ({ setIsLoggedIn }) => {
   const [password, setPassword] = useState("");
   const [error, setError] = useState(null);
   const navigate = useNavigate();
-  const clientID = "954982957712-gr3dpedcnotb0r1l3pqp0bj5ovnl6ftt.apps.googleusercontent.com"
+  const clientID = "563826116941-ss2c1f2frbuav6s49998mhlg2rff7nhv.apps.googleusercontent.com"
 
   const handleSubmit = async (e) => {
     e.preventDefault();
