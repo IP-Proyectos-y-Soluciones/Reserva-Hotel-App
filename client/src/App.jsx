@@ -9,7 +9,8 @@ import { Route, Routes, useLocation } from "react-router-dom";
 import PageNotFound from "./components/PageNotFound/PageNotFound";
 import Registar from "./components/login/registrar";
 import Verification from "./components/login/verificando";
-import CardReservas from './components/CardReservas/CardReservas';
+//import CardReservas from './components/CardReservas/CardReservas';
+import CardsReservasNuevo from './components/CardsReservas/CardsReservasNuevo';
 import axios from "axios";
 
 
@@ -37,7 +38,7 @@ const App = () => {
 
         <Route path="/plan" element={<CardPlan />} />
         {/* <Route path="/detail/:id" element={<Detail />} /> */}
-        <Route path="/reservas" element={<CardReservas />} />
+        <Route path="/reservas" element={<CardsReservasNuevo />} />
         <Route path="/booking" element={<Booking />} />
         <Route path="/users/login" element={<Login setIsLoggedIn={setIsLoggedIn} />} />
         <Route path="/registrar" element={<Registar setIsLoggedIn={setIsLoggedIn} />} />

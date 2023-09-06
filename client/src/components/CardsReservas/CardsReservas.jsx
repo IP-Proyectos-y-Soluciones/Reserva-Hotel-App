@@ -1,25 +1,26 @@
 
-import React, { useEffect } from "react";
-import CardReservas from "../CardReservas/CardReservas";
+import { useEffect } from "react";
+// import CardReservas from "../CardReservas/CardReservas";
 import { useSelector, useDispatch } from "react-redux";
 import { getBookings } from "../../redux/actions/bookingActions";
 
 function CardsReservas() {
   const dispatch = useDispatch();
-  const { allBookings } = useSelector((state) => state.bookings.bookings);
+  // const { allBookings } = useSelector((state) => state.bookings.bookings);
 
-  console.log(allBookings);
+ 
   
-  useEffect(() => {
+  // useEffect(() => {
     
-    dispatch(getBookings());
+  //   dispatch(getBookings());
     
-  }, [dispatch, allBookings]);
+  // }, [dispatch, allBookings]);
 
   
 
   return (
     <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4" id='bookings'>
+      hola estoy en cards
       { !allBookings ? <div>loading...</div> : allBookings.map((booking) => (
         <CardReservas
           key={booking.id_reservation}
