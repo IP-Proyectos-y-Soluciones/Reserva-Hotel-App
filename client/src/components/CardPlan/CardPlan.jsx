@@ -1,14 +1,18 @@
 import PropTypes from 'prop-types'
 
-const CardPlan = ({onMouseEnter, onMouseLeave, description , img, kind}) =>{
+const CardPlan = ({ description , img, kind }) =>{
 
     return (        
-      <div className='text-white'>
+      <div className='py-4 text-white'>
+        <div className='text-2xl font-bold leading-relaxed tracking-wide text-center'>
        <h4>{kind}</h4>
-          <a href="#">
-            <img className="h-40 rounded-lg w-60" src={img} alt={kind}/>
-          </a>     
+        </div>
+          <a>
+            <img className="rounded-t-lg w-[150%] h-[40%] border-b-2 border-black" src={img} />
+          </a>
+          <div className='text-xl leading-relaxed tracking-wide text-center break-words border-b-2 border-white'>
         <h3>{description}</h3>
+          </div>
       </div>
     )
 }

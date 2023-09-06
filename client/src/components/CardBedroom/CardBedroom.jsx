@@ -11,8 +11,8 @@ const CardBedroom = ({id, gallery0, kind_h }) =>{
     return ( 
       <div>
       <figure className="relative transition-all duration-300 cursor-pointer max-w-fit filter grayscale hover:grayscale-0">
-         <a href="#">
-           <img className="rounded-lg " src={gallery0} alt={kind_h}/>
+         <a>
+           <img className="rounded-lg" src={gallery0} alt={kind_h}/>
          </a>
            <figcaption className="absolute px-4 text-lg text-white bottom-6">
              <p>{kind_h}</p>

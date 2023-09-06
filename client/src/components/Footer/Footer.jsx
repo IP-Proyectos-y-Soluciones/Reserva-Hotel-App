@@ -10,12 +10,12 @@ const Footer = () => {
                 </a>
             </div>
             <div className="px-5 py-2">
-                <a href="#Plans" className="text-base leading-6 text-[#B99768] hover:text-white">
+                <a href="#plans" className="text-base leading-6 text-[#B99768] hover:text-white">
                     Planes
                 </a>
             </div>
             <div className="px-5 py-2">
-                <a href="#bedrooms" className="text-base leading-6 text-[#B99768] hover:text-white">
+                <a href="#bedroom" className="text-base leading-6 text-[#B99768] hover:text-white">
                     Habitaciones
                 </a>
             </div>

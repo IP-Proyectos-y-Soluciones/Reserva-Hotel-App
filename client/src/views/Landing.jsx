@@ -76,30 +76,12 @@ useEffect(()=>{
                     <h3 className="text-white">Descubran un refugio de lujo en el corazón de la ciudad. Con elegantes habitaciones, comodidades de primer nivel y un servicio excepcional, estamos aquí para hacer de su estadía una experiencia inolvidable. Desde relajarse en nuestro spa hasta disfrutar de deliciosas opciones gastronómicas, les invitamos a sumergirse en un mundo de tranquilidad y comodidad. ¡Es un placer tenerles aquí!</h3>
                 </div>
                 </div>
-            <div>
-                <div className="px-5 text-left text-[#B99768] text-4xl tracking-widest font-semibold shadow-lgg">
-                    <h1>Descubre la magia del lugar</h1>
-                </div>
-                    <div className='flex items-center justify-center'>
-                        {/* <CardsPlan handleCardHover={handleCardHover} handleCardLeave={handleCardLeave}/> */}
-                        <CardsPlan />
-                    </div>
-            </div>
-
-            <div>
-                <div className="text-4xl font-semibold tracking-widest text-right text-[#B99768] px-5">
-                    <h1>El confort que mereces</h1>
-                </div>
-                    <div className='flex items-center justify-center'>
-                        <CardsBedroom />
-                    </div>
-            </div>
-                
-                <div className='flex items-center justify-center'>
+            <CardsPlan />
+            <CardsBedroom />
+                <div className='flex items-center justify-center py-6'>
                     <CardsAmenitie images={images}/>
                 </div>
-
-                <About />
+            <About />
             <Footer />
             <ButtonBackToTop /> 
             </>
