@@ -1,5 +1,5 @@
 import { createSlice } from '@reduxjs/toolkit';
-import {getUsers, putUser,updatedsUser,createUsersVerify, loginUser } from '../actions/userActions';
+import {getUsers, putUser,updatedsUser,createUsersVerify, loginUser, logoutUser } from '../actions/userActions';
 
 const loadUserFromLocalStorage = () => {
   try {
@@ -27,7 +27,7 @@ const usersSlice = createSlice({
    // filterUsers : (state, action)=>{
 //
     //  const {search, member} = action.payload
-    //  member == "all"?
+    //  member == "all"?z
     //    state.usersCopy = state.users.filter(user=> user.name.toLowerCase().includes(search?.toLowerCase()) || user.surname.toLowerCase().includes(search?.toLowerCase()))
     //    : 
     //    state.usersCopy = state.users.filter(user=> user.isMember === (member == "true"? true : false) && ( user.name.toLowerCase().includes(search.toLowerCase()) || user.surname.toLowerCase().includes(search.toLowerCase())) ) ;
@@ -42,12 +42,10 @@ const usersSlice = createSlice({
     builder
       .addCase(getUsers.fulfilled, (state, action) => {
         state.error = "";
-        state.users = action.payload;
         state.usersCopy = action.payload;
       })
       .addCase(getUsers.rejected, (state, action) => {
         state.error = 'Error occurred while fetching sports data.';
-        state.users = action.payload;
       })
       .addCase(putUser.fulfilled, (state, action) => {
         state.error = "";
@@ -57,15 +55,24 @@ const usersSlice = createSlice({
       .addCase(createUsersVerify.fulfilled, (state,action)=>{
         state.userData=action.payload;
       })
+      .addCase(logoutUser.fulfilled, (state, action) => {
+        state.isLoading = false;
+        state.error = null;
+        state.logged = false;
+        state.success = action.payload.success;
+        state.userId = action.payload.userId;
+        console.log(localStorage)
+      })
+
       .addCase(loginUser.fulfilled, (state, action) => {
         if (action.payload.success && action.payload.logged) {
           state.userLogin = action.payload;
           state.loggedInUserId = action.payload.userId;
-          state.logged = true;
+          state.logged = action.payload.logged
           localStorage.setItem('user', JSON.stringify(action.payload));
           console.log(localStorage)
         }
-      })       
+      })    
       .addCase(updatedsUser.fulfilled, (state, action) => {
         state.userData = action.payload;
       });

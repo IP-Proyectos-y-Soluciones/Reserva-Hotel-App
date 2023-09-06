@@ -65,10 +65,10 @@ export const loginUser = createAsyncThunk(
       }
 
       const data = await response.json();
-      const { success, logged, userId } = data;
+      const { success, logged, userId, userPhoto } = data;
 
       if (success && logged && userId) {
-        return { userId, logged, success };
+        return { userId, logged, success, userPhoto };
       } else {
         throw new Error("Error al iniciar sesión. Por favor, verifica tus credenciales.");
       }
@@ -78,6 +78,38 @@ export const loginUser = createAsyncThunk(
     }
   }
 );
+
+
+export const logoutUser = createAsyncThunk(
+  "users/logout",
+  async ({ userId }) => {
+    try {
+      const response = await fetch("http://localhost:3001/users/logout", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ userId }),
+      });
+
+      if (!response.ok) {
+        throw new Error(`Failed to logout - HTTP Status: ${response.status}`);
+      }
+
+      const data = await response.json();
+      const { success } = data;
+
+      if (success) {
+        return { userId, logged: false, success };
+      } else {
+        throw new Error("Error al cerrar sesión.");
+      }
+    } catch (error) {
+      throw new Error("Error al cerrar sesión.");
+    }
+  }
+);
+
 
 export const createUsers=createAsyncThunk(
     "users/createUsers",
@@ -92,11 +124,17 @@ export const createUsers=createAsyncThunk(
                 },
               });
             return res.data
-        }catch(error){
-            throw new Error(error.response.data.message)
+        }
+        
+        catch(error){
+
+          console.log(error.message);
+            throw new Error("ya existe ese mail")
         }
     }
 );
+
+
 export const putUser = createAsyncThunk(
     "users/putUsers",
     async(obj)=>{
@@ -134,5 +172,7 @@ export const updatedsUser=createAsyncThunk(
         }
     }
 );
+
+
 
 
