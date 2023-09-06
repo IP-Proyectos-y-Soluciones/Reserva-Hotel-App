@@ -24,7 +24,9 @@ function Detail() {
   const { bedrooms, bedroomData } = useSelector(state => state.bedrooms);
   const {plans}= useSelector(state=>state.plans);
   const selectedRoomData = bedroomData || bedrooms.find(room => room.id === id) || {};
-  const { testimonials } = useSelector(state => state.testimonials); 
+  const { testimonials } = useSelector(state => state.testimonials);
+  const filteredTestimonials = testimonials.filter(testimonial => testimonial.id_room === id);
+
 
   const otherRoomId = bedrooms.findIndex(room => room.id === id) + 1;
   const nextRoomId = bedrooms[otherRoomId % bedrooms.length]?.id;
@@ -71,12 +73,12 @@ function Detail() {
         <div className="p-4 tesstimonios" style={{ backgroundColor: '#FFE288' }}>
           <h2> Aquí están los testimonios </h2>
           <ul>
-            {testimonials.map(testimonial => (
-              <li key={testimonial.id}>
-                <p>{testimonial.testimony}</p>
-              </li>
-            ))}
-          </ul>
+                {filteredTestimonials.map(testimonial => (
+                  <li key={testimonial.id_testimony}>
+                    <p>{testimonial.testimony}</p>
+                  </li>
+                ))}
+              </ul>
         </div>
    </div>
       <div className="grid flex-shrink-0 grid-rows-3 gap-4 barra-lateral w-50">
