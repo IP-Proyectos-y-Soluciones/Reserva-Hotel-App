@@ -1,7 +1,7 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
 import axios from "axios";
 
-const urlBedroom = "http://localhost:3001/bedroom";
+const urlBedroom = "https://reserva-hotel-app-orig-pcpqczlci-juanbog19.vercel.app/bedroom";
 
 export const getBedroom = createAsyncThunk(
   "bedroom/getBedroom",
