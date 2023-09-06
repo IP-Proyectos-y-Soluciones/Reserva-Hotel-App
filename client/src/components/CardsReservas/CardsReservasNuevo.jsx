@@ -7,6 +7,7 @@ const CardsReservasNuevo = ()=>{
 
     const { allBookings } = useSelector((state)=>state.bookings)
     // console.log(allBookings);
+    // console.log(allBookings);
 
     const dispatch = useDispatch();
     useEffect(()=>{
