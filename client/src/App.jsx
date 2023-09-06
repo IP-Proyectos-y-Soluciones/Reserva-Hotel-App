@@ -9,7 +9,7 @@ import { Route, Routes, useLocation } from "react-router-dom";
 import PageNotFound from "./components/PageNotFound/PageNotFound";
 import Registar from "./components/login/registrar";
 import Verification from "./components/login/verificando";
-import ReservasCards from "./components/reservasCards/CardsR"
+import CardReservas from './components/CardReservas/CardReservas';
 import axios from "axios";
 
 
@@ -23,6 +23,7 @@ const App = () => {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const location = useLocation();
 
+  
   return (
     <div>
         {
@@ -36,7 +37,7 @@ const App = () => {
 
         <Route path="/plan" element={<CardPlan />} />
         {/* <Route path="/detail/:id" element={<Detail />} /> */}
-        <Route path="/reservas" element={<ReservasCards />} />
+        <Route path="/reservas" element={<CardReservas />} />
         <Route path="/booking" element={<Booking />} />
         <Route path="/users/login" element={<Login setIsLoggedIn={setIsLoggedIn} />} />
         <Route path="/registrar" element={<Registar setIsLoggedIn={setIsLoggedIn} />} />
