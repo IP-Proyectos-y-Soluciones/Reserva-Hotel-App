@@ -21,9 +21,6 @@ const createUser = async (password, email, name, photo, mode, check, encrypted_e
       return User;
     }
   } catch (error) {
-    fs.appendFile("error.log", error.message + "\n", err => {
-      if (err) throw err;
-    });
     return { error: error.message };
   }
 };
@@ -45,9 +42,6 @@ const updateUsers = async (id, name, password, email, photo, mode, encrypted_ema
     );
     return newUser;
   } catch (error) {
-    fs.appendFile("error.log", error.message + "\n", err => {
-      if (err) throw err;
-    });
     return { error: error.message };
   }
 };
@@ -65,9 +59,6 @@ const login = async (email, password) => {
       throw new Error("User not found");
     }
   } catch (error) {
-    fs.appendFile("error.log", error.message + "\n", err => {
-      if (err) throw err;
-    });
     console.error(error)
     return { error: error.message };
   }
@@ -88,9 +79,6 @@ const getUsers = async () => {
     // });
     return users;
   } catch (error) {
-    fs.appendFile("error.log", error.message + "\n", err => {
-      if (err) throw err;
-    });
     return { error: error.message };
   }
 };
