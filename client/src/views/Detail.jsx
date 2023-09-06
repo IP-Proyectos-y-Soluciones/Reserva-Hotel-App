@@ -1,12 +1,15 @@
 import { useSelector, useDispatch } from 'react-redux';
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import { useParams, Link } from 'react-router-dom';
 import { getBedroomId, getBedroom } from '../redux/actions/bedroomsActions';
 import { getPlans } from '../redux/actions/plansActions';
+import { getAllTestimonials } from '../redux/actions/testimonialsActions'; 
 import Album from "../components/album/album";
 import Preview1 from '../components/bedroomPreview/preview1';
+import Loading from '../components/Loading/Loading';
 import FormDisponibilidad from '../components/FormDisponibilidad/FormDisponibilidad';
 import Preview2 from '../components/bedroomPreview/preview2';
+
 
 function Detail() {
   const { id } = useParams();
@@ -16,11 +19,13 @@ function Detail() {
     dispatch(getBedroom());
     dispatch(getBedroomId(id));
     dispatch(getPlans());
+    dispatch(getAllTestimonials()); 
   }, [dispatch, id]);
 
   const { bedrooms, bedroomData } = useSelector(state => state.bedrooms);
   const {plans}= useSelector(state=>state.plans);
   const selectedRoomData = bedroomData || bedrooms.find(room => room.id === id) || {};
+  const { testimonials } = useSelector(state => state.testimonials); 
 
   const otherRoomId = bedrooms.findIndex(room => room.id === id) + 1;
   const nextRoomId = bedrooms[otherRoomId % bedrooms.length]?.id;
@@ -28,9 +33,23 @@ function Detail() {
   const otherRoomId2 = bedrooms.findIndex(room => room.id === id) + 2;
   const nextRoomId2 = bedrooms[otherRoomId2 % bedrooms.length]?.id;
 
+  const [loading, setLoading] = useState(true);
 
+  useEffect(() => {
+      const timer = setTimeout(() => {
+          setLoading(false);
+      }, 2800)
+      return () => {
+          clearTimeout(timer);
+      }
+  }, [])
+  
   return (
     <div className="flex h-screen detail"  >
+    { loading ? (
+      <Loading />
+    ) : (
+    <>
       <div className="grid flex-1 gap-4 p-4 auto-rows-min" >
         <div className="imagen&type bg-gray-100 p-4 ">
           <h2 className="mt-10 font-bold text-center">
@@ -63,16 +82,25 @@ function Detail() {
             </div>
           </div>
         </div>
+
         <div className="p-4 tesstimonios" style={{ backgroundColor: '#FFE288' }}>
           <h2> Aquí están los testimonios </h2>
+          <ul>
+            {testimonials.map(testimonial => (
+              <li key={testimonial.id}>
+                <p>{testimonial.testimony}</p>
+              </li>
+            ))}
+          </ul>
         </div>
-
-       </div>
+   </div>
       <div className="grid flex-shrink-0 grid-rows-3 gap-4 barra-lateral w-50">
       <div className="p-4" style={{ backgroundColor: '#585552' }}><h2><FormDisponibilidad/></h2></div>
         <div className="p-4"style={{ backgroundColor: '#585552' }}> <Preview1 nextRoomId={nextRoomId} /></div>
         <div className="p-4"style={{ backgroundColor: '#585552' }}><Preview2 nextRoomId={nextRoomId2}  /></div>
       </div>
+      </>
+      )}
     </div>
   );
 }

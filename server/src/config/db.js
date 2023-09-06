@@ -50,6 +50,26 @@ sequelize.models = Object.fromEntries(capsEntries);
 // 		console.error(error);
 // 	});
 
+// const { sequelize, Testimonials, Users } = sequelize.models;
+
+// sequelize
+//   .query(
+//     `
+//   SELECT *
+//   FROM testimonials
+//   INNER JOIN users ON testimonials.id_us = users.id
+// `,
+//     {
+//       type: sequelize.QueryTypes.SELECT,
+//     }
+//   )
+//   .then((result) => {
+//     console.log(result);
+//   })
+//   .catch((error) => {
+//     console.error(error);
+//   });
+
 const { Diary, Bookings, Testimonials, Bedrooms, Users, Categories } = sequelize.models;
 
 Diary.belongsTo(Bedrooms, { foreignKey: "id_room" });
@@ -57,7 +77,8 @@ Categories.belongsTo(Bedrooms, { foreignKey: "id_room" });
 Bedrooms.belongsTo(Categories, { foreignKey: "id_categories" });
 Bookings.belongsTo(Users, { foreignKey: "id_user" });
 Bookings.belongsTo(Bedrooms, { foreignKey: "id_room" });
-//Testimonials.belongsTo(Users, { foreignKey: 'id_res' });
+// Testimonials.belongsTo(Users, { foreignKey: 'id_res' });
+Users.belongsTo(Testimonials, { foreignKey: "id_us" });
 Testimonials.belongsTo(Bookings, { foreignKey: "id_res" });
 Testimonials.belongsTo(Users, { foreignKey: "id_us" });
 Testimonials.belongsTo(Bedrooms, { foreignKey: "id_room" });

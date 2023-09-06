@@ -1,17 +1,7 @@
 const express = require('express');
 const router = express.Router();
 const { getAllTestimonials, createTestimonial, updateTestimonial, deleteTestimonial } = require('../controllers/testimonialsControllers');
-
-
-// router.get('/', async (req, res) => {
-//   const testimonials = await getAllTestimonials();
-
-//   //res.json(testimonials);
-
-//   res.json(testimonials);
-
-//   res.render('pages/testimonials.ejs', {testimonials, title: 'Hotel Backend'});
-// });
+const { verifyToken } = require('../middlewares/tokenAuthentication')
 
 router.get('/', async (req, res) => {
   try {
@@ -37,6 +27,21 @@ router.get('/', async (req, res) => {
   }
 });
 
+//Dashboard admin only
+router.get('/api', verifyToken, async (req, res) => {
+  try {
+      const testimonials = await getAllTestimonials();
+      if (testimonials.error) {
+          return res.status(400).json({ error: testimonials.error });
+      }
+
+      const responseData = { testimonials, title: 'Hotel Backend' };
+      res.render('pages/testimonials.ejs', responseData);
+
+  } catch (error) {
+      res.status(500).json({ error: error.message });
+  }
+});
 
 router.post('/', async (req, res) => {
   const { testimony, approved, id_us, id_room, id_res } = req.body;

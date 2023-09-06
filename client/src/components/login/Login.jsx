@@ -1,9 +1,11 @@
 
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { useDispatch } from "react-redux";
 import { useNavigate, NavLink } from "react-router-dom";
 import { loginUser } from "../../redux/actions/userActions";
 import GoogleLogin from "react-google-login";
+import Loading from "../Loading/Loading";
+
 
 
 
@@ -58,7 +60,16 @@ const Login = ({ setIsLoggedIn }) => {
   };
 
 
-  
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+      const timer = setTimeout(() => {
+          setLoading(false);
+      }, 2800)
+      return () => {
+          clearTimeout(timer);
+      }
+  }, [])
 
   const onGoogleLoginFailure = (error) => {
     console.error("FUE UN ERROR CON GOOGLE: ", error);
@@ -66,6 +77,10 @@ const Login = ({ setIsLoggedIn }) => {
 
   return (
     <div className="flex items-center justify-center min-h-screen bg-gray-100">
+    { loading ? (
+      <Loading />
+    ) : (
+      <>
       <div className="max-w-md p-6 bg-white rounded-lg shadow-md">
         <h1 className="mb-4 text-2xl font-semibold">Login</h1>
         <form onSubmit={handleSubmit}>
@@ -115,6 +130,8 @@ const Login = ({ setIsLoggedIn }) => {
           cookiePolicy={"single_host_origin"}
         />
       </div>
+      </>
+    )}
     </div>
   );
 };
