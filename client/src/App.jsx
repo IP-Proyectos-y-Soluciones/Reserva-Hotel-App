@@ -9,7 +9,7 @@ import { Route, Routes, useLocation } from "react-router-dom";
 import PageNotFound from "./components/PageNotFound/PageNotFound";
 import Registar from "./components/login/registrar";
 import Verification from "./components/login/verificando";
-import ReservasCards from "./components/reservasCards/ReservasCards"
+import ReservasCards from "./components/reservasCards/CardsR"
 import axios from "axios";
 
 
