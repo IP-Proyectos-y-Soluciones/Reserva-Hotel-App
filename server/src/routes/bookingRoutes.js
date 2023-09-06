@@ -24,7 +24,7 @@ require('dotenv').config();
 router.get('/', async (req, res) => {
   try {
       const bookings = await listBooking();
-      
+      console.log(bookings)
       if (bookings.error) {
           return res.status(400).json({ error: bookings.error });
       }

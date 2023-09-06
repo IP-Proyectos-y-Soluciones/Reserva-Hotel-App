@@ -27,11 +27,13 @@ export const getAllBookings=createAsyncThunk(
   "bookings/allBookings",
   async()=>{
     try{
+      
       const res = await axios.get(urlBookings, {
         headers: {
           Accept:'application/json',
         },
       });
+      console.log(res.data)
       return res.data;
      }catch(error){
       throw error.response.data.message;
