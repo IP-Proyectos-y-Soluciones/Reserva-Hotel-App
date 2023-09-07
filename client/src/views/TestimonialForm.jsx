@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 // import React, { useState, useEffect } from "react";
 // import { useDispatch, useSelector } from "react-redux";
 // import { postTestimonials } from "../redux/actions/testimonialsActions";
@@ -85,6 +86,9 @@
 // };
 
 // export default TestimonialForm;
+=======
+
+>>>>>>> 8a35dd79c14a99d652d4336ac342d61eb1d3d2bd
 import React, { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { postTestimonials } from "../redux/actions/testimonialsActions";
@@ -96,6 +100,10 @@ const TestimonialForm = () => {
     testimony: "",
     bedroomId: "",
   });
+<<<<<<< HEAD
+=======
+  const [isSubmitSuccess, setIsSubmitSuccess] = useState(false); // Estado para el mensaje de éxito
+>>>>>>> 8a35dd79c14a99d652d4336ac342d61eb1d3d2bd
 
   const { bedrooms } = useSelector((state) => state.bedrooms);
 
@@ -115,7 +123,10 @@ const TestimonialForm = () => {
     e.preventDefault();
 
     try {
+<<<<<<< HEAD
     
+=======
+>>>>>>> 8a35dd79c14a99d652d4336ac342d61eb1d3d2bd
       const testimonialToSend = {
         ...testimonial,
         approved: false,
@@ -127,6 +138,12 @@ const TestimonialForm = () => {
         testimony: "",
         bedroomId: "",
       });
+<<<<<<< HEAD
+=======
+
+      // Mostrar el mensaje de éxito
+      setIsSubmitSuccess(true);
+>>>>>>> 8a35dd79c14a99d652d4336ac342d61eb1d3d2bd
     } catch (error) {
       console.error("Error al agregar el testimonio:", error);
     }
@@ -135,6 +152,12 @@ const TestimonialForm = () => {
   return (
     <div className="px-8 pt-6 pb-8 mb-4 bg-white rounded shadow-md">
       <h2 className="mb-4 text-xl font-bold">Agregar Testimonio</h2>
+<<<<<<< HEAD
+=======
+      {isSubmitSuccess && (
+        <div className="mb-4 font-bold text-green-600">Testimonio enviado con éxito.</div>
+      )}
+>>>>>>> 8a35dd79c14a99d652d4336ac342d61eb1d3d2bd
       <form onSubmit={handleSubmit}>
         <div className="mb-4">
           <label

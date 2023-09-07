@@ -1,8 +1,8 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
 import axios from "axios";
 
-const urlUsers= "http://localhost:3001/users";
-const urlUsersPost ="http://localhost:3001/users/verify";
+const URL_USERS = "https://reservas-hotel.onrender.com/users/api";
+const URL_USER_POST ="https://reservas-hotel.onrender.com/users/verify/api";
 
 
 export const getUsers=createAsyncThunk(
@@ -11,7 +11,7 @@ export const getUsers=createAsyncThunk(
         try{
 
             
-   const res = await axios.get(urlUsers , {
+   const res = await axios.get(URL_USERS , {
 
                 headers: {
                   Accept: 'application/json',
@@ -32,7 +32,7 @@ export const createUsersVerify = createAsyncThunk(
   "users/createUsersVerify",
   async ({ verificationCode }) => {
       try {
-          const res = await axios.post(urlUsersPost, { verificationCode }, {
+          const res = await axios.post(URL_USER_POST , { verificationCode }, {
               headers: {
                   Accept: 'application/json',
               },
@@ -52,7 +52,7 @@ export const loginUser = createAsyncThunk(
   "users/login",
   async ({ email, password }) => {
     try {
-      const response = await fetch("http://localhost:3001/users/login", {
+      const response = await fetch("https://reservas-hotel.onrender.com/users/login/api", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -84,7 +84,7 @@ export const logoutUser = createAsyncThunk(
   "users/logout",
   async ({ userId }) => {
     try {
-      const response = await fetch("http://localhost:3001/users/logout", {
+      const response = await fetch("https://reservas-hotel.onrender.com/users/logout/api", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -117,7 +117,7 @@ export const createUsers=createAsyncThunk(
         try{
 
 
-            const res= await axios.post(urlUsers, payload , {
+            const res= await axios.post(URL_USERS, payload , {
 
                 headers: {
                   Accept: 'application/json',
@@ -141,7 +141,7 @@ export const putUser = createAsyncThunk(
         try{
 
 
-            const res= await axios.put(urlUsers, obj , {
+            const res= await axios.put(URL_USERS, obj , {
 
                 headers: {
                   Accept: 'application/json',
@@ -160,7 +160,7 @@ export const updatedsUser=createAsyncThunk(
         try{
 
 
-            const res= await axios.get(urlUsers,{data:{id:id}} , {
+            const res= await axios.get(URL_USERS,{data:{id:id}} , {
 
                 headers: {
                   Accept: 'application/json',

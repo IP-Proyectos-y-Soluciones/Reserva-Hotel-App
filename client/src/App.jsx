@@ -9,14 +9,13 @@ import { Route, Routes, useLocation } from 'react-router-dom';
 import PageNotFound from './components/PageNotFound/PageNotFound';
 import Registar from './components/login/registrar';
 import Verification from './components/login/verificando';
-//import CardReservas from './components/CardReservas/CardReservas';
 import CardsReservasNuevo from './components/CardReservas/CardsReservasNuevo';
 import axios from 'axios';
 import Success from './components/Booking/Success';
-
+import TestimonialForm from './views/TestimonialForm';
 import CardPlan from './components/CardPlan/CardPlan';
 
-// axios.defaults.baseURL = 'http://localhost:3001/';
+
 axios.defaults.baseURL = 'https://reservas-hotel.onrender.com';
 
 const App = () => {
@@ -29,11 +28,9 @@ const App = () => {
       <Routes>
         <Route exact path="/" element={<Landing isLoggedIn={isLoggedIn} setIsLoggedIn={setIsLoggedIn} />} />
         <Route path="/bedroom" element={<CardBedroom />} />
-
         <Route path="/detail/:id" element={<Detail />} />
-
         <Route path="/plan" element={<CardPlan />} />
-        {/* <Route path="/detail/:id" element={<Detail />} /> */}
+        <Route path="/form" element={<TestimonialForm />} />
         <Route path="/reservas" element={<CardsReservasNuevo />} />
         <Route path="/booking" element={<Booking />} />
         <Route path="/users/login" element={<Login setIsLoggedIn={setIsLoggedIn} />} />
@@ -46,4 +43,8 @@ const App = () => {
   );
 };
 
+
 export default App;
+
+
+

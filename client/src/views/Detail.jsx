@@ -26,6 +26,10 @@ function Detail() {
   const selectedRoomData = bedroomData || bedrooms.find(room => room.id === id) || {};
   const { testimonials } = useSelector(state => state.testimonials);
   const filteredTestimonials = testimonials.filter(testimonial => testimonial.id_room === id && testimonial.approved);
+<<<<<<< HEAD
+=======
+
+>>>>>>> 8a35dd79c14a99d652d4336ac342d61eb1d3d2bd
 
   const otherRoomId = bedrooms.findIndex(room => room.id === id) + 1;
   const nextRoomId = bedrooms[otherRoomId % bedrooms.length]?.id;
