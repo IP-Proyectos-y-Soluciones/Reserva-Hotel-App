@@ -24,7 +24,7 @@ const Album = ({ id }) => {
 
   useEffect(() => {
     // Realiza una solicitud a la API para obtener los datos de la habitación específica
-    axios.get(`http://localhost:3001/bedroom/detail/${id}`)
+    axios.get(`http://localhost:3001/bedroom/detail/api/${id}`)
       .then(response => {
         const roomData = response.data;
         const galleryImages = roomData.gallery || [];
