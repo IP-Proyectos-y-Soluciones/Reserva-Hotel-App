@@ -6,7 +6,7 @@ import { getPlans } from '../redux/actions/plansActions';
 import { getAllTestimonials } from '../redux/actions/testimonialsActions'; 
 import Album from "../components/album/album";
 import Preview1 from '../components/bedroomPreview/preview1';
-import FormDisponibilidad from '../components/FormDisponibilidad/FormDisponibilidad';
+// import FormDisponibilidad from '../components/FormDisponibilidad/FormDisponibilidad';
 import Preview2 from '../components/bedroomPreview/preview2';
 
 
@@ -81,7 +81,7 @@ function Detail() {
         </div>
    </div>
       <div className="grid flex-shrink-0 grid-rows-3 gap-4 barra-lateral w-50">
-      <div className="p-4" style={{ backgroundColor: '#585552' }}><h2><FormDisponibilidad/></h2></div>
+      {/* <div className="p-4" style={{ backgroundColor: '#585552' }}><h2><FormDisponibilidad/></h2></div> */}
         <div className="p-4"style={{ backgroundColor: '#585552' }}> <Preview1 nextRoomId={nextRoomId} /></div>
         <div className="p-4"style={{ backgroundColor: '#585552' }}><Preview2 nextRoomId={nextRoomId2}  /></div>
       </div>
