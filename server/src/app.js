@@ -7,15 +7,15 @@ const morgan = require("morgan");
 const path = require("path");
 const cors = require("cors");
 const indexRouter = require("./routes");
-// require("dotenv").config();
+require("dotenv").config();
 require('./config/db');
 
 // Conexion con el Server Remoto de la DB
-// const { config } = require( 'dotenv' );
-// const pg = require( 'pg' );
-// const DB_INTERNAL_URL = process.env;
+const { config } = require( 'dotenv' );
+const pg = require( 'pg' );
+const DB_INTERNAL_URL = process.env;
 
-// config();
+config();
 const server = express();
 
 // server.set("trust proxy", true);
@@ -55,9 +55,9 @@ server.set('view engine', 'ejs');
 server.set('upload', path.join(__dirname, 'uploads'));
 
 // Conexion con el Server Remoto de la DB
-// new pg.Pool({
-//   connectionString:  DB_INTERNAL_URL,
-// });
+new pg.Pool({
+  connectionString:  DB_INTERNAL_URL,
+});
 
 server.use( cors() );
 server.use( bodyParser.json() );
