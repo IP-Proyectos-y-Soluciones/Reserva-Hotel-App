@@ -46,6 +46,7 @@ const Preview1 = ({ nextRoomId } ) => {
   
   {/* <div className='text-black bg-yellow-300 rounded-lg'>{`Precio: ${roomData.price}`}</div>
   <div className='text-black bg-yellow-300 rounded-lg '>Precio: 550 usd</div> */}
+  
   <div className='bg-gray-800 rounded-lg text-gold hover:underline'> <Link to={`/detail/${nextRoomId}`}>ver detalles</Link></div>
 </div>
 
