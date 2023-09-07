@@ -1,7 +1,7 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
 import axios from "axios";
 
-const URL_CATEG = "https://reservas-hotel.onrender.com/categories/api";
+const URL_CATEG = "https://reservas-hotel.onrender.com/categories";
 
 export const getAllCategories = createAsyncThunk(
     "categories/allCategories",
