@@ -9,11 +9,9 @@ import { Route, Routes, useLocation } from "react-router-dom";
 import PageNotFound from "./components/PageNotFound/PageNotFound";
 import Registar from "./components/login/registrar";
 import Verification from "./components/login/verificando";
-import CardReservas from './components/CardReservas/CardReservas';
+//import CardReservas from './components/CardReservas/CardReservas';
+import CardsReservasNuevo from "../src/components/CardReservas/CardsReservasNuevo";
 import axios from "axios";
-
-
-
 import CardPlan from "./components/CardPlan/CardPlan";
 
 // axios.defaults.baseURL = 'http://localhost:3001/';
@@ -37,7 +35,7 @@ const App = () => {
 
         <Route path="/plan" element={<CardPlan />} />
         {/* <Route path="/detail/:id" element={<Detail />} /> */}
-        <Route path="/reservas" element={<CardReservas />} />
+        <Route path="/reservas" element={<CardsReservasNuevo />} />
         <Route path="/booking" element={<Booking />} />
         <Route path="/users/login" element={<Login setIsLoggedIn={setIsLoggedIn} />} />
         <Route path="/registrar" element={<Registar setIsLoggedIn={setIsLoggedIn} />} />
@@ -51,4 +49,4 @@ const App = () => {
   )
 }
 
-export default App;
+export default App;
