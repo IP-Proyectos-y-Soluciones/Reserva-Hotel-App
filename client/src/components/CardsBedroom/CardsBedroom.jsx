@@ -16,10 +16,9 @@ const CardsBedroom = () => {
 
 
 
-  if (!bedrooms) {
-    return <p>Loading...</p>;
+ if (!Array.isArray(bedrooms)) {
+    return <p>No bedrooms found</p>;
   }
-
 
   return (
     <div className="container flex flex-row p-4 mx-auto space-x-4" id="bedroom">
