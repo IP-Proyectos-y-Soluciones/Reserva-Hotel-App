@@ -52,7 +52,7 @@ const CardReservas = ({
 }) => {
   const dispatch = useDispatch();
   const userId = localStorage.getItem('userId');
-
+  console.log(userId)
   useEffect(() => {
     dispatch(getUsers());
   }, [dispatch]);
