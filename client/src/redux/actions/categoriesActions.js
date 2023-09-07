@@ -1,13 +1,13 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
 import axios from "axios";
 
-const urlCateg = "http://localhost:3001/categories";
+const URL_CATEG = "https://reservas-hotel.onrender.com/categories/api";
 
 export const getAllCategories = createAsyncThunk(
     "categories/allCategories",
     async()=>{
         try {
-            const resp = await axios.get(urlCateg,{
+            const resp = await axios.get(URL_CATEG,{
                 headers: {
                     Accept:'application/json',
                   },
@@ -23,7 +23,7 @@ export const getAllCategories = createAsyncThunk(
      "categories/postCategories",
      async()=>{
          try {
-            const resp = await axios.post(urlCateg, {
+            const resp = await axios.post(URL_CATEG, {
                 headers: {
                     Accept:'application/json',
                   },
