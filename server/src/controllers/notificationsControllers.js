@@ -12,9 +12,6 @@ const createNotification = async (kind, amount) => {
   }
 
   catch (error) {
-    fs.appendFile('error.log', error.message + '\n', (err) => {
-      if (err) throw err;
-    });
     return { error: error.message };
   }
 };
@@ -41,9 +38,6 @@ const updateNotification = async (id, kind, amount) => {
   }
 
   catch (error) {
-    fs.appendFile('error.log', error.message + '\n', (err) => {
-      if (err) throw err;
-    });
     return { error: error.message };
   }
 
@@ -63,9 +57,6 @@ const deleteNotification = async (id) => {
 
   }
   catch (error) {
-    fs.appendFile('error.log', error.message + '\n', (err) => {
-      if (err) throw err;
-    });
     return { error: error.message };
   }
 
@@ -86,9 +77,6 @@ const getNotification = async (id) => {
     throw new Error('Notification not found');
   }
   catch (error) {
-    fs.appendFile('error.log', error.message + '\n', (err) => {
-      if (err) throw err;
-    });
     return { error: error.message };
   }
 
@@ -104,9 +92,6 @@ const getAllNotifications = async () => {
 
   }
   catch (error) {
-    fs.appendFile('error.log', error.message + '\n', (err) => {
-      if (err) throw err;
-    });
     return { error: error.message };
   }
 }
