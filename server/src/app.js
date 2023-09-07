@@ -18,7 +18,7 @@ const DB_INTERNAL_URL = process.env;
 config();
 const server = express();
 
-server.set("trust proxy", false);
+server.set("trust proxy", true);
 
 // Configurar el limitador de velocidad: máximo de cinco solicitudes por minuto
 const limiter = RateLimit( {
