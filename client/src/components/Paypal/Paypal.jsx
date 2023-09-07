@@ -4,14 +4,14 @@ import { useNavigate } from 'react-router-dom';
 
 const PayPalButton = window.paypal.Buttons.driver('react', { React, ReactDOM });
 
-export default function PaypalPayment() {
-  const [price, setPrice] = useState(0);
+export default function PaypalPayment(props) {
+  //const [price, setPrice] = useState(0);
   const [opcion, setOpcion] = useState(5);
   const navigate = useNavigate();
 
-  useEffect(() => {
-    setPrice(10.0);
-  }, []);
+  // useEffect(() => {
+  //   setPrice(10.0);
+  // }, []);
 
   const createOrder = (data, actions) => {
     return actions.order.create({
@@ -19,7 +19,7 @@ export default function PaypalPayment() {
         {
           amount: {
             currency_code: 'USD',
-            value: price,
+            value: props.price,
           },
         },
       ],
