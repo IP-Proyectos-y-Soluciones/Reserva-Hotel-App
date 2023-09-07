@@ -59,7 +59,7 @@
                   <td><img src="<%= service.big_photo %>" alt="<%= service.title %> grande" class="img-fluid"></td>
                   <td><img src="<%= service.photo_small %>" alt="<%= service.title %> pequeño" class="img-fluid"></td>
                   <td>
-                    <button class="btn btn-warning btn-sm" data-toggle="modal" data-target="#editarServicio" data-id="<%= service.id %>"><i class="fas fa-pencil-alt text-white"></i></button>
+                    <button class="btn btn-warning btn-sm" data-toggle="modal" data-target="#editarServicio<%= service.id %>" data-id="<%= service.id %>"><i class="fas fa-pencil-alt text-white"></i></button>
                     <button class="btn btn-danger btn-sm" data-toggle="modal" data-target="#delete<%= service.id %>" data-id="<%= service.id %>"><i class="fas fa-trash-alt"></i></button>  
                   </td>
                 </tr>
@@ -164,12 +164,11 @@ Modal Crear Recorrido
 <!--=====================================
 Modal Editar Recorrido
 ======================================-->
-
 <% for (const service of services) { %>
-<div class="modal" id="editarServicio">
+<div class="modal" id="editarServicio<%= service.id %>">
   <div class="modal-dialog">
     <div class="modal-content">
-      <form method="post" action="/service/<%= service.id %>">
+      <form method="post" action="/service/api/<%= service.id %>">
         <!-- Modal Header -->
         <div class="modal-header bg-info">
           <h4 class="modal-title">Editar Servicio</h4>

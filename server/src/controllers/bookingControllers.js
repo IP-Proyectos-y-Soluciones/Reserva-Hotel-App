@@ -102,42 +102,36 @@ const updateBooking = async (
   }
 }
 
-
-
-
-
-const deleteBooking = async (id_reservation) => {
+const cancelBooking = async (id_reservation) => {
   try {
-
     const booking = await Bookings.findOne({ where: { id_reservation: id_reservation } });
-
-
     if (!booking) {
       throw new Error('Booking not found');
     }
+    console.log("booking: ", booking);
 
-
-    const user = await Users.findOne({ where: { id_u: booking.id_user } });
-    if (!user) {
-
-      throw new Error('User not found');
-    }
-    const deleted = await Bookings.destroy({ where: { id_reservation: id_reservation } });
-
-    const deleted2 = await Bookings2.destroy({ where: { id: id_reservation } });
-
-    if (deleted && deleted2) {
-
-      return { message: 'Booking deleted successfully' };
+    let user = null;
+    if (booking.id_user) {
+      user = await Users.findOne({ where: { id: booking.id_user } });
+      if (!user) {
+        throw new Error('User not found');
+      }
+    } else {
+      throw new Error('User ID is not defined');
     }
 
+    const updated = await Bookings.update({ isCancelled: true }, { where: { id_reservation: id_reservation } });
+    if (updated) {
+      return { message: 'Booking cancelled successfully' };
+    }
     throw new Error('Booking not found');
   }
   catch (error) {
-
-    return { error: error.message };
-  }
+    console.error(error)
+    return { error: error.message };
+  }
 }
+
 
 
 
@@ -164,7 +158,7 @@ const listBooking = async () => {
 
 module.exports = {
   listBooking,
-  deleteBooking,
+  cancelBooking,
   updateBooking,
   createBooking
 }

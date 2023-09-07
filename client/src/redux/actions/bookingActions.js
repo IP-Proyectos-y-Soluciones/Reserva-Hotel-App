@@ -3,7 +3,6 @@ import axios from "axios";
 
 const urlBookings ="http://localhost:3001/bookings";
 
-
 export const getBookings = createAsyncThunk(
   "bookings/getBookings",
   async(_, { getState }) =>{
@@ -30,6 +29,7 @@ export const getAllBookings=createAsyncThunk(
       
       const res = await axios.get(urlBookings, {
         headers: {
+          
           Accept:'application/json',
         },
       });
@@ -41,21 +41,37 @@ export const getAllBookings=createAsyncThunk(
   }
 );
 
-export const deleteBookings = createAsyncThunk(
-  "bookings/deleteBookings",
-   async (id) => {
+export const cancelBookings = createAsyncThunk(
+  "bookings/cancelBookings",
+  async ({ id }) => {
     try {
-      const resp = await axios.delete(urlBookings, { data: { id: id } }, {
+      console.log(id);
+      const response = await axios.post(`http://localhost:3001/bookings/delete/${id}`, {
+        data: { id: id },
+      }, {
         headers: {
           Accept: 'application/json',
         },
       });
-      return resp.data;
+
+      if (response.status >= 200 && response.status < 300) {
+        // İstek başarılı oldu
+        const data = response.data;
+        const { isCancelled } = data;
+        if (!isCancelled) {
+          return { isCancelled };
+        }
+      } else {
+        // İstek başarısız oldu
+        throw new Error("Failed to cancel booking");
+      }
     } catch (error) {
+      console.error(error);
       throw new Error(error.response.data.message);
     }
   }
 );
+
 
 
 export const postBookings = createAsyncThunk(

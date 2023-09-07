@@ -1,7 +1,9 @@
 const express = require('express');
 const router = express.Router();
 const  { Users }  = require("../config/db")
-const { listBooking, deleteBooking, createBooking, updateBooking } = require('../controllers/bookingControllers');
+const  { Bookings }  = require("../config/db")
+
+const { listBooking, cancelBooking, createBooking, updateBooking } = require('../controllers/bookingControllers');
 const { verifyToken } = require('../middlewares/tokenAuthentication')
 const { transporter } = require( '../controllers/sendMailController' );
 require('dotenv').config();
@@ -20,6 +22,7 @@ require('dotenv').config();
 
 //   }
 // });
+
 
 router.get('/', async (req, res) => {
   try {
@@ -69,23 +72,34 @@ router.post('/delete/:id_reservation', async (req, res) => {
   try {
     const { id_reservation } = req.params;
 
-    const user = await Users.findOne( { where: { id: id_user } } );
+    // Obtén la reserva correspondiente
+    const booking = await Bookings.findOne({ where: { id_reservation: id_reservation } });
+
+    if (!booking) {
+      res.status(500).json({ error: error.message })
+    }
+
+    // Verifica si booking tiene un campo id_user definido y guárdalo en id_user
+    const id_user = booking.id_user;
+
+    if (!id_user) {
+      throw new Error('User ID is not defined');
+    }
+
+    // Luego puedes usar id_user para encontrar al usuario y el resto de tu lógica
+    const user = await Users.findOne({ where: { id: id_user } });
     const email = user.email;
-
-    const deletedBooking = await deleteBooking(id_reservation);
+    const cancelledBooking = await cancelBooking(id_reservation);
     const bookings = await listBooking();
-    //res.status(200).json(result);
-
     let subject = "CANCELAR RESERVA";
-    let text = `El reserva ha sido eliminado con éxito. ¡Hasta luego, Hotel PF! ${id_reservation}`;
-
-      transporter(email, subject, text)
-      
-    res.render('pages/bookings.ejs', {deletedBooking, bookings, title: 'Hotel Backend'})
+    let text = `El reserva ha sido cancelado con éxito. ¡Hasta luego, Hotel PF! Tu reservation code es: ${id_reservation}.Si quieres actualizar otra vez por favor escribe nosotros`;
+    transporter(email, subject, text)
+    res.render('pages/bookings.ejs', { cancelledBooking, bookings, title: 'Hotel Backend' })
   } catch (error) {
     res.status(500).json({ error: error.message });
   }
 });
+
 
 router.put('/:id_reservation', async (req, res) => {
   try {

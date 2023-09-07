@@ -1,7 +1,6 @@
 import PropTypes from 'prop-types'
 
 const CardPlan = ({ description , img, kind }) =>{
-
     return (        
       <div className='py-4 overflow-hidden text-white'>
         <div className='text-2xl font-bold leading-relaxed tracking-wide text-center'>

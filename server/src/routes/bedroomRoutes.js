@@ -3,7 +3,7 @@ const router = express.Router();
 const { createBedroom, getBedrooms, updateBedroom, deleteBedrooms, getBedroomById } = require('../controllers/bedroomControllers');
 const { verifyToken } = require('../middlewares/tokenAuthentication')
 
-router.post('/', async (req, res) => {
+router.post('/api/', async (req, res) => {
   try {
     const { kind_h, style, gallery, description_h } = req.body;
     const newBedroom = await createBedroom(kind_h, style, gallery, description_h);

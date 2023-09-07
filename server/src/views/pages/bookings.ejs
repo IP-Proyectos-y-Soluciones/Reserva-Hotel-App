@@ -47,7 +47,7 @@
                             <th>Transacción</th>
                             <th>Ingreso</th>
                             <th>Salida</th>
-                            <th style="width: 100px">Acciones</th>
+                            <!-- <th style="width: 100px">Acciones</th> -->
                           </tr>
                         </thead>
 
@@ -85,10 +85,10 @@
                               <td><%= booking.transaction_number %></td>
                               <td><%= booking.admission_date %></td>
                               <td><%= booking.departure_date %></td>
-                              <td>
+                              <!-- <td>
                                 <button class="btn btn-warning btn-sm" data-toggle="modal" data-target="#editarReserva" data-id="<%= booking.id_reservation %>"><i class="fas fa-pencil-alt text-white"></i></button>
                                 <button class="btn btn-danger btn-sm" data-toggle="modal" data-target="#delete<%= booking.id_reservation %>" data-id="<%= booking.id_reservation %>"><i class="fas fa-trash-alt"></i></button> 
-                              </td>
+                              </td> -->
                             </tr>
                           <% } %>
                         </tbody>
