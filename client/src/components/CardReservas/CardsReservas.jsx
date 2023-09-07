@@ -52,7 +52,7 @@ const CardReservas = ({
 }) => {
   const dispatch = useDispatch();
   const userId = useSelector((state) => state.users.loggedInUserId);
-
+  console.log(userId)
   useEffect(() => {
     dispatch(getUsers());
   }, [dispatch]);
