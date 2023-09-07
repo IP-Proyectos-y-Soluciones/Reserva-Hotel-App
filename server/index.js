@@ -1,7 +1,10 @@
 const server = require("./src/app");
 const app = require("./src/app");
 const { conn } = require("./src/config/db");
+const createDefaultAdmin = require("./src/config/initialSetup");
 require("dotenv").config();
+
+createDefaultAdmin();
 
 server.set("port", process.env.PORT || 3001);
 conn.sync({ force: false }).then(() => {
