@@ -1,7 +1,7 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
 import axios from "axios";
 
-const URL_PLANS = "https://reservas-hotel.onrender.com/api/plan";
+const URL_PLANS = "/api/plan";
 
 export const getPlans=createAsyncThunk(
     "plan/getPlan",
