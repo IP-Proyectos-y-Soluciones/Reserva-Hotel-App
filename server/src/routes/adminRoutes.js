@@ -48,7 +48,7 @@ router.get('/', async (req, res) => {
 });
 
 //Dashboard admin only
-router.get('/api/', async (req, res) => {
+router.get('/api/', verifyToken, async (req, res) => {
   try {
 
     const admins = await getAdmins();
