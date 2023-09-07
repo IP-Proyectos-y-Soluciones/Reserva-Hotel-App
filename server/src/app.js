@@ -1,5 +1,5 @@
 const express = require( "express" );
-// const RateLimit = require( 'express-rate-limit' ); // Implementar la limitación de velocidad o "rate limiting" en las solicitudes HTTP
+const RateLimit = require( 'express-rate-limit' ); // Implementar la limitación de velocidad o "rate limiting" en las solicitudes HTTP
 const cookieParser = require('cookie-parser');
 const expressSession = require('express-session');
 const bodyParser = require("body-parser");
