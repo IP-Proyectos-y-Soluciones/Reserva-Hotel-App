@@ -94,14 +94,12 @@ export const cancelBookings = createAsyncThunk(
       });
 
       if (response.status >= 200 && response.status < 300) {
-        // İstek başarılı oldu
         const data = response.data;
         const { isCancelled } = data;
         if (!isCancelled) {
           return { isCancelled };
         }
       } else {
-        // İstek başarısız oldu
         throw new Error("Failed to cancel booking");
       }
     } catch (error) {
