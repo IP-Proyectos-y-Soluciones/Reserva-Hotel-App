@@ -1,7 +1,7 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
 import axios from "axios";
 
-const URL_PLANS = "/api/plan";
+const URL_PLANS = "/plan/api";
 
 export const getPlans=createAsyncThunk(
     "plan/getPlan",
