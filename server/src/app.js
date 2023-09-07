@@ -1,5 +1,5 @@
 const express = require( "express" );
-const RateLimit = require( 'express-rate-limit' ); // Implementar la limitación de velocidad o "rate limiting" en las solicitudes HTTP
+// const RateLimit = require( 'express-rate-limit' ); // Implementar la limitación de velocidad o "rate limiting" en las solicitudes HTTP
 const cookieParser = require('cookie-parser');
 const expressSession = require('express-session');
 const bodyParser = require("body-parser");
@@ -18,16 +18,16 @@ const DB_INTERNAL_URL = process.env;
 config();
 const server = express();
 
-server.set("trust proxy", true);
+// server.set("trust proxy", true);
 
 // Configurar el limitador de velocidad: máximo de cinco solicitudes por minuto
-const limiter = RateLimit( {
-  windowMs: 15 * 60 * 1000, // 15 minutes
-  max: 100, // limitar cada IP a 100 solicitudes por ventana
-} );
+// const limiter = RateLimit( {
+//   windowMs: 15 * 60 * 1000, // 15 minutes
+//   max: 100, // limitar cada IP a 100 solicitudes por ventana
+// } );
 
 // Aplicar limitador de tasa a todas las solicitudes
-server.use( limiter );
+// server.use( limiter );
 
 server.use( morgan( 'dev' ) );
 server.use( express.json() );
