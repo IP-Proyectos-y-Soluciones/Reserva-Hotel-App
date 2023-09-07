@@ -19,7 +19,8 @@ const router = express.Router();
 
 router.use(express.json());
 
-router.use("/", redirect);
+//router.use("/", redirect);
+router.use("/", home);
 router.use("/index", home);
 router.use("/admin", adminis);
 router.use("/banner", banner);
