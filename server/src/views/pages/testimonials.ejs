@@ -81,7 +81,17 @@
                 <td><%= testimonial.testimony %></td>
                 <!-- <td><%= testimonial.approved %></td> -->
                 <td>
-                  <button class="btn btn-dark btn-sm">Aprobar</button>
+                  <form action="/testimonials/api/approve/<%= testimonial.id_testimony %>" method="POST">
+                    <% if (testimonial.approved) { %>
+                      <button class="btn btn-success btn-sm" type="submit">
+                        Aprobado
+                      </button>
+                      <% } else { %>
+                      <button class="btn btn-dark btn-sm" type="submit">
+                        Aprobar
+                      </button>
+                      <% } %>
+                  </form>
                 </td>
                 <td><%= testimonial.date %></td>
               </tr>

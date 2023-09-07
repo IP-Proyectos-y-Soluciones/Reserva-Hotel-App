@@ -3,7 +3,6 @@ import axios from "axios";
 
 const URL_BANNER = 'https://reservas-hotel.onrender.com/banner/api';
 
-
 export const getAllBanner=createAsyncThunk(
     "banner/allBanner",
     async()=>{

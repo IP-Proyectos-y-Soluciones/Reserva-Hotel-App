@@ -1,5 +1,5 @@
 import { createSlice } from '@reduxjs/toolkit';
-import { getBookings,getAllBookings,deleteBookings } from '../actions/bookingActions';
+import { getBookings, getAllBookings, cancelBookings } from '../actions/bookingActions';
 
 const bookingsSlice = createSlice({
   name: 'bookings',
@@ -7,6 +7,7 @@ const bookingsSlice = createSlice({
     bookings: [],
     allBookings:[],
     searchBooking:[],
+    id_user: [],
     loading:false,
     status: 'idle',
     error: null,
@@ -51,23 +52,28 @@ const bookingsSlice = createSlice({
     .addCase(getAllBookings.fulfilled, (state, action) => {
       state.loading = false;
       state.allBookings = action.payload;
+      state.id_user = action.payload.id_user;
+
     })
     .addCase(getAllBookings.rejected, (state, action) => {
       state.loading = false;
       state.error = action.error.message;
     })
-    .addCase(deleteBookings.pending, (state) => {
-      state.loading = true;
-      state.error = null;
+    .addCase(cancelBookings.pending, (state) => {
+      state.status = 'loading';
     })
-    .addCase(deleteBookings.fulfilled, (state, action) => {
-      state.loading = false;
-      state.bookings = state.bookings.filter((booking) => booking.id !== action.payload.id);
+    .addCase(cancelBookings.fulfilled, (state, action) => {
+      state.status = 'succeeded';
+      const { id_reservation } = action.meta.arg;
+      const index = state.bookings.findIndex(booking => booking.id_reservation === id_reservation);
+      if (index !== -1) {
+        state.bookings[index].isCancelled = true;
+      }
     })
-    .addCase(deleteBookings.rejected, (state, action) => {
-      state.loading = false;
+    .addCase(cancelBookings.rejected, (state, action) => {
+      state.status = 'failed';
       state.error = action.error.message;
-    })
+      })
       .addCase(getBookings.pending, (state) => {
         state.status = 'loading';
       })

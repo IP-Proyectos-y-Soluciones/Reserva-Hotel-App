@@ -16,7 +16,7 @@ const Register = ({ setIsLoggedIn }) => {
     const [base64Image, setBase64Image] = useState("");
     const [error, setError] = useState("");
     const navigate = useNavigate();
-    const clientID = "954982957712-gr3dpedcnotb0r1l3pqp0bj5ovnl6ftt.apps.googleusercontent.com"
+    const clientID = "563826116941-ss2c1f2frbuav6s49998mhlg2rff7nhv.apps.googleusercontent.com"
     
     useEffect(() => {
         const start = () => {

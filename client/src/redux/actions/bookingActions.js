@@ -3,7 +3,6 @@ import axios from "axios";
 
 const URL_BOOKINGS ="https://reservas-hotel.onrender.com/bookings/api";
 
-
 export const getBookings = createAsyncThunk(
   "bookings/getBookings",
   async(_, { getState }) =>{
@@ -27,11 +26,14 @@ export const getAllBookings=createAsyncThunk(
   "bookings/allBookings",
   async()=>{
     try{
+
       const res = await axios.get(URL_BOOKINGS, {
         headers: {
+          
           Accept:'application/json',
         },
       });
+      console.log(res.data)
       return res.data;
      }catch(error){
       throw error.response.data.message;
@@ -39,21 +41,34 @@ export const getAllBookings=createAsyncThunk(
   }
 );
 
-export const deleteBookings = createAsyncThunk(
-  "bookings/deleteBookings",
-   async (id) => {
+export const cancelBookings = createAsyncThunk(
+  "bookings/cancelBookings",
+  async ({ id }) => {
     try {
       const resp = await axios.delete(URL_BOOKINGS, { data: { id: id } }, {
         headers: {
           Accept: 'application/json',
         },
       });
-      return resp.data;
+
+      if (response.status >= 200 && response.status < 300) {
+        // İstek başarılı oldu
+        const data = response.data;
+        const { isCancelled } = data;
+        if (!isCancelled) {
+          return { isCancelled };
+        }
+      } else {
+        // İstek başarısız oldu
+        throw new Error("Failed to cancel booking");
+      }
     } catch (error) {
+      console.error(error);
       throw new Error(error.response.data.message);
     }
   }
 );
+
 
 
 export const postBookings = createAsyncThunk(

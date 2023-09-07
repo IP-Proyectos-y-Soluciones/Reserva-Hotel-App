@@ -1,7 +1,7 @@
 
 const Footer = () => {
     return (
-<section className="bg-[#313131]">
+<section className="bg-[#313131]" id="footer">
     <div className="max-w-screen-xl px-4 py-12 mx-auto space-y-8 overflow-hidden sm:px-6 lg:px-8">
         <nav className="flex flex-wrap justify-center -mx-5 -my-2">
             <div className="px-5 py-2">
@@ -10,12 +10,12 @@ const Footer = () => {
                 </a>
             </div>
             <div className="px-5 py-2">
-                <a href="#Plans" className="text-base leading-6 text-[#B99768] hover:text-white">
+                <a href="#plans" className="text-base leading-6 text-[#B99768] hover:text-white">
                     Planes
                 </a>
             </div>
             <div className="px-5 py-2">
-                <a href="#bedrooms" className="text-base leading-6 text-[#B99768] hover:text-white">
+                <a href="#bedroom" className="text-base leading-6 text-[#B99768] hover:text-white">
                     Habitaciones
                 </a>
             </div>

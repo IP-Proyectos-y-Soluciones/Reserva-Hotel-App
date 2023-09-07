@@ -3,7 +3,7 @@ const router = express.Router();
 const { createPlan, updatePlan, deletePlan, getAllPlans } = require('../controllers/planControllers');
 const { verifyToken } = require('../middlewares/tokenAuthentication')
 
-router.post('/', async (req, res) => {
+router.post('/api/', async (req, res) => {
   try {
     const { kind, img, description, hight_price, low_price } = req.body;
     const newPlan = await createPlan(kind, img, description, hight_price, low_price);
@@ -20,7 +20,7 @@ router.post('/', async (req, res) => {
   }
 });
 
-router.post('/:id', async (req, res) => {
+router.post('/api/:id', async (req, res) => {
   try {
     const { id } = req.params;
     const { kind, img, description, high_price, low_price } = req.body;

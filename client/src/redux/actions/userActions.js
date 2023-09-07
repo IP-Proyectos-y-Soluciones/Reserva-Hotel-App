@@ -74,7 +74,7 @@ export const loginUser = createAsyncThunk(
       }
     } catch (error) {
       console.error(error)
-      throw new Error("Error al iniciar sesión. Por favor, verifica tus credenciales.");
+      throw new Error("The user has been deactivated, please contact an administrator.");
     }
   }
 );
@@ -172,7 +172,6 @@ export const updatedsUser=createAsyncThunk(
         }
     }
 );
-
 
 
 

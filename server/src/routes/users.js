@@ -5,6 +5,7 @@ const { Users } = require('../config/db')
 const { createUser, updateUsers, login, getUsers, logout } = require('../controllers/usersControllers')
 const { verifyToken } = require('../middlewares/tokenAuthentication')
 const { transporter } = require( '../controllers/sendMailController' );
+const { log } = require("console");
 require( 'dotenv' ).config();
 
 
@@ -201,8 +202,25 @@ router.get('/api', verifyToken, async (req, res) => {
   }
 });
 
+//Baneo de usuarios
+router.post('/api/ban/:id', async (req, res) => {
+  try {
+    const {id} = req.params
 
+    const record = await Users.findByPk(id)
 
+    if(!record){
+      return res.status(404).send('Registro no encontrado')
+    }
+
+    const newBannedUser = !record.status
+    await Users.update({status: newBannedUser}, {where: {id}})
+    res.redirect('/users/api')
+    
+  } catch (error) {
+    res.status(500).json({ error: error.message });
+  }
+})
 
 
 module.exports = router;
