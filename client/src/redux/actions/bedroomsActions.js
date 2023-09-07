@@ -1,7 +1,7 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
 import axios from "axios";
 
-const URL_BEDROOM = 'bedroom/api';
+const URL_BEDROOM = "https://reservas-hotel.onrender.com/bedroom";
 
 export const getBedroom = createAsyncThunk(
   "bedroom/getBedroom",
@@ -23,7 +23,7 @@ export const getBedroomId = createAsyncThunk(
   "bedroom/getBedroomId",
   async (id) =>{
     try {
-     const resp = await axios.get(`URL_BEDROOM/detail/${id}`, {
+     const resp = await axios.get(`${URL_BEDROOM}/detail/${id}`, {
       headers: {
         Accept: 'application/json',
       },
