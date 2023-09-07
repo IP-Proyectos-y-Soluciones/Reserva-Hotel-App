@@ -15,7 +15,7 @@ const Preview1 = ({ nextRoomId } ) => {
   });
 
   useEffect(() => {
-    axios.get(`http://localhost:3001/bedroom/detail/${nextRoomId}`)
+    axios.get(`https://reservas-hotel.onrender.com/bedroom/detail/${nextRoomId}`)
       .then(response => {
         const selectedRoomData = response.data;
 
