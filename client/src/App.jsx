@@ -13,6 +13,10 @@ import CardsReservasNuevo from "../src/components/CardReservas/CardsReservasNuev
 import axios from "axios";
 import CardPlan from "./components/CardPlan/CardPlan";
 import Success from './components/Booking/Success';
+
+import TestimonialForm from './views/TestimonialForm';
+
+
 axios.defaults.baseURL = 'https://reservas-hotel.onrender.com';
 
 const App = () => {
@@ -29,7 +33,7 @@ const App = () => {
         <Route path="/detail/:id" element={<Detail />} />
 
         <Route path="/plan" element={<CardPlan />} />
-        {/* <Route path="/detail/:id" element={<Detail />} /> */}
+        <Route path="/form" element={<TestimonialForm />} />
         <Route path="/reservas" element={<CardsReservasNuevo />} />
         <Route path="/booking" element={<Booking />} />
         <Route path="/users/login" element={<Login setIsLoggedIn={setIsLoggedIn} />} />
