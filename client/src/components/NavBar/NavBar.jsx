@@ -14,6 +14,7 @@ const NavBar = () => {
 
   useEffect(() => {
     dispatch(getUsers())
+    console.log(userId)
   }, [dispatch])
 
   const location = useLocation();
