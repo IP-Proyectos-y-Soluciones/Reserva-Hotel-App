@@ -1,14 +1,14 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
 import axios from "axios";
 
-const URL_TESTIMONIALS = "https://reservas-hotel.onrender.com/testimonials/api";
+const urlTestimonials = "http://localhost:3001/testimonials";
 
 export const getAllTestimonials = createAsyncThunk(
     "testimonials/getTestimonials",
     async()=>{
         try{
 
-   const resp=await axios.get(URL_TESTIMONIALS , {
+   const resp=await axios.get(urlTestimonials , {
 
                 headers: {
                   Accept: 'application/json',
@@ -25,7 +25,7 @@ export const postTestimonials = createAsyncThunk(
     async()=>{
         try{
 
-            const resp= await axios.post(URL_TESTIMONIALS , {
+            const resp= await axios.post(urlTestimonials , {
 
                 headers: {
                   Accept: 'application/json',
@@ -44,7 +44,7 @@ export const deleteTestimonials = createAsyncThunk(
 
 
 
-            const resp= await axios.delete(URL_TESTIMONIALS,{data:{id:id}} , {
+            const resp= await axios.delete(urlTestimonials,{data:{id:id}} , {
 
                 headers: {
                   Accept: 'application/json',
@@ -62,7 +62,7 @@ export const putTestimonials = createAsyncThunk(
         try{
 
 
-            const resp= await axios.put(URL_TESTIMONIALS, obj , {
+            const resp= await axios.put(urlTestimonials, obj , {
 
                 headers: {
                   Accept: 'application/json',

@@ -1,8 +1,8 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
 import axios from "axios";
 
-const URL_USERS = "https://reservas-hotel.onrender.com/users/api";
-const URL_USER_POST ="https://reservas-hotel.onrender.com/users/verify/api";
+const urlUsers= "http://localhost:3001/users";
+const urlUsersPost ="http://localhost:3001/users/verify";
 
 
 export const getUsers=createAsyncThunk(
@@ -11,7 +11,7 @@ export const getUsers=createAsyncThunk(
         try{
 
             
-   const res = await axios.get(URL_USERS , {
+   const res = await axios.get(urlUsers , {
 
                 headers: {
                   Accept: 'application/json',
@@ -32,7 +32,7 @@ export const createUsersVerify = createAsyncThunk(
   "users/createUsersVerify",
   async ({ verificationCode }) => {
       try {
-          const res = await axios.post(URL_USER_POST , { verificationCode }, {
+          const res = await axios.post(urlUsersPost, { verificationCode }, {
               headers: {
                   Accept: 'application/json',
               },
@@ -52,7 +52,7 @@ export const loginUser = createAsyncThunk(
   "users/login",
   async ({ email, password }) => {
     try {
-      const response = await fetch("https://reservas-hotel.onrender.com/users/login/api", {
+      const response = await fetch("http://localhost:3001/users/login", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -74,7 +74,7 @@ export const loginUser = createAsyncThunk(
       }
     } catch (error) {
       console.error(error)
-      throw new Error("The user has been deactivated, please contact an administrator.");
+      throw new Error("Error al iniciar sesión. Por favor, verifica tus credenciales.");
     }
   }
 );
@@ -84,7 +84,7 @@ export const logoutUser = createAsyncThunk(
   "users/logout",
   async ({ userId }) => {
     try {
-      const response = await fetch("https://reservas-hotel.onrender.com/users/logout/api", {
+      const response = await fetch("http://localhost:3001/users/logout", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -117,7 +117,7 @@ export const createUsers=createAsyncThunk(
         try{
 
 
-            const res= await axios.post(URL_USERS, payload , {
+            const res= await axios.post(urlUsers, payload , {
 
                 headers: {
                   Accept: 'application/json',
@@ -141,7 +141,7 @@ export const putUser = createAsyncThunk(
         try{
 
 
-            const res= await axios.put(URL_USERS, obj , {
+            const res= await axios.put(urlUsers, obj , {
 
                 headers: {
                   Accept: 'application/json',
@@ -160,7 +160,7 @@ export const updatedsUser=createAsyncThunk(
         try{
 
 
-            const res= await axios.get(URL_USERS,{data:{id:id}} , {
+            const res= await axios.get(urlUsers,{data:{id:id}} , {
 
                 headers: {
                   Accept: 'application/json',
@@ -172,6 +172,7 @@ export const updatedsUser=createAsyncThunk(
         }
     }
 );
+
 
 
 

@@ -16,6 +16,8 @@ function Calendar() {
         height={'90vh'}
         locale={'esLocale'}
         dateClick={handleDateClick}
+        selectable={false}
+        select={('2023-09-06', ['2023-09-10'])}
       />
     </div>
   );

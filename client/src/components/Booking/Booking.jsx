@@ -68,9 +68,9 @@ const Booking = () => {
                 onSubmit={(event) => handleSubmit(event)}
               >
                 <label className="leading-6 text-left ">Check-in</label>
-                <input className="border-2" type="date"></input>
+                <input className="border-2" type="date" min="2023-09-08"></input>
                 <label className="leading-6 text-left">Check-out</label>
-                <input className="border-2" type="date"></input>
+                <input className="border-2" type="date" min="2023-09-09"></input>
                 <label className="leading-6 text-left">Habitación</label>
                 <select className="border-2 rounded-md">
                   <option>Estandar</option>

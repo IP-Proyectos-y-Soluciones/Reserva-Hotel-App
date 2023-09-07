@@ -11,14 +11,20 @@ import { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from "react-redux";
 import { getAllBanner } from "../redux/actions/bannerActions";
 import { getAllService } from "../redux/actions/serviceActions";
+import { getBedroom } from "../redux/actions/bedroomsActions";
 
 const Landing = ({ isLoggedIn, setIsLoggedIn }) => {
 //Banner
     const [banner,setBanner] = useState([]);
     const { banners } = useSelector(state=>state.banner);   
     const dispatch = useDispatch();
+    const { bedrooms } = useSelector(state=>state.bedrooms);   
+
+
+    console.log(bedrooms)
     useEffect(()=>{
-        dispatch(getAllBanner())                
+        dispatch(getAllBanner())  
+        dispatch(getBedroom())              
     },[dispatch])
 
     useEffect(()=>{
@@ -76,8 +82,8 @@ useEffect(()=>{
                     <h3 className="text-white">Descubran un refugio de lujo en el corazón de la ciudad. Con elegantes habitaciones, comodidades de primer nivel y un servicio excepcional, estamos aquí para hacer de su estadía una experiencia inolvidable. Desde relajarse en nuestro spa hasta disfrutar de deliciosas opciones gastronómicas, les invitamos a sumergirse en un mundo de tranquilidad y comodidad. ¡Es un placer tenerles aquí!</h3>
                 </div>
                 </div>
-            {/* <CardsPlan />
-            <CardsBedroom /> */}
+             <CardsPlan />
+            <CardsBedroom /> 
                 <div className='flex items-center justify-center py-6'>
                     <CardsAmenitie images={images}/>
                 </div>

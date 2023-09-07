@@ -1,13 +1,13 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
 import axios from "axios";
 
-const URL_BEDROOM = 'https://reservas-hotel.onrender.com/bedroom/api';
+const urlBedroom = "http://localhost:3001/bedroom";
 
 export const getBedroom = createAsyncThunk(
   "bedroom/getBedroom",
   async () => {
     try {
-      const resp = await axios.get(URL_BEDROOM, {
+      const resp = await axios.get(urlBedroom, {
         headers: {
           Accept: 'application/json',
         },
@@ -23,7 +23,7 @@ export const getBedroomId = createAsyncThunk(
   "bedroom/getBedroomId",
   async (id) =>{
     try {
-     const resp = await axios.get(`${URL_BEDROOM}/detail/${id}`, {
+     const resp = await axios.get(`http://localhost:3001/bedroom/detail/${id}`, {
       headers: {
         Accept: 'application/json',
       },
@@ -39,7 +39,7 @@ export const postBedroom = createAsyncThunk(
   "bedroom/postBedroom",
   async (obj) => {
     try {
-      const resp = await axios.post(URL_BEDROOM, obj, {
+      const resp = await axios.post(urlBedroom, obj, {
         headers: {
           Accept: 'application/json',
         },
@@ -55,7 +55,7 @@ export const putBedroom = createAsyncThunk(
   "bedroom/putBedroom",
   async (obj) => {
     try {
-      const resp = await axios.put(URL_BEDROOM, obj, {
+      const resp = await axios.put(urlBedroom, obj, {
         headers: {
           Accept: 'application/json',
         },
@@ -71,7 +71,7 @@ export const deleteBedroom = createAsyncThunk(
   "bedroom/deleteBedroom",
   async (id) => {
     try {
-      const resp = await axios.delete(URL_BEDROOM, { data: { id: id } }, {
+      const resp = await axios.delete(urlBedroom, { data: { id: id } }, {
         headers: {
           Accept: 'application/json',
         },

@@ -27,7 +27,6 @@ function Detail() {
   const { testimonials } = useSelector(state => state.testimonials);
   const filteredTestimonials = testimonials.filter(testimonial => testimonial.id_room === id && testimonial.approved);
 
-
   const otherRoomId = bedrooms.findIndex(room => room.id === id) + 1;
   const nextRoomId = bedrooms[otherRoomId % bedrooms.length]?.id;
 
