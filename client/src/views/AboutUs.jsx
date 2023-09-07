@@ -17,7 +17,7 @@ const About = () => {
             <img
               alt="imagen"
               className="self-center flex-shrink-0 w-24 h-24 -mt-12 bg-center bg-cover rounded-full dark:bg-gray-500"
-              src="#"
+              src="https://res.cloudinary.com/dm9glx5a7/image/upload/v1694111383/PF-HOTEL-APP/Perfiles/WhatsApp_Image_2023-09-07_at_15.28.16_paguhy.jpg"
             />
             <div className="flex-1 my-4">
               <p className="text-xl font-semibold leadi">Juan Boglione</p>
@@ -103,7 +103,7 @@ const About = () => {
             <div className="flex items-center justify-center p-3 space-x-3 border-t-2">
               <a
                 rel="noopener noreferrer"
-                href="#"
+                href="kubathasanengin@gmail.com"
                 title="Email"
                 className="text-[#585552] hover:text-[#B99768]"
               >
@@ -152,7 +152,7 @@ const About = () => {
               <a
                 rel="noopener noreferrer"
 
-                href="#"
+                href="https://github.com/hasanenginkubat"
 
                 title="GitHub"
                 className="text-[#585552] hover:text-[#B99768]"
@@ -184,7 +184,7 @@ const About = () => {
             <div className="flex items-center justify-center p-3 space-x-3 border-t-2">
               <a
                 rel="noopener noreferrer"
-                href="#"
+                href="montalvox27@gmail.com"
                 title="Email"
                 className="text-[#585552] hover:text-[#B99768]"
               >
@@ -200,7 +200,7 @@ const About = () => {
               </a>
               <a
                 rel="noopener noreferrer"
-                href="#"
+                href="https://twitter.com/montalvvox"
                 title="Twitter"
                 className="text-[#585552] hover:text-[#B99768]"
               >
@@ -215,7 +215,7 @@ const About = () => {
               </a>
               <a
                 rel="noopener noreferrer"
-                href="#"
+                href="https://www.linkedin.com/in/wxmontalvo"
                 title="LinkedIn"
                 className="text-[#585552] hover:text-[#B99768]"
               >
@@ -230,7 +230,7 @@ const About = () => {
               </a>
               <a
                 rel="noopener noreferrer"
-                href="#"
+                href="https://github.com/xmontalvvo"
                 title="GitHub"
                 className="text-[#585552] hover:text-[#B99768]"
               >
@@ -251,7 +251,7 @@ const About = () => {
             <img
               alt="imagen"
               className="self-center flex-shrink-0 w-24 h-24 -mt-12 bg-center bg-cover rounded-full dark:bg-gray-500"
-              src="#"
+              src="https://res.cloudinary.com/dm9glx5a7/image/upload/v1694111383/PF-HOTEL-APP/Perfiles/WhatsApp_Image_2023-09-07_at_15.28.23_ogtapc.jpg"
             />
             
             <div className="flex-1 my-4">
@@ -328,7 +328,7 @@ const About = () => {
             <img
               alt="imagen"
               className="self-center flex-shrink-0 w-24 h-24 -mt-12 bg-center bg-cover rounded-full dark:bg-gray-500"
-              src="#"
+              src="https://res.cloudinary.com/dm9glx5a7/image/upload/v1694111383/PF-HOTEL-APP/Perfiles/WhatsApp_Image_2023-09-07_at_15.28.23_ogtapc.jpg"
             />
             <div className="flex-1 my-4">
               <p className="text-xl font-semibold leadi">Karina Romero</p>
@@ -337,7 +337,7 @@ const About = () => {
             <div className="flex items-center justify-center p-3 space-x-3 border-t-2">
               <a
                 rel="noopener noreferrer"
-                href="#"
+                href="romerokarina.dev@gmail.com"
                 title="Email"
                 className="text-[#585552] hover:text-[#B99768]"
               >
@@ -368,7 +368,7 @@ const About = () => {
               </a>
               <a
                 rel="noopener noreferrer"
-                href="#"
+                href="https://www.linkedin.com/in/karinaromero-fullstack/"
                 title="LinkedIn"
                 className="text-[#585552] hover:text-[#B99768]"
               >
@@ -383,7 +383,7 @@ const About = () => {
               </a>
               <a
                 rel="noopener noreferrer"
-                href="#"
+                href="https://github.com/KariRomero"
                 title="GitHub"
                 className="text-[#585552] hover:text-[#B99768]"
               >
@@ -403,7 +403,7 @@ const About = () => {
             <img
               alt="imagen"
               className="self-center flex-shrink-0 w-24 h-24 -mt-12 bg-center bg-cover rounded-full dark:bg-gray-500"
-              src="#"
+              src="https://res.cloudinary.com/dm9glx5a7/image/upload/v1694112133/PF-HOTEL-APP/Perfiles/WhatsApp_Image_2023-09-07_at_15.40.09_hmoeul.jpg"
             />
             <div className="flex-1 my-4">
               <p className="text-xl font-semibold leadi">Ruben Rodriguez</p>
@@ -479,7 +479,7 @@ const About = () => {
             <img
               alt="imagen"
               className="self-center flex-shrink-0 w-24 h-24 -mt-12 bg-center bg-cover rounded-full dark:bg-gray-500"
-              src="#"
+              src="https://avatars.githubusercontent.com/u/32624310?v=4"
             />
             <div className="flex-1 my-4">
               <p className="text-xl font-semibold leadi">Bladimir Parra</p>
@@ -534,7 +534,7 @@ const About = () => {
               </a>
               <a
                 rel="noopener noreferrer"
-                href="#"
+                href="https://github.com/ipproyectosysoluciones"
                 title="GitHub"
                 className="text-[#585552] hover:text-[#B99768]"
               >
@@ -556,16 +556,16 @@ const About = () => {
             <img
               alt="imagen"
               className="self-center flex-shrink-0 w-24 h-24 -mt-12 bg-center bg-cover rounded-full dark:bg-gray-500"
-              src="#"
+              src="https://res.cloudinary.com/dm9glx5a7/image/upload/v1694111383/PF-HOTEL-APP/Perfiles/WhatsApp_Image_2023-09-07_at_15.28.33_tkylyv.jpg"
             />
             <div className="flex-1 my-4">
-              <p className="text-xl font-semibold leadi">Dany </p>
+              <p className="text-xl font-semibold leadi">Daniel Lopez Galindo</p>
               <p>Full Stack Developer</p>
             </div>
             <div className="flex items-center justify-center p-3 space-x-3 border-t-2">
               <a
                 rel="noopener noreferrer"
-                href="#"
+                href="Daniellopg@hotmail.com "
                 title="Email"
                 className="text-[#585552] hover:text-[#B99768]"
               >
@@ -596,7 +596,7 @@ const About = () => {
               </a>
               <a
                 rel="noopener noreferrer"
-                href="#" 
+                href="https://www.linkedin.com/in/jose-daniel-l%C3%B3pez-galindo-a4b858242" 
                 title="LinkedIn"
                 className="text-[#585552] hover:text-[#B99768]"
               >
