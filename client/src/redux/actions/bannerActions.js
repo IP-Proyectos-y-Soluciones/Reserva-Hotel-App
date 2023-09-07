@@ -1,13 +1,13 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
 import axios from "axios";
 
-const URL_BANNER = 'https://reservas-hotel.onrender.com/banner/api';
+const urlBannner = "http://localhost:3001/banner";
 
 export const getAllBanner=createAsyncThunk(
     "banner/allBanner",
     async()=>{
       try{
-        const res = await axios.get(URL_BANNER, {
+        const res = await axios.get(urlBannner, {
           headers: {
             Accept:'application/json',
           },
@@ -23,7 +23,7 @@ export const getAllBanner=createAsyncThunk(
     "banner/newBanner",
     async()=>{
         try{
-            const resp = await axios.post(URL_BANNER,{
+            const resp = await axios.post(urlBannner,{
                 headers:{
                     Accept:'application/json',
                 },
