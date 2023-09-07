@@ -3,7 +3,7 @@ const router = express.Router();
 const { createAdmin, getAdmins, updateAdmin, deleteAdmin, login, getAdminById } = require("../controllers/administratorasControllers");
 const { verifyToken } = require('../middlewares/tokenAuthentication')
 
-router.post('/', async (req, res) => {
+router.post('/api/', async (req, res) => {
 
   const { profile, name, password, user, status } = req.body;
 
@@ -48,7 +48,7 @@ router.get('/', async (req, res) => {
 });
 
 //Dashboard admin only
-router.get('/api', verifyToken, async (req, res) => {
+router.get('/api/', verifyToken, async (req, res) => {
   try {
 
     const admins = await getAdmins();
@@ -66,7 +66,7 @@ router.get('/api', verifyToken, async (req, res) => {
 
 
 // Admin Güncelleme İşlemi
-router.post('/:id', async (req, res) => {
+router.post('/api/:id', async (req, res) => {
   try {
     const { id } = req.params;
     const { profile, name, user, password, status } = req.body;
@@ -84,7 +84,7 @@ router.post('/:id', async (req, res) => {
 
 
 // Admin Silme İşlemi
-router.post('/delete/:id', async (req, res) => {
+router.post('/api/delete/:id', async (req, res) => {
   try {
     const { id } = req.params;
 

@@ -3,7 +3,7 @@ const router = express.Router();
 const { createService, updateService, deleteService, getAllServices } = require('../controllers/serviceControllers')
 const { verifyToken } = require('../middlewares/tokenAuthentication')
 
-router.post('/', async (req, res) => {
+router.post('/api/', async (req, res) => {
     try {
         const { photo_small, big_photo, title, description } = req.body;
         const newService = await createService(photo_small, big_photo, title, description);
@@ -19,7 +19,7 @@ router.post('/', async (req, res) => {
     }
 });
 
-router.post('/:id', async (req, res) => {
+router.post('/api/:id', async (req, res) => {
     try {
         const { id } = req.params;
         const { photo_small, big_photo, title, description } = req.body;

@@ -21,14 +21,11 @@ const App = () => {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const location = useLocation();
 
-  
   return (
     <div>
-        {
-        location.pathname !== "/" && <NavBar isLoggedIn={isLoggedIn} setIsLoggedIn={setIsLoggedIn} />
-      }
+      {location.pathname !== '/' && <NavBar isLoggedIn={isLoggedIn} setIsLoggedIn={setIsLoggedIn} />}
       <Routes>
-      <Route exact path="/" element={<Landing isLoggedIn={isLoggedIn} setIsLoggedIn={setIsLoggedIn} />} />
+        <Route exact path="/" element={<Landing isLoggedIn={isLoggedIn} setIsLoggedIn={setIsLoggedIn} />} />
         <Route path="/bedroom" element={<CardBedroom />} />
 
         <Route path="/detail/:id" element={<Detail />} />
@@ -39,14 +36,16 @@ const App = () => {
         <Route path="/booking" element={<Booking />} />
         <Route path="/users/login" element={<Login setIsLoggedIn={setIsLoggedIn} />} />
         <Route path="/registrar" element={<Registar setIsLoggedIn={setIsLoggedIn} />} />
-        <Route path="/verification" element={<Verification/>} />
+        <Route path="/verification" element={<Verification />} />
+        <Route path="/success" element={<Success />} />
         <Route path="*" element={<PageNotFound />} />
-       
       </Routes>
     </div>
-    
-    
-  )
-}
+  );
+};
 
+<<<<<<< HEAD
 export default App;
+=======
+export default App;
+>>>>>>> f131e129755c5d6d81beb84d0679da19b7e19e60

@@ -51,7 +51,7 @@
                     <th>Nombre</th>
                     <th>Usuario</th>
                     <th>Perfil</th>
-                    <th>Estado</th>
+                    <!-- <th>Estado</th> -->
                     <th>Acciones</th>
                   </tr>
                 </thead>
@@ -63,9 +63,9 @@
                       <td><%= admin.name %></td>
                       <td><%= admin.user %></td>
                       <td><%= admin.profile %></td>
-                      <td><%= admin.status %></td>
+                      <!-- <td><%= admin.status %></td> -->
                       <td>
-                        <button class="btn btn-warning btn-sm editarBtn" data-toggle="modal" data-target="#editarAdministrador" data-id="<%= admin.id %>">
+                        <button class="btn btn-warning btn-sm editarBtn" data-toggle="modal" data-target="#editarAdministrador<%= admin.id %>" data-id="<%= admin.id %>">
                           <i class="fas fa-pencil-alt text-white"></i>
                       </button>
                       
@@ -237,10 +237,10 @@ Modal Crear Administrador
 Modal Editar Administrador
 ======================================-->
 <% for (const admin of admins) { %>
-  <div class="modal" id="editarAdministrador">
+  <div class="modal" id="editarAdministrador<%= admin.id %>">
     <div class="modal-dialog">
       <div class="modal-content">
-        <form method="post" action="/admin/<%= admin.id %>">
+        <form method="post" action="/admin/api/delete/<%= admin.id %>">
           <div class="modal-header bg-info">
             <h4 class="modal-title">Editar Administrador</h4>
             <button type="button" class="close" data-dismiss="modal">&times;</button>
@@ -345,7 +345,7 @@ Modal Editar Administrador
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
-                    <form method="post" action="/admin/delete/<%= admin.id %>">
+                    <form method="post" action="/admin/api/delete/<%= admin.id %>">
                         <input type="hidden" name="_method" value="delete">
                         <button type="submit" class="btn btn-danger">Eliminar</button>
                     </form>
