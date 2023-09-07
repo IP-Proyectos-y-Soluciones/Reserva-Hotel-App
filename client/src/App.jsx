@@ -9,12 +9,10 @@ import { Route, Routes, useLocation } from "react-router-dom";
 import PageNotFound from "./components/PageNotFound/PageNotFound";
 import Registar from "./components/login/registrar";
 import Verification from "./components/login/verificando";
-//import CardReservas from './components/CardReservas/CardReservas';
 import CardsReservasNuevo from "../src/components/CardReservas/CardsReservasNuevo";
 import axios from "axios";
 import CardPlan from "./components/CardPlan/CardPlan";
-
-// axios.defaults.baseURL = 'http://localhost:3001/';
+import Success from './components/Booking/Success';
 axios.defaults.baseURL = 'https://reservas-hotel.onrender.com';
 
 const App = () => {
@@ -44,8 +42,7 @@ const App = () => {
   );
 };
 
-<<<<<<< HEAD
-export default App;
-=======
+
 export default App;
->>>>>>> f131e129755c5d6d81beb84d0679da19b7e19e60
+
+
