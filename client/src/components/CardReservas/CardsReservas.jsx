@@ -51,7 +51,7 @@ const CardReservas = ({
   getBedroom
 }) => {
   const dispatch = useDispatch();
-  const userId = localStorage.getItem('userId');
+  const userId = useSelector((state) => state.users.loggedInUserId);
   console.log(userId)
   useEffect(() => {
     dispatch(getUsers());
