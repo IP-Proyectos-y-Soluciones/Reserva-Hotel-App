@@ -1,7 +1,7 @@
 import {createAsyncThunk} from "@reduxjs/toolkit";
 import axios from "axios";
 
-const URL_BOOKINGS ="https://reservas-hotel.onrender.com/bookings/api";
+const URL_BOOKINGS ="https://reservas-hotel.onrender.com/bookings";
 
 
 export const getBookings = createAsyncThunk(
@@ -84,7 +84,7 @@ export const cancelBookings = createAsyncThunk(
     try {
 
       console.log(id);
-      const response = await axios.post(`URL_BOOKINGS/delete/${id}`, {
+      const response = await axios.post(`${URL_BOOKINGS}/delete/${id}`, {
         data: { id: id },
       }, {
 

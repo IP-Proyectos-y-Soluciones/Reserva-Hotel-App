@@ -1,8 +1,8 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
 import axios from "axios";
 
-const URL_USERS = "https://reservas-hotel.onrender.com/users/api";
-const URL_USER_POST ="https://reservas-hotel.onrender.com/users/verify/api";
+const URL_USERS = "https://reservas-hotel.onrender.com/users";
+const URL_USER_POST ="https://reservas-hotel.onrender.com/users/verify";
 
 
 export const getUsers=createAsyncThunk(
@@ -52,7 +52,7 @@ export const loginUser = createAsyncThunk(
   "users/login",
   async ({ email, password }) => {
     try {
-      const response = await fetch("https://reservas-hotel.onrender.com/users/login/api", {
+      const response = await fetch("https://reservas-hotel.onrender.com/users/login", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -88,7 +88,7 @@ export const logoutUser = createAsyncThunk(
   "users/logout",
   async ({ userId }) => {
     try {
-      const response = await fetch("https://reservas-hotel.onrender.com/users/logout/api", {
+      const response = await fetch("https://reservas-hotel.onrender.com/users/logout", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",

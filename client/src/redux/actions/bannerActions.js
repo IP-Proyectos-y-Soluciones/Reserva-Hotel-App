@@ -1,7 +1,7 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
 import axios from "axios";
 
-const URL_BANNER = 'https://reservas-hotel.onrender.com/banner/api';
+const URL_BANNER = 'https://reservas-hotel.onrender.com/banner';
 
 export const getAllBanner=createAsyncThunk(
     "banner/allBanner",

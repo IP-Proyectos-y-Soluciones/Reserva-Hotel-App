@@ -19,7 +19,7 @@ const CardsPlan = () => {
                 <h1>Descubre la magia del lugar</h1>
             </div>
             <div className="grid grid-cols-1 gap-4 md:grid-cols-2 lg:grid-cols-4" id='plans'>
-                {plans && plans.map(plan => (
+                {Array.isArray(plans) && plans.map(plan => (
                         <CardPlan
                             key={plan.id}
                             kind={plan.kind}
