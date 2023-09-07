@@ -1,7 +1,7 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
 import axios from "axios";
 
-const urlNotification="http://localhost:3001/notifications";
+const URL_NOTIFICATION ="https://reservas-hotel.onrender.com/notifications";
 
 export const getNotifications=createAsyncThunk(
     "notifications/getNotifications",
@@ -9,7 +9,7 @@ export const getNotifications=createAsyncThunk(
         try{
 
 
-            const res = await axios.get(urlNotification , {
+            const res = await axios.get( URL_NOTIFICATION , {
 
                 headers: {
                   Accept: 'application/json',
@@ -26,7 +26,7 @@ export const postNotifications=createAsyncThunk(
     async()=>{
        try{
 
-        const res= await axios.post(urlNotification , {
+        const res= await axios.post( URL_NOTIFICATION , {
             headers: {
               Accept: 'application/json',
             },
@@ -43,7 +43,7 @@ export const putNotifications=createAsyncThunk(
         try{
 
       
-            const res= await axios.put(urlNotification,obj , {
+            const res= await axios.put( URL_NOTIFICATION,obj , {
 
                 headers: {
                   Accept: 'application/json',
@@ -61,7 +61,7 @@ export const deleteNotifications=createAsyncThunk(
         try{
 
 
-            const res=await axios.delete(urlNotification,{data:{id:id}} , {
+            const res=await axios.delete( URL_NOTIFICATION,{data:{id:id}} , {
 
                 headers: {
                   Accept: 'application/json',
