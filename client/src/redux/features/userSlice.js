@@ -9,6 +9,9 @@ const loadUserFromLocalStorage = () => {
     return null;
   }
 };
+const loggedIn = JSON.parse(localStorage.getItem('logged'));
+
+
 const initialState = {
   users: [],
   usersCopy: [],
@@ -16,7 +19,10 @@ const initialState = {
   userLogin:[],
   user:loadUserFromLocalStorage(),
   loggedInUserId: "",
-  logged: false,
+  logged: loggedIn !== null ? loggedIn : false,
+  userPhoto: localStorage.getItem('userPhoto'),
+  success: localStorage.getItem('success'),
+  userId: localStorage.getItem('userId'),
 };
 
 
@@ -58,21 +64,24 @@ const usersSlice = createSlice({
       .addCase(logoutUser.fulfilled, (state, action) => {
         state.isLoading = false;
         state.error = null;
-        state.logged = false;
+        localStorage.removeItem('logged');
         state.success = action.payload.success;
         state.userId = action.payload.userId;
-        console.log(localStorage)
       })
-
       .addCase(loginUser.fulfilled, (state, action) => {
         if (action.payload.success && action.payload.logged) {
           state.userLogin = action.payload;
           state.loggedInUserId = action.payload.userId;
-          state.logged = action.payload.logged
-          localStorage.setItem('user', JSON.stringify(action.payload));
-          console.log(localStorage)
+          state.logged = action.payload.logged;
+          localStorage.setItem('logged', JSON.stringify(true));
+          localStorage.setItem('userPhoto', action.payload.userPhoto);
+          localStorage.setItem('success', JSON.stringify(action.payload.success));
+          localStorage.setItem('userId', action.payload.userId);
         }
-      })    
+      })
+      
+      
+        
       .addCase(updatedsUser.fulfilled, (state, action) => {
         state.userData = action.payload;
       });
