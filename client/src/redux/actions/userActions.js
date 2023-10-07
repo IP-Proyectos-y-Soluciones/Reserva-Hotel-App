@@ -68,13 +68,17 @@ export const loginUser = createAsyncThunk(
       const { success, logged, userId, userPhoto } = data;
 
       if (success && logged && userId) {
+        localStorage.setItem('userPhoto', userPhoto);
+        localStorage.setItem('logged', logged);
+        localStorage.setItem('success', success);
+        localStorage.setItem('userId', userId);
         return { userId, logged, success, userPhoto };
       } else {
-        throw new Error("Error al iniciar sesión. Por favor, verifica tus credenciales.");
+        throw new Error("The user has been deactivated, please contact an administrator.");
       }
     } catch (error) {
       console.error(error)
-      throw new Error("Error al iniciar sesión. Por favor, verifica tus credenciales.");
+      throw new Error("The user has been deactivated, please contact an administrator");
     }
   }
 );
@@ -97,9 +101,12 @@ export const logoutUser = createAsyncThunk(
       }
 
       const data = await response.json();
-      const { success } = data;
+      const { success, logged } = data;
 
       if (success) {
+        localStorage.setItem("logged", logged);
+        localStorage.setItem("userId", userId);
+        localStorage.setItem("success", success);
         return { userId, logged: false, success };
       } else {
         throw new Error("Error al cerrar sesión.");

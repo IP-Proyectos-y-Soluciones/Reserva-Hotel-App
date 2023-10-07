@@ -1,5 +1,5 @@
 import { Link, useLocation, useNavigate } from 'react-router-dom';
-import { useSelector, useDispatch } from 'react-redux';
+import {  useDispatch } from 'react-redux';
 import { useEffect } from 'react';
 import { getUsers, logoutUser } from '../../redux/actions/userActions';
 import user from "./assets/user.png"
@@ -7,13 +7,14 @@ import user from "./assets/user.png"
 const NavBar = () => {
 
   const dispatch = useDispatch();
-  const userPhoto = useSelector((state) => state.users.userLogin.userPhoto);
-  const userId = useSelector((state) => state.users.loggedInUserId);
-  const login = useSelector((state) => state.users.logged);
+  const userPhoto = localStorage.getItem('userPhoto');
+  const userId = localStorage.getItem('userId');
+  const login = localStorage.getItem('logged');
   const navigate = useNavigate()
 
   useEffect(() => {
     dispatch(getUsers())
+    console.log(userId)
   }, [dispatch])
 
   const location = useLocation();
