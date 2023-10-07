@@ -17,7 +17,7 @@ const About = () => {
             <img
               alt="imagen"
               className="self-center flex-shrink-0 w-24 h-24 -mt-12 bg-center bg-cover rounded-full dark:bg-gray-500"
-              src="#"
+              src="https://res.cloudinary.com/dm9glx5a7/image/upload/v1694111383/PF-HOTEL-APP/Perfiles/WhatsApp_Image_2023-09-07_at_15.28.16_paguhy.jpg"
             />
             <div className="flex-1 my-4">
               <p className="text-xl font-semibold leadi">Juan Boglione</p>
